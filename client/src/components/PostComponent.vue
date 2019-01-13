@@ -5,7 +5,7 @@
       <div class="posts__create-form">
         <input class="posts__create-form__input" type="text" id="create-post" v-model="text"
                placeholder="Create a post ...">
-        <button v-on:click="createPost" class="button button--send">Post!</button>
+        <button v-on:click="createPost" class="button--send">Post!</button>
       </div>
       <hr>
       <p class="error" v-if="error">{{error}}</p>
@@ -60,6 +60,5 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-  @import "../styles/global";
   @import "../styles/components/PostComponent";
 </style>

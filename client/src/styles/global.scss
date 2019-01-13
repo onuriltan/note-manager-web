@@ -1,7 +1,8 @@
-@import "basics/buttons.scss";
-@import "basics/links.scss";
-@import "basics/mixins.scss";
-@import "basics/animations.scss";
+@import "basics/_buttons.scss";
+@import "basics/_links.scss";
+@import "basics/_mixins.scss";
+@import "basics/_animations.scss";
+@import "basics/inputs";
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

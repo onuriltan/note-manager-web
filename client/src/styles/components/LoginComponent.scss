@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+.login-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 400px;
+  border-radius: 4px;
+
+  &__input {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 10px;
+    &__text {
+      width: 284px;
+      border-radius: 4px;
+    }
+  }
+  &__button {
+    margin-top: 20px;
+    width: 300px;
+    border-radius: 4px;
+  }
+}
