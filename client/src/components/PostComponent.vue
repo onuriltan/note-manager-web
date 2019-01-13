@@ -3,18 +3,20 @@
     <div class="posts">
       <h1>Latest Posts</h1>
       <div class="posts__create-form">
-        <input class="posts__create-form__input" type="text" id="create-post" v-model="text" placeholder="Create a post ...">
+        <input class="posts__create-form__input" type="text" id="create-post" v-model="text"
+               placeholder="Create a post ...">
         <button v-on:click="createPost" class="button button--send">Post!</button>
       </div>
       <hr>
       <p class="error" v-if="error">{{error}}</p>
       <div class="posts__content">
-        <div class="posts__post"
+        <div class="posts__post fade--away slide--in--from--left"
              v-for="(post, index) in posts"
              v-bind:key="post._id"
              v-on:dblclick="deletePost(post._id)"
         >
-          <p class="posts__post__date">{{`${post.createdAt.getDate()}/${post.createdAt.getMonth()}/${post.createdAt.getFullYear()}`}}</p>
+          <p class="posts__post__date">
+            {{`${post.createdAt.getDate()}/${post.createdAt.getMonth()}/${post.createdAt.getFullYear()}`}}</p>
           <p class="posts__post__text">{{post.text}}</p>
         </div>
       </div>
@@ -58,5 +60,6 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import "../styles/components/PostComponent";
+  @import "../styles/global";
+  @import "../styles/components/PostComponent";
 </style>
