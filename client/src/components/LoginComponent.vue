@@ -2,8 +2,8 @@
   <div class="container">
     <form class="login-form">
       <h1>Login</h1>
-      <div v-if="errors.length > 0" class="login-form__errors flexmid">
-        <div v-for="error in errors" class="login-form__errors__error">
+      <div class="login-form__errors flexmid">
+        <div v-if="errors.length > 0" v-for="error in errors" class="login-form__errors__error">
           {{error.msg}}
         </div>
       </div>
