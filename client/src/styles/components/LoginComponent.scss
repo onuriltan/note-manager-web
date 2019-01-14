@@ -9,6 +9,20 @@
   flex-direction: column;
   width: 400px;
   border-radius: 4px;
+  &__errors{
+    margin-bottom: 10px;
+    &__error {
+      align-self: center;
+      padding: 20px;
+      margin-bottom: 10px;
+      background-color: palevioletred;
+      border: 1px solid red;
+      border-radius: 4px;
+      font-size: 14px;
+      color: white;
+      width: 260px;
+    }
+  }
 
   &__input {
     display: flex;

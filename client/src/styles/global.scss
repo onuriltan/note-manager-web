@@ -2,7 +2,9 @@
 @import "basics/_links.scss";
 @import "basics/_mixins.scss";
 @import "basics/_animations.scss";
-@import "basics/inputs";
+@import "basics/_inputs";
+@import "basics/_positionings.scss";
+
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

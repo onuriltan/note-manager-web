@@ -11,7 +11,7 @@
       <p class="error" v-if="error">{{error}}</p>
       <div class="posts__content">
         <div class="posts__post fade--away slide--in--from--left"
-             v-for="(post, index) in posts"
+             v-for="(post, app) in posts"
              v-bind:key="post._id"
              v-on:dblclick="deletePost(post._id)"
         >
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-  import PostService from "../PostService";
+  import PostService from "../services/PostService";
 
   export default {
     name: 'PostComponent',
