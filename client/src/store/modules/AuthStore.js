@@ -9,7 +9,9 @@ const state = {
 const AuthStore = {
   state,
   getters: {
-
+    isAuthenticated: state => {
+      return state.isAuthenticated
+    }
   },
   actions: {
     logout (context) {
@@ -24,8 +26,10 @@ const AuthStore = {
           })
           .catch((response) => { return resolve(response) })
       })
+    },
+    loadUser (context) {
+      context.commit('loadUser')
     }
-
   },
   mutations: {
     logout (state) {
@@ -38,6 +42,17 @@ const AuthStore = {
         window.localStorage.setItem('token', response.data.token)
         state.isAuthenticated = true
         router.push('/')
+      }
+    },
+    loadUser (state) {
+      let token = window.localStorage.getItem('token')
+      let unixTimeStamp = new Date().getTime() / 1000
+      let expiration = null
+      if (token != null) {
+        expiration = jwtDecode(token).exp
+      }
+      if (expiration != null && parseInt(expiration) - unixTimeStamp > 0) {
+        state.isAuthenticated = true
       }
     }
   }
