@@ -43,6 +43,9 @@
           this.$router.push('/dashboard')
         }
       },
+    },
+    mounted() {
+      console.log(this.$store.state.AuthStore.isAuthenticated)
     }
   }
 </script>
