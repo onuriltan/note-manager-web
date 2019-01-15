@@ -3,7 +3,7 @@
     <form class="login-form">
       <h1>Login</h1>
       <div class="login-form__errors flexmid" v-if="errors.length > 0" >
-        <div v-bind:key="error" v-for="error in errors" class="login-form__errors__error">
+        <div v-bind:key="index" v-for="(error, index) in errors" class="login-form__errors__error">
           {{error.msg}}
         </div>
       </div>
@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import AuthService from '../services/LoginService'
 
 export default {
   name: 'LoginComponent',
@@ -32,19 +31,22 @@ export default {
       password: ''
     }
   },
+  computed: {
+    isAuthenticated () {
+      return this.$store.state.AuthStore.isAuthenticated
+    }
+  },
   methods: {
     async login () {
       this.errors = []
-      const res = await AuthService.login(this.username, this.password)
+      const res = await this.$store.dispatch('login', { username: this.username, password: this.password })
       if (res.data.errors) {
         this.errors = res.data.errors
-      } else {
-        this.$router.push('/dashboard')
       }
+    },
+    async logout () {
+      await this.$store.dispatch('logout')
     }
-  },
-  mounted () {
-    console.log(this.$store.state.AuthStore.isAuthenticated)
   }
 }
 </script>
