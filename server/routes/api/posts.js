@@ -1,16 +1,19 @@
 const express = require('express');
 const mongodb = require('mongodb');
+const JwtOperations = require('../../config/JwtOperations');
 
 const router = express.Router();
 
 // Get Posts
-router.get('/', async (req, res) => {
+router.get('/', JwtOperations.getToken, async (req, res) => {
+    JwtOperations.verifyToken(req, res);
     const posts = await loadPostsCollection();
     res.send(await posts.find({}).toArray());
 });
 
 // Add Posts
-router.post('/', async (req, res) => {
+router.post('/', JwtOperations.getToken, async (req, res) => {
+    JwtOperations.verifyToken(req, res);
     const posts = await loadPostsCollection();
     await posts.insertOne({
         text: req.body.text,
@@ -19,7 +22,8 @@ router.post('/', async (req, res) => {
     res.status(201).send();
 });
 // Delete Posts
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', JwtOperations.getToken, async (req, res) => {
+    JwtOperations.verifyToken(req, res);
     const posts = await loadPostsCollection();
     await posts.deleteOne({_id: new mongodb.ObjectID(req.params.id)});// in mongo id is a special type of ObjectID
     res.status(200).send();
