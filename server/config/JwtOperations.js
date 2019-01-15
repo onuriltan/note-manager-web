@@ -26,7 +26,7 @@ const verifyToken =  (req, res) => {
 };
 
 const signToken =  (user, secretKey, res) => {
-    jwt.sign({ user }, secretKey, { expiresIn: '1w'}, (err, token) => {
+    jwt.sign({ user }, secretKey, { expiresIn: '10m'}, (err, token) => {
         res.json({ token });
     });
 };

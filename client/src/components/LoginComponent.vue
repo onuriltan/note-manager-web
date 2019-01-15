@@ -7,10 +7,10 @@
           {{error.msg}}
         </div>
       </div>
-      <div class="login-form__input">
+      <form class="login-form__input" @submit.prevent="login">
         <label for="username">Username </label>
         <input v-model="username" class="login-form__input__text text--input" type="text" id="username" placeholder="Username ... ">
-      </div>
+      </form>
       <div class="login-form__input">
         <label for="password">Password </label>
         <input v-model="password" class="login-form__input__text text--input" type="password" id="password" placeholder="Password ... ">
@@ -40,7 +40,7 @@
           this.errors = res.data.errors;
         }
         else {
-          this.$router.push('/')
+          this.$router.push('/dashboard')
         }
       },
     }
