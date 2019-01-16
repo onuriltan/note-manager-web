@@ -1,5 +1,5 @@
 <template>
-  <b-navbar toggleable="md" type="dark" variant="success" style="margin-bottom: 50px; border-style: unset">
+  <b-navbar toggleable="md" type="dark" variant="success" style="border-style: unset">
     <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
     <b-navbar-brand>
       <router-link to="/" style="text-decoration: none; color: white">NoteManager</router-link>
