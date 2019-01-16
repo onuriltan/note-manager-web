@@ -15,7 +15,7 @@
         <label for="password">Password </label>
         <input v-model="password" class="login-form__input__text text--input" type="password" id="password" placeholder="Password ... ">
       </div>
-      <button v-on:click="login()" class="login-form__button button--send" type="submit">Login</button>
+      <button v-on:click="login()" class="login-form__button button--send">Login</button>
     </form>
   </div>
 </template>

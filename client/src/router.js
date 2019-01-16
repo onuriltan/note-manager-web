@@ -2,26 +2,33 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import AuthStore from './store/modules/AuthStore'
+import Store from './store/index'
 
 const Login = () => import('./views/Login.vue')
 
 Vue.use(Router)
 
-function requireAuth (to, from, next) {
-  console.log(AuthStore.state.isAuthenticated)
-  if (AuthStore.state.isAuthenticated) {
-    next()
-  } else {
-    next('/login')
+async function requireAuth (to, from, next) {
+  function proceed () {
+    if (AuthStore.getters.isAuthenticated()) {
+      next()
+    } else {
+      next('/login')
+    }
   }
+  await Store.dispatch('loadUser')
+  proceed()
 }
-function alreadyLoggedIn (to, from, next) {
-  console.log(AuthStore.state.isAuthenticated)
-  if (!AuthStore.state.isAuthenticated) {
-    next()
-  } else {
-    next('/')
+async function alreadyLoggedIn (to, from, next) {
+  function proceed () {
+    if (!AuthStore.getters.isAuthenticated()) {
+      next()
+    } else {
+      next('/')
+    }
   }
+  await Store.dispatch('loadUser')
+  proceed()
 }
 
 export default new Router({

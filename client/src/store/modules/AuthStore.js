@@ -9,19 +9,19 @@ const state = {
 const AuthStore = {
   state,
   getters: {
-    isAuthenticated: state => {
+    isAuthenticated () {
       return state.isAuthenticated
     }
   },
   actions: {
     logout (context) {
-      context.commit('logout')
+      context.commit('deleteToken')
     },
     login (context, credentials) {
       return new Promise(resolve => {
         loginService.login(credentials)
           .then((response) => {
-            context.commit('login', response)
+            context.commit('updateIsAuthenticated', response)
             return resolve(response)
           })
           .catch((response) => { return resolve(response) })
@@ -32,12 +32,12 @@ const AuthStore = {
     }
   },
   mutations: {
-    logout (state) {
+    deleteToken (state) {
       window.localStorage.removeItem('token')
       state.isAuthenticated = false
       router.push('/login')
     },
-    login (state, response) {
+    updateIsAuthenticated (state, response) {
       if (response.status === 200) {
         window.localStorage.setItem('token', response.data.token)
         state.isAuthenticated = true
