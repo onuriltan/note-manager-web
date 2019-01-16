@@ -1,10 +1,10 @@
-.container {
+.login-container {
   display: flex;
   justify-content: center;
   min-height: calc(100vh - 30px);
 }
 .login-form {
-  width: 30%;
+  width: 400px;
   &__header {
     text-align: center;
     padding-bottom: 30px;
@@ -14,5 +14,10 @@
   }
   &__button {
     width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .login-form {
+    width: 250px;
   }
 }
