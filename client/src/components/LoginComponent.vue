@@ -1,22 +1,34 @@
 <template>
-  <div class="container">
-    <div class="login-form">
-      <h1>Login</h1>
-      <div class="login-form__errors flexmid" v-if="errors.length > 0" >
-        <div v-bind:key="index" v-for="(error, index) in errors" class="login-form__errors__error">
-          {{error.msg}}
-        </div>
+  <div class="login-container">
+    <b-form class="login-form">
+      <h2 class="login-form__header">Login</h2>
+      <div class="login-form__errors" v-if="errors.length > 0">
+          <b-alert v-bind:key="index" v-for="(error, index) in errors" show variant="danger" size="lg">
+            {{error.msg}}
+          </b-alert>
       </div>
-      <form class="login-form__input" @submit.prevent="login">
-        <label for="username">Username </label>
-        <input v-model="username" class="login-form__input__text text--input" type="text" id="username" placeholder="Username ... ">
-      </form>
-      <div class="login-form__input">
-        <label for="password">Password </label>
-        <input v-model="password" class="login-form__input__text text--input" type="password" id="password" placeholder="Password ... ">
-      </div>
-      <button v-on:click="login()" class="login-form__button button--send">Login</button>
-    </div>
+      <b-form-group id="username"
+                    label="Username"
+                    label-for="username">
+        <b-form-input id="username"
+                      type="email"
+                      v-model="username"
+                      size="lg"
+                      required>
+        </b-form-input>
+      </b-form-group>
+      <b-form-group id="password"
+                    label="Password"
+                    label-for="password">
+        <b-form-input id="password"
+                      type="password"
+                      v-model="password"
+                      size="lg"
+                      required>
+        </b-form-input>
+      </b-form-group>
+      <b-button class="login-form__button" v-on:click="login()" variant="success" size="lg">Login</b-button>
+    </b-form>
   </div>
 </template>
 
