@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <form class="login-form">
+    <div class="login-form">
       <h1>Login</h1>
       <div class="login-form__errors flexmid" v-if="errors.length > 0" >
         <div v-bind:key="index" v-for="(error, index) in errors" class="login-form__errors__error">
@@ -16,7 +16,7 @@
         <input v-model="password" class="login-form__input__text text--input" type="password" id="password" placeholder="Password ... ">
       </div>
       <button v-on:click="login()" class="login-form__button button--send">Login</button>
-    </form>
+    </div>
   </div>
 </template>
 
