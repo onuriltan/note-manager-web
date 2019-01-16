@@ -5,9 +5,6 @@
         <router-link to="/">Dashboard</router-link> |
         <span v-on:click="logout">Logout</span>
       </div>
-      <div v-if="!isAuthenticated">
-        <router-link v-if="!isAuthenticated" to="/login">Login</router-link>
-      </div>
     </div>
     <router-view/>
   </div>
