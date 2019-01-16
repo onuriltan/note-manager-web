@@ -34,7 +34,7 @@ async function alreadyLoggedIn (to, from, next) {
 export default new Router({
   routes: [
     {
-      path: '*', component: Home
+      path: '*', component: Home, beforeEnter: requireAuth
     },
     {
       path: '/', name: 'home', component: Home, beforeEnter: requireAuth
