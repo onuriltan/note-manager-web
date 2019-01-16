@@ -12,7 +12,7 @@ server.use(cors());
 const app = require('./routes');
 const posts = require('./routes/api/posts');
 const auth = require('./routes/api/users');
-server.use('/', app);
+server.use('/api', app);
 server.use('/api/posts', posts);
 server.use('/api/auth', auth);
 
