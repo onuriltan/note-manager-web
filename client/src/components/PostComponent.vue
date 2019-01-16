@@ -1,11 +1,16 @@
 <template>
   <div class="container">
     <div class="posts">
-      <h1>Latest Posts</h1>
+      <h1 class="posts__header">Latest Posts</h1>
       <div class="posts__create-form">
-        <input class="posts__create-form__input" type="text" id="create-post" v-model="text"
-               placeholder="Create a post ...">
-        <button v-on:click="createPost" class="button--send">Post!</button>
+        <b-input-group>
+          <b-form-input v-model="text"
+                        type="text"
+                        placeholder="Create a post ..."></b-form-input>
+          <b-input-group-append>
+            <b-btn v-on:click="createPost" variant="success">Post!</b-btn>
+          </b-input-group-append>
+        </b-input-group>
       </div>
       <hr>
       <p class="error" v-if="error">{{error}}</p>

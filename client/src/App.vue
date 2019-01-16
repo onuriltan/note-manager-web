@@ -1,18 +1,17 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <div v-if="isAuthenticated">
-        <router-link to="/">Dashboard</router-link> |
-        <span v-on:click="logout">Logout</span>
-      </div>
-    </div>
+    <HeaderComponent />
     <router-view/>
   </div>
 </template>
 
 <script>
+import HeaderComponent from './components/HeaderComponent'
 export default {
   name: 'App',
+  components: {
+    HeaderComponent
+  },
   computed: {
     isAuthenticated () {
       return this.$store.state.AuthStore.isAuthenticated
