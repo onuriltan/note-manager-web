@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const url = 'http://localhost:5000/api/auth'
+const url = '/api/auth'
 
 class AuthService {
   static login (credentials) {
