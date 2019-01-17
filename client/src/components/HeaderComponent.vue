@@ -26,19 +26,19 @@
 </template>
 
 <script>
-  export default {
-    name: "HeaderComponent",
-    computed: {
-      isAuthenticated() {
-        return this.$store.state.AuthStore.isAuthenticated
-      }
-    },
-    methods: {
-      async logout() {
-        await this.$store.dispatch('logout')
-      }
+export default {
+  name: 'HeaderComponent',
+  computed: {
+    isAuthenticated () {
+      return this.$store.state.AuthStore.isAuthenticated
+    }
+  },
+  methods: {
+    async logout () {
+      await this.$store.dispatch('logout')
     }
   }
+}
 </script>
 
 <style scoped>
