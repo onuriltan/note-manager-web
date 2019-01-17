@@ -1,7 +1,8 @@
-.container {
+.posts-container {
   display: block;
   max-width: 1200px;
   margin: 0 auto;
+  padding-top: 50px;
   .posts {
     display: flex;
     justify-content: center;
@@ -9,40 +10,41 @@
     flex-direction: column;
     &__header {
       margin-bottom: 50px;
+      font-weight: bold
     }
     &__create-form {
       display: flex;
       justify-content: center;
       align-items: center;
+      &__input {
+        width: 500px;
+      }
     }
     &__content {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
-      flex-direction: column;
-      width: 50%;
-    }
-    &__post {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
       width: 100%;
-      padding: 10px 10px 30px 10px;
-      margin: 10px;
-      background-color: #bcffb8;
-      border: 1px solid #5bd658;
-      &__date {
-        top: 0;
-        left: 0;
-        padding: 5px 15px 5px 15px;
-        background-color: darkgreen;
-        color: white;
-        font-size: 13px;
+      &__card {
+        margin: 20px;
       }
-      &__text {
-        font-weight: 700 ;
-        font-size: 22px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .posts-container {
+    .posts {
+      &__header {
+      }
+      &__create-form {
+        &__input {
+          width: 250px;
+        }
+      }
+      &__content {
+        &__card {
+        }
       }
     }
   }

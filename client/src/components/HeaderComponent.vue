@@ -2,7 +2,7 @@
   <b-navbar toggleable="md" type="dark" variant="success" style="border-style: unset">
     <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
     <b-navbar-brand>
-      <router-link to="/" style="text-decoration: none; color: white">NoteManager</router-link>
+      <router-link to="/" style="text-decoration: none; color: white; font-weight: bold">NoteManager</router-link>
     </b-navbar-brand>
     <b-collapse is-nav id="nav_collapse">
       <!-- Right aligned nav items -->
@@ -26,19 +26,19 @@
 </template>
 
 <script>
-  export default {
-    name: "HeaderComponent",
-    computed: {
-      isAuthenticated() {
-        return this.$store.state.AuthStore.isAuthenticated
-      }
-    },
-    methods: {
-      async logout() {
-        await this.$store.dispatch('logout')
-      }
+export default {
+  name: 'HeaderComponent',
+  computed: {
+    isAuthenticated () {
+      return this.$store.state.AuthStore.isAuthenticated
+    }
+  },
+  methods: {
+    async logout () {
+      await this.$store.dispatch('logout')
     }
   }
+}
 </script>
 
 <style scoped>
