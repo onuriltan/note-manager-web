@@ -25,7 +25,9 @@
             <p class="card-text">
               {{post.text}}
             </p>
-            <b-button variant="danger" @click="showModal(post._id)">Delete</b-button>
+            <div slot="footer">
+              <b-button size="sm" variant="danger" @click="showModal(post._id)">Delete</b-button>
+            </div>
           </b-card>
         </b-card-group>
         <b-modal ref="deleteNoteModal" id="modal" title="Delete">

@@ -26,6 +26,9 @@
       justify-content: center;
       &__card {
         margin: 20px;
+        &__footer {
+          border-top: unset;
+        }
       }
     }
   }
