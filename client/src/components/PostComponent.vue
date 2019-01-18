@@ -15,9 +15,8 @@
       </div>
       <hr>
       <p class="error" v-if="error">{{error}}</p>
-      <div class="posts__content">
-        <b-card-group deck>
-          <b-card :title="`${post.createdAt.getDate()}/${post.createdAt.getMonth()}/${post.createdAt.getFullYear()}`"
+        <b-card-group deck class="posts__content">
+          <b-card :title="post.createdAt | convertDate()"
                   tag="article"
                   v-for="post in posts"
                   v-bind:key="post._id"
@@ -26,7 +25,9 @@
             <p class="card-text">
               {{post.text}}
             </p>
-            <b-button variant="danger" @click="showModal(post._id)">Delete</b-button>
+            <div slot="footer">
+              <b-button size="sm" variant="danger" @click="showModal(post._id)">Delete</b-button>
+            </div>
           </b-card>
         </b-card-group>
         <b-modal ref="deleteNoteModal" id="modal" title="Delete">
@@ -40,7 +41,6 @@
           </b-btn>
         </div>
       </b-modal>
-      </div>
     </div>
   </div>
 
@@ -76,6 +76,11 @@ export default {
     hideModal () {
       this.tobeDeletedId = ''
       this.$refs.deleteNoteModal.hide()
+    }
+  },
+  filters: {
+    convertDate : function (date) {
+      return `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`
     }
   },
   async created () {

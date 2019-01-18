@@ -23,11 +23,30 @@
     }
     &__content {
       display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      width: 100%;
+      justify-content: center;
       &__card {
         margin: 20px;
+        &__footer {
+          border-top: unset;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1170px) {
+  .posts-container {
+    width: 90%;
+    .posts {
+      &__header {
+      }
+      &__create-form {
+        &__input {
+        }
+      }
+      &__content {
+        &__card {
+        }
       }
     }
   }
