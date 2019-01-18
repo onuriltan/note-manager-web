@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "f3c663d600f311e309bd",
-    "url": "/css/app.998aaa9a.css"
+    "revision": "20ba01d0f52c8baafa3d",
+    "url": "/css/app.192dec66.css"
   },
   {
-    "revision": "f3c663d600f311e309bd",
-    "url": "/js/app.54584eb4.js"
+    "revision": "20ba01d0f52c8baafa3d",
+    "url": "/js/app.c6a8bc87.js"
   },
   {
-    "revision": "4cb649e518c9cfb9465c",
+    "revision": "4487f15a7d01426c33fa",
     "url": "/css/chunk-3f99eee6.e7eac981.css"
   },
   {
-    "revision": "4cb649e518c9cfb9465c",
-    "url": "/js/chunk-3f99eee6.8a446bba.js"
+    "revision": "4487f15a7d01426c33fa",
+    "url": "/js/chunk-3f99eee6.453e3798.js"
   },
   {
     "revision": "3b152bdb6af1824d2ebe",
@@ -28,7 +28,7 @@ self.__precacheManifest = [
     "url": "/img/takingnotes.cfca4bf3.jpg"
   },
   {
-    "revision": "b98cf470313470682ae0a72b3d41f89c",
+    "revision": "24b921ff1588ff302e1464761b1b15fc",
     "url": "/index.html"
   },
   {

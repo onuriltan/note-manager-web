@@ -26,9 +26,20 @@
             <p class="card-text">
               {{post.text}}
             </p>
-            <b-button v-on:click="deletePost(post._id)" variant="danger">Delete</b-button>
+            <b-button variant="danger" @click="showModal(post._id)">Delete</b-button>
           </b-card>
         </b-card-group>
+        <b-modal ref="deleteNoteModal" id="modal" title="Delete">
+        <p class="my-4">Do you want to delete the note?</p>
+        <div slot="modal-footer">
+          <b-btn class="float-right" variant="primary" @click="hideModal()">
+            NO
+          </b-btn>
+          <b-btn class="float-right" variant="danger" @click="deletePost()">
+            YES
+          </b-btn>
+        </div>
+      </b-modal>
       </div>
     </div>
   </div>
@@ -44,7 +55,8 @@ export default {
     return {
       posts: [],
       error: '',
-      text: ''
+      text: '',
+      tobeDeletedId: ''
     }
   },
   methods: {
@@ -52,9 +64,18 @@ export default {
       await PostService.insertPost(this.text)
       this.posts = await PostService.getPosts()
     },
-    async deletePost (id) {
-      await PostService.deletePost(id)
+    async deletePost () {
+      this.$refs.deleteNoteModal.hide()
+      await PostService.deletePost(this.tobeDeletedId)
       this.posts = await PostService.getPosts()
+    },
+    showModal (id) {
+      this.tobeDeletedId = id
+      this.$refs.deleteNoteModal.show()
+    },
+    hideModal () {
+      this.tobeDeletedId = ''
+      this.$refs.deleteNoteModal.hide()
     }
   },
   async created () {

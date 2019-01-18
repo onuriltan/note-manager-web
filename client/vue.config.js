@@ -15,9 +15,9 @@ module.exports = {
       patterns: [path.resolve(__dirname, './src/styles/global.scss')]
     }
   },
-  configureWebpack: {
-    plugins: [
-
-    ]
+  chainWebpack: config => {
+    if (config.plugins.has('optimize-css')) {
+      config.plugins.delete('optimize-css')
+    }
   }
 }
