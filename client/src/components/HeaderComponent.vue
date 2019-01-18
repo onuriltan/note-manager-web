@@ -7,8 +7,8 @@
     <b-collapse is-nav id="nav_collapse">
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-        <b-nav-form @submit="logout()" v-if="isAuthenticated">
-          <b-button class="my-2 my-sm-0" type="submit" >Logout</b-button>
+        <b-nav-form v-if="isAuthenticated">
+          <b-button class="my-2 my-sm-0" type="button" @click="logout()">Logout</b-button>
         </b-nav-form>
         <b-nav-item-dropdown v-if="isAuthenticated" right>
           <!-- Using button-content slot -->
@@ -16,7 +16,7 @@
             <em>User</em>
           </template>
           <b-dropdown-item href="#">Profile</b-dropdown-item>
-          <b-dropdown-item href="#">Signout</b-dropdown-item>
+          <b-dropdown-item @click="logout()">Signout</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
 

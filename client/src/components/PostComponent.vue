@@ -15,8 +15,7 @@
       </div>
       <hr>
       <p class="error" v-if="error">{{error}}</p>
-      <div class="posts__content">
-        <b-card-group deck>
+        <b-card-group deck class="posts__content">
           <b-card :title="post.createdAt | convertDate()"
                   tag="article"
                   v-for="post in posts"
@@ -40,7 +39,6 @@
           </b-btn>
         </div>
       </b-modal>
-      </div>
     </div>
   </div>
 
