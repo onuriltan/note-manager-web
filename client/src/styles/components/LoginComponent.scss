@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   min-height: calc(100vh - 30px);
-  padding-top: 50px;
+  padding-top: 150px;
 
   &:after {
     content: "";
@@ -19,6 +19,11 @@
 }
 .login-form {
   width: 400px;
+  background-color: white;
+  border-radius: 10px;
+  height: 100%;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  padding: 30px;
   &__header {
     text-align: center;
     padding-bottom: 30px;
