@@ -1,3 +1,122 @@
+@import url(https://fonts.googleapis.com/css?family=Neucha|Cabin+Sketch);
+#nav {
+  padding: 30px;
+}
+#nav a {
+    font-weight: bold;
+    color: #2c3e50;
+}
+#nav a.router-link-exact-active {
+      color: #42b983;
+}
+@-webkit-keyframes slideInFromLeft {
+0% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+}
+100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+}
+}
+@keyframes slideInFromLeft {
+0% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+}
+100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+}
+}
+.slide--in--from--left {
+  -webkit-animation: 1s ease-out 0s 1 slideInFromLeft;
+          animation: 1s ease-out 0s 1 slideInFromLeft;
+}
+.text--input {
+  padding: 6px;
+}
+.flexmid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.posts-container[data-v-7de658a2] {
+  display: block;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 50px;
+}
+.posts-container .posts[data-v-7de658a2] {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    padding-top: 50px;
+}
+.posts-container .posts__header[data-v-7de658a2] {
+      margin-bottom: 50px;
+      font-weight: bold;
+}
+.posts-container .posts__create-form[data-v-7de658a2] {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+}
+.posts-container .posts__create-form__input[data-v-7de658a2] {
+        width: 500px;
+}
+.posts-container .posts__content[data-v-7de658a2] {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: start;
+          -ms-flex-pack: start;
+              justify-content: flex-start;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      width: 100%;
+}
+.posts-container .posts__content__card[data-v-7de658a2] {
+        margin: 20px;
+}
+@media screen and (max-width: 768px) {
+.posts-container .posts__create-form__input[data-v-7de658a2] {
+    width: 250px;
+}
+}
+
 /*!
  * Bootswatch v4.2.1
  * Homepage: https://bootswatch.com
@@ -10,7 +129,6 @@
  * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-@import url("https://fonts.googleapis.com/css?family=Neucha|Cabin+Sketch");
 
 :root {
     --blue: #007bff;
@@ -441,7 +559,7 @@ mark, .mark {
 }
 
 .blockquote-footer::before {
-    content: "\2014\00A0"
+    content: "\2014\A0"
 }
 
 .img-fluid {
@@ -8218,7 +8336,7 @@ a.bg-dark:hover, a.bg-dark:focus, button.bg-dark:hover, button.bg-dark:focus {
     z-index: 1030
 }
 
-@supports (position: -webkit-sticky) or (position: sticky) {
+@supports ((position: -webkit-sticky) or (position: sticky)) {
     .sticky-top {
         position: -webkit-sticky;
         position: sticky;
@@ -10781,3 +10899,6 @@ pre {
     content: "X";
     color: #333
 }
+
+
+/*# sourceMappingURL=app.998aaa9a.css.map*/

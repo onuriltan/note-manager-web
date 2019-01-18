@@ -1,0 +1,49 @@
+.login-container[data-v-2fb7a7e8] {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  min-height: calc(100vh - 30px);
+  padding-top: 150px;
+}
+.login-container[data-v-2fb7a7e8]:after {
+    content: "";
+    background: url(../img/takingnotes.cfca4bf3.jpg) no-repeat fixed center;
+    background-size: cover;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+}
+.login-form[data-v-2fb7a7e8] {
+  width: 400px;
+  background-color: white;
+  border-radius: 10px;
+  height: 100%;
+  -webkit-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+          box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  padding: 30px;
+}
+.login-form__header[data-v-2fb7a7e8] {
+    text-align: center;
+    padding-bottom: 30px;
+}
+.login-form__errors[data-v-2fb7a7e8] {
+    padding: 10px 0;
+}
+.login-form__button[data-v-2fb7a7e8] {
+    width: 100%;
+}
+@media screen and (max-width: 768px) {
+.login-form[data-v-2fb7a7e8] {
+    width: 250px;
+}
+}
+
+
+/*# sourceMappingURL=chunk-3f99eee6.e7eac981.css.map*/
