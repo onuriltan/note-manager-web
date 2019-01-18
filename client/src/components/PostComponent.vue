@@ -17,7 +17,7 @@
       <p class="error" v-if="error">{{error}}</p>
       <div class="posts__content">
         <b-card-group deck>
-          <b-card :title="`${post.createdAt.getDate()}/${post.createdAt.getMonth()}/${post.createdAt.getFullYear()}`"
+          <b-card :title="post.createdAt | convertDate()"
                   tag="article"
                   v-for="post in posts"
                   v-bind:key="post._id"
@@ -76,6 +76,11 @@ export default {
     hideModal () {
       this.tobeDeletedId = ''
       this.$refs.deleteNoteModal.hide()
+    }
+  },
+  filters: {
+    convertDate : function (date) {
+      return `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`
     }
   },
   async created () {
