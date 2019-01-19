@@ -1,12 +1,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const mongoose = require('mongoose');
 
 const server = express();
 
 // Middleware
 server.use(bodyParser.json());
 server.use(cors());
+
+// Connect to mongo
+const dbAddress = require('./config/MongoConnection').MongoURI;
+mongoose.connect(dbAddress, { useNewUrlParser: true })
+    .then(() => console.log('MongoDB connected.'))
+    .catch(err => console.log(err));
 
 // Routes
 const app = require('./routes');
