@@ -3,9 +3,9 @@
     <b-form class="login-form">
       <h2 class="login-form__header">Login</h2>
       <div class="login-form__errors" v-if="errors.length > 0">
-          <b-alert v-bind:key="index" v-for="(error, index) in errors" show variant="danger" size="lg">
-            {{error.msg}}
-          </b-alert>
+        <b-alert v-bind:key="index" v-for="(error, index) in errors" show variant="danger" size="lg">
+          {{error.msg}}
+        </b-alert>
       </div>
       <b-form-group id="username"
                     label="Username"
@@ -27,6 +27,9 @@
                       required>
         </b-form-input>
       </b-form-group>
+      <div style="font-weight: bold; margin: 30px 0; text-align: center">
+        <router-link to="/register">Dont have an account? Register from here!</router-link>
+      </div>
       <b-button class="login-form__button" v-on:click="login()" variant="success" size="lg">Login</b-button>
     </b-form>
   </div>
@@ -34,33 +37,25 @@
 
 <script>
 
-export default {
-  name: 'LoginComponent',
-  data () {
-    return {
-      errors: [],
-      username: '',
-      password: ''
-    }
-  },
-  computed: {
-    isAuthenticated () {
-      return this.$store.state.AuthStore.isAuthenticated
-    }
-  },
-  methods: {
-    async login () {
-      this.errors = []
-      const res = await this.$store.dispatch('login', { username: this.username, password: this.password })
-      if (res.data.errors) {
-        this.errors = res.data.errors
+  export default {
+    name: 'LoginComponent',
+    data() {
+      return {
+        errors: [],
+        username: '',
+        password: ''
       }
     },
-    async logout () {
-      await this.$store.dispatch('logout')
+    methods: {
+      async login() {
+        this.errors = []
+        const res = await this.$store.dispatch('login', {username: this.username, password: this.password})
+        if (res.data.errors) {
+          this.errors = res.data.errors
+        }
+      }
     }
   }
-}
 </script>
 
 <style scoped lang="scss">

@@ -1,4 +1,4 @@
-import loginService from '../../services/LoginService'
+import authService from '../../services/AuthService'
 import router from '../../router'
 import jwtDecode from 'jwt-decode'
 
@@ -19,9 +19,18 @@ const AuthStore = {
     },
     login (context, credentials) {
       return new Promise(resolve => {
-        loginService.login(credentials)
+        authService.login(credentials)
           .then((response) => {
             context.commit('updateIsAuthenticated', response)
+            return resolve(response)
+          })
+          .catch((response) => { return resolve(response) })
+      })
+    },
+    register (context, credentials) {
+      return new Promise(resolve => {
+        authService.register(credentials)
+          .then((response) => {
             return resolve(response)
           })
           .catch((response) => { return resolve(response) })

@@ -31,15 +31,19 @@ router.post('/login', (req, res) => {
 router.post('/register', (req, res) => {
     const { name, email, password, password2} = req.body;
     let errors = [];
+    console.log(req.body);
     //Check required fields
-    if(!name  || !email || !password || !password) {
+    if(!name  && !email && !password && !password) {
         errors.push({msg: 'Please enter all the fields'});
+        res.status(400).json({errors})
     }
     if(password !== password2) {
         errors.push({msg: 'Passwords do not match'});
+        res.status(400).json({errors})
     }
     if(password.length < 6 ) {
         errors.push({msg: 'Password length should be 6'});
+        res.status(400).json({errors})
     }
     // end of check required fields
     if(errors.length > 0) {

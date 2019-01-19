@@ -5,6 +5,7 @@ import AuthStore from './store/modules/AuthStore'
 import Store from './store/index'
 
 const Login = () => import('./views/Login.vue')
+const Register = () => import('./views/Register.vue')
 
 Vue.use(Router)
 
@@ -42,6 +43,9 @@ export default new Router({
     },
     {
       path: '/login', name: 'login', component: Login, beforeEnter: alreadyLoggedIn
+    },
+    {
+      path: '/register', name: 'register', component: Register, beforeEnter: alreadyLoggedIn
     }
   ]
 })
