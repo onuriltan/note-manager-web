@@ -37,25 +37,25 @@
 
 <script>
 
-  export default {
-    name: 'LoginComponent',
-    data() {
-      return {
-        errors: [],
-        username: '',
-        password: ''
-      }
-    },
-    methods: {
-      async login() {
-        this.errors = []
-        const res = await this.$store.dispatch('login', {username: this.username, password: this.password})
-        if (res.data.errors) {
-          this.errors = res.data.errors
-        }
+export default {
+  name: 'LoginComponent',
+  data () {
+    return {
+      errors: [],
+      username: '',
+      password: ''
+    }
+  },
+  methods: {
+    async login () {
+      this.errors = []
+      const res = await this.$store.dispatch('login', { username: this.username, password: this.password })
+      if (res.data.errors) {
+        this.errors = res.data.errors
       }
     }
   }
+}
 </script>
 
 <style scoped lang="scss">

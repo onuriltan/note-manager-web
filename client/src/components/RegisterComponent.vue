@@ -57,33 +57,33 @@
 
 <script>
 
-  export default {
-    name: 'RegisterComponent',
-    data() {
-      return {
-        errors: [],
-        username: '',
-        email: '',
-        password: '',
-        password2: ''
-      }
-    },
-    methods: {
-      async register() {
-        this.errors = []
-        const res = await this.$store.dispatch('register',
-          {
-            username: this.username,
-            email: this.email,
-            password: this.password,
-            password2: this.password2
-          })
-        if (res.data.errors) {
-          this.errors = res.data.errors
-        }
+export default {
+  name: 'RegisterComponent',
+  data () {
+    return {
+      errors: [],
+      username: '',
+      email: '',
+      password: '',
+      password2: ''
+    }
+  },
+  methods: {
+    async register () {
+      this.errors = []
+      const res = await this.$store.dispatch('register',
+        {
+          username: this.username,
+          email: this.email,
+          password: this.password,
+          password2: this.password2
+        })
+      if (res.data.errors) {
+        this.errors = res.data.errors
       }
     }
   }
+}
 </script>
 
 <style scoped lang="scss">
