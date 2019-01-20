@@ -7,12 +7,12 @@
           {{error.msg}}
         </b-alert>
       </div>
-      <b-form-group id="username"
-                    label="Username"
-                    label-for="username">
-        <b-form-input id="username"
+      <b-form-group id="email"
+                    label="Email"
+                    label-for="email">
+        <b-form-input id="email"
                       type="email"
-                      v-model="username"
+                      v-model="email"
                       size="lg"
                       required>
         </b-form-input>
@@ -42,14 +42,14 @@ export default {
   data () {
     return {
       errors: [],
-      username: '',
+      email: '',
       password: ''
     }
   },
   methods: {
     async login () {
       this.errors = []
-      const res = await this.$store.dispatch('login', { username: this.username, password: this.password })
+      const res = await this.$store.dispatch('login', { email: this.email, password: this.password })
       if (res.data.errors) {
         this.errors = res.data.errors
       }

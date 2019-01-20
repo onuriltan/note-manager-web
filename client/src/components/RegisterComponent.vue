@@ -10,6 +10,11 @@
           {{error.msg}}
         </b-alert>
       </div>
+      <div class="login-form__errors" v-if="messages.length > 0">
+        <b-alert v-bind:key="index" v-for="(message, index) in messages" show variant="success" size="lg">
+          {{message.msg}}
+        </b-alert>
+      </div>
       <b-form-group id="username"
                     label="Username"
                     label-for="username">
@@ -62,6 +67,7 @@ export default {
   data () {
     return {
       errors: [],
+      messages: [],
       username: '',
       email: '',
       password: '',
@@ -78,9 +84,15 @@ export default {
           password: this.password,
           password2: this.password2
         })
+
       if (res.data.errors) {
         this.errors = res.data.errors
       }
+      if (res.data.messages) {
+        this.messages = res.data.messages
+      }
+      console.log(res.data.messages)
+      console.log(this.messages)
     }
   }
 }
