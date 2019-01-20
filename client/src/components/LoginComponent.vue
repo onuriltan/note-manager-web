@@ -87,6 +87,9 @@ export default {
       let isValidForm = this.validateForm()
       if (isValidForm) {
         const res = await this.$store.dispatch('login', { email: this.email, password: this.password })
+        if (res.data.fieldErrors) {
+          this.fieldErrors = res.data.fieldErrors
+        }
         if (res.data.errors) {
           this.errors = res.data.errors
         }
