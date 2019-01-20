@@ -6,54 +6,54 @@ const User = require('../../models/User');
 const bcrypt = require('bcrypt');
 
 router.post('/login', (req, res) => {
-    const {username, password} = req.body;
+    const {email, password} = req.body;
 
     let errors = [];
-    if (!username || !password) {
+    if (!email || !password) {
         errors.push({msg: 'Please enter all the fields'});
         res.status(400).json({errors})
-    }
-    else if (username !== 'onur.iltan@gmail.com' || password !== 'p') {
-        errors.push({msg: 'Username or password is wrong'});
-        res.status(401).json({errors})
-    }
-    else {
-        // mock user
-        const user = {
-            id: 1,
-            username: username,
-            email: username
-        };
-        JwtOperations.signToken(user, 'theSecretKey', res);
+    } else {
+        User.findOne({email})
+            .then(user => {
+                if (user) {
+                    JwtOperations.signToken(user, 'theSecretKey', res);
+                } else {
+                    errors.push({msg: 'Username or password is wrong'});
+                    res.status(401).json({errors})
+                }
+            })
     }
 });
 
 router.post('/register', (req, res) => {
-    const { name, email, password, password2} = req.body;
+    const {username, email, password, password2} = req.body;
     let errors = [];
+    let messages = [];
     //Check required fields
-    if(!name  || !email || !password || !password) {
+    if (!username && !email && !password && !password) {
         errors.push({msg: 'Please enter all the fields'});
+        res.status(400).json({errors})
     }
-    if(password !== password2) {
+    if (password !== password2) {
         errors.push({msg: 'Passwords do not match'});
+        res.status(400).json({errors})
     }
-    if(password.length < 6 ) {
+    if (password.length < 6) {
         errors.push({msg: 'Password length should be 6'});
+        res.status(400).json({errors})
     }
     // end of check required fields
-    if(errors.length > 0) {
+    if (errors.length > 0) {
         res.status(400).json({errors})
-    }else {
-        User.findOne({ email })
+    } else {
+        User.findOne({email})
             .then(user => {
-                if (user){
+                if (user) {
                     errors.push({msg: 'This email is already registered'});
                     res.status(400).json({errors})
-                }
-                else {
+                } else {
                     const newUser = new User({
-                        name,
+                        username,
                         email,
                         password
                     });
@@ -63,9 +63,12 @@ router.post('/register', (req, res) => {
                             if (err) throw err;
                             newUser.password = hash; // Set password to hashed
                             newUser.save() // save user
-                                .then( res.json({ "msg": 'successfully registered' }))
+                                .then(() => {
+                                    messages.push({msg: 'Successfully registered, you can now login!'});
+                                    res.status(200).json({messages})
+                                })
                                 .catch(err => console.log(err));
-                    }))
+                        }))
                 }
             })
     }

@@ -79,8 +79,8 @@ export default {
     }
   },
   filters: {
-    convertDate : function (date) {
-      return `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`
+    convertDate: function (date) {
+      return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
     }
   },
   async created () {
