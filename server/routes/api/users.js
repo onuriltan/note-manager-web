@@ -8,9 +8,28 @@ const bcrypt = require('bcrypt');
 router.post('/login', (req, res) => {
     const {email, password} = req.body;
     let errors = [];
-    if (!email || !password) {
-        errors.push({msg: 'Please enter all the fields'});
-        res.status(400).json({errors})
+    let fieldErrors = {
+        email: "",
+        password: ""
+    };
+    if (!email) {
+        fieldErrors.email = 'Email required.'
+    } else if (!validEmail(email)) {
+        fieldErrors.email = 'Email is not valid.'
+    } else {
+        fieldErrors.email = ''
+    }
+    if (!password) {
+        fieldErrors.password = 'Password required.'
+    } else if (password.length < 6) {
+        fieldErrors.password = 'Password length should be 6.'
+    } else {
+        fieldErrors.password = ''
+    }
+    let isValid = fieldErrors.email === "" && fieldErrors.password === ""
+
+    if (!isValid) {
+        res.status(400).json({fieldErrors})
     } else {
         User.findOne({email})
             .then(user => {
@@ -32,25 +51,44 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/register', (req, res) => {
-    const {username, email, password, password2} = req.body;
+    const {email, password, password2} = req.body;
+    let fieldErrors = {
+        email: "",
+        password: "",
+        password2: "",
+    };
     let errors = [];
     let messages = [];
+
     //Check required fields
-    if (!username && !email && !password && !password) {
-        errors.push({msg: 'Please enter all the fields'});
-        res.status(400).json({errors})
+    if (!email) {
+        fieldErrors.email = 'Email required.'
+    } else if (!validEmail(email)) {
+        fieldErrors.email = 'Email is not valid.'
+    } else {
+        fieldErrors.email = ''
     }
-    if (password !== password2) {
-        errors.push({msg: 'Passwords do not match'});
-        res.status(400).json({errors})
+    if (!password) {
+        fieldErrors.password = 'Password required.'
+    } else if (password.length < 6) {
+        fieldErrors.password = 'Password length should be 6.'
+    } else {
+        fieldErrors.password = ''
     }
-    if (password.length < 6) {
-        errors.push({msg: 'Password length should be 6'});
-        res.status(400).json({errors})
+    if (!password2) {
+        fieldErrors.password2 = 'Repeat password required.'
+    } else if (password2.length < 6) {
+        fieldErrors.password2 = 'Repeat password length should be 6.'
+    } else if (password2 !== password) {
+        fieldErrors.password = 'Passwords does not match.'
+        fieldErrors.password2 = 'Passwords does not match.'
+    } else {
+        fieldErrors.password2 = ''
+        fieldErrors.password = ''
     }
-    // end of check required fields
-    if (errors.length > 0) {
-        res.status(400).json({errors})
+    let isValid = fieldErrors.email === "" && fieldErrors.password === "" && fieldErrors.password2 === ""
+    if (!isValid) {
+        res.status(400).json({fieldErrors})
     } else {
         User.findOne({email})
             .then(user => {
@@ -60,7 +98,6 @@ router.post('/register', (req, res) => {
                 } else {
                     const newUser = new User({
                         email,
-                        username,
                         password
                     });
                     //Hash password
@@ -79,6 +116,11 @@ router.post('/register', (req, res) => {
             })
     }
 });
+
+function validEmail(email) {
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    return re.test(email)
+}
 
 module.exports = router;
 

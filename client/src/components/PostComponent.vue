@@ -15,22 +15,22 @@
       </div>
       <hr>
       <p class="error" v-if="error">{{error}}</p>
-        <b-card-group deck class="posts__content">
-          <b-card :title="post.createdAt | convertDate()"
-                  tag="article"
-                  v-for="post in posts"
-                  v-bind:key="post._id"
-                  class="mb-2 posts__content__card fade--away slide--in--from--left"
-                  style="max-width: 15rem; min-width: 15rem;">
-            <p class="card-text">
-              {{post.text}}
-            </p>
-            <div slot="footer">
-              <b-button size="sm" variant="danger" @click="showModal(post._id)">Delete</b-button>
-            </div>
-          </b-card>
-        </b-card-group>
-        <b-modal ref="deleteNoteModal" id="modal" title="Delete">
+      <b-card-group deck class="posts__content">
+        <b-card :title="post.createdAt | convertDate()"
+                tag="article"
+                v-for="post in posts"
+                v-bind:key="post._id"
+                class="mb-2 posts__content__card fade--away slide--in--from--left"
+                style="max-width: 15rem; min-width: 15rem;">
+          <p class="card-text">
+            {{post.text}}
+          </p>
+          <div slot="footer">
+            <b-button size="sm" variant="danger" @click="showModal(post._id)">Delete</b-button>
+          </div>
+        </b-card>
+      </b-card-group>
+      <b-modal ref="deleteNoteModal" id="modal" title="Delete">
         <p class="my-4">Do you want to delete the note?</p>
         <div slot="modal-footer">
           <b-btn class="float-right" variant="primary" @click="hideModal()">

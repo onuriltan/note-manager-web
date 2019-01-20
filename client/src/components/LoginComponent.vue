@@ -9,6 +9,7 @@
       </div>
       <b-form-group id="email"
                     label="Email"
+                    :invalid-feedback="invalidEmail"
                     label-for="email">
         <b-form-input id="email"
                       type="email"
@@ -19,6 +20,7 @@
       </b-form-group>
       <b-form-group id="password"
                     label="Password"
+                    :invalid-feedback="invalidPassword"
                     label-for="password">
         <b-form-input id="password"
                       type="password"
@@ -42,16 +44,55 @@ export default {
   data () {
     return {
       errors: [],
+      fieldErrors: {
+        email: "",
+        password: "",
+      },
       email: '',
       password: ''
     }
   },
+  computed: {
+    invalidEmail () {
+      return this.fieldErrors.email
+    },
+    invalidPassword() {
+      return this.fieldErrors.password
+    },
+  },
   methods: {
+    validateForm: function () {
+      if (!this.email) {
+        this.fieldErrors.email = 'Email required.'
+      } else if (!this.validEmail(this.email)) {
+        this.fieldErrors.email = 'Email is not valid.'
+      }else {
+        this.fieldErrors.email = ''
+      }
+      if (!this.password) {
+        this.fieldErrors.password = 'Password required.'
+      } else if (this.password.length < 6) {
+        this.fieldErrors.password = 'Password length should be 6.'
+      }else {
+        this.fieldErrors.password = ''
+      }
+      return this.fieldErrors.email === "" && this.fieldErrors.password === ""
+    },
+    validEmail: function (email) {
+      let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      return re.test(email)
+    },
     async login () {
       this.errors = []
-      const res = await this.$store.dispatch('login', { email: this.email, password: this.password })
-      if (res.data.errors) {
-        this.errors = res.data.errors
+      let isValidForm = this.validateForm()
+      if (isValidForm) {
+        const res = await this.$store.dispatch('login', { email: this.email, password: this.password })
+        if (res.data.fieldErrors) {
+          this.fieldErrors = res.data.fieldErrors
+        }
+        if (res.data.errors) {
+          this.errors = res.data.errors
+        }
       }
     }
   }
