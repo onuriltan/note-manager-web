@@ -91,8 +91,6 @@ export default {
       if (res.data.messages) {
         this.messages = res.data.messages
       }
-      console.log(res.data.messages)
-      console.log(this.messages)
     }
   }
 }
