@@ -7,7 +7,6 @@ const bcrypt = require('bcrypt');
 
 router.post('/login', (req, res) => {
     const {email, password} = req.body;
-
     let errors = [];
     if (!email || !password) {
         errors.push({msg: 'Please enter all the fields'});
@@ -17,6 +16,7 @@ router.post('/login', (req, res) => {
             .then(user => {
                 if (user) {
                     let isPasswordCorrect = bcrypt.compareSync(password, user.password);
+                    console.log(isPasswordCorrect)
                     if (isPasswordCorrect) {
                         JwtOperations.signToken(user, 'theSecretKey', res);
                     } else {
@@ -59,7 +59,7 @@ router.post('/register', (req, res) => {
                     res.status(400).json({errors})
                 } else {
                     const newUser = new User({
-                        _id: email,
+                        email,
                         username,
                         password
                     });

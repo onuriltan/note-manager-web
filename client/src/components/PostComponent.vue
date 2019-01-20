@@ -86,6 +86,7 @@ export default {
   async created () {
     try {
       this.posts = await PostService.getPosts()
+      console.log(this.posts)
     } catch (e) {
       this.error = e.message
     }
