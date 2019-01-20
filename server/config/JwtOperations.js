@@ -18,11 +18,15 @@ const getToken = (req, res, next) => {
     }
 };
 
-const verifyToken =  (req, res) => {
+verifyToken =  (req, res) => {
+    let userData = "";
     jwt.verify(req.token, 'theSecretKey', async (err, authData) => {
-        if(err) res.sendStatus(403); // Forbidden
-        else return true;
+        if(err) { // Forbidden
+            res.sendStatus(403);
+        }
+        userData = authData;
     });
+    return userData;
 };
 
 const signToken =  (user, secretKey, res) => {
