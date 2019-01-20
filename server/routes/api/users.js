@@ -32,11 +32,11 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/register', (req, res) => {
-    const {username, email, password, password2} = req.body;
+    const {email, password, password2} = req.body;
     let errors = [];
     let messages = [];
     //Check required fields
-    if (!username && !email && !password && !password) {
+    if (!email && !password && !password) {
         errors.push({msg: 'Please enter all the fields'});
         res.status(400).json({errors})
     }
@@ -60,7 +60,6 @@ router.post('/register', (req, res) => {
                 } else {
                     const newUser = new User({
                         email,
-                        username,
                         password
                     });
                     //Hash password

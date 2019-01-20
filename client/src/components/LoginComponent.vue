@@ -47,11 +47,29 @@ export default {
     }
   },
   methods: {
+    validateForm: function () {
+      if (!this.email) {
+        this.errors.push({ msg: 'Email required.' })
+      } else if (!this.validEmail(this.email)) {
+        this.errors.push({ msg: 'Email is not valid.' })
+      }
+      if (!this.password) {
+        this.errors.push({ msg: 'Password required.' })
+      }
+      return !this.errors.length
+    },
+    validEmail: function (email) {
+      let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      return re.test(email)
+    },
     async login () {
       this.errors = []
-      const res = await this.$store.dispatch('login', { email: this.email, password: this.password })
-      if (res.data.errors) {
-        this.errors = res.data.errors
+      let isValidForm = this.validateForm()
+      if (isValidForm) {
+        const res = await this.$store.dispatch('login', { email: this.email, password: this.password })
+        if (res.data.errors) {
+          this.errors = res.data.errors
+        }
       }
     }
   }
