@@ -47,8 +47,8 @@ export default {
     return {
       errors: [],
       fieldErrors: {
-        email: "",
-        password: "",
+        email: '',
+        password: ''
       },
       email: '',
       password: ''
@@ -58,9 +58,9 @@ export default {
     invalidEmail () {
       return this.fieldErrors.email
     },
-    invalidPassword() {
+    invalidPassword () {
       return this.fieldErrors.password
-    },
+    }
   },
   methods: {
     validateForm: function () {
@@ -68,17 +68,17 @@ export default {
         this.fieldErrors.email = 'Email required.'
       } else if (!this.validEmail(this.email)) {
         this.fieldErrors.email = 'Email is not valid.'
-      }else {
+      } else {
         this.fieldErrors.email = ''
       }
       if (!this.password) {
         this.fieldErrors.password = 'Password required.'
       } else if (this.password.length < 6) {
         this.fieldErrors.password = 'Password length should be 6.'
-      }else {
+      } else {
         this.fieldErrors.password = ''
       }
-      return this.fieldErrors.email === "" && this.fieldErrors.password === ""
+      return this.fieldErrors.email === '' && this.fieldErrors.password === ''
     },
     validEmail: function (email) {
       let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/

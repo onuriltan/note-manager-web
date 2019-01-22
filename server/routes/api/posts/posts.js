@@ -1,7 +1,7 @@
 const express = require('express');
 const mongodb = require('mongodb');
-const JwtOperations = require('../../config/JwtOperations');
-const Post = require('../../models/Post');
+const JwtOperations = require('../../../config/JwtOperations');
+const Post = require('../../../models/Post');
 
 const router = express.Router();
 
