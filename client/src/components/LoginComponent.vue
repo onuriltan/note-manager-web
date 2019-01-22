@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <b-form class="login-form">
+    <b-form class="login-form" v-on:submit="login()">
       <h2 class="login-form__header">Login</h2>
       <div class="login-form__errors" v-if="errors.length > 0">
         <b-alert v-bind:key="index" v-for="(error, index) in errors" show variant="danger" size="lg">
@@ -34,7 +34,7 @@
       <div style="font-weight: bold; margin: 30px 0; text-align: center">
         <router-link to="/register">Dont have an account? Register from here!</router-link>
       </div>
-      <b-button class="login-form__button" v-on:click="login()" variant="success" size="lg">Login</b-button>
+      <b-button class="login-form__button" type="submit" variant="success" size="lg">Login</b-button>
     </b-form>
   </div>
 </template>

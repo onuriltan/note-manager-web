@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <b-form class="login-form">
+    <b-form class="login-form" v-on:submit="register()">
       <h2 class="login-form__header">Register</h2>
       <div style="font-weight: bold; margin-bottom: 20px; text-align: center">
         <router-link to="/login">Go back to login page!</router-link>
@@ -51,7 +51,7 @@
                       required>
         </b-form-input>
       </b-form-group>
-      <b-button class="login-form__button" v-on:click="register()" variant="success" size="lg">Register</b-button>
+      <b-button class="login-form__button" type="submit" variant="success" size="lg">Register</b-button>
     </b-form>
   </div>
 </template>

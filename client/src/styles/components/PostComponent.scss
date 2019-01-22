@@ -26,7 +26,8 @@
       &__card {
         margin: 20px;
         &__footer {
-          border-top: unset;
+          display: flex;
+          justify-content: space-between;
         }
       }
     }
