@@ -17,7 +17,7 @@ mongoose.connect(dbAddress, { useNewUrlParser: true })
 
 // Routes
 const app = require('./routes/api');
-const posts = require('./routes/api/posts/posts');
+const posts = require('./routes/api/posts/PostsService');
 const auth = require('./routes/api/users/UserService');
 server.use('/api', app);
 server.use('/api/posts', posts);
