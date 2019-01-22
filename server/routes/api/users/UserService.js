@@ -17,11 +17,9 @@ router.post('/login', (req, res) => {
 
 router.post('/register', (req, res) => {
     const {email, password, password2} = req.body;
-
     //Check required fields
     let fieldErrors = UserValidation.validateRegister(req.body);
-
-    let isValid = fieldErrors.email === "" && fieldErrors.password === "" && fieldErrors.password2 === ""
+    let isValid = fieldErrors.email === "" && fieldErrors.password === "" && fieldErrors.password2 === "";
     if (!isValid) {
         res.status(400).json({fieldErrors})
     } else {
