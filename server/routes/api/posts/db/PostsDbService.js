@@ -17,8 +17,15 @@ const findPost = (email, res) => {
     });
 };
 
-const deletePost = (email, req, res) => {
-    Post.deleteOne({_id: new mongodb.ObjectID(req.params.id), email: email}).then(() => {// in mongo id is a special type of ObjectID
+const editPost = (id, email, text, res) => {
+    Post.findOneAndUpdate({_id: id, email: email}, {text: text, editedAt: new Date()}, (err, updatedPost) => {
+        if (err) console.log(err);
+        res.send(updatedPost);
+    });
+};
+
+const deletePost = (email, id, res) => {
+    Post.deleteOne({_id: new mongodb.ObjectID(id), email: email}).then(() => {// in mongo id is a special type of ObjectID
             res.status(200).send();
         }
     );
@@ -27,3 +34,4 @@ const deletePost = (email, req, res) => {
 module.exports.createPost = createPost;
 module.exports.deletePost = deletePost;
 module.exports.findPost = findPost;
+module.exports.editPost = editPost;

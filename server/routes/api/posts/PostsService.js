@@ -4,24 +4,41 @@ const PostsDbService = require("./db/PostsDbService");
 
 const router = express.Router();
 
-// Get Posts
-router.get('/', JwtOperations.getToken, async (req, res) => {
-    const {user: {email}} = JwtOperations.verifyToken(req, res);
-    PostsDbService.findPost(email, res);
-
+router.get('/', JwtOperations.verifyToken, (req, res) => {
+    const authData = JwtOperations.decodeToken(req, res);
+    if (typeof authData !== "undefined") {
+        const {user: {email}} = authData;
+        PostsDbService.findPost(email, res);
+    }
 });
 
-// Add Posts
-router.post('/', JwtOperations.getToken, async (req, res) => {
-    const {user: {email}} = JwtOperations.verifyToken(req, res);
-    const {text} = req.body;
-    PostsDbService.createPost(text, email, res)
-
+router.post('/', JwtOperations.verifyToken, (req, res) => {
+    const authData = JwtOperations.decodeToken(req, res);
+    if (typeof authData !== "undefined") {
+        const {user: {email}} = authData;
+        const {text} = req.body;
+        PostsDbService.createPost(text, email, res)
+    }
 });
-// Delete Posts
-router.delete('/:id', JwtOperations.getToken, async (req, res) => {
-    const {user: {email}} = JwtOperations.verifyToken(req, res);
-    PostsDbService.deletePost(email, req, res);
+
+router.put('/:id', JwtOperations.verifyToken, (req, res) => {
+    const authData = JwtOperations.decodeToken(req, res);
+    if (typeof authData !== "undefined") {
+        const {user: {email}} = authData;
+        const {text} = req.body;
+        const id = req.params.id;
+        PostsDbService.editPost(id, email, text, res);
+    }
+});
+
+router.delete('/:id', JwtOperations.verifyToken, (req, res) => {
+    const authData = JwtOperations.decodeToken(req, res);
+    if (typeof authData !== "undefined") {
+        const {user: {email}} = authData;
+        const id = req.params.id;
+        PostsDbService.deletePost(email, id, res);
+    }
+
 });
 
 
