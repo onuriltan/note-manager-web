@@ -12,6 +12,9 @@ const PostSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: new Date()
+    },
+    editedAt: {
+        type: Date,
     }
 });
 const Post = mongoose.model( 'Post', PostSchema);

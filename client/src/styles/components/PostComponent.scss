@@ -8,7 +8,6 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding-top: 50px;
     &__header {
       margin-bottom: 50px;
       font-weight: bold
@@ -54,7 +53,6 @@
 
 @media screen and (max-width: 768px) {
   .posts-container {
-    padding-top: 0px;
     .posts {
       &__header {
       }
