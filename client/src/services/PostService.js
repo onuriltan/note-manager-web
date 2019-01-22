@@ -30,6 +30,11 @@ class PostService {
   static deletePost (id) {
     return axios.delete(`${url}/${id}`, { headers: { 'Authorization': `Bearer ${window.localStorage.getItem('token')}` } })
   }
+
+  // Edit Post
+  static editPost (id, text) {
+    return axios.put(`${url}/${id}`, { text },{ headers: { 'Authorization': `Bearer ${window.localStorage.getItem('token')}` } })
+  }
 }
 
 export default PostService

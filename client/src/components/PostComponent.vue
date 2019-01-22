@@ -7,7 +7,7 @@
           <b-form-input v-model="text"
                         class="posts__create-form__input"
                         type="text"
-                        placeholder="Create a post ..."></b-form-input>
+                        placeholder="Create a note ..."></b-form-input>
           <b-input-group-append>
             <b-btn v-on:click="createPost" variant="success">Post!</b-btn>
           </b-input-group-append>
@@ -25,11 +25,21 @@
           <p class="card-text">
             {{post.text}}
           </p>
-          <div slot="footer">
+          <div slot="footer" class="posts__content__card__footer">
             <b-button size="sm" variant="danger" @click="showModal(post._id)">Delete</b-button>
+            <b-button size="sm" @click="showEditModal(post._id, post.text)">Edit</b-button>
           </div>
         </b-card>
       </b-card-group>
+      <b-modal ref="editNoteModal" id="modal" title="Edit" hide-footer>
+        <b-input-group>
+          <b-form-input v-model="tobeEditedText"
+                        type="text">{{this.tobeEditedText}}</b-form-input>
+          <b-input-group-append>
+            <b-btn v-on:click="editPost" variant="success">EDIT</b-btn>
+          </b-input-group-append>
+        </b-input-group>
+      </b-modal>
       <b-modal ref="deleteNoteModal" id="modal" title="Delete">
         <p class="my-4">Do you want to delete the note?</p>
         <div slot="modal-footer">
@@ -56,7 +66,9 @@ export default {
       posts: [],
       error: '',
       text: '',
-      tobeDeletedId: ''
+      tobeDeletedId: '',
+      tobeEditedId: '',
+      tobeEditedText: ''
     }
   },
   methods: {
@@ -68,6 +80,19 @@ export default {
       this.$refs.deleteNoteModal.hide()
       await PostService.deletePost(this.tobeDeletedId)
       this.posts = await PostService.getPosts()
+    },
+    async editPost () {
+      this.$refs.editNoteModal.hide()
+      console.log(this.tobeEditedId)
+      await PostService.editPost(this.tobeEditedId, this.tobeEditedText)
+      this.tobeEditedId = ""
+      this.tobeEditedText = ""
+      this.posts = await PostService.getPosts()
+    },
+    showEditModal (id, text) {
+      this.tobeEditedId = id
+      this.tobeEditedText = text
+      this.$refs.editNoteModal.show()
     },
     showModal (id) {
       this.tobeDeletedId = id
