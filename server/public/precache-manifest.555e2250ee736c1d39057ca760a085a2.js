@@ -36,7 +36,7 @@ self.__precacheManifest = [
     "url": "/img/takingnotes.cfca4bf3.jpg"
   },
   {
-    "revision": "13c026dec3c3b13028eb0e6b659f08e0",
+    "revision": "0af3ece7c7b6a718b13bc7ff9d06650a",
     "url": "/index.html"
   },
   {
