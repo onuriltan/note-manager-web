@@ -13,6 +13,7 @@
                     label-for="email">
         <b-form-input id="email"
                       type="email"
+                      class="login-form__input"
                       v-model="email"
                       size="lg"
                       required>
@@ -24,6 +25,7 @@
                     label-for="password">
         <b-form-input id="password"
                       type="password"
+                      class="login-form__input"
                       v-model="password"
                       size="lg"
                       required>

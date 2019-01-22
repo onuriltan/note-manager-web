@@ -22,6 +22,7 @@
         <b-form-input id="email"
                       type="email"
                       v-model="email"
+                      class="login-form__input"
                       size="lg"
                       required>
         </b-form-input>
@@ -32,6 +33,7 @@
                     label-for="password">
         <b-form-input id="password"
                       type="password"
+                      class="login-form__input"
                       v-model="password"
                       size="lg"
                       required>
@@ -43,6 +45,7 @@
                     label-for="password2">
         <b-form-input id="password2"
                       type="password"
+                      class="login-form__input"
                       v-model="password2"
                       size="lg"
                       required>

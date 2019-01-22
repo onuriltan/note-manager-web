@@ -53,6 +53,10 @@
     &__errors{
       padding: 5px 0;
     }
+    &__input {
+      height: calc(2.25rem) !important;
+      font-size: 1rem;
+    }
     &__button {
       width: 100%;
     }
