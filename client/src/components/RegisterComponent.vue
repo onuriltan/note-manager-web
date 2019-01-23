@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <b-form class="login-form" v-on:submit="register()">
+    <b-form class="login-form" v-on:submit.prevent="register()">
       <h2 class="login-form__header">Register</h2>
       <div style="font-weight: bold; margin-bottom: 20px; text-align: center">
         <router-link to="/login">Go back to login page!</router-link>

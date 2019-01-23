@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <b-form class="login-form" v-on:submit="login()">
+    <b-form class="login-form" v-on:submit.prevent="login()">
       <h2 class="login-form__header">Login</h2>
       <div class="login-form__errors" v-if="errors.length > 0">
         <b-alert v-bind:key="index" v-for="(error, index) in errors" show variant="danger" size="lg">
