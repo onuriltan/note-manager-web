@@ -1,4 +1,4 @@
-.login-container[data-v-0b4233c4] {
+.login-container[data-v-3b510dae] {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -10,7 +10,7 @@
   background: url(../img/takingnotes.cfca4bf3.jpg) no-repeat fixed center;
   background-size: cover;
 }
-.login-form[data-v-0b4233c4] {
+.login-form[data-v-3b510dae] {
   width: 400px;
   background-color: white;
   border-radius: 10px;
@@ -19,18 +19,18 @@
           box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
   padding: 30px;
 }
-.login-form__header[data-v-0b4233c4] {
+.login-form__header[data-v-3b510dae] {
     text-align: center;
     padding-bottom: 30px;
 }
-.login-form__errors[data-v-0b4233c4] {
+.login-form__errors[data-v-3b510dae] {
     padding: 10px 0;
 }
-.login-form__button[data-v-0b4233c4] {
+.login-form__button[data-v-3b510dae] {
     width: 100%;
 }
 @media screen and (max-width: 768px) {
-.login-container[data-v-0b4233c4] {
+.login-container[data-v-3b510dae] {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -40,7 +40,7 @@
     min-height: calc(100vh - 30px);
     padding-top: 20px;
 }
-.login-container[data-v-0b4233c4]:after {
+.login-container[data-v-3b510dae]:after {
       content: "";
       background: url(../img/takingnotes.cfca4bf3.jpg) no-repeat fixed center;
       background-size: cover;
@@ -52,24 +52,24 @@
       position: absolute;
       z-index: -1;
 }
-.login-form[data-v-0b4233c4] {
+.login-form[data-v-3b510dae] {
     width: 250px;
 }
-.login-form__header[data-v-0b4233c4] {
+.login-form__header[data-v-3b510dae] {
       text-align: center;
       padding-bottom: 5px;
 }
-.login-form__errors[data-v-0b4233c4] {
+.login-form__errors[data-v-3b510dae] {
       padding: 5px 0;
 }
-.login-form__input[data-v-0b4233c4] {
+.login-form__input[data-v-3b510dae] {
       height: calc(2.25rem) !important;
       font-size: 1rem;
 }
-.login-form__button[data-v-0b4233c4] {
+.login-form__button[data-v-3b510dae] {
       width: 100%;
 }
 }
 
 
-/*# sourceMappingURL=chunk-0a5592dc.9976c675.css.map*/
+/*# sourceMappingURL=chunk-29f1b247.80abea28.css.map*/
