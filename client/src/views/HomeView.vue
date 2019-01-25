@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import PostComponent from '../components/PostComponent.vue'
+import PostComponent from '../components/Dashboard.vue'
 
 export default {
   name: 'home',

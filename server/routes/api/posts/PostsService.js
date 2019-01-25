@@ -12,6 +12,17 @@ router.get('/', JwtOperations.verifyToken, (req, res) => {
     }
 });
 
+router.get('/:fromDate/:toDate/:keyword', JwtOperations.verifyToken, (req, res) => {
+    const authData = JwtOperations.decodeToken(req, res);
+    if (typeof authData !== "undefined") {
+        const {user: {email}} = authData;
+        const fromDate = req.params.fromDate;
+        const toDate = req.params.toDate;
+        const keyword = req.params.keyword;
+        PostsDbService.findPostBetweenDatesandKeyword(fromDate, toDate, keyword, email, res);
+    }
+});
+
 router.post('/', JwtOperations.verifyToken, (req, res) => {
     const authData = JwtOperations.decodeToken(req, res);
     if (typeof authData !== "undefined") {

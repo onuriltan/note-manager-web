@@ -17,6 +17,12 @@ const findPost = (email, res) => {
     });
 };
 
+const findPostBetweenDatesandKeyword = (fromDate, toDate, keyword, email, res) => {
+    Post.find({email, text: {$regex : keyword}} , (err, posts) => {
+        res.send(posts);
+    });
+};
+
 const editPost = (id, email, text, res) => {
     Post.findOneAndUpdate({_id: id, email: email}, {text: text, editedAt: new Date()}, (err, updatedPost) => {
         if (err) console.log(err);
@@ -34,4 +40,5 @@ const deletePost = (email, id, res) => {
 module.exports.createPost = createPost;
 module.exports.deletePost = deletePost;
 module.exports.findPost = findPost;
+module.exports.findPostBetweenDatesandKeyword = findPostBetweenDatesandKeyword;
 module.exports.editPost = editPost;
