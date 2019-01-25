@@ -1,0 +1,18 @@
+.history-container {
+  padding-top: 50px;
+}
+.history {
+  &__header {
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 30px;
+  }
+  &__form {
+    &__content {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+  }
+}
+
