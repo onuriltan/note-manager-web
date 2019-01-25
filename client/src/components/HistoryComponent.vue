@@ -5,7 +5,7 @@
       <div class="history__form__content">
         <b-form-group
           id="fromDate"
-          class="mr-2 ml-2"
+          class="history__form__content__item mr-2 ml-2"
           label="From Date"
           label-for="fromDate">
           <b-form-input id="fromDate" type="date" :max="new Date() | convertDate"
@@ -14,7 +14,7 @@
 
         <b-form-group
           id="toDate"
-          class="mr-2 ml-2"
+          class="history__form__content__item mr-2 ml-2"
           label="To Date"
           label-for="toDate">
           <b-form-input id="fromDate" type="date" :max="new Date() | convertDate"
@@ -23,13 +23,13 @@
 
         <b-form-group
           id="keyword"
-          class="mr-2 ml-2"
+          class="history__form__content__item mr-2 ml-2"
           label="Keyword"
           label-for="keyword">
           <b-form-input id="keyword"></b-form-input>
         </b-form-group>
 
-        <b-button type="submit" class="mr-2 ml-2 mb-3" variant="success">Submit</b-button>
+        <b-button type="submit" class="history__form__content__button mr-2 ml-2 mb-3" variant="success">Submit</b-button>
 
       </div>
     </b-form>
