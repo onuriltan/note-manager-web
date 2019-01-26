@@ -102,5 +102,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "../styles/components/LoginComponent.scss";
+  @import "../styles/components/Login";
 </style>

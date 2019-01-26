@@ -1,7 +1,4 @@
 .posts-container {
-  display: block;
-  max-width: 1200px;
-  margin: 0 auto;
   padding-top: 50px;
   .posts {
     display: flex;
@@ -28,24 +25,6 @@
         &__footer {
           display: flex;
           justify-content: space-between;
-        }
-      }
-    }
-  }
-}
-
-@media screen and (min-width: 769px) and (max-width: 1170px) {
-  .posts-container {
-    width: 90%;
-    .posts {
-      &__header {
-      }
-      &__create-form {
-        &__input {
-        }
-      }
-      &__content {
-        &__card {
         }
       }
     }

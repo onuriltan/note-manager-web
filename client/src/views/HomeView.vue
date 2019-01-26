@@ -1,12 +1,11 @@
 <template>
-  <div class="home">
+  <div class="container">
     <PostComponent />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import PostComponent from '@/components/PostComponent.vue'
+import PostComponent from '../components/Dashboard.vue'
 
 export default {
   name: 'home',

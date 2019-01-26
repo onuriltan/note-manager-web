@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Home from './views/HomeView.vue'
 import AuthStore from './store/modules/AuthStore'
 import Store from './store/index'
 
-const Login = () => import('./views/Login.vue')
-const Register = () => import('./views/Register.vue')
+const Login = () => import('./views/LoginView.vue')
+const Register = () => import('./views/RegisterView.vue')
+const History = () => import('./views/HistoryView.vue')
 
 Vue.use(Router)
 
@@ -40,6 +41,9 @@ export default new Router({
     },
     {
       path: '/', name: 'home', component: Home, beforeEnter: requireAuth
+    },
+    {
+      path: '/notes-history', name: 'history', component: History, beforeEnter: requireAuth
     },
     {
       path: '/login', name: 'login', component: Login, beforeEnter: alreadyLoggedIn

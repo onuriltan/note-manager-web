@@ -17,6 +17,48 @@ const findPost = (email, res) => {
     });
 };
 
+const findPostBetweenDatesandKeyword = (fromDate, toDate, keyword, email, res) => {
+    let regex = new RegExp(`${keyword}`, "i")
+
+    if (fromDate.toString() === 'Invalid Date' && toDate.toString() === 'Invalid Date') {
+        Post.find(
+            {
+                email,
+                text: {$regex: regex},
+            }, (err, posts) => {
+                res.send(posts);
+            });
+    } else if (fromDate.toString() === 'Invalid Date' && toDate.toString() !== 'Invalid Date') {
+        Post.find(
+            {
+                email,
+                text: {$regex: regex},
+                createdAt: {$lte: toDate}
+            }, (err, posts) => {
+                res.send(posts);
+            });
+    } else if (fromDate.toString() !== 'Invalid Date' && toDate.toString() === 'Invalid Date') {
+        Post.find(
+            {
+                email,
+                text: {$regex: regex},
+                createdAt: {$gte: fromDate}
+            }, (err, posts) => {
+                res.send(posts);
+            });
+    } else {
+        Post.find(
+            {
+                email,
+                text: {$regex: regex},
+                createdAt: {$gte: fromDate, $lte: toDate}
+            }, (err, posts) => {
+                res.send(posts);
+            });
+    }
+
+};
+
 const editPost = (id, email, text, res) => {
     Post.findOneAndUpdate({_id: id, email: email}, {text: text, editedAt: new Date()}, (err, updatedPost) => {
         if (err) console.log(err);
@@ -34,4 +76,5 @@ const deletePost = (email, id, res) => {
 module.exports.createPost = createPost;
 module.exports.deletePost = deletePost;
 module.exports.findPost = findPost;
+module.exports.findPostBetweenDatesandKeyword = findPostBetweenDatesandKeyword;
 module.exports.editPost = editPost;

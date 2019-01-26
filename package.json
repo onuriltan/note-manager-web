@@ -1,7 +1,7 @@
 {
   "name": "notemanager",
   "version": "1.0.0",
-  "description": "Vue note taking app",
+  "description": "Note manager app with Vue.js",
   "main": "index.js",
   "scripts": {
     "start": "node server/app.js",
