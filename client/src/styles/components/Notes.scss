@@ -1,8 +1,25 @@
 .notes {
   padding-top: 50px;
+  &__empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: calc(100vh - 600px);
+    &__image {
+      width: 100px;
+    }
+    &__message {
+      padding-top: 30px;
+      text-align: center;
+    }
+  }
   &__content {
     display: flex;
     justify-content: center;
+    &__cards {
+      justify-content: center;
+    }
     &__card {
       margin: 20px;
       &__footer {

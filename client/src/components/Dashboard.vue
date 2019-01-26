@@ -2,21 +2,21 @@
   <div class="posts-container">
     <div class="posts">
       <h1 class="posts__header">Latest Posts</h1>
-      <div class="posts__create-form">
+      <form class="posts__create-form" @submit.prevent="createPost">
         <b-input-group>
           <b-form-input v-model="text"
                         class="posts__create-form__input"
                         type="text"
                         placeholder="Create a note ..."></b-form-input>
           <b-input-group-append>
-            <b-btn v-on:click="createPost" variant="success">Post!</b-btn>
+            <b-btn type="submit" variant="success">Post!</b-btn>
           </b-input-group-append>
         </b-input-group>
-      </div>
+      </form>
       <hr>
       <p class="error" v-if="error">{{error}}</p>
 
-      <Notes :editPost="editPost" :deletePost="deletePost" :posts="posts"/>
+      <Notes v-cloak :editPost="editPost" :deletePost="deletePost" :posts="posts"/>
 
     </div>
   </div>
@@ -53,7 +53,7 @@ export default {
       this.posts = await PostService.getPosts()
     }
   },
-  async created () {
+  async beforeMount () {
     try {
       this.posts = await PostService.getPosts()
     } catch (e) {

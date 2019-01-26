@@ -32,7 +32,7 @@
       </div>
     </b-form>
 
-    <Notes :deletePost="deletePost" :editPost="editPost" :posts="posts"/>
+    <Notes v-cloak :deletePost="deletePost" :editPost="editPost" :posts="posts"/>
 
   </div>
 </template>
