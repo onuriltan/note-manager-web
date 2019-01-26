@@ -38,6 +38,9 @@ const AuthStore = {
     },
     loadUser (context) {
       context.commit('loadUser')
+    },
+    checkIsAuthenticated (context) {
+      context.commit('checkIsAuthenticated')
     }
   },
   mutations: {
@@ -45,6 +48,18 @@ const AuthStore = {
       window.localStorage.removeItem('token')
       state.isAuthenticated = false
       router.push('/login')
+    },
+    checkIsAuthenticated (state) {
+      let token = window.localStorage.getItem('token')
+      let unixTimeStamp = new Date().getTime() / 1000
+      let expiration = null
+      if (token != null) {
+        expiration = jwtDecode(token).exp
+      }
+      if (expiration != null && parseInt(expiration) - unixTimeStamp < 0) {
+        state.isAuthenticated = false
+        router.push('/login')
+      }
     },
     updateIsAuthenticated (state, response) {
       if (response.status === 200) {
