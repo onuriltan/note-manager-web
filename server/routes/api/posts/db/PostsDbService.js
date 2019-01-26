@@ -18,9 +18,45 @@ const findPost = (email, res) => {
 };
 
 const findPostBetweenDatesandKeyword = (fromDate, toDate, keyword, email, res) => {
-    Post.find({email, text: {$regex : keyword}} , (err, posts) => {
-        res.send(posts);
-    });
+    let regex = new RegExp(`${keyword}`, "i")
+
+    if (fromDate.toString() === 'Invalid Date' && toDate.toString() === 'Invalid Date') {
+        Post.find(
+            {
+                email,
+                text: {$regex: regex},
+            }, (err, posts) => {
+                res.send(posts);
+            });
+    } else if (fromDate.toString() === 'Invalid Date' && toDate.toString() !== 'Invalid Date') {
+        Post.find(
+            {
+                email,
+                text: {$regex: regex},
+                createdAt: {$lte: toDate}
+            }, (err, posts) => {
+                res.send(posts);
+            });
+    } else if (fromDate.toString() !== 'Invalid Date' && toDate.toString() === 'Invalid Date') {
+        Post.find(
+            {
+                email,
+                text: {$regex: regex},
+                createdAt: {$gte: fromDate}
+            }, (err, posts) => {
+                res.send(posts);
+            });
+    } else {
+        Post.find(
+            {
+                email,
+                text: {$regex: regex},
+                createdAt: {$gte: fromDate, $lte: toDate}
+            }, (err, posts) => {
+                res.send(posts);
+            });
+    }
+
 };
 
 const editPost = (id, email, text, res) => {

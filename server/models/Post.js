@@ -4,7 +4,6 @@ const PostSchema = new mongoose.Schema({
     text: {
         type: String,
         required: true,
-        index: true
     },
     email: {
         type: String,
@@ -17,10 +16,6 @@ const PostSchema = new mongoose.Schema({
     editedAt: {
         type: Date,
     }
-});
-
-PostSchema.index({
-    'text': 'text',
 });
 
 const Post = mongoose.model( 'Post', PostSchema);

@@ -31,24 +31,6 @@
   }
 }
 
-@media screen and (min-width: 769px) and (max-width: 1170px) {
-  .posts-container {
-    width: 90%;
-    .posts {
-      &__header {
-      }
-      &__create-form {
-        &__input {
-        }
-      }
-      &__content {
-        &__card {
-        }
-      }
-    }
-  }
-}
-
 @media screen and (max-width: 768px) {
   .posts-container {
     .posts {

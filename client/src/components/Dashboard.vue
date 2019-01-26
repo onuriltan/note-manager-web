@@ -15,42 +15,9 @@
       </div>
       <hr>
       <p class="error" v-if="error">{{error}}</p>
-      <b-card-group deck class="posts__content">
-        <b-card :title="post.createdAt | convertDate()"
-                tag="article"
-                v-for="post in posts"
-                v-bind:key="post._id"
-                class="mb-2 posts__content__card fade--away slide--in--from--left"
-                style="max-width: 15rem; min-width: 15rem;">
-          <p class="card-text">
-            {{post.text}}
-          </p>
-          <div slot="footer" class="posts__content__card__footer">
-            <b-button size="sm" variant="danger" @click="showModal(post._id)">Delete</b-button>
-            <b-button size="sm" @click="showEditModal(post._id, post.text)">Edit</b-button>
-          </div>
-        </b-card>
-      </b-card-group>
-      <b-modal ref="editNoteModal" id="modal" title="Edit" hide-footer>
-        <b-input-group>
-          <b-form-input v-model="tobeEditedText"
-                        type="text">{{this.tobeEditedText}}</b-form-input>
-          <b-input-group-append>
-            <b-btn v-on:click="editPost" variant="success">EDIT</b-btn>
-          </b-input-group-append>
-        </b-input-group>
-      </b-modal>
-      <b-modal ref="deleteNoteModal" id="modal" title="Delete">
-        <p class="my-4">Do you want to delete the note?</p>
-        <div slot="modal-footer">
-          <b-btn class="float-right" variant="primary" @click="hideModal()">
-            NO
-          </b-btn>
-          <b-btn class="float-right" variant="danger" @click="deletePost()">
-            YES
-          </b-btn>
-        </div>
-      </b-modal>
+
+      <Notes :editPost="editPost" :deletePost="deletePost" :posts="posts"/>
+
     </div>
   </div>
 
@@ -58,17 +25,18 @@
 
 <script>
 import PostService from '../services/PostService'
+import Notes from '../components/Notes'
 
 export default {
   name: 'PostComponent',
+  components: {
+    Notes
+  },
   data () {
     return {
       posts: [],
       error: '',
-      text: '',
-      tobeDeletedId: '',
-      tobeEditedId: '',
-      tobeEditedText: ''
+      text: ''
     }
   },
   methods: {
@@ -76,36 +44,13 @@ export default {
       await PostService.insertPost(this.text)
       this.posts = await PostService.getPosts()
     },
-    async deletePost () {
-      this.$refs.deleteNoteModal.hide()
-      await PostService.deletePost(this.tobeDeletedId)
+    async deletePost (tobeDeletedId) {
+      await PostService.deletePost(tobeDeletedId)
       this.posts = await PostService.getPosts()
     },
-    async editPost () {
-      this.$refs.editNoteModal.hide()
-      console.log(this.tobeEditedId)
-      await PostService.editPost(this.tobeEditedId, this.tobeEditedText)
-      this.tobeEditedId = ""
-      this.tobeEditedText = ""
+    async editPost (tobeEditedId, tobeEditedText) {
+      await PostService.editPost(tobeEditedId, tobeEditedText)
       this.posts = await PostService.getPosts()
-    },
-    showEditModal (id, text) {
-      this.tobeEditedId = id
-      this.tobeEditedText = text
-      this.$refs.editNoteModal.show()
-    },
-    showModal (id) {
-      this.tobeDeletedId = id
-      this.$refs.deleteNoteModal.show()
-    },
-    hideModal () {
-      this.tobeDeletedId = ''
-      this.$refs.deleteNoteModal.hide()
-    }
-  },
-  filters: {
-    convertDate: function (date) {
-      return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
     }
   },
   async created () {
@@ -120,5 +65,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-  @import "../styles/components/PostComponent";
+  @import "../styles/components/Dashboard";
 </style>
