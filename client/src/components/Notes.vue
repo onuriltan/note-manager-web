@@ -55,6 +55,9 @@ export default {
       tobeEditedId: ''
     }
   },
+  mounted () {
+    console.log()
+  },
   methods: {
     showEditModal (id, text) {
       this.tobeEditedId = id
