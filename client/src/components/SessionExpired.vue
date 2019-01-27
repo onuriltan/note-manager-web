@@ -1,0 +1,44 @@
+<template>
+  <div id="theWarning" style="display:none" :class="{'session-expired-alert' : sessionExpired}">
+    <div class="session-expired-alert__content">
+      <b-alert show variant="warning" style="margin-bottom: unset !important; padding: 50px 100px!important;">Your session is expired ...</b-alert>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'SessionExpired',
+  computed: {
+    sessionExpired () {
+      return this.$store.state.AuthStore.sessionExpired
+    }
+  },
+  watch: {
+    sessionExpired (oldValue, newValue) { }
+  }
+}
+</script>
+
+<style scoped lang="scss">
+  .session-expired-alert {
+    display: flex !important; /* Hidden by default */
+    justify-content: center;
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    &__content {
+      display: flex;
+      justify-content: center;
+      margin: auto;
+      text-align: center;
+      width: 350px!important;
+    }
+  }
+</style>

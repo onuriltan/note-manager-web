@@ -3,7 +3,8 @@ import router from '../../router'
 import jwtDecode from 'jwt-decode'
 
 const state = {
-  isAuthenticated: false
+  isAuthenticated: false,
+  sessionExpired: false
 }
 
 const AuthStore = {
@@ -57,14 +58,19 @@ const AuthStore = {
         expiration = jwtDecode(token).exp
       }
       if (expiration != null && parseInt(expiration) - unixTimeStamp < 0) {
-        state.isAuthenticated = false
-        router.push('/login')
+        state.sessionExpired = true
+        setTimeout(() => {
+          state.isAuthenticated = false
+          router.push('/login')
+          state.sessionExpired = false
+        }, 2000)
       }
     },
     updateIsAuthenticated (state, response) {
       if (response.status === 200) {
         window.localStorage.setItem('token', response.data.token)
         state.isAuthenticated = true
+        state.sessionExpired = false
         router.push('/')
       }
     },
@@ -77,6 +83,7 @@ const AuthStore = {
       }
       if (expiration != null && parseInt(expiration) - unixTimeStamp > 0) {
         state.isAuthenticated = true
+        state.sessionExpired = false
       }
     }
   }
@@ -91,6 +98,7 @@ document.addEventListener('DOMContentLoaded', function (event) { // on Dom load 
   }
   if (expiration != null && parseInt(expiration) - unixTimeStamp > 0) {
     state.isAuthenticated = true
+    state.sessionExpired = false
   }
 })
 

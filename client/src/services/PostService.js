@@ -33,15 +33,14 @@ class PostService {
       try {
         const res = await axios.get(`${url}/${fromDate}/${toDate}/${keyword}`, { headers: { 'Authorization': `Bearer ${window.localStorage.getItem('token')}` } })
         const data = res.data
-        if(data !== "") {
+        if (data !== '') {
           resolve(
             data.map(post => ({
               ...post,
               createdAt: new Date(post.createdAt)
             }))
           )
-        }
-      else resolve([])
+        } else resolve([])
       } catch (e) {
         reject(e)
       }

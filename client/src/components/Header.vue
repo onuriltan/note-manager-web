@@ -1,12 +1,13 @@
 <template>
-  <b-navbar toggleable="md" type="dark" variant="success" style="border-style: unset">
+  <b-navbar toggleable="md" type="dark" variant="success" class="header">
     <b-navbar-toggle target="nav_collapse" v-if="isAuthenticated"></b-navbar-toggle>
     <b-navbar-brand>
-      <router-link to="/" style="text-decoration: none; color: white; font-weight: bold">NoteManager</router-link>
+      <router-link to="/" class="header__brand">NoteManager</router-link>
     </b-navbar-brand>
     <b-collapse is-nav id="nav_collapse" v-if="isAuthenticated">
       <b-navbar-nav>
-          <router-link to="/notes-history" class="nav-link">Notes History</router-link>
+          <router-link to="/" class="header__link nav-link">Latest Notes</router-link>
+          <router-link to="/notes-history" class="header__link nav-link">Notes History</router-link>
       </b-navbar-nav>
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
@@ -22,7 +23,6 @@
 
     </b-collapse>
   </b-navbar>
-
 </template>
 
 <script>
@@ -41,6 +41,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  @import "../styles/components/Header.scss";
 
 </style>

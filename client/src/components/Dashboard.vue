@@ -1,9 +1,9 @@
 <template>
   <div class="posts-container">
     <div class="posts">
-      <h1 class="posts__header">Latest Posts</h1>
+      <h1 class="posts__header">Latest Notes</h1>
       <form class="posts__create-form" @submit.prevent="createPost">
-        <b-input-group>
+        <b-input-group class="posts__create-form__inputgroup">
           <b-form-input v-model="text"
                         class="posts__create-form__input"
                         type="text"
@@ -14,7 +14,6 @@
         </b-input-group>
       </form>
       <hr>
-      <p class="error" v-if="error">{{error}}</p>
 
       <Notes v-cloak :editPost="editPost" :deletePost="deletePost" :posts="posts"/>
 

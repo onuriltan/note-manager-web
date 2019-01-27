@@ -1,26 +1,21 @@
 <template>
-  <div id="app">
-    <HeaderComponent />
-    <router-view/>
+  <div>
+    <div id="app">
+      <SessionExpired />
+      <HeaderComponent />
+      <router-view/>
+    </div>
   </div>
 </template>
 
 <script>
 import HeaderComponent from './components/Header'
+import SessionExpired from './components/SessionExpired'
 export default {
   name: 'App',
   components: {
+    SessionExpired,
     HeaderComponent
-  },
-  computed: {
-    isAuthenticated () {
-      return this.$store.state.AuthStore.isAuthenticated
-    }
-  },
-  methods: {
-    async logout () {
-      await this.$store.dispatch('logout')
-    }
   }
 }
 </script>

@@ -13,6 +13,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      &__inputgroup {
+        flex-wrap: unset;
+      }
       &__input {
         width: 500px;
       }
