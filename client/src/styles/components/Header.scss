@@ -1,0 +1,14 @@
+.header {
+  border-style: unset;
+  &__brand {
+    text-decoration: none;
+    color: white !important;
+    font-weight: bold
+  }
+  &__link {
+    color: white;
+    &:hover {
+      color: black !important;
+    }
+  }
+}

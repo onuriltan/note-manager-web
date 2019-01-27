@@ -1,16 +1,16 @@
 <template>
   <div class="container">
-    <PostComponent />
+    <Dashboard />
   </div>
 </template>
 
 <script>
-import PostComponent from '../components/Dashboard.vue'
+import Dashboard from '../components/Dashboard.vue'
 
 export default {
   name: 'home',
   components: {
-    PostComponent
+    Dashboard
   }
 }
 </script>
