@@ -30,7 +30,7 @@ decodeToken = (req, res) => {
 };
 
 const signToken = (user, secretKey, res) => {
-    jwt.sign({user}, secretKey, {expiresIn: '1s'}, (err, token) => {
+    jwt.sign({user}, secretKey, {expiresIn: '10m'}, (err, token) => {
         res.json({token});
     });
 };
