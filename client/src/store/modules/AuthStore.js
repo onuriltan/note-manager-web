@@ -63,7 +63,7 @@ const AuthStore = {
           state.isAuthenticated = false
           router.push('/login')
           state.sessionExpired = false
-        }, 200000)
+        }, 2000)
       }
     },
     updateIsAuthenticated (state, response) {
