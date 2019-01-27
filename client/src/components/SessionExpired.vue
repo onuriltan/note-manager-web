@@ -1,23 +1,27 @@
 <template>
   <div id="theWarning" style="display:none" :class="{'session-expired-alert' : sessionExpired}">
     <div class="session-expired-alert__content">
-      <b-alert show variant="warning" style="margin-bottom: unset !important; padding: 50px 100px!important;">Your session is expired ...</b-alert>
+      <b-alert show variant="warning" class="session-expired-alert__content__message">
+        <h4 class="alert-heading">Warning!</h4>
+        <p>Your session is expired. Redirecting to login ...</p>
+      </b-alert>
     </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'SessionExpired',
-  computed: {
-    sessionExpired () {
-      return this.$store.state.AuthStore.sessionExpired
+  export default {
+    name: 'SessionExpired',
+    computed: {
+      sessionExpired() {
+        return this.$store.state.AuthStore.sessionExpired
+      }
+    },
+    watch: {
+      sessionExpired(oldValue, newValue) {
+      }
     }
-  },
-  watch: {
-    sessionExpired (oldValue, newValue) { }
   }
-}
 </script>
 
 <style scoped lang="scss">
@@ -37,8 +41,11 @@ export default {
       display: flex;
       justify-content: center;
       margin: auto;
-      text-align: center;
-      width: 350px!important;
+      &__message {
+        margin-bottom: unset !important;
+        padding: 50px 20px;
+        border: 2px solid;
+      }
     }
   }
 </style>

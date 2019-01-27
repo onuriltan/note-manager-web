@@ -14,7 +14,7 @@
       color: black !important;
 }
 
-.session-expired-alert[data-v-40833540] {
+.session-expired-alert[data-v-5faa54d7] {
   display: -webkit-box !important;
   display: -ms-flexbox !important;
   display: flex !important;
@@ -39,7 +39,7 @@
   background-color: rgba(0, 0, 0, 0.4);
   /* Black w/ opacity */
 }
-.session-expired-alert__content[data-v-40833540] {
+.session-expired-alert__content[data-v-5faa54d7] {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -47,8 +47,11 @@
         -ms-flex-pack: center;
             justify-content: center;
     margin: auto;
-    text-align: center;
-    width: 350px !important;
+}
+.session-expired-alert__content__message[data-v-5faa54d7] {
+      margin-bottom: unset !important;
+      padding: 50px 20px;
+      border: 2px solid;
 }
 
 .active-page {
@@ -11005,4 +11008,4 @@ pre {
 }
 
 
-/*# sourceMappingURL=app.2d98d201.css.map*/
+/*# sourceMappingURL=app.53fddae6.css.map*/
