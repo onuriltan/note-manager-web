@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const UserValidation = require('./validation/UserValidation');
 const UserDbService = require('./db/UserDbService');
+const Mail = require('../../../config/Mail')
 
 router.post('/login', (req, res) => {
     const {email, password} = req.body;
@@ -9,7 +10,7 @@ router.post('/login', (req, res) => {
     let isValid = fieldErrors.email === "" && fieldErrors.password === "";
 
     if (!isValid) {
-        res.status(400).json({fieldErrors})
+        res.status(400).json({fieldErrors});
     } else {
         UserDbService.findUser(email, password, res);
     }
@@ -21,12 +22,12 @@ router.post('/register', (req, res) => {
     let fieldErrors = UserValidation.validateRegister(req.body);
     let isValid = fieldErrors.email === "" && fieldErrors.password === "" && fieldErrors.password2 === "";
     if (!isValid) {
-        res.status(400).json({fieldErrors})
+        res.status(400).json({fieldErrors});
     } else {
         UserDbService.createUser(email, password, res)
+        Mail.sendMail();
     }
 });
 
 
 module.exports = router;
-
