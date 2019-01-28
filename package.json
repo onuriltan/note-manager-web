@@ -18,7 +18,8 @@
     "jsonwebtoken": "^8.4.0",
     "mongodb": "^3.1.10",
     "mongoose": "^5.4.4",
-    "nodemailer": "^5.1.1"
+    "nodemailer": "^5.1.1",
+    "uniqid": "^5.0.3"
   },
   "devDependencies": {
     "nodemon": "^1.18.9"

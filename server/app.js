@@ -13,7 +13,7 @@ server.use(bodyParser.json());
 server.use(cors());
 
 // Connect to Mongo
-const dbAddress = require('./config/MongoConnection').MongoURI;
+const dbAddress = require('./config/DbConnection').MongoURI;
 mongoose.connect(dbAddress, { useNewUrlParser: true })
     .then(() => console.log('MongoDB connected.'))
     .catch(err => console.log(err));

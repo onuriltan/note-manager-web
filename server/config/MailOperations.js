@@ -8,13 +8,13 @@ let transporter = nodemailer.createTransport({
     }
 });
 
-async function sendMail() {
+async function sendConfirmationMail(to, confirmationToken) {
     let mailOptions = {
         from: '"Note Manager 👻" <'+process.env.MAIL+'>', // sender address
-        to: "vehbi.iltan@gmail.com", // list of receivers
-        subject: "Hello ✔", // Subject line
-        text: "Hello world?", // plain text body
-        html: "<b>Hello world?</b>" // html body
+        to: to, // list of receivers
+        subject: "Welcome to note manager ✔", // Subject line
+        text: "Please confirm your account with this token = "+confirmationToken, // plain text body
+        html: "<a href="+process.env.CONFIRM_EMAIL_URL+"/"+confirmationToken+">Click to activate your account</a>" // html body
     };
     // send mail with defined transport object
     let info = await transporter.sendMail(mailOptions)
@@ -23,4 +23,4 @@ async function sendMail() {
     console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 }
 
-module.exports.sendMail = sendMail;
+module.exports.sendConfirmationMail = sendConfirmationMail;
