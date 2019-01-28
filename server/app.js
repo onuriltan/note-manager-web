@@ -3,13 +3,16 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-const server = express();
+// Environment Variables
+const dotenv = require('dotenv');
+dotenv.config();
 
 // Middleware
+const server = express();
 server.use(bodyParser.json());
 server.use(cors());
 
-// Connect to mongo
+// Connect to Mongo
 const dbAddress = require('./config/MongoConnection').MongoURI;
 mongoose.connect(dbAddress, { useNewUrlParser: true })
     .then(() => console.log('MongoDB connected.'))
@@ -22,6 +25,7 @@ const auth = require('./routes/api/users/UserService');
 server.use('/api', app);
 server.use('/api/posts', posts);
 server.use('/api/auth', auth);
+
 
 if (process.env.NODE_ENV === 'production') {
   // Static folder
