@@ -35,7 +35,10 @@ const AuthStore = {
             context.commit('updateIsAuthenticated', response)
             return resolve(response)
           })
-          .catch((response) => { return resolve(response) })
+          .catch((response) => {
+            return resolve(response)
+
+          })
       })
     },
     register (context, credentials) {
@@ -82,6 +85,8 @@ const AuthStore = {
         state.isAuthenticated = true
         state.sessionExpired = false
         router.push('/')
+      }else {
+        setTimeout(() => { router.push('/login') }, 2000)
       }
     },
     loadUser (state) {
