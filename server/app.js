@@ -30,10 +30,11 @@ server.use('/api/auth', auth);
 if (process.env.NODE_ENV === 'production') {
   // Static folder
   server.use(express.static(__dirname + '/public'));
-  // Handle SPA
-  server.get(/.*/, (req, res) => res.sendFile(__dirname + 'public/index.html'));
-}
 
+  // Catch all routes and redirect to the index file
+  server.get('*', (req, res) => res.sendFile(__dirname + 'public/index.html'));
+
+}
 const port = process.env.PORT || 5000;
 
 server.listen(port, () => {
