@@ -2,8 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const serveStatic = require('serve-static');
-const path = require('path');
 
 // Environment Variables
 const dotenv = require('dotenv');
@@ -31,10 +29,11 @@ server.use('/api/auth', auth);
 
 if (process.env.NODE_ENV === 'production') {
   // Static folder
-  app.use("/", serveStatic ( path.join (__dirname, '/public') ) )
-  // Catch all routes and redirect to the index file
+  server.use(express.static(__dirname + '/public'));
+  // Handle SPA
   server.get('*', (req, res) => res.sendFile(__dirname + 'public/index.html'));
 }
+
 const port = process.env.PORT || 5000;
 
 server.listen(port, () => {
