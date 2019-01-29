@@ -28,6 +28,19 @@ const AuthStore = {
           .catch((response) => { return resolve(response) })
       })
     },
+    confirmUser (context, confirmationToken) {
+      return new Promise(resolve => {
+        authService.confirmUser(confirmationToken)
+          .then((response) => {
+            context.commit('updateIsAuthenticated', response)
+            return resolve(response)
+          })
+          .catch((response) => {
+            return resolve(response)
+
+          })
+      })
+    },
     register (context, credentials) {
       return new Promise(resolve => {
         authService.register(credentials)
@@ -72,6 +85,8 @@ const AuthStore = {
         state.isAuthenticated = true
         state.sessionExpired = false
         router.push('/')
+      }else {
+        setTimeout(() => { router.push('/login') }, 2000)
       }
     },
     loadUser (state) {
@@ -90,15 +105,17 @@ const AuthStore = {
 }
 
 document.addEventListener('DOMContentLoaded', function (event) { // on Dom load check if user is already logged in
-  let token = window.localStorage.getItem('token')
-  let unixTimeStamp = new Date().getTime() / 1000
-  let expiration = null
-  if (token != null) {
-    expiration = jwtDecode(token).exp
-  }
-  if (expiration != null && parseInt(expiration) - unixTimeStamp > 0) {
-    state.isAuthenticated = true
-    state.sessionExpired = false
+  if (window.localStorage.getItem('token'))  {
+    let token = window.localStorage.getItem('token')
+    let unixTimeStamp = new Date().getTime() / 1000
+    let expiration = null
+    if (token != null) {
+      expiration = jwtDecode(token).exp
+    }
+    if (expiration != null && parseInt(expiration) - unixTimeStamp > 0) {
+      state.isAuthenticated = true
+      state.sessionExpired = false
+    }
   }
 })
 

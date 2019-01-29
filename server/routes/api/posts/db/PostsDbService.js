@@ -1,4 +1,4 @@
-const Post = require('../../../../models/Post');
+const Post = require('../entity/Post');
 const mongodb = require('mongodb');
 
 const createPost = (text, email, res) => {
@@ -18,7 +18,7 @@ const findPost = (email, res) => {
 };
 
 const findPostBetweenDatesandKeyword = (fromDate, toDate, keyword, email, res) => {
-    let regex = new RegExp(`${keyword}`, "i")
+    let regex = new RegExp(`${keyword}`, "i");
 
     if (fromDate.toString() === 'Invalid Date' && toDate.toString() === 'Invalid Date') {
         Post.find(

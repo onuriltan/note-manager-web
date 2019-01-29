@@ -7,6 +7,8 @@ import Store from './store/index'
 const Login = () => import('./views/LoginView.vue')
 const Register = () => import('./views/RegisterView.vue')
 const History = () => import('./views/HistoryView.vue')
+const Confirmation = () => import('./views/ConfirmationView.vue')
+const NotFound = () => import('./views/NotFoundView.vue')
 
 Vue.use(Router)
 
@@ -35,13 +37,17 @@ async function alreadyLoggedIn (to, from, next) {
 
 export default new Router({
   scrollBehavior: (to, from, savedPosition) => ({ y: 0 }), // scroll to top of the page every time route changes
+  mode: 'history',
   linkExactActiveClass: 'active-page', // router-link active class name
   routes: [
     {
-      path: '*', component: Home, beforeEnter: requireAuth
+      path: '*', component: NotFound
     },
     {
       path: '/', name: 'home', component: Home, beforeEnter: requireAuth
+    },
+    {
+      path: '/confirm/:confirmationToken', name: 'confirm', component: Confirmation, beforeEnter: alreadyLoggedIn
     },
     {
       path: '/notes-history', name: 'history', component: History, beforeEnter: requireAuth

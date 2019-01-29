@@ -23,6 +23,16 @@ class AuthService {
       }
     })
   }
+  static confirmUser (confirmationToken) {
+    return new Promise(async (resolve) => {
+      try {
+        const res = await axios.get(`${url}/confirm/${confirmationToken}`)
+        resolve(res)
+      } catch (e) {
+        resolve(e.response)
+      }
+    })
+  }
 }
 
 export default AuthService

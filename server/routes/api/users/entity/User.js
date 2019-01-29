@@ -5,6 +5,17 @@ let UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    active: {
+        type: Boolean,
+        default: false
+    },
+    confirmationToken: {
+        type: String,
+    },
+    confirmationTokenExpiry: {
+        type: Date,
+        default: new Date(new Date().getTime() + 24 * 60 * 60 * 1000) // until tomorrow
+    },
     password: {
         type: String,
         required: true
