@@ -38,7 +38,10 @@ const findUserWithConfirmationToken = (confirmationToken, res) => {
                     user.confirmationToken = undefined;
                     user.confirmationTokenExpiry = undefined;
                     user.active = true;
-                    user.save();
+                    user.save( (err, updatedUser) => {
+                        if (err) console.log(err);
+                        else console.log(updatedUser.name+" activated")
+                    });
                     JwtOperations.signToken(user, 'theSecretKey', res);
                 } else {
                     user.deleteOne({_id: new mongodb.ObjectID(user.id)});

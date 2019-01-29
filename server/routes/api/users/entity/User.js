@@ -11,7 +11,6 @@ let UserSchema = new mongoose.Schema({
     },
     confirmationToken: {
         type: String,
-        required: true
     },
     confirmationTokenExpiry: {
         type: Date,

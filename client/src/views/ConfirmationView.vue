@@ -2,7 +2,7 @@
   <div class="container">
     <div v-if="errors.length > 0">
       <div v-for="error in errors">
-        <p>{{error}}</p>
+        <p style="display: flex; justify-content: center; align-items: center; font-size: 20px; min-height: calc(100vh - 70px);">{{error.msg}}</p>
       </div>
     </div>
   </div>
@@ -17,10 +17,11 @@
       }
     },
     async beforeMount () {
-      console.log(this.$route.params.confirmationToken)
       const res = await this.$store.dispatch('confirmUser',  this.$route.params.confirmationToken)
+      console.log()
       if (res.data.errors) {
         this.errors = res.data.errors
+        console.log(this.errors)
       }
     }
   }

@@ -29,11 +29,9 @@ const AuthStore = {
       })
     },
     confirmUser (context, confirmationToken) {
-      console.log(confirmationToken)
       return new Promise(resolve => {
         authService.confirmUser(confirmationToken)
           .then((response) => {
-            console.log(response)
             context.commit('updateIsAuthenticated', response)
             return resolve(response)
           })
