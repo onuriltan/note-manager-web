@@ -15,7 +15,7 @@
       </form>
       <hr>
 
-      <Notes v-cloak :editPost="editPost" :deletePost="deletePost" :posts="posts"/>
+      <Notes :editPost="editPost" :deletePost="deletePost" :posts="posts" :isLoading="isLoading" />
 
     </div>
   </div>
@@ -27,7 +27,7 @@ import PostService from '../services/PostService'
 import Notes from '../components/Notes'
 
 export default {
-  name: 'PostComponent',
+  name: 'DashboardComponent',
   components: {
     Notes
   },
@@ -35,29 +35,46 @@ export default {
     return {
       posts: [],
       error: '',
-      text: ''
+      text: '',
+      isLoading: false
     }
   },
   methods: {
     async createPost () {
-      await PostService.insertPost(this.text)
-      this.posts = await PostService.getPosts()
+      this.isLoading = true;
+      setTimeout(async  () => {
+        await PostService.insertPost(this.text)
+        this.posts = await PostService.getPosts()
+        this.isLoading = false;
+      }, 1000)
     },
     async deletePost (tobeDeletedId) {
-      await PostService.deletePost(tobeDeletedId)
-      this.posts = await PostService.getPosts()
+      this.isLoading = true;
+      setTimeout(async  () => {
+        await PostService.deletePost(tobeDeletedId)
+        this.posts = await PostService.getPosts()
+        this.isLoading = false;
+      }, 1000)
+
     },
     async editPost (tobeEditedId, tobeEditedText) {
-      await PostService.editPost(tobeEditedId, tobeEditedText)
-      this.posts = await PostService.getPosts()
+      this.isLoading = true;
+      setTimeout(async  () => {
+        await PostService.editPost(tobeEditedId, tobeEditedText)
+        this.posts = await PostService.getPosts()
+        this.isLoading = false;
+      }, 1000)
     }
   },
   async beforeMount () {
     try {
+      this.isLoading = true;
       this.posts = await PostService.getPosts()
     } catch (e) {
       this.error = e.message
     }
+    this.isLoading = false;
+
   }
 }
 </script>

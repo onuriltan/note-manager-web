@@ -32,7 +32,7 @@
       </div>
     </b-form>
 
-    <Notes v-cloak :deletePost="deletePost" :editPost="editPost" :posts="posts"/>
+    <Notes v-cloak :deletePost="deletePost" :editPost="editPost" :posts="posts" :isLoading="isLoading"/>
 
   </div>
 </template>
@@ -51,21 +51,32 @@ export default {
       posts: [],
       toDate: '',
       fromDate: '',
-      keyword: ''
+      keyword: '',
+      isLoading: false
     }
   },
   methods: {
     async deletePost (tobeDeletedId) {
-      await PostService.deletePost(tobeDeletedId)
-      this.posts = await PostService.getPosts()
+      this.isLoading = true;
+      setTimeout(async  () => {
+        await PostService.deletePost(tobeDeletedId)
+        this.posts = await PostService.getPosts()
+        this.isLoading = false;
+      }, 1000)
     },
     async editPost (tobeEditedId, tobeEditedText) {
-      await PostService.editPost(tobeEditedId, tobeEditedText)
-      this.posts = await PostService.getPosts()
+      setTimeout(async  () => {
+        await PostService.editPost(tobeEditedId, tobeEditedText)
+        this.posts = await PostService.getPosts()
+      }, 1000)
     },
     async getPosts () {
-      this.posts = []
-      this.posts = await PostService.getPostsByCriteria(this.fromDate, this.toDate, this.keyword)
+      this.isLoading = true;
+      setTimeout(async () => {
+        this.posts = []
+        this.posts = await PostService.getPostsByCriteria(this.fromDate, this.toDate, this.keyword)
+        this.isLoading = false;
+      }, 1000)
     }
   },
   filters: {

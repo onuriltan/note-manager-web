@@ -34,7 +34,9 @@
       <div style="font-weight: bold; margin: 30px 0; text-align: center">
         <router-link to="/register">Dont have an account? Register from here!</router-link>
       </div>
-      <b-button class="login-form__button" type="submit" variant="success" size="lg">Login</b-button>
+      <b-button class="login-form__button" :class="{ 'button--loading': loginClicked }" type="submit" variant="success" size="lg">
+        <i class="fa fa-refresh fa-spin hide--button--loading--icon" :class="{ 'show--button--loading--icon': loginClicked }"></i>
+        Login</b-button>
     </b-form>
   </div>
 </template>
@@ -51,7 +53,8 @@ export default {
         password: ''
       },
       email: '',
-      password: ''
+      password: '',
+      loginClicked: false
     }
   },
   computed: {
@@ -88,13 +91,17 @@ export default {
       this.errors = []
       let isValidForm = this.validateForm()
       if (isValidForm) {
-        const res = await this.$store.dispatch('login', { email: this.email, password: this.password })
-        if (res.data.fieldErrors) {
-          this.fieldErrors = res.data.fieldErrors
-        }
-        if (res.data.errors) {
-          this.errors = res.data.errors
-        }
+        this.loginClicked = true
+        setTimeout(async () => {
+          const res = await this.$store.dispatch('login', { email: this.email, password: this.password })
+          this.loginClicked = false
+          if (res.data.fieldErrors) {
+            this.fieldErrors = res.data.fieldErrors
+          }
+          if (res.data.errors) {
+            this.errors = res.data.errors
+          }
+        }, 1000)
       }
     }
   }

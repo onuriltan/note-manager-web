@@ -1,15 +1,15 @@
 <template>
   <div class="container">
-    <HistoryComponent />
+    <History />
   </div>
 </template>
 
 <script>
-import HistoryComponent from '../components/History'
+import History from '../components/History'
 export default {
   name: 'HistoryView',
   components: {
-    HistoryComponent
+    History
   }
 }
 </script>
