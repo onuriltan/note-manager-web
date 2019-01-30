@@ -95,7 +95,6 @@ export default {
         setTimeout(async () => {
           const res = await this.$store.dispatch('login', { email: this.email, password: this.password })
           this.loginClicked = false
-          console.log(this.loginClicked)
           if (res.data.fieldErrors) {
             this.fieldErrors = res.data.fieldErrors
           }

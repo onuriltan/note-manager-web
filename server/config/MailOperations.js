@@ -18,9 +18,9 @@ async function sendConfirmationMail(to, confirmationToken) {
     };
     // send mail with defined transport object
     let info = await transporter.sendMail(mailOptions)
-    console.log("Message sent: %s", info.messageId);
+    // console.log("Message sent: %s", info.messageId);
     // Preview only available when sending through an Ethereal account
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 }
 
 module.exports.sendConfirmationMail = sendConfirmationMail;

@@ -18,10 +18,8 @@
     },
     async beforeMount () {
       const res = await this.$store.dispatch('confirmUser',  this.$route.params.confirmationToken)
-      console.log()
       if (res.data.errors) {
         this.errors = res.data.errors
-        console.log(this.errors)
       }
     }
   }
