@@ -1,7 +1,7 @@
 <template>
   <div class="notes">
     <div class="notes__content" v-if="posts.length !==0 && isLoading === false">
-      <b-card-group deck class="notes__content__cards">
+      <b-card-group deck class="notes__content__cards" style="width: 100% !important;">
         <b-card :title="post.createdAt | convertDate()"
                 tag="article"
                 v-for="post in posts"

@@ -99,15 +99,25 @@
       -ms-flex-direction: column;
           flex-direction: column;
 }
+.button--loading {
+  opacity: 0.6 !important;
+}
+.show--button--loading--icon {
+  visibility: visible !important;
+}
+.hide--button--loading--icon {
+  visibility: hidden;
+}
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.notes[data-v-169fda1f] {
+.notes[data-v-0bdb6df6] {
   padding: 50px 0;
+  width: 100%;
 }
-.notes__empty[data-v-169fda1f] {
+.notes__empty[data-v-0bdb6df6] {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -123,14 +133,14 @@
             flex-direction: column;
     min-height: calc(100vh - 600px);
 }
-.notes__empty__image[data-v-169fda1f] {
+.notes__empty__image[data-v-0bdb6df6] {
       width: 100px;
 }
-.notes__empty__message[data-v-169fda1f] {
+.notes__empty__message[data-v-0bdb6df6] {
       padding-top: 30px;
       text-align: center;
 }
-.notes__content[data-v-169fda1f] {
+.notes__content[data-v-0bdb6df6] {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -138,15 +148,15 @@
         -ms-flex-pack: center;
             justify-content: center;
 }
-.notes__content__cards[data-v-169fda1f] {
+.notes__content__cards[data-v-0bdb6df6] {
       -webkit-box-pack: center;
           -ms-flex-pack: center;
               justify-content: center;
 }
-.notes__content__card[data-v-169fda1f] {
+.notes__content__card[data-v-0bdb6df6] {
       margin: 20px;
 }
-.notes__content__card__footer[data-v-169fda1f] {
+.notes__content__card__footer[data-v-0bdb6df6] {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -155,10 +165,10 @@
                 justify-content: space-between;
 }
 
-.posts-container[data-v-ff2589dc] {
+.posts-container[data-v-0c451304] {
   padding-top: 50px;
 }
-.posts-container .posts[data-v-ff2589dc] {
+.posts-container .posts[data-v-0c451304] {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -173,11 +183,11 @@
         -ms-flex-direction: column;
             flex-direction: column;
 }
-.posts-container .posts__header[data-v-ff2589dc] {
+.posts-container .posts__header[data-v-0c451304] {
       margin-bottom: 50px;
       font-weight: bold;
 }
-.posts-container .posts__create-form[data-v-ff2589dc] {
+.posts-container .posts__create-form[data-v-0c451304] {
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
@@ -188,14 +198,14 @@
           -ms-flex-align: center;
               align-items: center;
 }
-.posts-container .posts__create-form__inputgroup[data-v-ff2589dc] {
+.posts-container .posts__create-form__inputgroup[data-v-0c451304] {
         -ms-flex-wrap: unset;
             flex-wrap: unset;
 }
-.posts-container .posts__create-form__input[data-v-ff2589dc] {
+.posts-container .posts__create-form__input[data-v-0c451304] {
         width: 500px;
 }
-.posts-container .posts__content[data-v-ff2589dc] {
+.posts-container .posts__content[data-v-0c451304] {
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
@@ -203,10 +213,10 @@
           -ms-flex-pack: center;
               justify-content: center;
 }
-.posts-container .posts__content__card[data-v-ff2589dc] {
+.posts-container .posts__content__card[data-v-0c451304] {
         margin: 20px;
 }
-.posts-container .posts__content__card__footer[data-v-ff2589dc] {
+.posts-container .posts__content__card__footer[data-v-0c451304] {
           display: -webkit-box;
           display: -ms-flexbox;
           display: flex;
@@ -215,10 +225,10 @@
                   justify-content: space-between;
 }
 @media screen and (max-width: 768px) {
-.posts-container .posts__create-form__input[data-v-ff2589dc] {
+.posts-container .posts__create-form__input[data-v-0c451304] {
     width: 250px;
 }
-.posts-container .posts__content[data-v-ff2589dc] {
+.posts-container .posts__content[data-v-0c451304] {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
@@ -11008,4 +11018,4 @@ pre {
 }
 
 
-/*# sourceMappingURL=app.53fddae6.css.map*/
+/*# sourceMappingURL=app.609600eb.css.map*/
