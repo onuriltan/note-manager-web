@@ -51,7 +51,12 @@
                       required>
         </b-form-input>
       </b-form-group>
-      <b-button class="login-form__button" type="submit" variant="success" size="lg">Register</b-button>
+      <b-button class="login-form__button" type="submit" variant="success" size="lg"
+                :class="{ 'button--loading': registerClicked }">
+        <i class="fa fa-refresh fa-spin hide--button--loading--icon"
+           :class="{ 'show--button--loading--icon': registerClicked }"></i>
+        Register
+      </b-button>
     </b-form>
   </div>
 </template>
@@ -71,7 +76,8 @@ export default {
       messages: [],
       email: '',
       password: '',
-      password2: ''
+      password2: '',
+      registerClicked: false
     }
   },
   computed: {
@@ -124,6 +130,7 @@ export default {
       this.errors = []
       let isValidForm = this.validateForm()
       if (isValidForm) {
+        this.registerClicked = true;
         const res = await this.$store.dispatch('register',
           {
             email: this.email,
@@ -131,9 +138,11 @@ export default {
             password2: this.password2
           })
         if (res.data.errors) {
+          this.registerClicked = false;
           this.errors = res.data.errors
         }
         if (res.data.messages) {
+          this.registerClicked = false;
           this.messages = res.data.messages
         }
       }
