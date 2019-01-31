@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 
 let transporter = nodemailer.createTransport({
-    service: "hotmail", // hostname
+    service: "gmail",
     auth: {
         user: process.env.MAIL_USERNAME,
         pass: process.env.MAIL_PASSWORD
@@ -22,5 +22,4 @@ async function sendConfirmationMail(to, confirmationToken) {
     // Preview only available when sending through an Ethereal account
     // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 }
-
 module.exports.sendConfirmationMail = sendConfirmationMail;
