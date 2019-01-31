@@ -18,6 +18,10 @@ mongoose.connect(dbAddress, { useNewUrlParser: true })
     .then(() => console.log('MongoDB connected.'))
     .catch(err => console.log(err));
 
+console.log(process.env.MAIL_USERNAME)
+console.log(process.env.MAIL_PASSWORD)
+console.log(process.env.MAIL)
+
 // Routes
 const app = require('./routes/api');
 const posts = require('./routes/api/posts/PostsService');

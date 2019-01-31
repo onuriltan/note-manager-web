@@ -21,10 +21,6 @@ async function sendConfirmationMail(to, confirmationToken) {
         text: "Please confirm your account with this token = "+confirmationToken, // plain text body
         html: "<a href="+process.env.CONFIRM_EMAIL_URL+"/"+confirmationToken+">Click to activate your account</a>" // html body
     };
-
-    console.log(process.env.MAIL_USERNAME)
-    console.log(process.env.MAIL_PASSWORD)
-    console.log(process.env.MAIL)
     // send mail with defined transport object
     let info = await transporter.sendMail(mailOptions)
     // console.log("Message sent: %s", info.messageId);
