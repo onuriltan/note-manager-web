@@ -41,40 +41,38 @@ export default {
   },
   methods: {
     async createPost () {
-      this.isLoading = true;
-      setTimeout(async  () => {
+      this.isLoading = true
+      setTimeout(async () => {
         await PostService.insertPost(this.text)
         this.posts = await PostService.getPosts()
-        this.isLoading = false;
+        this.isLoading = false
       }, 1000)
     },
     async deletePost (tobeDeletedId) {
-      this.isLoading = true;
-      setTimeout(async  () => {
+      this.isLoading = true
+      setTimeout(async () => {
         await PostService.deletePost(tobeDeletedId)
         this.posts = await PostService.getPosts()
-        this.isLoading = false;
+        this.isLoading = false
       }, 1000)
-
     },
     async editPost (tobeEditedId, tobeEditedText) {
-      this.isLoading = true;
-      setTimeout(async  () => {
+      this.isLoading = true
+      setTimeout(async () => {
         await PostService.editPost(tobeEditedId, tobeEditedText)
         this.posts = await PostService.getPosts()
-        this.isLoading = false;
+        this.isLoading = false
       }, 1000)
     }
   },
   async beforeMount () {
     try {
-      this.isLoading = true;
+      this.isLoading = true
       this.posts = await PostService.getPosts()
     } catch (e) {
       this.error = e.message
     }
-    this.isLoading = false;
-
+    this.isLoading = false
   }
 }
 </script>

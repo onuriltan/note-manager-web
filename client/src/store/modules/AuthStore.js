@@ -37,7 +37,6 @@ const AuthStore = {
           })
           .catch((response) => {
             return resolve(response)
-
           })
       })
     },
@@ -85,7 +84,7 @@ const AuthStore = {
         state.isAuthenticated = true
         state.sessionExpired = false
         router.push('/')
-      }else {
+      } else {
         setTimeout(() => { router.push('/login') }, 2000)
       }
     },
@@ -105,7 +104,7 @@ const AuthStore = {
 }
 
 document.addEventListener('DOMContentLoaded', function (event) { // on Dom load check if user is already logged in
-  if (window.localStorage.getItem('token'))  {
+  if (window.localStorage.getItem('token')) {
     let token = window.localStorage.getItem('token')
     let unixTimeStamp = new Date().getTime() / 1000
     let expiration = null
