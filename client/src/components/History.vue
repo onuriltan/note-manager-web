@@ -57,25 +57,25 @@ export default {
   },
   methods: {
     async deletePost (tobeDeletedId) {
-      this.isLoading = true;
-      setTimeout(async  () => {
+      this.isLoading = true
+      setTimeout(async () => {
         await PostService.deletePost(tobeDeletedId)
         this.posts = await PostService.getPosts()
-        this.isLoading = false;
+        this.isLoading = false
       }, 1000)
     },
     async editPost (tobeEditedId, tobeEditedText) {
-      setTimeout(async  () => {
+      setTimeout(async () => {
         await PostService.editPost(tobeEditedId, tobeEditedText)
         this.posts = await PostService.getPosts()
       }, 1000)
     },
     async getPosts () {
-      this.isLoading = true;
+      this.isLoading = true
       setTimeout(async () => {
         this.posts = []
         this.posts = await PostService.getPostsByCriteria(this.fromDate, this.toDate, this.keyword)
-        this.isLoading = false;
+        this.isLoading = false
       }, 1000)
     }
   },

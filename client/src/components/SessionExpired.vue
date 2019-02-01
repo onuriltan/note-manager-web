@@ -10,18 +10,18 @@
 </template>
 
 <script>
-  export default {
-    name: 'SessionExpired',
-    computed: {
-      sessionExpired() {
-        return this.$store.state.AuthStore.sessionExpired
-      }
-    },
-    watch: {
-      sessionExpired(oldValue, newValue) {
-      }
+export default {
+  name: 'SessionExpired',
+  computed: {
+    sessionExpired () {
+      return this.$store.state.AuthStore.sessionExpired
+    }
+  },
+  watch: {
+    sessionExpired (oldValue, newValue) {
     }
   }
+}
 </script>
 
 <style scoped lang="scss">

@@ -38,13 +38,13 @@ const findUserWithConfirmationToken = (confirmationToken, res) => {
                     user.confirmationToken = undefined;
                     user.confirmationTokenExpiry = undefined;
                     user.active = true;
-                    user.save( (err, updatedUser) => {
+                    user.save((err, updatedUser) => {
                         if (err) console.log(err);
-                        else console.log(updatedUser.name+" activated")
+                        else console.log(updatedUser.name + " activated")
                     });
                     JwtOperations.signToken(user, 'theSecretKey', res);
                 } else {
-                    user.deleteOne({_id: new mongodb.ObjectID(user.id)});
+                    User.deleteOne({_id: new mongodb.ObjectID(user.id)});
                     errors.push({msg: 'Your account is expired, please re-register'});
                     res.status(401).json({errors})
                 }
@@ -77,13 +77,16 @@ const createUser = (email, password, res) => {
                         newUser.save() // save user
                             .then(() => {
                                 MailOperations.sendConfirmationMail(newUser.email, newUser.confirmationToken)
-                                    .then(() => {
+                                    .then(response => {
                                         messages.push({msg: 'Check your email to confirm your account!'});
-                                        res.status(200).json({messages})
+                                        res.status(200).json({messages});
                                     })
                                     .catch(err => {
-                                        messages.push({msg: 'An error occurred while sending e-mail.'});
-                                        console.log(err)
+                                        User.deleteOne({_id: new mongodb.ObjectID(newUser.id)}).then(() => {// in mongo id is a special type of ObjectID
+                                                errors.push({msg: 'An error occurred while sending e-mail.'});
+                                                res.status(400).json({errors});
+                                            }
+                                        );
                                     })
                             })
                             .catch(err => {

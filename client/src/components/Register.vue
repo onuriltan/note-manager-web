@@ -130,7 +130,7 @@ export default {
       this.errors = []
       let isValidForm = this.validateForm()
       if (isValidForm) {
-        this.registerClicked = true;
+        this.registerClicked = true
         const res = await this.$store.dispatch('register',
           {
             email: this.email,
@@ -138,11 +138,11 @@ export default {
             password2: this.password2
           })
         if (res.data.errors) {
-          this.registerClicked = false;
+          this.registerClicked = false
           this.errors = res.data.errors
         }
         if (res.data.messages) {
-          this.registerClicked = false;
+          this.registerClicked = false
           this.messages = res.data.messages
         }
       }

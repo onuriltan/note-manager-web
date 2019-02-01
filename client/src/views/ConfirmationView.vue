@@ -9,18 +9,18 @@
 </template>
 
 <script>
-  export default {
-    name: 'ConfirmationView',
-    data () {
-      return {
-        errors: []
-      }
-    },
-    async beforeMount () {
-      const res = await this.$store.dispatch('confirmUser',  this.$route.params.confirmationToken)
-      if (res.data.errors) {
-        this.errors = res.data.errors
-      }
+export default {
+  name: 'ConfirmationView',
+  data () {
+    return {
+      errors: []
+    }
+  },
+  async beforeMount () {
+    const res = await this.$store.dispatch('confirmUser', this.$route.params.confirmationToken)
+    if (res.data.errors) {
+      this.errors = res.data.errors
     }
   }
+}
 </script>
