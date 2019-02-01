@@ -1,0 +1,39 @@
+.notfound[data-v-1bd88389] {
+  min-height: calc(100vh - 30px);
+  background: url(https://media.giphy.com/media/2fC74jNn5SPvO/giphy.gif) no-repeat fixed center;
+  background-size: cover;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+  padding: 100px 0;
+}
+.notfound .nyan-cat[data-v-1bd88389] {
+    width: 70%;
+}
+.notfound p[data-v-1bd88389] {
+    padding: 0 20px;
+    z-index: 1000;
+    color: white;
+    font-weight: 900;
+    font-size: 40px;
+    text-shadow: 2px 2px 5px black;
+}
+@media screen and (max-width: 768px) {
+.nyan-cat[data-v-1bd88389] {
+    width: 100% !important;
+}
+}
+
+
+/*# sourceMappingURL=chunk-6b8104d2.2f2085f2.css.map*/
