@@ -1,6 +1,6 @@
-.notfound[data-v-f55d14a0] {
+.notfound[data-v-5990c0b0] {
   min-height: calc(100vh - 30px);
-  background: url(https://media.giphy.com/media/2fC74jNn5SPvO/giphy.gif) no-repeat fixed center;
+  background-color: black;
   background-size: cover;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -16,12 +16,11 @@
       -ms-flex-direction: column;
           flex-direction: column;
   text-align: center;
-  padding: 100px 0;
 }
-.notfound .nyan-cat[data-v-f55d14a0] {
+.notfound .nyan-cat[data-v-5990c0b0] {
     width: 70%;
 }
-.notfound p[data-v-f55d14a0] {
+.notfound p[data-v-5990c0b0] {
     padding: 0 20px;
     z-index: 1000;
     color: white;
@@ -30,10 +29,10 @@
     text-shadow: 2px 2px 5px black;
 }
 @media screen and (max-width: 768px) {
-.nyan-cat[data-v-f55d14a0] {
+.nyan-cat[data-v-5990c0b0] {
     width: 100% !important;
 }
 }
 
 
-/*# sourceMappingURL=chunk-6d7598e9.89fbc7d1.css.map*/
+/*# sourceMappingURL=chunk-8ab427d8.9255d193.css.map*/

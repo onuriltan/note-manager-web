@@ -36,14 +36,13 @@
 <style scoped lang="scss">
   .notfound {
     min-height: calc(100vh - 30px);
-    background: url(https://media.giphy.com/media/2fC74jNn5SPvO/giphy.gif) no-repeat fixed center;
+    background-color: black;
     background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     text-align: center;
-    padding: 100px 0;
     .nyan-cat {
       width: 70%;
     }
