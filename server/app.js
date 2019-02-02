@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
+
 const mongoose = require('mongoose');
 
 // Environment Variables
@@ -11,6 +13,7 @@ dotenv.config();
 const server = express();
 server.use(bodyParser.json());
 server.use(cors());
+server.use(cookieParser());
 
 // Connect to Mongo
 const dbAddress = process.env.MONGO_URL;

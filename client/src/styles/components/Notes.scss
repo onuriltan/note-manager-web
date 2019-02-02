@@ -1,31 +1,65 @@
 .notes {
   padding: 50px 0;
   width: 100%;
+
   &__empty {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     min-height: calc(100vh - 600px);
+
     &__image {
       width: 100px;
     }
+
     &__message {
       padding-top: 30px;
       text-align: center;
     }
   }
+
   &__content {
     display: flex;
     justify-content: center;
+
     &__cards {
-      justify-content: center;
+      width: 100% !important;
+      justify-content: space-evenly;
+      align-items: center;
+      flex-flow: wrap;
     }
+
     &__card {
-      margin: 20px;
+      max-width: 15rem;
+      min-width: 15rem;
+      margin: 10px;
       &__footer {
         display: flex;
         justify-content: space-between;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .notes {
+    &__empty {
+      &__image {
+      }
+
+      &__message {
+      }
+    }
+    &__content {
+      &__cards {
+      }
+      &__card {
+        max-width: 10rem;
+        min-width: 10rem;
+        &__footer {
+
+        }
       }
     }
   }

@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const UserValidation = require('./validation/UserValidation');
 const UserDbService = require('./db/UserDbService');
+const csrf = require('csurf');
+
+const csrfProtection = csrf({ cookie : true});
 
 router.post('/login', (req, res) => {
     const {email, password} = req.body;

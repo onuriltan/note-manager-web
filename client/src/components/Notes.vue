@@ -1,13 +1,12 @@
 <template>
   <div class="notes">
-    <div class="notes__content" v-if="posts.length !==0 && isLoading === false">
-      <b-card-group deck class="notes__content__cards" style="width: 100% !important;">
+    <div class="notes__content" v-if="searchClicked && posts.length !==0 && isLoading === false">
+      <b-card-group deck class="notes__content__cards">
         <b-card :title="post.createdAt | convertDate()"
                 tag="article"
                 v-for="post in posts"
                 v-bind:key="post._id"
-                class="mb-2 posts__content__card slide--in--from--left"
-                style="max-width: 15rem; min-width: 15rem;">
+                class="mb-2 notes__content__card slide--in--from--left">
           <p class="card-text">
             {{post.text}}
           </p>
@@ -38,15 +37,18 @@
         </div>
       </b-modal>
     </div>
-    <div class="notes__empty slide--in--from--left" v-if="posts.length ===0 && isLoading === false">
+    <div class="notes__empty slide--in--from--left" v-if="searchClicked && posts.length ===0 && isLoading === false">
       <img src="../assets/empty-paper.png"  class="notes__empty__image" alt="notes-empty"/>
       <span v-if="this.$parent.$vnode.componentOptions.tag === 'Dashboard'" class="notes__empty__message">No notes found.</span>
       <span v-if="this.$parent.$vnode.componentOptions.tag === 'History'" class="notes__empty__message">No notes were found in the criteria you searched for.</span>
-
     </div>
 
-    <div class="notes__empty" v-if="isLoading">
+    <div class="notes__empty" v-if="searchClicked && isLoading">
       <i class="fa fa-refresh fa-spin fa-5x"></i>
+    </div>
+
+    <div class="notes__empty" v-if="this.$parent.$vnode.componentOptions.tag === 'History' && !searchClicked">
+
     </div>
 
   </div>
@@ -61,7 +63,8 @@ export default {
     isLoading: Boolean,
     deletePost: Function,
     posts: Array,
-    parentComponentName: String
+    parentComponentName: String,
+    searchClicked: Boolean
   },
   data () {
     return {

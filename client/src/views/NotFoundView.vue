@@ -13,24 +13,23 @@
       </b-button>
     </router-link>
 
-
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'NotFound',
-    mounted() {
-      let promise = document.getElementById('audio').play();
-      if (promise !== undefined) {
-        promise.then(_ => {
-          // Autoplay started!
-        }).catch(error => {
-          document.getElementById('audio').style.display = "block"
-        });
-      }
+export default {
+  name: 'NotFound',
+  mounted () {
+    let promise = document.getElementById('audio').play()
+    if (promise !== undefined) {
+      promise.then(_ => {
+        // Autoplay started!
+      }).catch(error => {
+        document.getElementById('audio').style.display = 'block'
+      })
     }
   }
+}
 </script>
 
 <style scoped lang="scss">
@@ -61,6 +60,5 @@
       width: 100% !important;
     }
   }
-
 
 </style>

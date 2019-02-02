@@ -32,7 +32,7 @@
       </div>
     </b-form>
 
-    <Notes v-cloak :deletePost="deletePost" :editPost="editPost" :posts="posts" :isLoading="isLoading"/>
+    <Notes v-cloak :deletePost="deletePost" :editPost="editPost" :posts="posts" :isLoading="isLoading" :searchClicked="searchClicked"/>
 
   </div>
 </template>
@@ -52,7 +52,8 @@ export default {
       toDate: '',
       fromDate: '',
       keyword: '',
-      isLoading: false
+      isLoading: false,
+      searchClicked: false
     }
   },
   methods: {
@@ -72,6 +73,7 @@ export default {
     },
     async getPosts () {
       this.isLoading = true
+      this.searchClicked = true
       setTimeout(async () => {
         this.posts = []
         this.posts = await PostService.getPostsByCriteria(this.fromDate, this.toDate, this.keyword)

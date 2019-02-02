@@ -15,7 +15,7 @@
       </form>
       <hr>
 
-      <Notes :editPost="editPost" :deletePost="deletePost" :posts="posts" :isLoading="isLoading" />
+      <Notes :editPost="editPost" :deletePost="deletePost" :posts="posts" :isLoading="isLoading" :searchClicked="searchClicked" />
 
     </div>
   </div>
@@ -36,7 +36,8 @@ export default {
       posts: [],
       error: '',
       text: '',
-      isLoading: false
+      isLoading: false,
+      searchClicked: true
     }
   },
   methods: {
