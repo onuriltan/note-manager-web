@@ -1,10 +1,10 @@
 self.__precacheManifest = [
   {
-    "revision": "f01fd1615eb50c06ba7e",
-    "url": "/css/app.4910ad95.css"
+    "revision": "904768ed5e5d26943fb2",
+    "url": "/css/app.225f6dee.css"
   },
   {
-    "revision": "f01fd1615eb50c06ba7e",
+    "revision": "904768ed5e5d26943fb2",
     "url": "/js/app.f3167855.js"
   },
   {
@@ -64,7 +64,7 @@ self.__precacheManifest = [
     "url": "/media/nyan-cat-short.1ae7649e.mp3"
   },
   {
-    "revision": "0b2346e918514cef60d9f345d7fe7eb1",
+    "revision": "88f3a4ed722f71a21b3ae5f3077cf69c",
     "url": "/index.html"
   },
   {
