@@ -26,9 +26,9 @@ You need to create a .env file in the root folder of the app and you need to
 give parameters as;
 
 * MONGO_URL= "your mongodb connection url"
-* MAIL="your email for sending confirmation emails"
-* MAIL_USERNAME="your email"
-* MAIL_PASSWORD="your email password"
+* MAIL="your yandex email for sending confirmation emails"
+* MAIL_USERNAME="your yandex email"
+* MAIL_PASSWORD="your yandex email password"
 * CONFIRM_EMAIL_URL="your confirmation page url"
 
 
