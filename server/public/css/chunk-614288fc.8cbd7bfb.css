@@ -1,4 +1,4 @@
-.login-container[data-v-90eb8070] {
+.login-container[data-v-23b2030e] {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -10,7 +10,7 @@
   background: url(../img/takingnotes.cfca4bf3.jpg) no-repeat fixed center;
   background-size: cover;
 }
-.login-form[data-v-90eb8070] {
+.login-form[data-v-23b2030e] {
   width: 400px;
   background-color: white;
   border-radius: 10px;
@@ -19,18 +19,27 @@
           box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
   padding: 30px;
 }
-.login-form__header[data-v-90eb8070] {
+.login-form__header[data-v-23b2030e] {
     text-align: center;
     padding-bottom: 30px;
 }
-.login-form__errors[data-v-90eb8070] {
+.login-form__errors[data-v-23b2030e] {
     padding: 10px 0;
 }
-.login-form__button[data-v-90eb8070] {
+.login-form__button[data-v-23b2030e] {
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 @media screen and (max-width: 768px) {
-.login-container[data-v-90eb8070] {
+.login-container[data-v-23b2030e] {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -40,7 +49,7 @@
     min-height: calc(100vh - 30px);
     padding-top: 20px;
 }
-.login-container[data-v-90eb8070]:after {
+.login-container[data-v-23b2030e]:after {
       content: "";
       background: url(../img/takingnotes.cfca4bf3.jpg) no-repeat fixed center;
       background-size: cover;
@@ -52,24 +61,26 @@
       position: absolute;
       z-index: -1;
 }
-.login-form[data-v-90eb8070] {
+.login-form[data-v-23b2030e] {
     width: 250px;
 }
-.login-form__header[data-v-90eb8070] {
+.login-form__header[data-v-23b2030e] {
       text-align: center;
       padding-bottom: 5px;
 }
-.login-form__errors[data-v-90eb8070] {
+.login-form__errors[data-v-23b2030e] {
       padding: 5px 0;
 }
-.login-form__input[data-v-90eb8070] {
+.login-form__errors__error[data-v-23b2030e] {
+        font-size: 13px;
+        padding: 10px;
+        text-align: center;
+}
+.login-form__input[data-v-23b2030e] {
       height: calc(2.25rem) !important;
       font-size: 1rem;
 }
-.login-form__button[data-v-90eb8070] {
-      width: 100%;
-}
 }
 
 
-/*# sourceMappingURL=chunk-293ffb7e.d5beb206.css.map*/
+/*# sourceMappingURL=chunk-614288fc.8cbd7bfb.css.map*/

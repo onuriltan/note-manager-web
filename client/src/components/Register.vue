@@ -6,12 +6,12 @@
         <router-link to="/login">Go back to login page!</router-link>
       </div>
       <div class="login-form__errors" v-if="errors.length > 0">
-        <b-alert v-bind:key="index" v-for="(error, index) in errors" show variant="danger" size="lg">
+        <b-alert v-bind:key="index" class="login-form__errors__error "v-for="(error, index) in errors" show variant="danger" size="lg">
           {{error.msg}}
         </b-alert>
       </div>
       <div class="login-form__errors" v-if="messages.length > 0">
-        <b-alert v-bind:key="index" v-for="(message, index) in messages" show variant="success" size="lg">
+        <b-alert v-bind:key="index" class="login-form__errors__error " v-for="(message, index) in messages" show variant="success" size="lg">
           {{message.msg}}
         </b-alert>
       </div>
@@ -55,7 +55,9 @@
                 :class="{ 'button--loading': registerClicked }">
         <i class="fa fa-refresh fa-spin hide--button--loading--icon"
            :class="{ 'show--button--loading--icon': registerClicked }"></i>
-        Register
+        <div style="margin: 0 5px;">
+          Register
+        </div>
       </b-button>
     </b-form>
   </div>

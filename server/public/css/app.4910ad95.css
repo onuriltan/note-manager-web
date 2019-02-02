@@ -103,10 +103,10 @@
   opacity: 0.6 !important;
 }
 .show--button--loading--icon {
-  visibility: visible !important;
+  display: block !important;
 }
 .hide--button--loading--icon {
-  visibility: hidden;
+  display: none;
 }
 #app {
   -webkit-font-smoothing: antialiased;
@@ -11032,4 +11032,4 @@ pre {
 }
 
 
-/*# sourceMappingURL=app.25551d26.css.map*/
+/*# sourceMappingURL=app.4910ad95.css.map*/

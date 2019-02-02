@@ -3,9 +3,9 @@
 }
 
 .show--button--loading--icon {
-  visibility: visible !important;
+  display: block !important;
 }
 
 .hide--button--loading--icon {
-  visibility: hidden;
+  display: none;
 }
