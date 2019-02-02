@@ -8,7 +8,7 @@
           class="history__form__content__item mr-2 ml-2"
           label="From Date"
           label-for="fromDate">
-          <b-form-input id="fromDate" type="date" :max="new Date() | convertDate"
+          <b-form-input id="fromDate" type="date"
                         min="2018-01-01" class="form-control" v-model="fromDate"></b-form-input>
         </b-form-group>
 
@@ -17,7 +17,7 @@
           class="history__form__content__item mr-2 ml-2"
           label="To Date"
           label-for="toDate">
-          <b-form-input id="fromDate" type="date" :max="new Date() | convertDate"
+          <b-form-input id="fromDate" type="date"
                         min="2018-01-01" class="form-control" v-model="toDate"></b-form-input>
         </b-form-group>
 
