@@ -64,19 +64,19 @@
 </template>
 
 <script>
-import { validateRegister } from '../methods/Validators'
+import { validateRegister } from '../helpers/Validators'
 
 export default {
   name: 'RegisterComponent',
   data () {
     return {
       errors: [],
+      messages: [],
       fieldErrors: {
         email: '',
         password: '',
         password2: ''
       },
-      messages: [],
       email: '',
       password: '',
       password2: '',
@@ -116,6 +116,7 @@ export default {
   methods: {
     async register () {
       this.errors = []
+      this.messages = []
       this.fieldErrors = validateRegister(this.email, this.password, this.password2)
       this.registerClicked = true
       if (this.isValidForm) {

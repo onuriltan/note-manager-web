@@ -47,8 +47,7 @@
 </template>
 
 <script>
-import { validateLogin, validateEmail, validatePassword } from '../methods/Validators'
-
+import { validateLogin, validateEmail, validatePassword } from '../helpers/Validators'
 export default {
   name: 'LoginComponent',
   data () {
