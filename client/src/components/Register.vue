@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import { validateRegister } from '../methods/Validators';
+import { validateRegister } from '../methods/Validators'
 
 export default {
   name: 'RegisterComponent',

@@ -1,9 +1,9 @@
-export function validateRegister  (email, password, password2) {
+export function validateRegister (email, password, password2) {
   let fieldErrors = {
     email: '',
     password: '',
     password2: ''
-  };
+  }
 
   if (!email) {
     fieldErrors.email = 'Email required.'
@@ -31,14 +31,38 @@ export function validateRegister  (email, password, password2) {
     fieldErrors.password2 = ''
     fieldErrors.password = ''
   }
-  return fieldErrors;
+  return fieldErrors
+}
+
+export function validateEmail (email) {
+  let error = ''
+  if (!email) {
+    error = 'Email required.'
+  } else if (!validEmail(email)) {
+    error = 'Email is not valid.'
+  } else {
+    error = ''
+  }
+  return error
+}
+
+export function validatePassword (password) {
+  let error = ''
+  if (!password) {
+    error = 'Password required.'
+  } else if (password.length < 6) {
+    error = 'Password length should be 6.'
+  } else {
+    error = ''
+  }
+  return error
 }
 
 export function validateLogin (email, password) {
   let fieldErrors = {
     email: '',
-    password: '',
-  };
+    password: ''
+  }
 
   if (!email) {
     fieldErrors.email = 'Email required.'
@@ -55,11 +79,10 @@ export function validateLogin (email, password) {
     fieldErrors.password = ''
   }
 
-  return fieldErrors;
+  return fieldErrors
 }
 
-function validEmail(email) {
+function validEmail (email) {
   let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   return re.test(email)
 }
-
