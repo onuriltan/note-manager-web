@@ -29,9 +29,12 @@ decodeToken = (req, res) => {
     return userData;
 };
 
-const signToken = (user, secretKey, res) => {
-    jwt.sign({user}, secretKey, {expiresIn: '10m'}, (err, token) => {
-        res.json({token});
+const signToken = async (user, secretKey) => {
+    return await new Promise((resolve, reject) => {
+        jwt.sign({user}, secretKey, {expiresIn: '10m'}, (err, token) => {
+            if (err) reject(err);
+            resolve(token)
+        });
     });
 };
 module.exports.decodeToken = decodeToken;
