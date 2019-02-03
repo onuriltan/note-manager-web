@@ -22,9 +22,9 @@
         <b-form-input id="email"
                       type="email"
                       v-model="email"
+                      :state="emailCorrectState"
                       class="login-form__input"
-                      size="lg"s
-                      required>
+                      size="lg">
         </b-form-input>
       </b-form-group>
       <b-form-group id="password"
@@ -35,8 +35,8 @@
                       type="password"
                       class="login-form__input"
                       v-model="password"
-                      size="lg"
-                      required>
+                      :state="passwordCorrectState"
+                      size="lg">
         </b-form-input>
       </b-form-group>
       <b-form-group id="password2"
@@ -47,14 +47,14 @@
                       type="password"
                       class="login-form__input"
                       v-model="password2"
-                      size="lg"
-                      required>
+                      :state="password2CorrectState"
+                      size="lg">
         </b-form-input>
       </b-form-group>
       <b-button class="login-form__button" type="submit" variant="success" size="lg"
-                :class="{ 'button--loading': registerClicked }">
+                :class="{ 'button--loading': registerValidated }">
         <i class="fa fa-refresh fa-spin hide--button--loading--icon"
-           :class="{ 'show--button--loading--icon': registerClicked }"></i>
+           :class="{ 'show--button--loading--icon': registerValidated }"></i>
         <div style="margin: 0 5px;">
           Register
         </div>
@@ -80,7 +80,8 @@ export default {
       email: '',
       password: '',
       password2: '',
-      registerClicked: false
+      registerClicked: false,
+      registerValidated: false
     }
   },
   computed: {
@@ -95,14 +96,30 @@ export default {
     },
     isValidForm () {
       return this.fieldErrors.email === '' && this.fieldErrors.password === '' && this.fieldErrors.password2 === ''
+    },
+    emailCorrectState () {
+      if (this.registerClicked && this.invalidEmail === '') return true
+      if (this.registerClicked && this.invalidEmail !== '') return false
+      return null
+    },
+    passwordCorrectState () {
+      if (this.registerClicked && this.invalidPassword === '') return true
+      if (this.registerClicked && this.invalidPassword !== '') return false
+      return null
+    },
+    password2CorrectState () {
+      if (this.registerClicked && this.invalidPassword2 === '') return true
+      if (this.registerClicked && this.invalidPassword2 !== '') return false
+      return null
     }
   },
   methods: {
     async register () {
       this.errors = []
       this.fieldErrors = validateRegister(this.email, this.password, this.password2)
+      this.registerClicked = true
       if (this.isValidForm) {
-        this.registerClicked = true
+        this.registerValidated = true
         const res = await this.$store.dispatch('register',
           {
             email: this.email,
@@ -111,10 +128,12 @@ export default {
           })
         if (res.data.errors) {
           this.registerClicked = false
+          this.registerValidated = false
           this.errors = res.data.errors
         }
         if (res.data.messages) {
           this.registerClicked = false
+          this.registerValidated = false
           this.messages = res.data.messages
         }
       }
