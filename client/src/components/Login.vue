@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import Validators from '../methods/Validators';
 
 export default {
   name: 'LoginComponent',
@@ -66,34 +67,16 @@ export default {
     },
     invalidPassword () {
       return this.fieldErrors.password
+    },
+    isValidForm () {
+      return this.fieldErrors.email === '' && this.fieldErrors.password === ''
     }
   },
   methods: {
-    validateForm: function () {
-      if (!this.email) {
-        this.fieldErrors.email = 'Email required.'
-      } else if (!this.validEmail(this.email)) {
-        this.fieldErrors.email = 'Email is not valid.'
-      } else {
-        this.fieldErrors.email = ''
-      }
-      if (!this.password) {
-        this.fieldErrors.password = 'Password required.'
-      } else if (this.password.length < 6) {
-        this.fieldErrors.password = 'Password length should be 6.'
-      } else {
-        this.fieldErrors.password = ''
-      }
-      return this.fieldErrors.email === '' && this.fieldErrors.password === ''
-    },
-    validEmail: function (email) {
-      let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      return re.test(email)
-    },
     async login () {
       this.errors = []
-      let isValidForm = this.validateForm()
-      if (isValidForm) {
+      this.fieldErrors = Validators.validateRegister(this.email, this.password, this.password2);
+      if (this.isValidForm) {
         this.loginClicked = true
         setTimeout(async () => {
           const res = await this.$store.dispatch('login', { email: this.email, password: this.password })

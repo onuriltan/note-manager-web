@@ -23,7 +23,7 @@
                       type="email"
                       v-model="email"
                       class="login-form__input"
-                      size="lg"
+                      size="lg"s
                       required>
         </b-form-input>
       </b-form-group>
@@ -64,6 +64,7 @@
 </template>
 
 <script>
+import Validators from '../methods/Validators';
 
 export default {
   name: 'RegisterComponent',
@@ -91,47 +92,16 @@ export default {
     },
     invalidPassword2 () {
       return this.fieldErrors.password2
+    },
+    isValidForm () {
+      return this.fieldErrors.email === '' && this.fieldErrors.password === '' && this.fieldErrors.password2 === ''
     }
   },
   methods: {
-    validateForm: function () {
-      if (!this.email) {
-        this.fieldErrors.email = 'Email required.'
-      } else if (!this.validEmail(this.email)) {
-        this.fieldErrors.email = 'Email is not valid.'
-      } else {
-        this.fieldErrors.email = ''
-      }
-      if (!this.password) {
-        this.fieldErrors.password = 'Password required.'
-      } else if (this.password.length < 6) {
-        this.fieldErrors.password = 'Password length should be 6.'
-      } else {
-        this.fieldErrors.password = ''
-      }
-
-      if (!this.password2) {
-        this.fieldErrors.password2 = 'Repeat password required.'
-      } else if (this.password2.length < 6) {
-        this.fieldErrors.password2 = 'Repeat password length should be 6.'
-      } else if (this.password2 !== this.password) {
-        this.fieldErrors.password = 'Passwords does not match.'
-        this.fieldErrors.password2 = 'Passwords does not match.'
-      } else {
-        this.fieldErrors.password2 = ''
-        this.fieldErrors.password = ''
-      }
-
-      return this.fieldErrors.email === '' && this.fieldErrors.password === '' && this.fieldErrors.password2 === ''
-    },
-    validEmail: function (email) {
-      let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      return re.test(email)
-    },
     async register () {
       this.errors = []
-      let isValidForm = this.validateForm()
-      if (isValidForm) {
+      this.fieldErrors = Validators.validateRegister(this.email, this.password, this.password2);
+      if (this.isValidForm) {
         this.registerClicked = true
         const res = await this.$store.dispatch('register',
           {
