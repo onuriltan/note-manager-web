@@ -1,4 +1,4 @@
-function validateRegister  (email, password, password2) {
+export function validateRegister  (email, password, password2) {
   let fieldErrors = {
     email: '',
     password: '',
@@ -34,7 +34,7 @@ function validateRegister  (email, password, password2) {
   return fieldErrors;
 }
 
-function validateLogin (email, password) {
+export function validateLogin (email, password) {
   let fieldErrors = {
     email: '',
     password: '',
@@ -63,4 +63,3 @@ function validEmail(email) {
   return re.test(email)
 }
 
-module.exports.validateRegister = validateRegister();

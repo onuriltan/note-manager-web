@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import Validators from '../methods/Validators';
+import { validateRegister } from '../methods/Validators';
 
 export default {
   name: 'RegisterComponent',
@@ -100,7 +100,7 @@ export default {
   methods: {
     async register () {
       this.errors = []
-      this.fieldErrors = Validators.validateRegister(this.email, this.password, this.password2);
+      this.fieldErrors = validateRegister(this.email, this.password, this.password2)
       if (this.isValidForm) {
         this.registerClicked = true
         const res = await this.$store.dispatch('register',

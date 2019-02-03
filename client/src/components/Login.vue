@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import Validators from '../methods/Validators';
+import { validateLogin } from '../methods/Validators';
 
 export default {
   name: 'LoginComponent',
@@ -75,7 +75,7 @@ export default {
   methods: {
     async login () {
       this.errors = []
-      this.fieldErrors = Validators.validateRegister(this.email, this.password, this.password2);
+      this.fieldErrors = validateLogin(this.email, this.password)
       if (this.isValidForm) {
         this.loginClicked = true
         setTimeout(async () => {
