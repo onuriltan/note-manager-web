@@ -19,6 +19,9 @@
   }
   &__errors{
     padding: 10px 0;
+    &__error {
+      text-align: center;
+    }
   }
   &__button {
     width: 100%;

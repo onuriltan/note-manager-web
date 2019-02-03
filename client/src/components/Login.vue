@@ -9,26 +9,28 @@
       </div>
       <b-form-group id="email"
                     label="Email"
-                    :invalid-feedback="invalidEmail"
+                    :invalid-feedback="invalidEmailMessage"
                     label-for="email">
         <b-form-input id="email"
                       type="email"
+                      @keydown.native="validateEmail"
+                      :state="emailCorrectState"
                       class="login-form__input"
                       v-model="email"
-                      size="lg"
-                      required>
+                      size="lg">
         </b-form-input>
       </b-form-group>
       <b-form-group id="password"
                     label="Password"
-                    :invalid-feedback="invalidPassword"
+                    :invalid-feedback="invalidPasswordMessage"
                     label-for="password">
         <b-form-input id="password"
                       type="password"
+                      @keydown.native="validatePassword"
+                      :state="passwordCorrectState"
                       class="login-form__input"
                       v-model="password"
-                      size="lg"
-                      required>
+                      size="lg">
         </b-form-input>
       </b-form-group>
       <div style="font-weight: bold; margin: 30px 0; text-align: center">
@@ -45,6 +47,7 @@
 </template>
 
 <script>
+import { validateLogin, validateEmail, validatePassword } from '../methods/Validators'
 
 export default {
   name: 'LoginComponent',
@@ -52,48 +55,54 @@ export default {
     return {
       errors: [],
       fieldErrors: {
-        email: '',
-        password: ''
+        email: null,
+        password: null
       },
       email: '',
       password: '',
-      loginClicked: false
+      loginClicked: false,
+      isEmailEntered: false,
+      isPasswordEntered: false
     }
   },
   computed: {
-    invalidEmail () {
+    invalidEmailMessage () {
       return this.fieldErrors.email
     },
-    invalidPassword () {
+    invalidPasswordMessage () {
       return this.fieldErrors.password
+    },
+    isValidForm () {
+      return this.fieldErrors.email === '' && this.fieldErrors.password === ''
+    },
+    emailCorrectState () {
+      if (this.isEmailEntered && this.invalidEmailMessage === '') return true
+      if (this.isEmailEntered && this.invalidEmailMessage !== '') return false
+      return null
+    },
+    passwordCorrectState () {
+      if (this.isPasswordEntered && this.invalidPasswordMessage === '') return true
+      if (this.isPasswordEntered && this.invalidPasswordMessage !== '') return false
+      return null
     }
   },
   methods: {
-    validateForm: function () {
-      if (!this.email) {
-        this.fieldErrors.email = 'Email required.'
-      } else if (!this.validEmail(this.email)) {
-        this.fieldErrors.email = 'Email is not valid.'
-      } else {
-        this.fieldErrors.email = ''
-      }
-      if (!this.password) {
-        this.fieldErrors.password = 'Password required.'
-      } else if (this.password.length < 6) {
-        this.fieldErrors.password = 'Password length should be 6.'
-      } else {
-        this.fieldErrors.password = ''
-      }
-      return this.fieldErrors.email === '' && this.fieldErrors.password === ''
+    validateEmail () {
+      setTimeout(() => {
+        this.isEmailEntered = true
+        this.fieldErrors.email = validateEmail(this.email)
+      }, 600)
     },
-    validEmail: function (email) {
-      let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      return re.test(email)
+    validatePassword () {
+      setTimeout(() => {
+        this.isPasswordEntered = true
+        this.fieldErrors.password = validatePassword(this.password)
+      }, 600)
     },
     async login () {
       this.errors = []
-      let isValidForm = this.validateForm()
-      if (isValidForm) {
+      this.fieldErrors = validateLogin(this.email, this.password)
+      if (this.isValidForm) {
         this.loginClicked = true
         setTimeout(async () => {
           const res = await this.$store.dispatch('login', { email: this.email, password: this.password })
