@@ -14,6 +14,12 @@
         </b-input-group>
       </form>
       <hr>
+      <br>
+      <br>
+      <b-pagination v-if="this.pagination.pages > this.pagination.page" align="center" :total-rows="this.pagination.total"
+                    v-model="this.pagination.page" :per-page="this.pagination.limit">
+      </b-pagination>
+
 
       <Notes :editPost="editPost" :deletePost="deletePost" :posts="posts" :isLoading="isLoading" :searchClicked="searchClicked" />
 
@@ -34,6 +40,12 @@ export default {
   data () {
     return {
       posts: [],
+      pagination: {
+        total: 0,
+        limit: 0,
+        page: 0,
+        pages: 0
+      },
       error: '',
       text: '',
       isLoading: false,
@@ -45,7 +57,8 @@ export default {
       this.isLoading = true
       setTimeout(async () => {
         await PostService.insertPost(this.text)
-        this.posts = await PostService.getPosts()
+        let postss = await PostService.getPosts()
+        this.posts = postss.docs
         this.isLoading = false
       }, 1000)
     },
@@ -53,7 +66,8 @@ export default {
       this.isLoading = true
       setTimeout(async () => {
         await PostService.deletePost(tobeDeletedId)
-        this.posts = await PostService.getPosts()
+        let postss = await PostService.getPosts()
+        this.posts = postss.docs
         this.isLoading = false
       }, 1000)
     },
@@ -61,7 +75,8 @@ export default {
       this.isLoading = true
       setTimeout(async () => {
         await PostService.editPost(tobeEditedId, tobeEditedText)
-        this.posts = await PostService.getPosts()
+        let postss = await PostService.getPosts()
+        this.posts = postss.docs
         this.isLoading = false
       }, 1000)
     }
@@ -69,7 +84,13 @@ export default {
   async beforeMount () {
     try {
       this.isLoading = true
-      this.posts = await PostService.getPosts()
+      let postss = await PostService.getPosts()
+      this.posts = postss.docs
+      this.pagination.total = postss.total
+      this.pagination.limit = postss.limit
+      this.pagination.page = postss.page
+      this.pagination.pages = postss.pages
+      console.log(this.pagination)
     } catch (e) {
       this.error = e.message
     }

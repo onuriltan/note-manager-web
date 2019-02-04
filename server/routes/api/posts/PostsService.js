@@ -10,7 +10,7 @@ router.get('/', JwtOperations.verifyToken, async (req, res) => {
         const {user: {email}} = authData;
         const options = {
             page: parseInt(page, 10) || 1 ,
-            limit: parseInt(perPage, 10) || 30
+            limit: parseInt(perPage, 10) || 10
         };
         const notes = await PostsDbService.findNotes(email, options);
         res.send(notes);
@@ -28,7 +28,7 @@ router.get('/:fromDate/:toDate/:keyword', JwtOperations.verifyToken, async (req,
         toDate.setDate(toDate.getDate()+1);
         const options = {
             page: parseInt(page, 10) || 1 ,
-            limit: parseInt(perPage, 10) || 30
+            limit: parseInt(perPage, 10) || 10
         };
 
         const notes = await PostsDbService.findNotesBetweenDatesandKeyword(fromDate, toDate, keyword, email, options);

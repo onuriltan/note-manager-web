@@ -32,6 +32,12 @@
       </div>
     </b-form>
 
+    <br>
+    <br>
+    <b-pagination v-if="this.pagination.pages > this.pagination.page" align="center" :total-rows="this.pagination.total"
+                  v-model="this.pagination.page" :per-page="this.pagination.limit">
+    </b-pagination>
+
     <Notes v-cloak :deletePost="deletePost" :editPost="editPost" :posts="posts" :isLoading="isLoading" :searchClicked="searchClicked"/>
 
   </div>
@@ -49,6 +55,12 @@ export default {
   data () {
     return {
       posts: [],
+      pagination: {
+        total: 0,
+        limit: 0,
+        page: 0,
+        pages: 0
+      },
       toDate: '',
       fromDate: '',
       keyword: '',
@@ -61,14 +73,16 @@ export default {
       this.isLoading = true
       setTimeout(async () => {
         await PostService.deletePost(tobeDeletedId)
-        this.posts = await PostService.getPosts()
+        let postss = await PostService.getPostsByCriteria(this.fromDate, this.toDate, this.keyword)
+        this.posts = postss.docs
         this.isLoading = false
       }, 1000)
     },
     async editPost (tobeEditedId, tobeEditedText) {
       setTimeout(async () => {
         await PostService.editPost(tobeEditedId, tobeEditedText)
-        this.posts = await PostService.getPosts()
+        let postss = await PostService.getPostsByCriteria(this.fromDate, this.toDate, this.keyword)
+        this.posts = postss.docs
       }, 1000)
     },
     async getPosts () {
@@ -76,7 +90,13 @@ export default {
       this.searchClicked = true
       setTimeout(async () => {
         this.posts = []
-        this.posts = await PostService.getPostsByCriteria(this.fromDate, this.toDate, this.keyword)
+        let postss = await PostService.getPostsByCriteria(this.fromDate, this.toDate, this.keyword)
+        this.posts = postss.docs
+        this.pagination.total = postss.total
+        this.pagination.limit = postss.limit
+        this.pagination.page = postss.page
+        this.pagination.pages = postss.pages
+        console.log(this.pagination)
         this.isLoading = false
       }, 1000)
     }
