@@ -10,7 +10,7 @@ class PostService {
     return new Promise(async (resolve, reject) => {
       try {
         const res = await axios.get(url, { headers: { 'Authorization': `Bearer ${window.localStorage.getItem('token')}` } })
-        const data = res.data
+        const data = res.data.docs
         resolve(
           data.map(post => ({
             ...post,
@@ -32,7 +32,7 @@ class PostService {
 
       try {
         const res = await axios.get(`${url}/${fromDate}/${toDate}/${keyword}`, { headers: { 'Authorization': `Bearer ${window.localStorage.getItem('token')}` } })
-        const data = res.data
+        const data = res.data.docs
         if (data !== '') {
           resolve(
             data.map(post => ({

@@ -11,50 +11,24 @@ const createPost = (text, email, res) => {
     });
 };
 
-const findPost = (email, res) => {
-    Post.find({email}, (err, posts) => {
-        res.send(posts);
-    });
+const findNotes = async (email, options) => {
+    return await Post.paginate({email}, options);
 };
 
-const findPostBetweenDatesandKeyword = (fromDate, toDate, keyword, email, res) => {
+const findNotesBetweenDatesandKeyword = async (fromDate, toDate, keyword, email, options) => {
     let regex = new RegExp(`${keyword}`, "i");
 
     if (fromDate.toString() === 'Invalid Date' && toDate.toString() === 'Invalid Date') {
-        Post.find(
-            {
-                email,
-                text: {$regex: regex},
-            }, (err, posts) => {
-                res.send(posts);
-            });
+        return await Post.paginate({email, text: {$regex: regex}}, options);
+
     } else if (fromDate.toString() === 'Invalid Date' && toDate.toString() !== 'Invalid Date') {
-        Post.find(
-            {
-                email,
-                text: {$regex: regex},
-                createdAt: {$lte: toDate}
-            }, (err, posts) => {
-                res.send(posts);
-            });
+        return await Post.paginate({email, text: {$regex: regex}, createdAt: {$lte: toDate}}, options);
+
     } else if (fromDate.toString() !== 'Invalid Date' && toDate.toString() === 'Invalid Date') {
-        Post.find(
-            {
-                email,
-                text: {$regex: regex},
-                createdAt: {$gte: fromDate}
-            }, (err, posts) => {
-                res.send(posts);
-            });
+        return await Post.paginate({email, text: {$regex: regex}, createdAt: {$gte: fromDate}}, options);
+
     } else {
-        Post.find(
-            {
-                email,
-                text: {$regex: regex},
-                createdAt: {$gte: fromDate, $lte: toDate}
-            }, (err, posts) => {
-                res.send(posts);
-            });
+        return await Post.paginate({email, text: {$regex: regex}, createdAt: {$gte: fromDate, $lte: toDate}}, options);
     }
 
 };
@@ -75,6 +49,6 @@ const deletePost = (email, id, res) => {
 
 module.exports.createPost = createPost;
 module.exports.deletePost = deletePost;
-module.exports.findPost = findPost;
-module.exports.findPostBetweenDatesandKeyword = findPostBetweenDatesandKeyword;
+module.exports.findNotes = findNotes;
+module.exports.findNotesBetweenDatesandKeyword = findNotesBetweenDatesandKeyword;
 module.exports.editPost = editPost;
