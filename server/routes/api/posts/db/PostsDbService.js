@@ -1,13 +1,13 @@
 const Post = require('../entity/Post');
 const mongodb = require('mongodb');
 
-const createPost = (text, email, res) => {
+const createPost = async (text, email, res) => {
     const newPost = new Post({
         text,
         email
     });
-    newPost.save().then(() => {
-        res.status(201).send();
+    await newPost.save().then(() => {
+        return newPost;
     });
 };
 
@@ -33,18 +33,20 @@ const findNotesBetweenDatesandKeyword = async (fromDate, toDate, keyword, email,
 
 };
 
-const editPost = (id, email, text, res) => {
-    Post.findOneAndUpdate({_id: id, email: email}, {text: text, editedAt: new Date()}, (err, updatedPost) => {
+const editPost = async (id, email, text) => {
+    await Post.findOneAndUpdate({_id: id, email: email}, {text: text, editedAt: new Date()}, (err, updatedPost) => {
         if (err) console.log(err);
-        res.send(updatedPost);
+        return updatedPost
     });
 };
 
-const deletePost = (email, id, res) => {
-    Post.deleteOne({_id: new mongodb.ObjectID(id), email: email}).then(() => {// in mongo id is a special type of ObjectID
-            res.status(200).send();
-        }
-    );
+const deletePost = async (email, id) => {
+    let isUpdated = false;
+    await Post.deleteOne({_id: new mongodb.ObjectID(id), email: email})
+        .then(() => {// in mongo id is a special type of ObjectID
+            isUpdated = true;
+        });
+    return isUpdated;
 };
 
 module.exports.createPost = createPost;
