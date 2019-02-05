@@ -18,12 +18,9 @@
       <br>
       <br>
 
-      <div v-if="!!this.pagination.page && !!this.pagination.pages" >
-        <b-pagination-nav v-if="!!this.pagination.page && !!this.pagination.pages" :link-gen="toPage" :number-of-pages="this.pagination.pages"
-                          v-model="this.pagination.page" use-router></b-pagination-nav>
-      </div>
-
-
+      <b-pagination-nav v-if="!!this.pagination.page && !!this.pagination.pages" :link-gen="toPage"
+                        :number-of-pages="this.pagination.pages" v-model="currentPage" use-router>
+      </b-pagination-nav>
 
       <Notes :editPost="editPost" :deletePost="deletePost" :posts="posts" :isLoading="isLoading" :searchClicked="searchClicked" />
 
@@ -48,8 +45,9 @@ export default {
         total: 0,
         limit: 0,
         page: 0,
-        pages: 0
+        pages: 0,
       },
+      currentPage: 1,
       error: '',
       text: '',
       isLoading: false,
@@ -64,7 +62,6 @@ export default {
   methods: {
     toPage (pageNum) {
       return '/dashboard/' + pageNum
-      // this.$route.params.pageNumber
     },
     async createPost () {
       this.isLoading = true

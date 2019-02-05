@@ -25,15 +25,18 @@ class PostService {
     })
   }
 
-  static getPostsByCriteria (fromDate, toDate, keyword) { // static to directly reach the getPosts method instead of instantiating PostService class
+  static getPostsByCriteria (fromDate, toDate, keyword, pageNumber) { // static to directly reach the getPosts method instead of instantiating PostService class
     Store.dispatch('checkIsAuthenticated')
+    let config = {
+      headers: { 'Authorization': `Bearer ${window.localStorage.getItem('token')}` },
+      params: { page: pageNumber }
+    };
     return new Promise(async (resolve, reject) => {
       if (fromDate === '') fromDate = '%20'
       if (toDate === '') toDate = '%20'
       if (keyword === '') keyword = '%20'
-
       try {
-        const res = await axios.get(`${url}/${fromDate}/${toDate}/${keyword}`, { headers: { 'Authorization': `Bearer ${window.localStorage.getItem('token')}` } })
+        const res = await axios.get(`${url}/${fromDate}/${toDate}/${keyword}`, config)
         const data = res.data
         if (data.docs !== []) {
           resolve(
