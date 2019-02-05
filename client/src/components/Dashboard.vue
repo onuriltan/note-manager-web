@@ -15,6 +15,13 @@
       </form>
       <hr>
 
+      <br>
+      <br>
+
+      <b-pagination-nav v-if="!!this.pagination.page && !!this.pagination.pages" :link-gen="toPage"
+                        :number-of-pages="this.pagination.pages" v-model="currentPage" use-router>
+      </b-pagination-nav>
+
       <Notes :editPost="editPost" :deletePost="deletePost" :posts="posts" :isLoading="isLoading" :searchClicked="searchClicked" />
 
     </div>
@@ -34,18 +41,34 @@ export default {
   data () {
     return {
       posts: [],
+      pagination: {
+        total: 0,
+        limit: 0,
+        page: 0,
+        pages: 0,
+      },
+      currentPage: 1,
       error: '',
       text: '',
       isLoading: false,
       searchClicked: true
     }
   },
+  watch: {
+    '$route.params.pageNumber': function () {
+      this.getNotes()
+    }
+  },
   methods: {
+    toPage (pageNum) {
+      return '/dashboard/' + pageNum
+    },
     async createPost () {
       this.isLoading = true
       setTimeout(async () => {
         await PostService.insertPost(this.text)
-        this.posts = await PostService.getPosts()
+        let postss = await PostService.getPosts()
+        this.posts = postss.docs
         this.isLoading = false
       }, 1000)
     },
@@ -53,7 +76,8 @@ export default {
       this.isLoading = true
       setTimeout(async () => {
         await PostService.deletePost(tobeDeletedId)
-        this.posts = await PostService.getPosts()
+        let postss = await PostService.getPosts()
+        this.posts = postss.docs
         this.isLoading = false
       }, 1000)
     },
@@ -61,19 +85,34 @@ export default {
       this.isLoading = true
       setTimeout(async () => {
         await PostService.editPost(tobeEditedId, tobeEditedText)
-        this.posts = await PostService.getPosts()
+        let postss = await PostService.getPosts()
+        this.posts = postss.docs
         this.isLoading = false
       }, 1000)
+    },
+    async getNotes () {
+      try {
+        let postss = []
+        if (this.$route.params.pageNumber) {
+          postss = await PostService.getPosts(this.$route.params.pageNumber)
+        }else {
+          postss = await PostService.getPosts()
+        }
+        this.isLoading = true
+        this.posts = postss.docs
+        this.pagination.total = postss.total
+        this.pagination.limit = postss.limit
+        this.pagination.page = postss.page
+        this.pagination.pages = postss.pages
+
+      } catch (e) {
+        this.error = e.message
+      }
+      this.isLoading = false
     }
   },
-  async beforeMount () {
-    try {
-      this.isLoading = true
-      this.posts = await PostService.getPosts()
-    } catch (e) {
-      this.error = e.message
-    }
-    this.isLoading = false
+   beforeMount () {
+    this.getNotes()
   }
 }
 </script>

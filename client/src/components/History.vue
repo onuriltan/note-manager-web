@@ -1,7 +1,7 @@
 <template>
   <div class="history-container">
     <h1 class="history__header">Notes History</h1>
-    <b-form class="history__form" v-on:submit.prevent="getPosts()">
+    <b-form class="history__form" v-on:submit.prevent="getNotes()">
       <div class="history__form__content">
         <b-form-group
           id="fromDate"
@@ -32,6 +32,15 @@
       </div>
     </b-form>
 
+    <br>
+    <br>
+    <div v-if="this.pagination !== null">
+      <b-pagination-nav v-if="this.pagination.pages >= 1"
+                        :link-gen="toPage" align="center" use-router
+                        :number-of-pages="this.pagination.pages" v-model="currentPage">
+      </b-pagination-nav>
+    </div>
+
     <Notes v-cloak :deletePost="deletePost" :editPost="editPost" :posts="posts" :isLoading="isLoading" :searchClicked="searchClicked"/>
 
   </div>
@@ -49,6 +58,13 @@ export default {
   data () {
     return {
       posts: [],
+      pagination: {
+        total: 0,
+        limit: 0,
+        page: 0,
+        pages: 0,
+      },
+      currentPage: 1,
       toDate: '',
       fromDate: '',
       keyword: '',
@@ -56,27 +72,48 @@ export default {
       searchClicked: false
     }
   },
+  watch: {
+    '$route.params.pageNumber': function () {
+      this.getNotes()
+    }
+  },
+
   methods: {
+    toPage (pageNum) {
+      return '/notes-history/' + pageNum
+    },
     async deletePost (tobeDeletedId) {
       this.isLoading = true
       setTimeout(async () => {
         await PostService.deletePost(tobeDeletedId)
-        this.posts = await PostService.getPosts()
+        let postss = await PostService.getPostsByCriteria(this.fromDate, this.toDate, this.keyword)
+        this.posts = postss.docs
         this.isLoading = false
       }, 1000)
     },
     async editPost (tobeEditedId, tobeEditedText) {
       setTimeout(async () => {
         await PostService.editPost(tobeEditedId, tobeEditedText)
-        this.posts = await PostService.getPosts()
+        let postss = await PostService.getPostsByCriteria(this.fromDate, this.toDate, this.keyword)
+        this.posts = postss.docs
       }, 1000)
     },
-    async getPosts () {
+    async getNotes () {
       this.isLoading = true
       this.searchClicked = true
       setTimeout(async () => {
         this.posts = []
-        this.posts = await PostService.getPostsByCriteria(this.fromDate, this.toDate, this.keyword)
+        let postss = []
+        if (this.$route.params.pageNumber) {
+          postss = await PostService.getPostsByCriteria(this.fromDate, this.toDate, this.keyword, this.$route.params.pageNumber)
+        }else {
+          postss = await PostService.getPostsByCriteria(this.fromDate, this.toDate, this.keyword)
+        }
+        this.posts = postss.docs
+        this.pagination.total = postss.total
+        this.pagination.limit = postss.limit
+        this.pagination.page = postss.page
+        this.pagination.pages = postss.pages
         this.isLoading = false
       }, 1000)
     }

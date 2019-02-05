@@ -38,19 +38,19 @@ async function alreadyLoggedIn (to, from, next) {
 export default new Router({
   scrollBehavior: (to, from, savedPosition) => ({ y: 0 }), // scroll to top of the page every time route changes
   mode: 'history',
-  linkExactActiveClass: 'active-page', // router-link active class name
+  linkActiveClass: 'active-page', // router-link active class name
   routes: [
     {
       path: '*', component: NotFound
     },
     {
-      path: '/', name: 'home', component: Home, beforeEnter: requireAuth
+      path: '/dashboard/:pageNumber?', name: 'home', component: Home, beforeEnter: requireAuth
     },
     {
       path: '/confirm/:confirmationToken', name: 'confirm', component: Confirmation, beforeEnter: alreadyLoggedIn
     },
     {
-      path: '/notes-history', name: 'history', component: History, beforeEnter: requireAuth
+      path: '/notes-history/:pageNumber?', name: 'history', component: History, beforeEnter: requireAuth
     },
     {
       path: '/login', name: 'login', component: Login, beforeEnter: alreadyLoggedIn
