@@ -56,7 +56,7 @@ export default {
   },
   watch: {
     '$route.params.pageNumber': function () {
-      this.getNotes()
+      this.getNotes(1000)
     }
   },
   methods: {
@@ -67,8 +67,7 @@ export default {
       this.isLoading = true
       setTimeout(async () => {
         await PostService.insertPost(this.text)
-        let postss = await PostService.getPosts()
-        this.posts = postss.docs
+        await this.getNotes(0)
         this.isLoading = false
       }, 1000)
     },
@@ -76,8 +75,7 @@ export default {
       this.isLoading = true
       setTimeout(async () => {
         await PostService.deletePost(tobeDeletedId)
-        let postss = await PostService.getPosts()
-        this.posts = postss.docs
+        await this.getNotes(0)
         this.isLoading = false
       }, 1000)
     },
@@ -85,34 +83,37 @@ export default {
       this.isLoading = true
       setTimeout(async () => {
         await PostService.editPost(tobeEditedId, tobeEditedText)
-        let postss = await PostService.getPosts()
-        this.posts = postss.docs
+        await this.getNotes(0)
         this.isLoading = false
       }, 1000)
     },
-    async getNotes () {
-      try {
+    async getNotes (seconds) {
+      this.isLoading = true
+      setTimeout(async () => {
         let postss = []
-        if (this.$route.params.pageNumber) {
-          postss = await PostService.getPosts(this.$route.params.pageNumber)
-        }else {
-          postss = await PostService.getPosts()
-        }
-        this.isLoading = true
-        this.posts = postss.docs
-        this.pagination.total = postss.total
-        this.pagination.limit = postss.limit
-        this.pagination.page = postss.page
-        this.pagination.pages = postss.pages
+        try {
+          if (this.$route.params.pageNumber) {
+            postss = await PostService.getPosts(this.$route.params.pageNumber)
+          }else {
+            postss = await PostService.getPosts()
+          }
+          this.posts = postss.docs
+          this.pagination.total = postss.total
+          this.pagination.limit = postss.limit
+          this.pagination.page = postss.page
+          this.pagination.pages = postss.pages
+          console.log(this.pagination)
 
-      } catch (e) {
-        this.error = e.message
-      }
-      this.isLoading = false
+        } catch (e) {
+          this.error = e.message
+        }
+        this.isLoading = false
+      }, seconds)
+
     }
   },
    beforeMount () {
-    this.getNotes()
+    this.getNotes(1000)
   }
 }
 </script>

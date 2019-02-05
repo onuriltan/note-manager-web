@@ -182,10 +182,10 @@ input:-webkit-autofill:active {
 }
 }
 
-.posts-container[data-v-6a5ab55e] {
+.posts-container[data-v-196fab66] {
   padding-top: 50px;
 }
-.posts-container .posts[data-v-6a5ab55e] {
+.posts-container .posts[data-v-196fab66] {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -200,11 +200,11 @@ input:-webkit-autofill:active {
         -ms-flex-direction: column;
             flex-direction: column;
 }
-.posts-container .posts__header[data-v-6a5ab55e] {
+.posts-container .posts__header[data-v-196fab66] {
       margin-bottom: 50px;
       font-weight: bold;
 }
-.posts-container .posts__create-form[data-v-6a5ab55e] {
+.posts-container .posts__create-form[data-v-196fab66] {
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
@@ -215,14 +215,14 @@ input:-webkit-autofill:active {
           -ms-flex-align: center;
               align-items: center;
 }
-.posts-container .posts__create-form__inputgroup[data-v-6a5ab55e] {
+.posts-container .posts__create-form__inputgroup[data-v-196fab66] {
         -ms-flex-wrap: unset;
             flex-wrap: unset;
 }
-.posts-container .posts__create-form__input[data-v-6a5ab55e] {
+.posts-container .posts__create-form__input[data-v-196fab66] {
         width: 500px;
 }
-.posts-container .posts__content[data-v-6a5ab55e] {
+.posts-container .posts__content[data-v-196fab66] {
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
@@ -230,10 +230,10 @@ input:-webkit-autofill:active {
           -ms-flex-pack: center;
               justify-content: center;
 }
-.posts-container .posts__content__card[data-v-6a5ab55e] {
+.posts-container .posts__content__card[data-v-196fab66] {
         margin: 20px;
 }
-.posts-container .posts__content__card__footer[data-v-6a5ab55e] {
+.posts-container .posts__content__card__footer[data-v-196fab66] {
           display: -webkit-box;
           display: -ms-flexbox;
           display: flex;
@@ -242,10 +242,10 @@ input:-webkit-autofill:active {
                   justify-content: space-between;
 }
 @media screen and (max-width: 768px) {
-.posts-container .posts__create-form__input[data-v-6a5ab55e] {
+.posts-container .posts__create-form__input[data-v-196fab66] {
     width: 250px;
 }
-.posts-container .posts__content[data-v-6a5ab55e] {
+.posts-container .posts__content[data-v-196fab66] {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
@@ -11035,4 +11035,4 @@ pre {
 }
 
 
-/*# sourceMappingURL=app.12a3d47a.css.map*/
+/*# sourceMappingURL=app.b38b416d.css.map*/
