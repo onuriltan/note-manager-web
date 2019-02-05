@@ -25,4 +25,4 @@ yarn-error.log*
 *.sw*
 
 # Env file
-.env
+/.env

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Store from '../store/index'
 
-const url = 'http://localhost:5000/api/posts'
+const url = process.env.VUE_APP_NOTES_URL
 
 class PostService {
   // Get Posts
