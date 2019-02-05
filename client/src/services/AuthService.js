@@ -4,7 +4,6 @@ const url = process.env.VUE_APP_AUTH_URL
 
 class AuthService {
   static login (credentials) {
-    console.log(process.env)
     return new Promise(async (resolve) => {
       try {
         const res = await axios.post(`${url}/login`, credentials)
