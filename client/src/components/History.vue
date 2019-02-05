@@ -35,7 +35,7 @@
     <br>
     <br>
     <div v-if="this.pagination !== null">
-      <b-pagination-nav v-if="this.pagination.pages >= 1"
+      <b-pagination-nav v-if="this.pagination.pages > 1"
                         :link-gen="toPage" align="center" use-router
                         :number-of-pages="this.pagination.pages" v-model="currentPage">
       </b-pagination-nav>
@@ -112,6 +112,7 @@ export default {
         this.pagination.limit = postss.limit
         this.pagination.page = postss.page
         this.pagination.pages = postss.pages
+        console.log(this.pagination.pages)
         this.isLoading = false
       }, seconds)
     }

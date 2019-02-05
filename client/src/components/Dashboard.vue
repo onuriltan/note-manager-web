@@ -18,7 +18,7 @@
       <br>
       <br>
 
-      <b-pagination-nav v-if="!!this.pagination.page && !!this.pagination.pages" :link-gen="toPage"
+      <b-pagination-nav v-if="!!this.pagination.page && !!this.pagination.pages && this.pagination.pages > 1" :link-gen="toPage"
                         :number-of-pages="this.pagination.pages" v-model="currentPage" use-router>
       </b-pagination-nav>
 
