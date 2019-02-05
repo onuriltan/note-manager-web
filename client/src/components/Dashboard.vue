@@ -14,9 +14,16 @@
         </b-input-group>
       </form>
       <hr>
+
       <br>
       <br>
-      <b-pagination-nav :link-gen="toPage" :number-of-pages="this.pagination.pages" v-model="this.pagination.page" use-router></b-pagination-nav>
+
+      <div v-if="!!this.pagination.page && !!this.pagination.pages" >
+        <b-pagination-nav v-if="!!this.pagination.page && !!this.pagination.pages" :link-gen="toPage" :number-of-pages="this.pagination.pages"
+                          v-model="this.pagination.page" use-router></b-pagination-nav>
+      </div>
+
+
 
       <Notes :editPost="editPost" :deletePost="deletePost" :posts="posts" :isLoading="isLoading" :searchClicked="searchClicked" />
 
@@ -91,7 +98,6 @@ export default {
         let postss = []
         if (this.$route.params.pageNumber) {
           postss = await PostService.getPosts(this.$route.params.pageNumber)
-
         }else {
           postss = await PostService.getPosts()
         }
@@ -101,6 +107,7 @@ export default {
         this.pagination.limit = postss.limit
         this.pagination.page = postss.page
         this.pagination.pages = postss.pages
+
       } catch (e) {
         this.error = e.message
       }
