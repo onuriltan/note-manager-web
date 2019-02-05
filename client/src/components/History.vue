@@ -74,7 +74,7 @@ export default {
   },
   watch: {
     '$route.params.pageNumber': function () {
-      this.getNotes()
+      this.getNotes(1000)
     }
   },
 
@@ -86,19 +86,17 @@ export default {
       this.isLoading = true
       setTimeout(async () => {
         await PostService.deletePost(tobeDeletedId)
-        let postss = await PostService.getPostsByCriteria(this.fromDate, this.toDate, this.keyword)
-        this.posts = postss.docs
+        await this.getNotes(0)
         this.isLoading = false
       }, 1000)
     },
     async editPost (tobeEditedId, tobeEditedText) {
       setTimeout(async () => {
         await PostService.editPost(tobeEditedId, tobeEditedText)
-        let postss = await PostService.getPostsByCriteria(this.fromDate, this.toDate, this.keyword)
-        this.posts = postss.docs
+        await this.getNotes(0)
       }, 1000)
     },
-    async getNotes () {
+    async getNotes (seconds) {
       this.isLoading = true
       this.searchClicked = true
       setTimeout(async () => {
@@ -115,7 +113,7 @@ export default {
         this.pagination.page = postss.page
         this.pagination.pages = postss.pages
         this.isLoading = false
-      }, 1000)
+      }, seconds)
     }
   },
   filters: {
