@@ -2,9 +2,6 @@ const path = require('path')
 
 module.exports = {
   outputDir: path.resolve(__dirname, '../server/public'), // build all the assets inside server/public folder
-  devServer: {
-    proxy: 'http://localhost:5000'
-  },
   pluginOptions: {
     'style-resources-loader': {
       preProcessor: 'scss',

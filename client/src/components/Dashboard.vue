@@ -102,7 +102,6 @@ export default {
           this.pagination.limit = postss.limit
           this.pagination.page = postss.page
           this.pagination.pages = postss.pages
-          console.log(this.pagination)
 
         } catch (e) {
           this.error = e.message
