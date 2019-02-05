@@ -16,10 +16,7 @@
       <hr>
       <br>
       <br>
-      <b-pagination v-if="this.pagination.pages > this.pagination.page" align="center" :total-rows="this.pagination.total"
-                    v-model="this.pagination.page" :per-page="this.pagination.limit">
-      </b-pagination>
-
+      <b-pagination-nav :link-gen="toPage" :number-of-pages="this.pagination.pages" v-model="this.pagination.page" use-router></b-pagination-nav>
 
       <Notes :editPost="editPost" :deletePost="deletePost" :posts="posts" :isLoading="isLoading" :searchClicked="searchClicked" />
 
@@ -52,7 +49,16 @@ export default {
       searchClicked: true
     }
   },
+  watch: {
+    '$route.params.pageNumber': function () {
+      this.getNotes()
+    }
+  },
   methods: {
+    toPage (pageNum) {
+      return '/dashboard/' + pageNum
+      // this.$route.params.pageNumber
+    },
     async createPost () {
       this.isLoading = true
       setTimeout(async () => {
@@ -79,22 +85,30 @@ export default {
         this.posts = postss.docs
         this.isLoading = false
       }, 1000)
+    },
+    async getNotes () {
+      try {
+        let postss = []
+        if (this.$route.params.pageNumber) {
+          postss = await PostService.getPosts(this.$route.params.pageNumber)
+
+        }else {
+          postss = await PostService.getPosts()
+        }
+        this.isLoading = true
+        this.posts = postss.docs
+        this.pagination.total = postss.total
+        this.pagination.limit = postss.limit
+        this.pagination.page = postss.page
+        this.pagination.pages = postss.pages
+      } catch (e) {
+        this.error = e.message
+      }
+      this.isLoading = false
     }
   },
-  async beforeMount () {
-    try {
-      this.isLoading = true
-      let postss = await PostService.getPosts()
-      this.posts = postss.docs
-      this.pagination.total = postss.total
-      this.pagination.limit = postss.limit
-      this.pagination.page = postss.page
-      this.pagination.pages = postss.pages
-      console.log(this.pagination)
-    } catch (e) {
-      this.error = e.message
-    }
-    this.isLoading = false
+   beforeMount () {
+    this.getNotes()
   }
 }
 </script>

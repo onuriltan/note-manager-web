@@ -101,7 +101,7 @@ export default {
   },
   filters: {
     convertDate: function (date) {
-      let theDate  = new Date(date)
+      let theDate = new Date(date)
       return `${theDate.getDate()}/${theDate.getMonth() + 1}/${theDate.getFullYear()}`
     }
   }

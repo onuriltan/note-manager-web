@@ -44,7 +44,7 @@ export default new Router({
       path: '*', component: NotFound
     },
     {
-      path: '/', name: 'home', component: Home, beforeEnter: requireAuth
+      path: '/dashboard/:pageNumber?', name: 'home', component: Home, beforeEnter: requireAuth
     },
     {
       path: '/confirm/:confirmationToken', name: 'confirm', component: Confirmation, beforeEnter: alreadyLoggedIn

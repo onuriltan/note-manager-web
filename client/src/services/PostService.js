@@ -1,15 +1,20 @@
 import axios from 'axios'
 import Store from '../store/index'
 
-const url = 'api/posts'
+const url = 'http://localhost:5000/api/posts'
 
 class PostService {
   // Get Posts
-  static getPosts () { // static to directly reach the getPosts method instead of instantiating PostService class
+  static getPosts (pageNumber) { // static to directly reach the getPosts method instead of instantiating PostService class
     Store.dispatch('checkIsAuthenticated')
+    let config = {
+      headers: { 'Authorization': `Bearer ${window.localStorage.getItem('token')}` },
+      params: { page: pageNumber }
+    };
+
     return new Promise(async (resolve, reject) => {
       try {
-        const res = await axios.get(url, { headers: { 'Authorization': `Bearer ${window.localStorage.getItem('token')}` } })
+        const res = await axios.get(url, config)
         const data = res.data
         resolve(
           data
@@ -30,7 +35,7 @@ class PostService {
       try {
         const res = await axios.get(`${url}/${fromDate}/${toDate}/${keyword}`, { headers: { 'Authorization': `Bearer ${window.localStorage.getItem('token')}` } })
         const data = res.data
-        if (data.docs!== []) {
+        if (data.docs !== []) {
           resolve(
             data
           )
