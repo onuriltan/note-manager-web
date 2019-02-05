@@ -2,11 +2,11 @@
   <b-navbar toggleable="md" type="dark" variant="success" class="header">
     <b-navbar-toggle target="nav_collapse" v-if="isAuthenticated"></b-navbar-toggle>
     <b-navbar-brand>
-      <router-link to="/" class="header__brand">NoteManager</router-link>
+      <router-link to="/dashboard" class="header__brand">NoteManager</router-link>
     </b-navbar-brand>
     <b-collapse is-nav id="nav_collapse" v-if="isAuthenticated">
       <b-navbar-nav>
-          <router-link to="/" class="header__link nav-link">Latest Notes</router-link>
+          <router-link to="/dashboard" class="header__link nav-link">Latest Notes</router-link>
           <router-link to="/notes-history" class="header__link nav-link">Notes History</router-link>
       </b-navbar-nav>
       <!-- Right aligned nav items -->
