@@ -41,6 +41,9 @@ export default new Router({
   linkActiveClass: 'active-page', // router-link active class name
   routes: [
     {
+      path: '/', redirect: '/dashboard'
+    },
+    {
       path: '*', component: NotFound
     },
     {
