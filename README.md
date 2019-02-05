@@ -32,6 +32,7 @@ give parameters as;
 * CONFIRM_EMAIL_URL="your confirmation page url"
 
 To run Node.js server, go to server folder and run `npm run dev`.
+
 To run the Vue CLI client, go to client folder and run `npm run serve`.
 
 ## LICENSE
