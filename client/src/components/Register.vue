@@ -6,7 +6,7 @@
         <router-link to="/login">Go back to login page!</router-link>
       </div>
       <div v-if="emailAccepted" style="font-weight: bold; margin-bottom: 20px; text-align: center">
-        <router-link to="/login">Resend Confirmation Email</router-link>
+        <p class="login-form__resend" @click="resendConfirmation">Resend Confirmation Email</p>
       </div>
       <div class="login-form__errors" v-if="errors.length > 0">
         <b-alert v-bind:key="index" class="login-form__errors__error "v-for="(error, index) in errors" show variant="danger" size="lg">
@@ -143,6 +143,10 @@ export default {
           this.emailAccepted = true
         }
       }
+    },
+    resendConfirmation () {
+      this.errors = []
+      this.messages = []
     }
   }
 }

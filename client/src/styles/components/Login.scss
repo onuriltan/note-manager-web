@@ -17,6 +17,13 @@
     text-align: center;
     padding-bottom: 30px;
   }
+  &__resend {
+    text-decoration: #28a745 underline;
+    color: #28a745;
+    &:hover {
+      cursor: pointer;
+    }
+  }
   &__errors{
     padding: 10px 0;
     &__error {
