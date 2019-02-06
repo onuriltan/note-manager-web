@@ -86,7 +86,7 @@ router.get('/confirm/:confirmationToken', async (req, res) => {
                 if (err) console.log(err);
                 else console.log(updatedUser.name + " activated")
             });
-            let token = JwtOperations.signToken(user, 'theSecretKey');
+            let token = await JwtOperations.signToken(user, 'theSecretKey');
             res.json({token});
         } else {
             await UserDbService.deleteUser(user.id);

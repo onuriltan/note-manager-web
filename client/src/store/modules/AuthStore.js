@@ -83,7 +83,7 @@ const AuthStore = {
         window.localStorage.setItem('token', response.data.token)
         state.isAuthenticated = true
         state.sessionExpired = false
-        router.push('dashboard/1')
+        router.push('/dashboard')
       } else {
         setTimeout(() => { router.push('/login') }, 2000)
       }

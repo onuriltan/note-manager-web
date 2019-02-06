@@ -5,6 +5,9 @@
       <div style="font-weight: bold; margin-bottom: 20px; text-align: center">
         <router-link to="/login">Go back to login page!</router-link>
       </div>
+      <div v-if="emailAccepted" style="font-weight: bold; margin-bottom: 20px; text-align: center">
+        <router-link to="/login">Resend Confirmation Email</router-link>
+      </div>
       <div class="login-form__errors" v-if="errors.length > 0">
         <b-alert v-bind:key="index" class="login-form__errors__error "v-for="(error, index) in errors" show variant="danger" size="lg">
           {{error.msg}}
@@ -81,7 +84,8 @@ export default {
       password: '',
       password2: '',
       registerClicked: false,
-      registerValidated: false
+      registerValidated: false,
+      emailAccepted: false
     }
   },
   computed: {
@@ -136,6 +140,7 @@ export default {
           this.registerClicked = false
           this.registerValidated = false
           this.messages = res.data.messages
+          this.emailAccepted = true
         }
       }
     }
