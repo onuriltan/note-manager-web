@@ -16,7 +16,7 @@ router.post('/login', async (req, res) => {
     if (!isValid) {
         res.status(400).json({fieldErrors});
     } else {
-        let user = await UserDbService.findUser(email, password, res);
+        let user = await UserDbService.findUser(email);
         if (user) {
             let isPasswordCorrect = bcrypt.compareSync(password, user.password);
             if (!user.active) {
@@ -45,7 +45,7 @@ router.post('/register', async (req, res) => {
     if (!isValid) {
         res.status(400).json({fieldErrors});
     } else {
-        let foundUser = await UserDbService.findUser(email);
+        let foundUser = await UserDbService.findUser(email, password);
         if (!foundUser) {
             let newUser = await UserDbService.createUser(email, password);
             if (newUser) {
@@ -66,6 +66,43 @@ router.post('/register', async (req, res) => {
             }
         } else {
             errors.push({msg: 'This email is already registered'});
+            res.status(400).json({errors})
+        }
+    }
+});
+
+
+router.post('/resendConfirmationEmail', async (req, res) => {
+    const {email, password} = req.body;
+    let errors = [];
+    let messages = [];
+    let fieldErrors = UserValidation.validateRegister(req.body); //Check required fields
+    let isValid = fieldErrors.email === "" && fieldErrors.password === "" && fieldErrors.password2 === "";
+    if (!isValid) {
+        res.status(400).json({fieldErrors});
+    } else {
+        let foundUser = await UserDbService.findUser(email);
+        if (foundUser && !foundUser.active) {
+            let isPasswordCorrect = bcrypt.compareSync(password, foundUser.password);
+            if (isPasswordCorrect) {
+                let user = await UserDbService.regenerateUserConfirmationToken(email);
+                if (user) {
+                    MailOperations.sendConfirmationMail(user.email, user.confirmationToken)
+                        .then(() => {
+                            messages.push({msg: 'Confirmation email is resent!'});
+                            res.status(200).json({messages});
+                        })
+                        .catch(() => {
+                            errors.push({msg: 'An error occurred while sending e-mail.'});
+                            res.status(400).json({errors});
+                        })
+                }
+            } else {
+                errors.push({msg: 'Username or password is wrong'});
+                res.status(400).json({errors})
+            }
+        } else {
+            errors.push({msg: 'An error occurred'});
             res.status(400).json({errors})
         }
     }

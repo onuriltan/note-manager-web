@@ -23,6 +23,17 @@ class AuthService {
       }
     })
   }
+
+  static resendConfirmationEmail (credentials) {
+    return new Promise(async (resolve) => {
+      try {
+        const res = await axios.post(`${url}/resendConfirmationEmail`, credentials)
+        resolve(res)
+      } catch (e) {
+        resolve(e.response)
+      }
+    })
+  }
   static confirmUser (confirmationToken) {
     return new Promise(async (resolve) => {
       try {
