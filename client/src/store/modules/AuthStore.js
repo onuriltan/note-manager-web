@@ -49,6 +49,15 @@ const AuthStore = {
           .catch((response) => { return resolve(response) })
       })
     },
+    resendConfirmationEmail (context, credentials) {
+      return new Promise(resolve => {
+        authService.resendConfirmationEmail(credentials)
+          .then((response) => {
+            return resolve(response)
+          })
+          .catch((response) => { return resolve(response) })
+      })
+    },
     loadUser (context) {
       context.commit('loadUser')
     },

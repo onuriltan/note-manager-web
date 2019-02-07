@@ -28,12 +28,28 @@ const createUser = async (email, password) => {
         password
     });
     //Hash password
-    let hash = await hashPassword(newUser);
-    newUser.password = hash; // Set password to hashed
+    newUser.password = await hashPassword(newUser); // Set password to hashed
     newUser.confirmationToken = uniqid();
     await newUser.save() // save user
         .then(() => {
             theUser = newUser;
+        })
+        .catch(err => {
+            console.log(err)
+        });
+    return theUser;
+};
+
+const regenerateUserConfirmationToken = async (email) => {
+    let theUser = '';
+    await User.findOne({email})
+        .then(user => {
+            theUser = user;
+        });
+    theUser.confirmationToken = uniqid();
+    await theUser.save() // save user
+        .then(user => {
+            theUser = user;
         })
         .catch(err => {
             console.log(err)
@@ -65,3 +81,4 @@ module.exports.findUser = findUser;
 module.exports.createUser = createUser;
 module.exports.deleteUser = deleteUser;
 module.exports.findUserWithConfirmationToken = findUserWithConfirmationToken;
+module.exports.regenerateUserConfirmationToken = regenerateUserConfirmationToken;

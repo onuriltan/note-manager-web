@@ -1,4 +1,4 @@
-.login-container[data-v-71210c2b] {
+.login-container[data-v-68775cce] {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -10,7 +10,7 @@
   background: url(../img/takingnotes.cfca4bf3.jpg) no-repeat fixed center;
   background-size: cover;
 }
-.login-form[data-v-71210c2b] {
+.login-form[data-v-68775cce] {
   width: 400px;
   background-color: white;
   border-radius: 10px;
@@ -19,17 +19,25 @@
           box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
   padding: 30px;
 }
-.login-form__header[data-v-71210c2b] {
+.login-form__header[data-v-68775cce] {
     text-align: center;
     padding-bottom: 30px;
 }
-.login-form__errors[data-v-71210c2b] {
+.login-form__resend[data-v-68775cce] {
+    -webkit-text-decoration: #28a745 underline;
+            text-decoration: #28a745 underline;
+    color: #28a745;
+}
+.login-form__resend[data-v-68775cce]:hover {
+      cursor: pointer;
+}
+.login-form__errors[data-v-68775cce] {
     padding: 10px 0;
 }
-.login-form__errors__error[data-v-71210c2b] {
+.login-form__errors__error[data-v-68775cce] {
       text-align: center;
 }
-.login-form__button[data-v-71210c2b] {
+.login-form__button[data-v-68775cce] {
     width: 100%;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -42,7 +50,7 @@
             align-items: center;
 }
 @media screen and (max-width: 768px) {
-.login-container[data-v-71210c2b] {
+.login-container[data-v-68775cce] {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -52,7 +60,7 @@
     min-height: calc(100vh - 30px);
     padding-top: 20px;
 }
-.login-container[data-v-71210c2b]:after {
+.login-container[data-v-68775cce]:after {
       content: "";
       background: url(../img/takingnotes.cfca4bf3.jpg) no-repeat fixed center;
       background-size: cover;
@@ -64,26 +72,26 @@
       position: absolute;
       z-index: -1;
 }
-.login-form[data-v-71210c2b] {
+.login-form[data-v-68775cce] {
     width: 250px;
 }
-.login-form__header[data-v-71210c2b] {
+.login-form__header[data-v-68775cce] {
       text-align: center;
       padding-bottom: 5px;
 }
-.login-form__errors[data-v-71210c2b] {
+.login-form__errors[data-v-68775cce] {
       padding: 5px 0;
 }
-.login-form__errors__error[data-v-71210c2b] {
+.login-form__errors__error[data-v-68775cce] {
         font-size: 13px;
         padding: 10px;
         text-align: center;
 }
-.login-form__input[data-v-71210c2b] {
+.login-form__input[data-v-68775cce] {
       height: calc(2.25rem) !important;
       font-size: 1rem;
 }
 }
 
 
-/*# sourceMappingURL=chunk-5350c8b1.e7a0d2d4.css.map*/
+/*# sourceMappingURL=chunk-914f1ffa.954bb50b.css.map*/
