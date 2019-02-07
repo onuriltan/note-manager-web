@@ -114,7 +114,7 @@ router.get('/confirm/:confirmationToken', async (req, res) => {
     let user = await UserDbService.findUserWithConfirmationToken(confirmationToken);
     if (user) {
         let expiry = user.confirmationTokenExpiry;
-        let compare = new Date().setDate(new Date().getDate() + 1);
+        let compare = new Date().setDate(new Date().getDate() + 3);
         if (expiry < compare) {
             user.confirmationToken = undefined;
             user.confirmationTokenExpiry = undefined;

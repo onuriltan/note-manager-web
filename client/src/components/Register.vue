@@ -78,14 +78,14 @@
         </b-alert>
       </div>
       <h2 class="login-form__header">Welcome to Note Manager</h2>
-      <p> Please check your mail to confirm your account.</p>
+      <p> We've send you a confirmation e-mail. Click the link in your e-mail to confirm your account. If you cant find the
+      e-mail check the spam folder or click the button below to-resend </p>
       <b-button class="login-form__button" type="submit" variant="success"
                 :class="{ 'button--loading': resentConfirmationEmailClicked }">
         <i class="fa fa-refresh fa-spin hide--button--loading--icon"
            :class="{ 'show--button--loading--icon': resentConfirmationEmailClicked }"></i>
         <div style="margin: 0 5px;">
           Resend Confirmation Link
-
         </div>
       </b-button>
     </b-form>
