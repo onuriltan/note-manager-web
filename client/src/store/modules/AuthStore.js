@@ -112,19 +112,4 @@ const AuthStore = {
   }
 }
 
-document.addEventListener('DOMContentLoaded', function (event) { // on Dom load check if user is already logged in
-  if (window.localStorage.getItem('token')) {
-    let token = window.localStorage.getItem('token')
-    let unixTimeStamp = new Date().getTime() / 1000
-    let expiration = null
-    if (token != null) {
-      expiration = jwtDecode(token).exp
-    }
-    if (expiration != null && parseInt(expiration) - unixTimeStamp > 0) {
-      state.isAuthenticated = true
-      state.sessionExpired = false
-    }
-  }
-})
-
 export default AuthStore
