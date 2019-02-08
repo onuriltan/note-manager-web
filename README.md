@@ -31,9 +31,15 @@ give parameters as;
 * MAIL_PASSWORD="your yandex email password"
 * CONFIRM_EMAIL_URL="your confirmation page url"
 
+### Development
 To run Node.js server, go to server folder and run `npm run dev`.
 
 To run the Vue CLI client, go to client folder and run `npm run serve`.
+
+### Production
+To run the Node.js server with public distribution folder, 
+1. Go to client folder and run `npm run serve`
+2. Go to root folder and run `npm run start`
 
 ## LICENSE
 [MIT](https://choosealicense.com/licenses/mit/)
