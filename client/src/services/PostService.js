@@ -10,7 +10,7 @@ class PostService {
     let config = {
       headers: { 'Authorization': `Bearer ${window.localStorage.getItem('token')}` },
       params: { page: pageNumber }
-    };
+    }
 
     return new Promise(async (resolve, reject) => {
       try {
@@ -30,7 +30,7 @@ class PostService {
     let config = {
       headers: { 'Authorization': `Bearer ${window.localStorage.getItem('token')}` },
       params: { page: pageNumber }
-    };
+    }
     return new Promise(async (resolve, reject) => {
       if (fromDate === '') fromDate = '%20'
       if (toDate === '') toDate = '%20'
