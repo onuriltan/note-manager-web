@@ -62,7 +62,7 @@ export default {
         total: 0,
         limit: 0,
         page: 0,
-        pages: 0,
+        pages: 0
       },
       currentPage: 1,
       toDate: '',
@@ -104,7 +104,7 @@ export default {
         let postss = []
         if (this.$route.params.pageNumber) {
           postss = await PostService.getPostsByCriteria(this.fromDate, this.toDate, this.keyword, this.$route.params.pageNumber)
-        }else {
+        } else {
           postss = await PostService.getPostsByCriteria(this.fromDate, this.toDate, this.keyword)
         }
         this.posts = postss.docs

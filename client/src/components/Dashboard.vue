@@ -45,7 +45,7 @@ export default {
         total: 0,
         limit: 0,
         page: 0,
-        pages: 0,
+        pages: 0
       },
       currentPage: 1,
       error: '',
@@ -94,7 +94,7 @@ export default {
         try {
           if (this.$route.params.pageNumber) {
             postss = await PostService.getPosts(this.$route.params.pageNumber)
-          }else {
+          } else {
             postss = await PostService.getPosts()
           }
           this.posts = postss.docs
@@ -102,16 +102,14 @@ export default {
           this.pagination.limit = postss.limit
           this.pagination.page = postss.page
           this.pagination.pages = postss.pages
-
         } catch (e) {
           this.error = e.message
         }
         this.isLoading = false
       }, seconds)
-
     }
   },
-   beforeMount () {
+  beforeMount () {
     this.getNotes(1000)
   }
 }
