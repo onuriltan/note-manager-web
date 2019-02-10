@@ -3,9 +3,9 @@ import Store from '../store/index'
 
 const url = process.env.VUE_APP_NOTES_URL
 
-class PostService {
+class NotesService {
   // Get Posts
-  static getPosts (pageNumber) { // static to directly reach the getPosts method instead of instantiating PostService class
+  static getPosts (pageNumber) { // static to directly reach the getPosts method instead of instantiating NotesService class
     Store.dispatch('checkIsAuthenticated')
     let config = {
       headers: { 'Authorization': `Bearer ${window.localStorage.getItem('token')}` },
@@ -25,7 +25,7 @@ class PostService {
     })
   }
 
-  static getPostsByCriteria (fromDate, toDate, keyword, pageNumber) { // static to directly reach the getPosts method instead of instantiating PostService class
+  static getPostsByCriteria (fromDate, toDate, keyword, pageNumber) { // static to directly reach the getPosts method instead of instantiating NotesService class
     Store.dispatch('checkIsAuthenticated')
     let config = {
       headers: { 'Authorization': `Bearer ${window.localStorage.getItem('token')}` },
@@ -68,4 +68,4 @@ class PostService {
   }
 }
 
-export default PostService
+export default NotesService

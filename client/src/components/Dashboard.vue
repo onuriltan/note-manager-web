@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import PostService from '../services/PostService'
+import NotesService from '../services/NotesService'
 import Notes from '../components/Notes'
 
 export default {
@@ -66,7 +66,7 @@ export default {
     async createPost () {
       this.isLoading = true
       setTimeout(async () => {
-        await PostService.insertPost(this.text)
+        await NotesService.insertPost(this.text)
         await this.getNotes(0)
         this.isLoading = false
       }, 1000)
@@ -74,7 +74,7 @@ export default {
     async deletePost (tobeDeletedId) {
       this.isLoading = true
       setTimeout(async () => {
-        await PostService.deletePost(tobeDeletedId)
+        await NotesService.deletePost(tobeDeletedId)
         await this.getNotes(0)
         this.isLoading = false
       }, 1000)
@@ -82,7 +82,7 @@ export default {
     async editPost (tobeEditedId, tobeEditedText) {
       this.isLoading = true
       setTimeout(async () => {
-        await PostService.editPost(tobeEditedId, tobeEditedText)
+        await NotesService.editPost(tobeEditedId, tobeEditedText)
         await this.getNotes(0)
         this.isLoading = false
       }, 1000)
@@ -93,9 +93,9 @@ export default {
         let postss = []
         try {
           if (this.$route.params.pageNumber) {
-            postss = await PostService.getPosts(this.$route.params.pageNumber)
+            postss = await NotesService.getPosts(this.$route.params.pageNumber)
           } else {
-            postss = await PostService.getPosts()
+            postss = await NotesService.getPosts()
           }
           this.posts = postss.docs
           this.pagination.total = postss.total
