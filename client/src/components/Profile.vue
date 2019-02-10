@@ -16,7 +16,6 @@
       </div>
       <b-form-group id="oldPassword"
                     label="Old Password"
-                    :invalid-feedback="invalidEmailMessage"
                     label-for="oldPassword">
         <b-form-input id="oldPassword"
                       type="password"
@@ -33,9 +32,9 @@
                       v-model="newPassword">
         </b-form-input>
       </b-form-group>
-      <b-button class="form__content__button" :class="{ 'button--loading': loginClicked }" type="submit" variant="success">
+      <b-button class="form__content__button" :class="{ 'button--loading': changePasswordClicked }" type="submit" variant="success">
         <i class="fa fa-refresh fa-spin hide--button--loading--icon"
-           :class="{ 'show--button--loading--icon': loginClicked }"></i>
+           :class="{ 'show--button--loading--icon': changePasswordClicked }"></i>
         <div style="margin: 0 5px;">
           Change Password
         </div>
