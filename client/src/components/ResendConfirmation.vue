@@ -57,7 +57,6 @@ export default {
             password: this.password,
             password2: this.password2
           })
-        console.log(res)
         if (res.data.errors) {
           this.resentConfirmationEmailClicked = false
           this.errors = res.data.errors

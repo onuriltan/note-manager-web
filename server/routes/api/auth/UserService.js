@@ -36,7 +36,8 @@ router.post('/changePassword', JwtOperations.verifyToken, async (req, res) => {
             res.status(400).json(
                 {
                     "fieldErrors": {
-                        "oldPassword": "Password is wrong"
+                        "oldPassword": "Password is wrong",
+                        "newPassword": ""
                     }
                 });
         }

@@ -3,13 +3,13 @@
     <div class="change-password-form__content">
       <h2 class="change-password-form__content__header">Change Password</h2>
       <div class="change-password-form__content__errors" v-if="errors.length > 0">
-        <b-alert v-bind:key="index" class="change-password-form__errors__error " v-for="error in errors" show
+        <b-alert v-bind:key="index" class="change-password-form__errors__error " v-for="(error, index) in errors" show
                  variant="danger" size="lg">
           {{error.msg}}
         </b-alert>
       </div>
       <div class="change-password-form__content__errors" v-if="messages.length > 0">
-        <b-alert v-bind:key="index" class="change-password-form__errors__error " v-for="message in messages" show
+        <b-alert v-bind:key="index" class="change-password-form__errors__error " v-for="(message, index) in messages" show
                  variant="success" size="lg">
           {{message.msg}}
         </b-alert>
@@ -50,6 +50,8 @@
 
 <script>
 import UserService from '../services/UserService'
+import { validateChangePassword } from '../helpers/Validators'
+
 export default {
   name: 'Profile',
   computed: {
@@ -62,7 +64,10 @@ export default {
       if(this.fieldErrors.newPassword === null) return null
       else if (this.fieldErrors.newPassword === '') return true
       else if (this.fieldErrors.newPassword !== '') return false
-    }
+    },
+    isValidForm () {
+      return this.fieldErrors.oldPassword === ''  && this.fieldErrors.newPassword === ''
+    },
   },
   data () {
     return {
@@ -79,19 +84,31 @@ export default {
   },
   methods: {
     changePassword () {
-      this.changePasswordClicked = true
-      setTimeout(async () => {
-        const res = await UserService.changePassword({ email: this.email, password: this.password })
-        this.changePasswordClicked = false
-        console.log(res)
-        if (res.data.fieldErrors) {
-          this.fieldErrors = res.data.fieldErrors
-          console.log( this.fieldErrors)
-        }
-        if (res.data.errors) {
-          this.errors = res.data.errors
-        }
-      }, 1000)
+      this.clearErrors()
+      this.fieldErrors = validateChangePassword(this.oldPassword, this.newPassword)
+      if (this.isValidForm) {
+        this.changePasswordClicked = true
+        setTimeout(async () => {
+          const res = await UserService.changePassword({oldPassword: this.oldPassword, newPassword: this.newPassword})
+          this.changePasswordClicked = false
+          if (res.data.fieldErrors) {
+            this.fieldErrors = res.data.fieldErrors
+          }
+          if (res.data.errors) {
+            this.errors = res.data.errors
+          }
+          if(res.status === 200) {
+            this.messages.push({msg: 'Password is changed!'});
+          }
+
+        }, 1000)
+      }
+    },
+    clearErrors () {
+      this.fieldErrors.oldPassword = null
+      this.fieldErrors.newPassword = null
+      this.errors= []
+      this.messages= []
     }
   }
 }

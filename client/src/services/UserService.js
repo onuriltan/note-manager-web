@@ -1,9 +1,11 @@
 import axios from 'axios'
+import Store from '../store/index'
 
 const url = process.env.VUE_APP_USER_URL
 
 class UserService {
   static getUser (credentials) {
+    Store.dispatch('checkIsAuthenticated')
     let config = {
       headers: { 'Authorization': `Bearer ${window.localStorage.getItem('token')}` }
     }
@@ -16,7 +18,8 @@ class UserService {
       }
     })
   }
-  static changePassword (credentials, body) {
+  static changePassword (body) {
+    Store.dispatch('checkIsAuthenticated')
     let config = {
       headers: { 'Authorization': `Bearer ${window.localStorage.getItem('token')}` }
     }

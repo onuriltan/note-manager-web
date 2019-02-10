@@ -9,6 +9,18 @@
       font-weight: bold;
       padding-bottom: 50px;
     }
+    &__errors {
+      padding: 10px 0;
+      &__error {
+        text-align: center;
+      }
+    }
+    &__messages {
+      padding: 10px 0;
+      &__message {
+        text-align: center;
+      }
+    }
     &__input {
       width: 250px;
     }

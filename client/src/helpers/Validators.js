@@ -82,6 +82,25 @@ export function validateLogin (email, password) {
   return fieldErrors
 }
 
+
+export function validateChangePassword (oldPassword, newPassword) {
+  let fieldErrors = {
+    oldPassword: '',
+    newPassword: ''
+  }
+  if (!oldPassword) {
+    fieldErrors.oldPassword = 'Old password required.'
+  } else if (oldPassword.length < 6) {
+    fieldErrors.oldPassword = 'Password length should be 6.'
+  }
+  if (!newPassword) {
+    fieldErrors.newPassword = 'New password required.'
+  } else if (newPassword.length < 6) {
+    fieldErrors.newPassword = 'Password length should be 6.'
+  }
+  return fieldErrors
+}
+
 function validEmail (email) {
   let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   return re.test(email)
