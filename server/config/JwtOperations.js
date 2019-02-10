@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const uniqid = require('uniqid');
 
 const verifyToken = (req, res, next) => {
     // Get auth header value
