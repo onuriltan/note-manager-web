@@ -9,6 +9,7 @@ const Register = () => import('./views/RegisterView.vue')
 const History = () => import('./views/HistoryView.vue')
 const Confirmation = () => import('./views/ConfirmationView.vue')
 const NotFound = () => import('./views/NotFoundView.vue')
+const Profile = () => import('./views/ProfileView.vue')
 
 Vue.use(Router)
 
@@ -50,10 +51,13 @@ export default new Router({
       path: '/dashboard/:pageNumber?', name: 'home', component: Home, beforeEnter: requireAuth
     },
     {
-      path: '/confirm/:confirmationToken', name: 'confirm', component: Confirmation, beforeEnter: alreadyLoggedIn
+      path: '/notes-history/:pageNumber?', name: 'history', component: History, beforeEnter: requireAuth
     },
     {
-      path: '/notes-history/:pageNumber?', name: 'history', component: History, beforeEnter: requireAuth
+      path: '/profile', name: 'profile', component: Profile, beforeEnter: requireAuth
+    },
+    {
+      path: '/confirm/:confirmationToken', name: 'confirm', component: Confirmation, beforeEnter: alreadyLoggedIn
     },
     {
       path: '/login', name: 'login', component: Login, beforeEnter: alreadyLoggedIn
