@@ -24,11 +24,13 @@ mongoose.connect(dbAddress, { useNewUrlParser: true })
 // Routes
 const app = require('./routes/api');
 const posts = require('./routes/api/posts/PostsService');
-const auth = require('./routes/api/users/UserService');
+const auth = require('./routes/api/auth/AuthService');
+const user = require('./routes/api/auth/UserService');
 
 server.use('/api', app);
 server.use('/api/posts', posts);
 server.use('/api/auth', auth);
+server.use('/api/user', user);
 
 if (process.env.NODE_ENV === 'production') {
   // Static folder
