@@ -23,27 +23,23 @@ router.get('/getUser', JwtOperations.verifyToken, async (req, res) => {
 
 router.post('/changePassword', JwtOperations.verifyToken, async (req, res) => {
     const authData = JwtOperations.decodeToken(req, res);
-    if (typeof authData !== "undefined") {
-        const {user: {email}} = authData;
-        const {oldPassword, newPassword} = req.body;
-        const fieldErrors = UserValidation.validateChangePassword(req.body);
-        if (!_.isEmpty(fieldErrors)) {
-            res.status(400).json({fieldErrors});
-        } else {
-            const isPasswordChanged = await UserDbService.changePassword(email, oldPassword, newPassword);
-            if (isPasswordChanged) {
-                res.status(200).send();
-            } else {
-                res.status(400).json(
-                    {
-                        "fieldErrors" : {
-                            "oldPassword" : "Password is wrong"
-                        }
-                });
-            }
-        }
+    const {user: {email}} = authData;
+    const {oldPassword, newPassword} = req.body;
+    const fieldErrors = UserValidation.validateChangePassword(req.body);
+    if (!_.isEmpty(fieldErrors)) {
+        res.status(400).json({fieldErrors});
     } else {
-        res.status(401).send();
+        const isPasswordChanged = await UserDbService.changePassword(email, oldPassword, newPassword);
+        if (isPasswordChanged) {
+            res.status(200).send();
+        } else {
+            res.status(400).json(
+                {
+                    "fieldErrors": {
+                        "oldPassword": "Password is wrong"
+                    }
+                });
+        }
     }
 
 });
