@@ -25,12 +25,20 @@ mongoose.connect(dbAddress, { useNewUrlParser: true })
 const app = require('./routes/api');
 const posts = require('./routes/api/posts/PostsService');
 const auth = require('./routes/api/auth/AuthService');
+const facebook = require('./routes/api/auth/FacebookService');
 const user = require('./routes/api/auth/UserService');
 
 server.use('/api', app);
 server.use('/api/posts', posts);
 server.use('/api/auth', auth);
+server.use('/api/auth/facebook', facebook);
 server.use('/api/user', user);
+
+if (process.env.NODE_ENV !== 'production') {
+  server.get('/', (req, res) => res.redirect('http://localhost:8080/login'));
+  server.get('/dashboard', (req, res) => res.redirect('http://localhost:8080/dashboard'));
+  server.get('/login', (req, res) => res.redirect('http://localhost:8080/login'));
+}
 
 if (process.env.NODE_ENV === 'production') {
   // Static folder

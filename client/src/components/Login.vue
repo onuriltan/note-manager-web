@@ -42,6 +42,7 @@
           Login
         </div>
       </b-button>
+      <a href="http://localhost:5000/api/auth/facebook">Login with Facebook</a>
     </b-form>
   </div>
 </template>
