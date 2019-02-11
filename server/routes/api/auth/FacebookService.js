@@ -1,31 +1,53 @@
 const express = require('express');
 const router = express.Router();
 const UserDbService = require('./db/UserDbService');
+const AuthDbService = require('./db/AuthDbService');
 
-const passport = require('passport')
-    , FacebookStrategy = require('passport-facebook').Strategy;
+const User = require('./entity/User');
 
-passport.use(new FacebookStrategy({
-        clientID: "534567813717942",
-        clientSecret: "e8d4629725a512c2801228e369616317",
-        callbackURL: "http://localhost:5000/login"
-    },
-    function (accessToken, refreshToken, profile, done) {
-        console.log(accessToken)
-        console.log(refreshToken)
-        console.log(profile)
+const passport = require('passport');
+const FacebookTokenStrategy = require('passport-facebook-token');
+
+passport.use(new FacebookTokenStrategy({
+        clientID: process.env.FACEBOOK_APP_ID,
+        clientSecret: process.env.FACEBOOK_APP_SECRET,
+    }, async (accessToken, refreshToken, profile, done) => {
+        try {
+            const existingUser = await AuthDbService.findUser(profile._json.email);
+            if (existingUser) {
+                return done(null, existingUser);
+            }
+            const newUser = new User({
+                active: true,
+                confirmationTokenExpiry: null,
+                email: profile._json.email,
+                facebook: {
+                    id: profile.id,
+                    email: profile._json.email
+                }
+            });
+            await AuthDbService.createUserWithFacebook(newUser);
+            done(null, newUser)
+
+        } catch (e) {
+            done(e, false, e.message)
+        }
     }
 ));
 
-router.get('/', passport.authenticate('facebook'));
+passport.serializeUser(function(user, done) {
+    done(null, user);
+});
 
-// Facebook will redirect the user to this URL after approval.  Finish the
-// authentication process by attempting to obtain an access token.  If
-// access was granted, the user will be logged in.  Otherwise,
-// authentication has failed.
-router.get('/callback',
-    passport.authenticate('facebook', { successRedirect: '/dashboard',
-        failureRedirect: '/login' }));
+passport.deserializeUser(function(user, done) {
+    done(null, user);
+});
 
+router.post('/',
+    passport.authenticate('facebook-token'),
+    function (req, res) {
+        console.log(req.user)
+        res.send(req.user)
+    })
 
 module.exports = router;

@@ -5,6 +5,14 @@ let UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    facebook: {
+        id: {
+            type: String,
+        },
+        email: {
+            type: String,
+        }
+    },
     active: {
         type: Boolean,
         default: false
@@ -18,7 +26,6 @@ let UserSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
     },
     date: {
         type: Date,

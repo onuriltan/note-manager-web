@@ -40,6 +40,18 @@ const createUser = async (email, password) => {
     return theUser;
 };
 
+const createUserWithFacebook = async (user) => {
+    let theUser = null;
+    await user.save() // save user
+        .then(() => {
+            theUser = user;
+        })
+        .catch(err => {
+            console.log(err)
+        });
+    return theUser;
+};
+
 const regenerateUserConfirmationToken = async (email) => {
     let theUser = '';
     await User.findOne({email})
@@ -79,6 +91,8 @@ async function hashPassword (user) {
 
 module.exports.findUser = findUser;
 module.exports.createUser = createUser;
+module.exports.createUserWithFacebook = createUserWithFacebook;
 module.exports.deleteUser = deleteUser;
 module.exports.findUserWithConfirmationToken = findUserWithConfirmationToken;
 module.exports.regenerateUserConfirmationToken = regenerateUserConfirmationToken;
+

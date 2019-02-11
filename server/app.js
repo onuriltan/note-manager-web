@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-
+const passport = require('passport');
 const mongoose = require('mongoose');
 
 // Environment Variables
@@ -14,6 +14,8 @@ const server = express();
 server.use(bodyParser.json());
 server.use(cors());
 server.use(cookieParser());
+server.use(passport.initialize());
+
 
 // Connect to Mongo
 const dbAddress = process.env.MONGO_URL;
