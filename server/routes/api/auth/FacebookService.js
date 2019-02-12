@@ -30,24 +30,31 @@ passport.use(new FacebookTokenStrategy({
             done(null, newUser)
 
         } catch (e) {
-            done(e, false, e.message)
+            console.log(e.message);
+            done(e, false, e.message);
         }
     }
 ));
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
     done(null, user);
 });
 
-passport.deserializeUser(function(user, done) {
+passport.deserializeUser(function (user, done) {
     done(null, user);
 });
 
 router.post('/',
     passport.authenticate('facebook-token'),
     function (req, res) {
-        console.log(req.user)
-        res.send(req.user)
+        if (req.user) {
+            //authenticated! return sensitive secret information here.
+            res.status(200).send(req.user);
+        } else {
+            // not authenticated.
+            res.status(401).send(req.user);
+
+        }
     })
 
 module.exports = router;

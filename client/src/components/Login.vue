@@ -43,14 +43,20 @@
         </div>
       </b-button>
       <a href="http://localhost:5000/api/auth/facebook">Login with Facebook</a>
+      <FacebookLogin />
+
     </b-form>
   </div>
 </template>
 
 <script>
 import { validateLogin, validateEmail, validatePassword } from '../helpers/Validators'
+import FacebookLogin from './FacebookLogin'
 export default {
   name: 'LoginComponent',
+  components: {
+    FacebookLogin
+  },
   data () {
     return {
       errors: [],
