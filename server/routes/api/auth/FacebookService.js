@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const UserDbService = require('./db/UserDbService');
 const AuthDbService = require('./db/AuthDbService');
+const JwtOperations = require('../../../config/JwtOperations');
 
 const User = require('./entity/User');
 
@@ -46,14 +47,12 @@ passport.deserializeUser(function (user, done) {
 
 router.post('/',
     passport.authenticate('facebook-token'),
-    function (req, res) {
+    async function (req, res) {
         if (req.user) {
-            //authenticated! return sensitive secret information here.
-            res.status(200).send(req.user);
+            let token = await JwtOperations.signToken(req.user, 'theSecretKey');
+            res.json({token});
         } else {
-            // not authenticated.
             res.status(401);
-
         }
     })
 

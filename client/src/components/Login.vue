@@ -42,9 +42,9 @@
           Login
         </div>
       </b-button>
-      <a href="http://localhost:5000/api/auth/facebook">Login with Facebook</a>
-      <FacebookLogin />
-
+      <div class="login-form__social-container">
+        <FacebookLogin />
+      </div>
     </b-form>
   </div>
 </template>

@@ -1,19 +1,14 @@
 <template>
-<div>
-  <b-btn @click="loginWithFacebook()"> Login with Facebook</b-btn>
-</div>
+  <div>
+    <b-btn @click="loginWithFacebook()" class="facebook-button"> Login with Facebook</b-btn>
+  </div>
 </template>
 
 <script>
-import SocialService from '../services/SocialService'
+
 export default {
   name: 'FacebookLogin',
-  data() {
-    return {
-        FB: ''
-    }
-  },
-  mounted () {
+  mounted() {
     let appId = process.env.VUE_APP_FACEBOOK_APP_ID
     window.fbAsyncInit = function () {
       FB.init({
@@ -28,7 +23,8 @@ export default {
     };
 
     (function (d, s, id) {
-      let js; let fjs = d.getElementsByTagName(s)[0]
+      let js;
+      let fjs = d.getElementsByTagName(s)[0]
       if (d.getElementById(id)) {
         return
       }
@@ -38,7 +34,7 @@ export default {
       fjs.parentNode.insertBefore(js, fjs)
     }(document, 'script', 'facebook-jssdk'))
 
-    function statusChangeCallback (response) {
+    function statusChangeCallback(response) {
       if (response.status === 'Connected') {
         console.log('logged in and authenticated')
       } else {
@@ -47,21 +43,23 @@ export default {
     }
   },
   methods: {
-    loginWithFacebook () {
-      window.FB.login(async function (response) {
+    loginWithFacebook() {
+      FB.login(function (response) {
         console.log(response)
         if (response.authResponse) {
-          const user = await this.$store.dispatch(response.authResponse.accessToken)
-          console.log(user)
+          this.$store.dispatch('loginWithFacebook', response.authResponse.accessToken)
         } else {
           console.log('User cancelled login or did not fully authorize.')
         }
-      },{scope: 'public_profile,email', return_scopes: true})
+      }.bind(this), {scope: 'public_profile,email', return_scopes: true})
     }
   }
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+  .facebook-button {
+    background-color: #3b5998;
+    border-color: white;
+  }
 </style>
