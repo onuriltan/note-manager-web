@@ -1,50 +1,62 @@
 <template>
-
-  <b-btn @click="facebookLogin()"> Login with Facebook</b-btn>
-
+<div>
+  <b-btn @click="loginWithFacebook()"> Login with Facebook</b-btn>
+</div>
 </template>
 
 <script>
-
+import SocialService from '../services/SocialService'
 export default {
-  name: "FacebookLogin",
-  beforeMount() {
-    const appId = process.env.VUE_APP_FACEBOOK_APP_ID
+  name: 'FacebookLogin',
+  data() {
+    return {
+        FB: ''
+    }
+  },
+  mounted () {
+    let appId = process.env.VUE_APP_FACEBOOK_APP_ID
     window.fbAsyncInit = function () {
       FB.init({
         appId: appId,
         autoLogAppEvents: true,
         xfbml: true,
         version: 'v3.2'
-      });
+      })
+      FB.getLoginStatus(function (response) {
+        statusChangeCallback(response)
+      })
     };
 
     (function (d, s, id) {
-      let js, fjs = d.getElementsByTagName(s)[0];
+      let js; let fjs = d.getElementsByTagName(s)[0]
       if (d.getElementById(id)) {
-        return;
+        return
       }
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
+      js = d.createElement(s)
+      js.id = id
+      js.src = 'https://connect.facebook.net/en_US/sdk.js'
+      fjs.parentNode.insertBefore(js, fjs)
+    }(document, 'script', 'facebook-jssdk'))
+
+    function statusChangeCallback (response) {
+      if (response.status === 'Connected') {
+        console.log('logged in and authenticated')
+      } else {
+        console.log('Not authenticated')
+      }
+    }
   },
   methods: {
-    facebookInit () {
-
-    },
-    facebookLogin() {
-      FB.login(function (response) {
+    loginWithFacebook () {
+      window.FB.login(async function (response) {
+        console.log(response)
         if (response.authResponse) {
-          console.log('Welcome!  Fetching your information.... ');
-          FB.api('/me', function (response) {
-            console.log('Good to see you, ' + response.name + '.');
-          });
+          const user = await this.$store.dispatch('response.authResponse.accessToken')
+          console.log(user)
         } else {
-          console.log('User cancelled login or did not fully authorize.');
+          console.log('User cancelled login or did not fully authorize.')
         }
-      });
+      },{scope: 'public_profile,email', return_scopes: true})
     }
   }
 }

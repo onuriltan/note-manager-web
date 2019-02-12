@@ -52,7 +52,7 @@ router.post('/',
             res.status(200).send(req.user);
         } else {
             // not authenticated.
-            res.status(401).send(req.user);
+            res.status(401);
 
         }
     })

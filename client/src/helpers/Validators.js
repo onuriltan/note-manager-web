@@ -82,7 +82,6 @@ export function validateLogin (email, password) {
   return fieldErrors
 }
 
-
 export function validateChangePassword (oldPassword, newPassword) {
   let fieldErrors = {
     oldPassword: '',
