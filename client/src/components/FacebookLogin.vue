@@ -51,7 +51,7 @@ export default {
       window.FB.login(async function (response) {
         console.log(response)
         if (response.authResponse) {
-          const user = await this.$store.dispatch('response.authResponse.accessToken')
+          const user = await this.$store.dispatch(response.authResponse.accessToken)
           console.log(user)
         } else {
           console.log('User cancelled login or did not fully authorize.')
