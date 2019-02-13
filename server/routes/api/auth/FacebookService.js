@@ -21,7 +21,6 @@ passport.use(new FacebookTokenStrategy({
             const newUser = new User({
                 active: true,
                 confirmationTokenExpiry: null,
-                email: profile._json.email,
                 facebook: {
                     id: profile.id,
                     email: profile._json.email

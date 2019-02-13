@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 
 let UserSchema = new mongoose.Schema({
     email: {
-        type: String,
-        required: true
+        type: String
     },
     facebook: {
         id: {
