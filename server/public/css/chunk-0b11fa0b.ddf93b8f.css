@@ -1,9 +1,18 @@
-.facebook-button[data-v-18648b6f] {
+.facebook-button[data-v-1e119bfc] {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   background-color: #3b5998;
   border-color: white;
 }
 @media screen and (max-width: 768px) {
-.facebook-button[data-v-18648b6f] {
+.facebook-button[data-v-1e119bfc] {
     width: 100%;
     margin: 10px 0;
 }
@@ -129,4 +138,4 @@
 }
 
 
-/*# sourceMappingURL=chunk-0f2a3035.d22b5cae.css.map*/
+/*# sourceMappingURL=chunk-0b11fa0b.ddf93b8f.css.map*/
