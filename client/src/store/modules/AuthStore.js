@@ -1,4 +1,6 @@
 import authService from '../../services/AuthService'
+import socialService  from '../../services/SocialService'
+
 import router from '../../router'
 import jwtDecode from 'jwt-decode'
 
@@ -28,6 +30,18 @@ const AuthStore = {
           .catch((response) => { return resolve(response) })
       })
     },
+
+    loginWithFacebook (context, token) {
+      return new Promise(resolve => {
+        socialService.loginWithFacebook(token)
+          .then((response) => {
+            context.commit('updateIsAuthenticated', response)
+            return resolve(response)
+          })
+          .catch((response) => { return resolve(response) })
+      })
+    },
+
     confirmUser (context, confirmationToken) {
       return new Promise(resolve => {
         authService.confirmUser(confirmationToken)
@@ -40,6 +54,7 @@ const AuthStore = {
           })
       })
     },
+
     register (context, credentials) {
       return new Promise(resolve => {
         authService.register(credentials)
@@ -49,6 +64,7 @@ const AuthStore = {
           .catch((response) => { return resolve(response) })
       })
     },
+
     resendConfirmationEmail (context, credentials) {
       return new Promise(resolve => {
         authService.resendConfirmationEmail(credentials)
@@ -58,9 +74,11 @@ const AuthStore = {
           .catch((response) => { return resolve(response) })
       })
     },
+
     loadUser (context) {
       context.commit('loadUser')
     },
+
     checkIsAuthenticated (context) {
       context.commit('checkIsAuthenticated')
     }
@@ -71,6 +89,7 @@ const AuthStore = {
       state.isAuthenticated = false
       router.push('/login')
     },
+
     checkIsAuthenticated (state) {
       let token = window.localStorage.getItem('token')
       let unixTimeStamp = new Date().getTime() / 1000
@@ -87,6 +106,7 @@ const AuthStore = {
         }, 2000)
       }
     },
+
     updateIsAuthenticated (state, response) {
       if (response.status === 200) {
         window.localStorage.setItem('token', response.data.token)
@@ -97,6 +117,7 @@ const AuthStore = {
         setTimeout(() => { router.push('/login') }, 2000)
       }
     },
+
     loadUser (state) {
       let token = window.localStorage.getItem('token')
       let unixTimeStamp = new Date().getTime() / 1000

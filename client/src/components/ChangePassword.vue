@@ -49,69 +49,68 @@
 </template>
 
 <script>
-  import UserService from '../services/UserService'
-  import { validateChangePassword } from '../helpers/Validators'
+import UserService from '../services/UserService'
+import { validateChangePassword } from '../helpers/Validators'
 
-  export default {
-    name: 'ChangePassword',
-    computed: {
-      oldPasswordCorrectState () {
-        if(this.fieldErrors.oldPassword === null) return null
-        if (this.fieldErrors.oldPassword === '') return true
-        if (this.fieldErrors.oldPassword !== '') return false
-      },
-      newPasswordCorrectState () {
-        if(this.fieldErrors.newPassword === null) return null
-        else if (this.fieldErrors.newPassword === '') return true
-        else if (this.fieldErrors.newPassword !== '') return false
-      },
-      isValidForm () {
-        return this.fieldErrors.oldPassword === ''  && this.fieldErrors.newPassword === ''
-      },
+export default {
+  name: 'ChangePassword',
+  computed: {
+    oldPasswordCorrectState () {
+      if (this.fieldErrors.oldPassword === null) return null
+      if (this.fieldErrors.oldPassword === '') return true
+      if (this.fieldErrors.oldPassword !== '') return false
     },
-    data () {
-      return {
-        errors: [],
-        fieldErrors: {
-          oldPassword: null,
-          newPassword: null
-        },
-        messages: [],
-        oldPassword: '',
-        newPassword: '',
-        changePasswordClicked: false
+    newPasswordCorrectState () {
+      if (this.fieldErrors.newPassword === null) return null
+      else if (this.fieldErrors.newPassword === '') return true
+      else if (this.fieldErrors.newPassword !== '') return false
+    },
+    isValidForm () {
+      return this.fieldErrors.oldPassword === '' && this.fieldErrors.newPassword === ''
+    }
+  },
+  data () {
+    return {
+      errors: [],
+      fieldErrors: {
+        oldPassword: null,
+        newPassword: null
+      },
+      messages: [],
+      oldPassword: '',
+      newPassword: '',
+      changePasswordClicked: false
+    }
+  },
+  methods: {
+    changePassword () {
+      this.clearErrors()
+      this.fieldErrors = validateChangePassword(this.oldPassword, this.newPassword)
+      if (this.isValidForm) {
+        this.changePasswordClicked = true
+        setTimeout(async () => {
+          const res = await UserService.changePassword({ oldPassword: this.oldPassword, newPassword: this.newPassword })
+          this.changePasswordClicked = false
+          if (res.data.fieldErrors) {
+            this.fieldErrors = res.data.fieldErrors
+          }
+          if (res.data.errors) {
+            this.errors = res.data.errors
+          }
+          if (res.status === 200) {
+            this.messages.push({ msg: 'Password is changed!' })
+          }
+        }, 1000)
       }
     },
-    methods: {
-      changePassword () {
-        this.clearErrors()
-        this.fieldErrors = validateChangePassword(this.oldPassword, this.newPassword)
-        if (this.isValidForm) {
-          this.changePasswordClicked = true
-          setTimeout(async () => {
-            const res = await UserService.changePassword({oldPassword: this.oldPassword, newPassword: this.newPassword})
-            this.changePasswordClicked = false
-            if (res.data.fieldErrors) {
-              this.fieldErrors = res.data.fieldErrors
-            }
-            if (res.data.errors) {
-              this.errors = res.data.errors
-            }
-            if(res.status === 200) {
-              this.messages.push({msg: 'Password is changed!'});
-            }
-
-          }, 1000)
-        }
-      },
-      clearErrors () {
-        this.fieldErrors.oldPassword = null
-        this.fieldErrors.newPassword = null
-        this.errors= []
-        this.messages= []
-      }
+    clearErrors () {
+      this.fieldErrors.oldPassword = null
+      this.fieldErrors.newPassword = null
+      this.errors = []
+      this.messages = []
     }
   }
+}
 </script>
 
 <style scoped lang="scss">

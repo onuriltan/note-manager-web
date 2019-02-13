@@ -1,4 +1,26 @@
-.login-container[data-v-68775cce] {
+.facebook-button[data-v-18648b6f] {
+  background-color: #3b5998;
+  border-color: white;
+}
+@media screen and (max-width: 768px) {
+.facebook-button[data-v-18648b6f] {
+    width: 100%;
+    margin: 10px 0;
+}
+}
+
+.google-button[data-v-81fec2e6] {
+  background-color: #db3236;
+  border-color: white;
+}
+@media screen and (max-width: 768px) {
+.google-button[data-v-81fec2e6] {
+    width: 100%;
+    margin: 10px 0;
+}
+}
+
+.login-container[data-v-dba948bc] {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -10,7 +32,7 @@
   background: url(../img/takingnotes.cfca4bf3.jpg) no-repeat fixed center;
   background-size: cover;
 }
-.login-form[data-v-68775cce] {
+.login-form[data-v-dba948bc] {
   width: 400px;
   background-color: white;
   border-radius: 10px;
@@ -19,25 +41,25 @@
           box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
   padding: 30px;
 }
-.login-form__header[data-v-68775cce] {
+.login-form__header[data-v-dba948bc] {
     text-align: center;
     padding-bottom: 30px;
 }
-.login-form__resend[data-v-68775cce] {
+.login-form__resend[data-v-dba948bc] {
     -webkit-text-decoration: #28a745 underline;
             text-decoration: #28a745 underline;
     color: #28a745;
 }
-.login-form__resend[data-v-68775cce]:hover {
+.login-form__resend[data-v-dba948bc]:hover {
       cursor: pointer;
 }
-.login-form__errors[data-v-68775cce] {
+.login-form__errors[data-v-dba948bc] {
     padding: 10px 0;
 }
-.login-form__errors__error[data-v-68775cce] {
+.login-form__errors__error[data-v-dba948bc] {
       text-align: center;
 }
-.login-form__button[data-v-68775cce] {
+.login-form__button[data-v-dba948bc] {
     width: 100%;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -49,8 +71,17 @@
         -ms-flex-align: center;
             align-items: center;
 }
+.login-form__social-container[data-v-dba948bc] {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    margin-top: 20px;
+}
 @media screen and (max-width: 768px) {
-.login-container[data-v-68775cce] {
+.login-container[data-v-dba948bc] {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -60,7 +91,7 @@
     min-height: calc(100vh - 30px);
     padding-top: 20px;
 }
-.login-container[data-v-68775cce]:after {
+.login-container[data-v-dba948bc]:after {
       content: "";
       background: url(../img/takingnotes.cfca4bf3.jpg) no-repeat fixed center;
       background-size: cover;
@@ -72,26 +103,30 @@
       position: absolute;
       z-index: -1;
 }
-.login-form[data-v-68775cce] {
+.login-form[data-v-dba948bc] {
     width: 250px;
 }
-.login-form__header[data-v-68775cce] {
+.login-form__header[data-v-dba948bc] {
       text-align: center;
       padding-bottom: 5px;
 }
-.login-form__errors[data-v-68775cce] {
+.login-form__errors[data-v-dba948bc] {
       padding: 5px 0;
 }
-.login-form__errors__error[data-v-68775cce] {
+.login-form__errors__error[data-v-dba948bc] {
         font-size: 13px;
         padding: 10px;
         text-align: center;
 }
-.login-form__input[data-v-68775cce] {
+.login-form__social-container[data-v-dba948bc] {
+      display: block;
+      width: 100%;
+}
+.login-form__input[data-v-dba948bc] {
       height: calc(2.25rem) !important;
       font-size: 1rem;
 }
 }
 
 
-/*# sourceMappingURL=chunk-914f1ffa.954bb50b.css.map*/
+/*# sourceMappingURL=chunk-0f2a3035.d22b5cae.css.map*/

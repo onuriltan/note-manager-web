@@ -49,6 +49,15 @@
         -ms-flex-align: center;
             align-items: center;
 }
+.login-form__social-container[data-v-367ff005] {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    margin-top: 20px;
+}
 @media screen and (max-width: 768px) {
 .login-container[data-v-367ff005] {
     display: -webkit-box;
@@ -86,6 +95,10 @@
         font-size: 13px;
         padding: 10px;
         text-align: center;
+}
+.login-form__social-container[data-v-367ff005] {
+      display: block;
+      width: 100%;
 }
 .login-form__input[data-v-367ff005] {
       height: calc(2.25rem) !important;
@@ -144,6 +157,15 @@
         -ms-flex-align: center;
             align-items: center;
 }
+.login-form__social-container[data-v-63ab8c33] {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    margin-top: 20px;
+}
 @media screen and (max-width: 768px) {
 .login-container[data-v-63ab8c33] {
     display: -webkit-box;
@@ -182,6 +204,10 @@
         padding: 10px;
         text-align: center;
 }
+.login-form__social-container[data-v-63ab8c33] {
+      display: block;
+      width: 100%;
+}
 .login-form__input[data-v-63ab8c33] {
       height: calc(2.25rem) !important;
       font-size: 1rem;
@@ -189,4 +215,4 @@
 }
 
 
-/*# sourceMappingURL=chunk-78d21a06.8129718e.css.map*/
+/*# sourceMappingURL=chunk-78d21a06.dc0caf95.css.map*/

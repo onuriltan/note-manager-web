@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-
+const passport = require('passport');
 const mongoose = require('mongoose');
 
 // Environment Variables
@@ -14,6 +14,8 @@ const server = express();
 server.use(bodyParser.json());
 server.use(cors());
 server.use(cookieParser());
+server.use(passport.initialize());
+
 
 // Connect to Mongo
 const dbAddress = process.env.MONGO_URL;
@@ -25,11 +27,13 @@ mongoose.connect(dbAddress, { useNewUrlParser: true })
 const app = require('./routes/api');
 const posts = require('./routes/api/posts/PostsService');
 const auth = require('./routes/api/auth/AuthService');
+const facebook = require('./routes/api/auth/FacebookService');
 const user = require('./routes/api/auth/UserService');
 
 server.use('/api', app);
 server.use('/api/posts', posts);
 server.use('/api/auth', auth);
+server.use('/api/auth/facebook', facebook);
 server.use('/api/user', user);
 
 if (process.env.NODE_ENV === 'production') {

@@ -42,14 +42,25 @@
           Login
         </div>
       </b-button>
+      <div class="login-form__social-container">
+        <FacebookLogin />
+        <GoogleLogin />
+      </div>
     </b-form>
   </div>
 </template>
 
 <script>
 import { validateLogin, validateEmail, validatePassword } from '../helpers/Validators'
+import FacebookLogin from './FacebookLogin'
+import GoogleLogin from './GoogleLogin'
+
 export default {
   name: 'LoginComponent',
+  components: {
+    FacebookLogin,
+    GoogleLogin
+  },
   data () {
     return {
       errors: [],
