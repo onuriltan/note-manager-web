@@ -1,11 +1,21 @@
 <template>
-    <b-btn @click="loginWithFacebook()" class="facebook-button"> Login with Facebook</b-btn>
+    <b-btn @click="loginWithFacebook()" class="facebook-button" :class="{ 'button--loading': fbLoginClicked }">
+      <i class="fa fa-refresh fa-spin hide--button--loading--icon" :class="{ 'show--button--loading--icon': fbLoginClicked }"></i>
+      <div style="margin: 0 5px;">
+        Login with Facebook
+      </div>
+    </b-btn>
 </template>
 
 <script>
 
 export default {
   name: 'FacebookLogin',
+  data () {
+    return {
+      fbLoginClicked: false
+    }
+  },
   mounted() {
     let appId = process.env.VUE_APP_FACEBOOK_APP_ID
     window.fbAsyncInit = function () {
@@ -32,12 +42,14 @@ export default {
   },
   methods: {
     loginWithFacebook() {
+      this.fbLoginClicked = true;
       FB.login(function (response) {
         if (response.authResponse) {
           this.$store.dispatch('loginWithFacebook', response.authResponse.accessToken)
         } else {
           console.log('User cancelled login or did not fully authorize.')
         }
+        this.fbLoginClicked = false;
       }.bind(this), {scope: 'public_profile,email', return_scopes: true})
     }
   }
@@ -46,6 +58,9 @@ export default {
 
 <style scoped lang="scss">
   .facebook-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #3b5998;
     border-color: white;
   }
@@ -56,6 +71,4 @@ export default {
       margin: 10px 0;
     }
   }
-
-
 </style>
