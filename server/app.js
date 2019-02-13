@@ -36,12 +36,6 @@ server.use('/api/auth', auth);
 server.use('/api/auth/facebook', facebook);
 server.use('/api/user', user);
 
-if (process.env.NODE_ENV !== 'production') {
-  server.get('/', (req, res) => res.redirect('http://localhost:8080/login'));
-  server.get('/dashboard', (req, res) => res.redirect('http://localhost:8080/dashboard'));
-  server.get('/login', (req, res) => res.redirect('http://localhost:8080/login'));
-}
-
 if (process.env.NODE_ENV === 'production') {
   // Static folder
   server.use(express.static(__dirname + '/public'));

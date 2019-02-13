@@ -1,7 +1,5 @@
 <template>
-  <div>
     <b-btn @click="loginWithFacebook()" class="facebook-button"> Login with Facebook</b-btn>
-  </div>
 </template>
 
 <script>
@@ -17,9 +15,6 @@ export default {
         xfbml: true,
         version: 'v3.2'
       })
-      FB.getLoginStatus(function (response) {
-        statusChangeCallback(response)
-      })
     };
 
     (function (d, s, id) {
@@ -34,18 +29,10 @@ export default {
       fjs.parentNode.insertBefore(js, fjs)
     }(document, 'script', 'facebook-jssdk'))
 
-    function statusChangeCallback(response) {
-      if (response.status === 'Connected') {
-        console.log('logged in and authenticated')
-      } else {
-        console.log('Not authenticated')
-      }
-    }
   },
   methods: {
     loginWithFacebook() {
       FB.login(function (response) {
-        console.log(response)
         if (response.authResponse) {
           this.$store.dispatch('loginWithFacebook', response.authResponse.accessToken)
         } else {
@@ -62,4 +49,13 @@ export default {
     background-color: #3b5998;
     border-color: white;
   }
+
+  @media screen and (max-width: 768px) {
+    .facebook-button {
+      width: 100%;
+      margin: 10px 0;
+    }
+  }
+
+
 </style>
