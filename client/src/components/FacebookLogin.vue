@@ -41,11 +41,11 @@ export default {
 
   },
   methods: {
-    loginWithFacebook() {
+     loginWithFacebook() {
       this.fbLoginClicked = true;
-      FB.login(function (response) {
+      FB.login(async function (response) {
         if (response.authResponse) {
-          this.$store.dispatch('loginWithFacebook', response.authResponse.accessToken)
+          await this.$store.dispatch('loginWithFacebook', response.authResponse.accessToken)
         } else {
           console.log('User cancelled login or did not fully authorize.')
         }
