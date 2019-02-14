@@ -1,4 +1,4 @@
-.facebook-button[data-v-1e119bfc] {
+.facebook-button[data-v-960d3d94] {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -12,7 +12,7 @@
   border-color: white;
 }
 @media screen and (max-width: 768px) {
-.facebook-button[data-v-1e119bfc] {
+.facebook-button[data-v-960d3d94] {
     width: 100%;
     margin: 10px 0;
 }
@@ -138,4 +138,4 @@
 }
 
 
-/*# sourceMappingURL=chunk-0b11fa0b.ddf93b8f.css.map*/
+/*# sourceMappingURL=chunk-61c23156.7674b784.css.map*/

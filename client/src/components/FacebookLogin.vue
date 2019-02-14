@@ -16,7 +16,7 @@ export default {
       fbLoginClicked: false
     }
   },
-  mounted() {
+  mounted () {
     let appId = process.env.VUE_APP_FACEBOOK_APP_ID
     window.fbAsyncInit = function () {
       FB.init({
@@ -28,7 +28,7 @@ export default {
     };
 
     (function (d, s, id) {
-      let js;
+      let js
       let fjs = d.getElementsByTagName(s)[0]
       if (d.getElementById(id)) {
         return
@@ -38,19 +38,18 @@ export default {
       js.src = 'https://connect.facebook.net/en_US/sdk.js'
       fjs.parentNode.insertBefore(js, fjs)
     }(document, 'script', 'facebook-jssdk'))
-
   },
   methods: {
-     loginWithFacebook() {
-      this.fbLoginClicked = true;
+    loginWithFacebook () {
+      this.fbLoginClicked = true
       FB.login(async function (response) {
         if (response.authResponse) {
           await this.$store.dispatch('loginWithFacebook', response.authResponse.accessToken)
         } else {
           console.log('User cancelled login or did not fully authorize.')
         }
-        this.fbLoginClicked = false;
-      }.bind(this), {scope: 'public_profile,email', return_scopes: true})
+        this.fbLoginClicked = false
+      }.bind(this), { scope: 'public_profile,email', return_scopes: true })
     }
   }
 }

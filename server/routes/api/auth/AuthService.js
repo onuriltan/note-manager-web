@@ -18,7 +18,7 @@ router.post('/login', async (req, res) => {
     } else {
         let user = await AuthDbService.findUser(email);
         if (user) {
-            let isPasswordCorrect = bcrypt.compareSync(password, user.password);
+            let isPasswordCorrect = bcrypt.compareSync(password, user.local.password);
             if (!user.active) {
                 errors.push({msg: 'You need to activate your account'});
                 res.status(401).json({errors});
@@ -49,7 +49,7 @@ router.post('/register', async (req, res) => {
         if (!foundUser) {
             let newUser = await AuthDbService.createUser(email, password);
             if (newUser) {
-                MailOperations.sendConfirmationMail(newUser.email, newUser.confirmationToken)
+                MailOperations.sendConfirmationMail(newUser.local.email, newUser.confirmationToken)
                     .then(response => {
                         messages.push({msg: 'Check your email to confirm your account!'});
                         res.status(200).json({messages});

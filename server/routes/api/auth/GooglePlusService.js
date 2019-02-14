@@ -5,21 +5,21 @@ const JwtOperations = require('../../../config/JwtOperations');
 const User = require('./entity/User');
 
 const passport = require('passport');
-const FacebookTokenStrategy = require('passport-facebook-token');
+const googlePlusTokenStrategy = require('passport-google-plus-token');
 
-passport.use("facebook-token",new FacebookTokenStrategy({
-        clientID: process.env.FACEBOOK_APP_ID,
-        clientSecret: process.env.FACEBOOK_APP_SECRET,
+passport.use("google-token", new googlePlusTokenStrategy({
+        clientID: process.env.GOOGLE_APP_ID,
+        clientSecret: process.env.GOOGLE_APP_SECRET,
     }, async (accessToken, refreshToken, profile, done) => {
         try {
-            const existingUser = await User.findOne({ "facebook.id": profile.id});
+            const existingUser = await User.findOne({ "google.id": profile.id});
             if (existingUser) {
                 return done(null, existingUser);
             }
             const newUser = new User({
-                active: true,
                 method: 'google',
-                facebook: {
+                active: true,
+                google: {
                     id: profile.id,
                     email: profile._json.emails[0].value
                 }
@@ -43,7 +43,7 @@ passport.deserializeUser(function (user, done) {
 });
 
 router.post('/',
-    passport.authenticate('facebook-token'),
+    passport.authenticate('google-token'),
     async function (req, res) {
         if (req.user) {
             let token = await JwtOperations.signToken(req.user, 'theSecretKey');
@@ -54,3 +54,4 @@ router.post('/',
     })
 
 module.exports = router;
+
