@@ -49,7 +49,6 @@ export default {
       this.errors = []
       this.messages = []
       this.resentConfirmationEmailClicked = true
-      console.log(this.email, this.password, this.password2)
       setTimeout(async () => {
         const res = await this.$store.dispatch('resendConfirmationEmail',
           {

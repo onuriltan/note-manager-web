@@ -1,5 +1,5 @@
 import authService from '../../services/AuthService'
-import socialService  from '../../services/SocialService'
+import socialService from '../../services/SocialService'
 
 import router from '../../router'
 import jwtDecode from 'jwt-decode'
@@ -41,6 +41,18 @@ const AuthStore = {
           .catch((response) => { return resolve(response) })
       })
     },
+
+    loginWithGoogle (context, token) {
+      return new Promise(resolve => {
+        socialService.loginWithGoogle(token)
+          .then((response) => {
+            context.commit('updateIsAuthenticated', response)
+            return resolve(response)
+          })
+          .catch((response) => { return resolve(response) })
+      })
+    },
+
 
     confirmUser (context, confirmationToken) {
       return new Promise(resolve => {

@@ -6,7 +6,18 @@ class SocialService {
   static loginWithFacebook (token) {
     return new Promise(async (resolve) => {
       try {
-        const res = await axios.post(`${url}/facebook`, { access_token : token})
+        const res = await axios.post(`${url}/facebook`, { access_token: token })
+        resolve(res)
+      } catch (e) {
+        resolve(e.response)
+      }
+    })
+  }
+
+  static loginWithGoogle (token) {
+    return new Promise(async (resolve) => {
+      try {
+        const res = await axios.post(`${url}/google`, { access_token: token })
         resolve(res)
       } catch (e) {
         resolve(e.response)

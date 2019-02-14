@@ -5,7 +5,7 @@ const uniqid = require('uniqid');
 
 const getUser = async (email) => {
     let theUser = null;
-    await User.findOne({email})
+    await User.findOne({"local.email" : email})
         .then(user => {
             theUser = user;
         })
@@ -14,14 +14,14 @@ const getUser = async (email) => {
 
 const changePassword = async (email, oldPassword, newPassword) => {
     let theUser = null;
-    await User.findOne({email})
+    await User.findOne({"local.email" : email})
         .then(user => {
             theUser = user;
         })
     if(theUser != null) {
-        let isPasswordCorrect = bcrypt.compareSync(oldPassword, theUser.password);
+        let isPasswordCorrect = bcrypt.compareSync(oldPassword, theUser.local.password);
         if(isPasswordCorrect) {
-            theUser.password = await hashPassword(newPassword);
+            theUser.local.password = await hashPassword(newPassword);
             theUser.save();
             return true;
         }

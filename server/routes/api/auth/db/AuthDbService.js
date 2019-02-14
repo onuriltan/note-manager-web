@@ -5,7 +5,7 @@ const uniqid = require('uniqid');
 
 const findUser = async (email) => {
     let theUser = null;
-    await User.findOne({email})
+    await User.findOne({ "local.email": email})
         .then(user => {
             theUser = user;
         })
@@ -24,11 +24,14 @@ const findUserWithConfirmationToken = async (confirmationToken) => {
 const createUser = async (email, password) => {
     let theUser = null;
     const newUser = new User({
-        email,
-        password
+        method: "local",
+        local: {
+            email: email,
+            password: password
+        }
     });
     //Hash password
-    newUser.password = await hashPassword(newUser); // Set password to hashed
+    newUser.local.password = await hashPassword(newUser); // Set password to hashed
     newUser.confirmationToken = uniqid();
     await newUser.save() // save user
         .then(() => {
@@ -40,21 +43,9 @@ const createUser = async (email, password) => {
     return theUser;
 };
 
-const createUserWithFacebook = async (user) => {
-    let theUser = null;
-    await user.save() // save user
-        .then(() => {
-            theUser = user;
-        })
-        .catch(err => {
-            console.log(err)
-        });
-    return theUser;
-};
-
 const regenerateUserConfirmationToken = async (email) => {
     let theUser = '';
-    await User.findOne({email})
+    await User.findOne({ "local.email": email})
         .then(user => {
             theUser = user;
         });
@@ -79,7 +70,7 @@ const deleteUser = async (id) => {
 
 
 async function hashPassword (user) {
-    const password = user.password;
+    const password = user.local.password;
     const saltRounds = 10;
     return await new Promise((resolve, reject) => {
         bcrypt.hash(password, saltRounds, function (err, hash) {
@@ -91,7 +82,6 @@ async function hashPassword (user) {
 
 module.exports.findUser = findUser;
 module.exports.createUser = createUser;
-module.exports.createUserWithFacebook = createUserWithFacebook;
 module.exports.deleteUser = deleteUser;
 module.exports.findUserWithConfirmationToken = findUserWithConfirmationToken;
 module.exports.regenerateUserConfirmationToken = regenerateUserConfirmationToken;
