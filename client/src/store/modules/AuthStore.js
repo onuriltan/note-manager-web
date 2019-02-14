@@ -42,6 +42,18 @@ const AuthStore = {
       })
     },
 
+    loginWithGoogle (context, token) {
+      return new Promise(resolve => {
+        socialService.loginWithGoogle(token)
+          .then((response) => {
+            context.commit('updateIsAuthenticated', response)
+            return resolve(response)
+          })
+          .catch((response) => { return resolve(response) })
+      })
+    },
+
+
     confirmUser (context, confirmationToken) {
       return new Promise(resolve => {
         authService.confirmUser(confirmationToken)

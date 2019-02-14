@@ -16,12 +16,13 @@ passport.use("facebook-token",new FacebookTokenStrategy({
             if (existingUser) {
                 return done(null, existingUser);
             }
+            console.log(profile)
             const newUser = new User({
                 active: true,
-                method: 'google',
+                method: 'facebook',
                 facebook: {
                     id: profile.id,
-                    email: profile._json.emails[0].value
+                    email: profile._json.email
                 }
             });
             await newUser.save();

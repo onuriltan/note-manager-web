@@ -13,6 +13,17 @@ class SocialService {
       }
     })
   }
+
+  static loginWithGoogle (token) {
+    return new Promise(async (resolve) => {
+      try {
+        const res = await axios.post(`${url}/google`, { access_token: token })
+        resolve(res)
+      } catch (e) {
+        resolve(e.response)
+      }
+    })
+  }
 }
 
 export default SocialService
