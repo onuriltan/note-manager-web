@@ -16,7 +16,6 @@ passport.use("facebook-token",new FacebookTokenStrategy({
             if (existingUser) {
                 return done(null, existingUser);
             }
-            console.log(profile)
             const newUser = new User({
                 active: true,
                 method: 'facebook',
