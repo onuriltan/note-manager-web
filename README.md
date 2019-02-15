@@ -54,7 +54,7 @@ You need to create applications from your Facebook and Google Developer Accounts
 * GOOGLE_APP_SECRET="your app secret"
 
 ### Development
-To run Node.js server, go to server folder and run `npm run dev`.
+To run Node.js server, go to root folder and run `npm run dev`.
 
 To run the Vue CLI client, go to client folder and run `npm run serve`.
 
