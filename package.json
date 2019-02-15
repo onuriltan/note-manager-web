@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/app.js",
-    "dev": "nodemon server/app.js"
+    "dev": "nodemon server/app.js",
+    "heroku-postbuild": "./client npm run build"
   },
   "author": "Onur Iltan",
   "license": "MIT",
