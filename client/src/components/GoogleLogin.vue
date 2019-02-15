@@ -37,14 +37,20 @@ export default {
         });
         // Sign the user in, and then retrieve their ID.
         let token = null;
-        await auth2.signIn().then(async function() {
-          token = auth2.currentUser.get().Zi.access_token
-        });
+        await auth2.signIn()
+          .then(function() {
+            token = auth2.currentUser.get().Zi.access_token
+          })
+          .catch(function (error) {
+            this.googleLoginClicked = false
+          }.bind(this));
+
         if(token !== null) {
           await this.$store.dispatch('loginWithGoogle', auth2.currentUser.get().Zi.access_token)
         }
         this.googleLoginClicked = false
       }.bind(this))
+
     }
   }
 }
