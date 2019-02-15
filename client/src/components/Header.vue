@@ -12,8 +12,8 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <b-dropdown right text="Account" class="m-md-2">
-          <b-dropdown-item to="/profile">Profile</b-dropdown-item>
-          <b-dropdown-item @click="logout()">Logout</b-dropdown-item>
+          <b-dropdown-item to="/profile"><i class="fa fa-user mr-2"></i>Profile</b-dropdown-item>
+          <b-dropdown-item @click="logout()"><i class="fa fa-sign-out  mr-2"></i>Logout</b-dropdown-item>
         </b-dropdown>
       </b-navbar-nav>
 
