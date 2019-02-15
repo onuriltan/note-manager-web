@@ -62,6 +62,3 @@ To run the Vue CLI client, go to client folder and run `npm run serve`.
 To run the Node.js server with public distribution folder, 
 1. Go to client folder and run `npm run build` to create dist folder.
 2. Go to root folder and run `npm run start` .
-
-## LICENSE
-[MIT](https://choosealicense.com/licenses/mit/)
