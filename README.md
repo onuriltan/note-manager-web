@@ -25,11 +25,34 @@ of a practice for that.
 You need to create a .env file in the root folder of the app and you need to 
 give parameters as;
 
+#### Node Environment
 * MONGO_URL= "your mongodb connection url"
 * MAIL="your yandex email for sending confirmation emails"
 * MAIL_USERNAME="your yandex email"
 * MAIL_PASSWORD="your yandex email password"
 * CONFIRM_EMAIL_URL="your confirmation page url"
+
+Also you need to create .env.development and .env.production files to justify backend url's and social app id's on development
+and production, for example in .env.development;
+
+#### Vue Environment
+VUE_APP_AUTH_URL=http://localhost:5000/api/auth
+VUE_APP_NOTES_URL=http://localhost:5000/api/posts
+VUE_APP_USER_URL=http://localhost:5000/api/use
+VUE_APP_FACEBOOK_APP_ID="your facebook app id"
+VUE_APP_GOOGLE_APP_ID="your google app id"
+
+
+### Social Authentication
+You need to create applications from your Facebook and Google Developer Accounts
+
+#### Facebook Auth
+FACEBOOK_APP_ID="your app id"
+FACEBOOK_APP_SECRET="your app secret"
+
+#### Google Auth: 
+GOOGLE_APP_ID="your app id"
+GOOGLE_APP_SECRET="your app secret"
 
 ### Development
 To run Node.js server, go to server folder and run `npm run dev`.
