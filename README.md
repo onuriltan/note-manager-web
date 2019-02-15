@@ -25,17 +25,16 @@ of a practice for that.
 You need to create a .env file in the root folder of the app and you need to 
 give parameters as;
 
-#### Node Environment
+##### Node Environment
 * MONGO_URL= "your mongodb connection url"
 * MAIL="your yandex email for sending confirmation emails"
 * MAIL_USERNAME="your yandex email"
 * MAIL_PASSWORD="your yandex email password"
 * CONFIRM_EMAIL_URL="your confirmation page url"
 
-Also you need to create .env.development and .env.production files to justify backend url's and social app id's on development
-and production, for example in .env.development;
+Also you need to create .env.development and .env.production files in the client folder to justify backend url's and social app id's on development and production, for example in .env.development;
 
-#### Vue Environment
+##### Vue Environment
 * VUE_APP_AUTH_URL=http://localhost:5000/api/auth
 * VUE_APP_NOTES_URL=http://localhost:5000/api/posts
 * VUE_APP_USER_URL=http://localhost:5000/api/use
@@ -46,11 +45,11 @@ and production, for example in .env.development;
 ### Social Authentication
 You need to create applications from your Facebook and Google Developer Accounts
 
-#### Facebook Auth
+##### Facebook Auth
 * FACEBOOK_APP_ID="your app id"
 * FACEBOOK_APP_SECRET="your app secret"
 
-#### Google Auth: 
+##### Google Auth: 
 * GOOGLE_APP_ID="your app id"
 * GOOGLE_APP_SECRET="your app secret"
 
