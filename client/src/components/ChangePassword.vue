@@ -36,7 +36,8 @@
                       v-model="newPassword">
         </b-form-input>
       </b-form-group>
-      <b-button class="change-password-form__content__button" :class="{ 'button--loading': changePasswordClicked }" type="submit" variant="success">
+      <b-button class="change-password-form__content__button" :class="{ 'button--loading': changePasswordClicked }" type="submit"
+                variant="success" :disabled="changePasswordDisabled">
         <i class="fa fa-refresh fa-spin hide--button--loading--icon"
            :class="{ 'show--button--loading--icon': changePasswordClicked }"></i>
         <div style="margin: 0 5px;">
@@ -67,7 +68,11 @@ export default {
     },
     isValidForm () {
       return this.fieldErrors.oldPassword === '' && this.fieldErrors.newPassword === ''
-    }
+    },
+    changePasswordDisabled () {
+      return (this.newPassword === null || this.newPassword === '') ||
+             (this.oldPassword === null || this.oldPassword === '')
+    },
   },
   data () {
     return {
