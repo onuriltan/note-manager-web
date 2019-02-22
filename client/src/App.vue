@@ -3,7 +3,7 @@
     <div id="app">
       <SessionExpired />
       <HeaderComponent />
-        <router-view/>
+      <router-view/>
     </div>
   </div>
 </template>

@@ -21,7 +21,7 @@ const verifyToken = (req, res, next) => {
 
 decodeToken = (req, res) => {
     let userData = "";
-    jwt.verify(req.token, 'theSecretKey', (err, authData) => {
+    jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
         if (err) { // Forbidden
             res.sendStatus(403);
         }

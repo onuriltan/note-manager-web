@@ -23,7 +23,7 @@ router.post('/login', async (req, res) => {
                 errors.push({msg: 'You need to activate your account'});
                 res.status(401).json({errors});
             } else if (user.active && isPasswordCorrect) {
-                let token = await JwtOperations.signToken(user, 'theSecretKey');
+                let token = await JwtOperations.signToken(user, process.env.JWT_SECRET);
                 res.json({token});
             } else {
                 errors.push({msg: 'Username or password is wrong'});
@@ -123,7 +123,7 @@ router.get('/confirm/:confirmationToken', async (req, res) => {
                 if (err) console.log(err);
                 else console.log(updatedUser.name + " activated")
             });
-            let token = await JwtOperations.signToken(user, 'theSecretKey');
+            let token = await JwtOperations.signToken(user, process.env.JWT_SECRET);
             res.json({token});
         } else {
             await AuthDbService.deleteUser(user.id);

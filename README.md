@@ -31,6 +31,7 @@ give parameters as;
 * MAIL_USERNAME="your yandex email"
 * MAIL_PASSWORD="your yandex email password"
 * CONFIRM_EMAIL_URL="your confirmation page url"
+* JWT_SECRET="secret to parse jwt tokens"
 
 Also you need to create .env.development and .env.production files in the client folder to justify backend url's and social app id's on development and production, for example in .env.development;
 
@@ -43,7 +44,8 @@ Also you need to create .env.development and .env.production files in the client
 
 
 ### Social Authentication
-You need to create applications from your Facebook and Google Developer Accounts
+You need to create applications from your Facebook and Google Developer Accounts and add
+their credentials in .env file.
 
 ##### Facebook Auth
 * FACEBOOK_APP_ID="your app id"
