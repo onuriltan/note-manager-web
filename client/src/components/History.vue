@@ -8,8 +8,7 @@
           class="history__form__content__item mr-2 ml-2"
           label="From Date"
           label-for="fromDate">
-          <b-form-input id="fromDate" type="date"
-                        min="2018-01-01" class="form-control" v-model="fromDate"></b-form-input>
+          <b-form-input id="fromDate" type="date" min="2019-05-05" class="form-control" v-model="fromDate" ></b-form-input>
         </b-form-group>
 
         <b-form-group
@@ -18,7 +17,7 @@
           label="To Date"
           label-for="toDate">
           <b-form-input id="fromDate" type="date"
-                        min="2018-01-01" class="form-control" v-model="toDate"></b-form-input>
+                        :min="fromDate" class="form-control" v-model="toDate" :disabled="fromDate === ''"></b-form-input>
         </b-form-group>
 
         <b-form-group
@@ -127,3 +126,6 @@ export default {
 <style scoped lang="scss">
   @import "../styles/components/History";
 </style>
+
+
+
