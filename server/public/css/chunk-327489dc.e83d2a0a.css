@@ -1,0 +1,55 @@
+.change-password-form[data-v-5f5ecb74] {
+  padding-top: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.change-password-form__content__header[data-v-5f5ecb74] {
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 50px;
+}
+.change-password-form__content__errors[data-v-5f5ecb74] {
+    padding: 10px 0;
+}
+.change-password-form__content__errors__error[data-v-5f5ecb74] {
+      text-align: center;
+}
+.change-password-form__content__messages[data-v-5f5ecb74] {
+    padding: 10px 0;
+}
+.change-password-form__content__messages__message[data-v-5f5ecb74] {
+      text-align: center;
+}
+.change-password-form__content__input[data-v-5f5ecb74] {
+    width: 250px;
+}
+.change-password-form__content__button[data-v-5f5ecb74] {
+    width: 200px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+
+.profile-container[data-v-a584f95e] {
+  margin-top: 50px;
+}
+.profile-container__tab[data-v-a584f95e] {
+    height: 80vh;
+}
+
+
+/*# sourceMappingURL=chunk-327489dc.e83d2a0a.css.map*/

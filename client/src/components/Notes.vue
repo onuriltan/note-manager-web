@@ -38,7 +38,7 @@
       </b-modal>
     </div>
     <div class="notes__empty slide--in--from--left" v-if="searchClicked && posts.length ===0 && isLoading === false">
-      <img src="../assets/empty-paper.png"  class="notes__empty__image" alt="notes-empty"/>
+      <img :src="getImgUrl(tobeDeletedId)" class="notes__empty__image" alt="notes-empty"/>
       <span v-if="this.$parent.$vnode.componentOptions.tag === 'Dashboard'" class="notes__empty__message">No notes found.</span>
       <span v-if="this.$parent.$vnode.componentOptions.tag === 'History'" class="notes__empty__message">No notes were found in the criteria you searched for.</span>
     </div>
@@ -74,6 +74,10 @@ export default {
     }
   },
   methods: {
+    getImgUrl (imgName) {
+      console.log(imgName)
+      return require('../assets/' + imgName)
+    },
     showEditModal (id, text) {
       this.tobeEditedId = id
       this.tobeEditedText = text
