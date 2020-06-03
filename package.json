@@ -4,10 +4,10 @@
   "description": "Note manager app with Vue.js",
   "main": "index.js",
   "scripts": {
-    "start": "node server/app.js",
-    "dev": "nodemon server/app.js",
-    "heroku-prebuild": "npm install npm@latest -g && cd client && npm install && npm install --only=dev",
-    "heroku-postbuild": "cd client && npm run build"
+    "dev": "nodemon api/app.js",
+    "start": "node api/app.js",
+    "heroku-prebuild": "npm install npm@latest -g && cd web && npm install && npm install --only=dev",
+    "heroku-postbuild": "cd web && npm run build"
   },
   "author": "Onur Iltan",
   "license": "MIT",

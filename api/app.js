@@ -19,7 +19,7 @@ server.use(passport.initialize());
 
 // Connect to Mongo
 const dbAddress = process.env.MONGO_URL;
-mongoose.connect(dbAddress, { useNewUrlParser: true })
+mongoose.connect(dbAddress, { useNewUrlParser: true, useUnifiedTopology: true  })
     .then(() => console.log('MongoDB connected.'))
     .catch(err => console.log(err));
 
@@ -28,14 +28,16 @@ const app = require('./routes/api');
 const posts = require('./routes/api/posts/PostsService');
 const auth = require('./routes/api/auth/AuthService');
 const facebook = require('./routes/api/auth/FacebookService');
-const google = require('./routes/api/auth/GooglePlusService');
+// TODO : Update Google Auth
+// const google = require('./routes/api/auth/GooglePlusService');
 const user = require('./routes/api/auth/UserService');
 
 server.use('/api', app);
 server.use('/api/posts', posts);
 server.use('/api/auth', auth);
 server.use('/api/auth/facebook', facebook);
-server.use('/api/auth/google', google);
+// TODO : Update Google Auth
+// server.use('/api/auth/google', google);
 server.use('/api/user', user);
 
 if (process.env.NODE_ENV === 'production') {

@@ -6,9 +6,9 @@ package-lock.json
 node_modules
 /dist
 
-# local env files
-.env.local
-.env.*.local
+# Env
+.env
+
 
 # Log files
 npm-debug.log*
@@ -24,5 +24,3 @@ yarn-error.log*
 *.sln
 *.sw*
 
-# Env file
-/.env
