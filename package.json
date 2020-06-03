@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "nodemon api/app.js",
     "start": "node api/app.js",
-    "heroku-prebuild": "npm install npm@latest -g && cd web && npm install && npm install --only=dev",
-    "heroku-postbuild": "cd web && npm run build"
+    "heroku-prebuild": "npm install yarn && cd web && yarn && yarn install --production=false",
+    "heroku-postbuild": "cd web && yarn build"
   },
   "author": "Onur Iltan",
   "license": "MIT",
@@ -29,7 +29,8 @@
     "passport-facebook-token": "^3.3.0",
     "passport-google-plus-token": "^2.1.0",
     "serve-static": "^1.14.1",
-    "uniqid": "^5.0.3"
+    "uniqid": "^5.0.3",
+    "yarn": "^1.22.4"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
