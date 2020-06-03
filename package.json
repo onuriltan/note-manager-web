@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon api/app.js",
     "start": "node api/app.js",
-    "heroku-prebuild": "npm install yarn && cd web && yarn && yarn install --production=false",
+    "heroku-prebuild": "cd web && yarn && yarn install --production=false",
     "heroku-postbuild": "cd web && yarn build"
   },
   "author": "Onur Iltan",
