@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-  outputDir: path.resolve(__dirname, '../server/public'), // build all the assets inside server/public folder
+  outputDir: path.resolve(__dirname, '../api/public'), // build all the assets inside api/public folder
   pluginOptions: {
     'style-resources-loader': {
       preProcessor: 'scss',
