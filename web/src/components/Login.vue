@@ -75,7 +75,7 @@
 import {
   validateLogin,
   validateEmail,
-  validatePassword
+  validatePassword,
 } from "../helpers/validators";
 import FacebookLogin from "./FacebookLogin";
 import GoogleLogin from "./GoogleLogin";
@@ -85,20 +85,20 @@ export default {
   components: {
     FacebookLogin,
     // eslint-disable-next-line vue/no-unused-components
-    GoogleLogin
+    GoogleLogin,
   },
   data() {
     return {
       errors: [],
       fieldErrors: {
         email: null,
-        password: null
+        password: null,
       },
       email: "",
       password: "",
       loginClicked: false,
       isEmailEntered: false,
-      isPasswordEntered: false
+      isPasswordEntered: false,
     };
   },
   computed: {
@@ -124,7 +124,7 @@ export default {
         return false;
       }
       return null;
-    }
+    },
   },
   methods: {
     validateEmail() {
@@ -147,7 +147,7 @@ export default {
         setTimeout(async () => {
           const res = await this.$store.dispatch("login", {
             email: this.email,
-            password: this.password
+            password: this.password,
           });
           this.loginClicked = false;
           if (res.data.fieldErrors) {
@@ -158,8 +158,8 @@ export default {
           }
         }, 1000);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
