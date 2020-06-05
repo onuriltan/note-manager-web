@@ -31,26 +31,27 @@ export default {
     loginWithGoogle () {
       this.googleLoginClicked = true
       window.gapi.load('auth2', async function () {
+        // eslint-disable-next-line no-undef
         let auth2 = gapi.auth2.init({
           client_id: process.env.VUE_APP_GOOGLE_APP_ID,
           scope: 'profile'
-        });
+        })
         // Sign the user in, and then retrieve their ID.
-        let token = null;
+        let token = null
         await auth2.signIn()
-          .then(function() {
+          .then(function () {
             token = auth2.currentUser.get().Zi.access_token
           })
+          // eslint-disable-next-line handle-callback-err
           .catch(function (error) {
             this.googleLoginClicked = false
-          }.bind(this));
+          }.bind(this))
 
-        if(token !== null) {
+        if (token !== null) {
           await this.$store.dispatch('loginWithGoogle', auth2.currentUser.get().Zi.access_token)
         }
         this.googleLoginClicked = false
       }.bind(this))
-
     }
   }
 }

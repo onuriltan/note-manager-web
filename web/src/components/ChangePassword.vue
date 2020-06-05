@@ -60,11 +60,13 @@ export default {
       if (this.fieldErrors.oldPassword === null) return null
       if (this.fieldErrors.oldPassword === '') return true
       if (this.fieldErrors.oldPassword !== '') return false
+      return false
     },
     newPasswordCorrectState () {
       if (this.fieldErrors.newPassword === null) return null
       else if (this.fieldErrors.newPassword === '') return true
       else if (this.fieldErrors.newPassword !== '') return false
+      return false
     },
     isValidForm () {
       return this.fieldErrors.oldPassword === '' && this.fieldErrors.newPassword === ''
@@ -72,7 +74,7 @@ export default {
     changePasswordDisabled () {
       return (this.newPassword === null || this.newPassword === '') ||
              (this.oldPassword === null || this.oldPassword === '')
-    },
+    }
   },
   data () {
     return {

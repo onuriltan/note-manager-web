@@ -19,6 +19,7 @@ export default {
   mounted () {
     let appId = process.env.VUE_APP_FACEBOOK_APP_ID
     window.fbAsyncInit = function () {
+      // eslint-disable-next-line no-undef
       FB.init({
         appId: appId,
         autoLogAppEvents: true,

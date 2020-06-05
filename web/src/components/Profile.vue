@@ -22,17 +22,17 @@ export default {
   components: {
     ChangePassword
   },
-  created() {
+  created () {
     window.addEventListener('resize', this.handleResize)
   },
-  data() {
+  data () {
     return {
       alignTab: false
     }
   },
   methods: {
-    handleResize() {
-      this.alignTab = window.innerWidth > 768;
+    handleResize () {
+      this.alignTab = window.innerWidth > 768
     }
   }
 }

@@ -24,6 +24,7 @@ export default {
     if (promise !== undefined) {
       promise.then(_ => {
         // Autoplay started!
+      // eslint-disable-next-line handle-callback-err
       }).catch(error => {
         document.getElementById('audio').style.display = 'block'
       })

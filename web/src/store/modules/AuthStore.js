@@ -53,7 +53,6 @@ const AuthStore = {
       })
     },
 
-
     confirmUser (context, confirmationToken) {
       return new Promise(resolve => {
         authService.confirmUser(confirmationToken)
