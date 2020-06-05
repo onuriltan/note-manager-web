@@ -10,7 +10,8 @@
           show
           variant="danger"
           size="lg"
-        >{{error.msg}}</b-alert>
+          >{{ error.msg }}</b-alert
+        >
       </div>
       <b-form-group
         id="email"
@@ -45,7 +46,9 @@
         ></b-form-input>
       </b-form-group>
       <div style="font-weight: bold; margin: 30px 0; text-align: center">
-        <router-link to="/register">Dont have an account? Register from here!</router-link>
+        <router-link to="/register"
+          >Dont have an account? Register from here!</router-link
+        >
       </div>
       <b-button
         class="login-form__button"
@@ -73,86 +76,91 @@ import {
   validateLogin,
   validateEmail,
   validatePassword
-} from '../helpers/Validators'
-import FacebookLogin from './FacebookLogin'
-import GoogleLogin from './GoogleLogin'
+} from "../helpers/validators";
+import FacebookLogin from "./FacebookLogin";
+import GoogleLogin from "./GoogleLogin";
 
 export default {
-  name: 'LoginComponent',
+  name: "LoginComponent",
   components: {
     FacebookLogin,
+    // eslint-disable-next-line vue/no-unused-components
     GoogleLogin
   },
-  data () {
+  data() {
     return {
       errors: [],
       fieldErrors: {
         email: null,
         password: null
       },
-      email: '',
-      password: '',
+      email: "",
+      password: "",
       loginClicked: false,
       isEmailEntered: false,
       isPasswordEntered: false
-    }
+    };
   },
   computed: {
-    invalidEmailMessage () {
-      return this.fieldErrors.email
+    invalidEmailMessage() {
+      return this.fieldErrors.email;
     },
-    invalidPasswordMessage () {
-      return this.fieldErrors.password
+    invalidPasswordMessage() {
+      return this.fieldErrors.password;
     },
-    isValidForm () {
-      return this.fieldErrors.email === '' && this.fieldErrors.password === ''
+    isValidForm() {
+      return this.fieldErrors.email === "" && this.fieldErrors.password === "";
     },
-    emailCorrectState () {
-      if (this.isEmailEntered && this.invalidEmailMessage === '') return true
-      if (this.isEmailEntered && this.invalidEmailMessage !== '') return false
-      return null
+    emailCorrectState() {
+      if (this.isEmailEntered && this.invalidEmailMessage === "") return true;
+      if (this.isEmailEntered && this.invalidEmailMessage !== "") return false;
+      return null;
     },
-    passwordCorrectState () {
-      if (this.isPasswordEntered && this.invalidPasswordMessage === '') { return true }
-      if (this.isPasswordEntered && this.invalidPasswordMessage !== '') { return false }
-      return null
+    passwordCorrectState() {
+      if (this.isPasswordEntered && this.invalidPasswordMessage === "") {
+        return true;
+      }
+      if (this.isPasswordEntered && this.invalidPasswordMessage !== "") {
+        return false;
+      }
+      return null;
     }
   },
   methods: {
-    validateEmail () {
+    validateEmail() {
       setTimeout(() => {
-        this.isEmailEntered = true
-        this.fieldErrors.email = validateEmail(this.email)
-      }, 600)
+        this.isEmailEntered = true;
+        this.fieldErrors.email = validateEmail(this.email);
+      }, 600);
     },
-    validatePassword () {
+    validatePassword() {
       setTimeout(() => {
-        this.isPasswordEntered = true
-        this.fieldErrors.password = validatePassword(this.password)
-      }, 600)
+        this.isPasswordEntered = true;
+        this.fieldErrors.password = validatePassword(this.password);
+      }, 600);
     },
-    async login () {
-      this.errors = []
-      this.fieldErrors = validateLogin(this.email, this.password)
+    async login() {
+      this.errors = [];
+      this.fieldErrors = validateLogin(this.email, this.password);
       if (this.isValidForm) {
-        this.loginClicked = true
+        this.loginClicked = true;
         setTimeout(async () => {
-          const res = await this.$store.dispatch('login', {
+          const res = await this.$store.dispatch("login", {
             email: this.email,
             password: this.password
-          })
-          this.loginClicked = false
+          });
+          this.loginClicked = false;
           if (res.data.fieldErrors) {
-            this.fieldErrors = res.data.fieldErrors
+            this.fieldErrors = res.data.fieldErrors;
           }
           if (res.data.errors) {
-            this.errors = res.data.errors
+            this.errors = res.data.errors;
           }
-        }, 1000)
+        }, 1000);
       }
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">

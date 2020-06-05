@@ -11,33 +11,32 @@
       </b-tabs>
     </b-card>
   </div>
-
 </template>
 
 <script>
-import ChangePassword from './ChangePassword'
+import ChangePassword from "./ChangePassword";
 
 export default {
-  name: 'Profile',
+  name: "Profile",
   components: {
     ChangePassword
   },
-  created () {
-    window.addEventListener('resize', this.handleResize)
+  created() {
+    window.addEventListener("resize", this.handleResize);
   },
-  data () {
+  data() {
     return {
       alignTab: false
-    }
+    };
   },
   methods: {
-    handleResize () {
-      this.alignTab = window.innerWidth > 768
+    handleResize() {
+      this.alignTab = window.innerWidth > 768;
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-  @import "../styles/components/Profile";
+@import "../styles/components/Profile";
 </style>

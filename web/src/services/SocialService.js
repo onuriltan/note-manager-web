@@ -1,29 +1,31 @@
-import axios from 'axios'
+import axios from "axios";
 
-const url = process.env.VUE_APP_AUTH_URL
+const url = process.env.VUE_APP_AUTH_URL;
 
 class SocialService {
-  static loginWithFacebook (token) {
-    return new Promise(async (resolve) => {
+  static loginWithFacebook(token) {
+    return new Promise(async resolve => {
       try {
-        const res = await axios.post(`${url}/facebook`, { access_token: token })
-        resolve(res)
+        const res = await axios.post(`${url}/facebook`, {
+          access_token: token
+        });
+        resolve(res);
       } catch (e) {
-        resolve(e.response)
+        resolve(e.response);
       }
-    })
+    });
   }
 
-  static loginWithGoogle (token) {
-    return new Promise(async (resolve) => {
+  static loginWithGoogle(token) {
+    return new Promise(async resolve => {
       try {
-        const res = await axios.post(`${url}/google`, { access_token: token })
-        resolve(res)
+        const res = await axios.post(`${url}/google`, { access_token: token });
+        resolve(res);
       } catch (e) {
-        resolve(e.response)
+        resolve(e.response);
       }
-    })
+    });
   }
 }
 
-export default SocialService
+export default SocialService;
