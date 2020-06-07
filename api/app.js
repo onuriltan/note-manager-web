@@ -24,21 +24,21 @@ mongoose
   .catch((err) => console.log(err));
 
 // Routes
-const app = require("./routes/api");
-const posts = require("./routes/api/posts/PostsService");
-const auth = require("./routes/api/auth/AuthService");
-const facebook = require("./routes/api/auth/FacebookService");
+const app = require("./src/modules");
+const posts = require("./src/modules/posts/service/posts");
+const auth = require("./src/modules/auth/service/auth");
+const facebook = require("./src/modules/auth/service/facebook");
+const user = require("./src/modules/auth/service/user");
 // TODO : Update Google Auth
 // const google = require('./routes/api/auth/GooglePlusService');
-const user = require("./routes/api/auth/UserService");
 
 server.use("/api", app);
 server.use("/api/posts", posts);
 server.use("/api/auth", auth);
 server.use("/api/auth/facebook", facebook);
+server.use("/api/user", user);
 // TODO : Update Google Auth
 // server.use('/api/auth/google', google);
-server.use("/api/user", user);
 
 if (process.env.NODE_ENV === "production") {
   // Static folder

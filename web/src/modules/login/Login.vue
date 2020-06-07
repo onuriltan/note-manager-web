@@ -10,7 +10,8 @@
           show
           variant="danger"
           size="lg"
-        >{{ error.msg }}</b-alert>
+          >{{ error.msg }}</b-alert
+        >
       </div>
       <b-form-group
         id="email"
@@ -45,7 +46,9 @@
         ></b-form-input>
       </b-form-group>
       <div style="font-weight: bold; margin: 30px 0; text-align: center">
-        <router-link to="/register">Dont have an account? Register from here!</router-link>
+        <router-link to="/register"
+          >Dont have an account? Register from here!</router-link
+        >
       </div>
       <b-button
         class="login-form__button"

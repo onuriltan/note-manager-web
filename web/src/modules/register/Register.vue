@@ -1,6 +1,10 @@
 <template>
   <div class="login-container">
-    <b-form class="login-form" v-if="!emailAccepted" v-on:submit.prevent="register()">
+    <b-form
+      class="login-form"
+      v-if="!emailAccepted"
+      v-on:submit.prevent="register()"
+    >
       <h2 class="login-form__header">Register</h2>
       <div style="font-weight: bold; margin-bottom: 20px; text-align: center">
         <router-link to="/login">Go back to login page!</router-link>
@@ -13,7 +17,8 @@
           show
           variant="danger"
           size="lg"
-        >{{ error.msg }}</b-alert>
+          >{{ error.msg }}</b-alert
+        >
       </div>
       <div class="login-form__errors" v-if="messages.length > 0">
         <b-alert
@@ -23,9 +28,15 @@
           show
           variant="success"
           size="lg"
-        >{{ message.msg }}</b-alert>
+          >{{ message.msg }}</b-alert
+        >
       </div>
-      <b-form-group id="email" label="Email" :invalid-feedback="invalidEmail" label-for="email">
+      <b-form-group
+        id="email"
+        label="Email"
+        :invalid-feedback="invalidEmail"
+        label-for="email"
+      >
         <b-form-input
           id="email"
           type="email"
