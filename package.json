@@ -35,8 +35,5 @@
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
-  },
-  "resolutions": {
-    "eslint-loader": "2.1.2"
   }
 }
