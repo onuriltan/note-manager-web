@@ -1,6 +1,6 @@
 const express = require("express");
-const JwtOperations = require("../../../config/JwtOperations");
-const PostsDbService = require("../repository/posts");
+const JwtOperations = require("../../../config/jwt");
+const PostsRepository = require("../repository/posts");
 const router = express.Router();
 
 router.get("/", JwtOperations.verifyToken, async (req, res) => {
@@ -20,7 +20,7 @@ router.get("/", JwtOperations.verifyToken, async (req, res) => {
       page: parseInt(page, 10) || 1,
       limit: parseInt(perPage, 10) || 10,
     };
-    const notes = await PostsDbService.findNotes(email, options);
+    const notes = await PostsRepository.findNotes(email, options);
     res.send(notes);
   }
 });
@@ -43,7 +43,7 @@ router.get(
         limit: parseInt(perPage, 10) || 10,
       };
 
-      const notes = await PostsDbService.findNotesBetweenDatesandKeyword(
+      const notes = await PostsRepository.findNotesBetweenDatesandKeyword(
         fromDate,
         toDate,
         keyword,
@@ -61,7 +61,7 @@ router.post("/", JwtOperations.verifyToken, async (req, res) => {
     const { user } = authData;
     let email = getEmail(user);
     const { text } = req.body;
-    const newPost = await PostsDbService.createPost(text, email, res);
+    const newPost = await PostsRepository.createPost(text, email, res);
     res.status(201).send(newPost);
   }
 });
@@ -73,7 +73,7 @@ router.put("/:id", JwtOperations.verifyToken, async (req, res) => {
     let email = getEmail(user);
     const { text } = req.body;
     const id = req.params.id;
-    const updatedPost = await PostsDbService.editPost(id, email, text);
+    const updatedPost = await PostsRepository.editPost(id, email, text);
     res.send(updatedPost);
   }
 });
@@ -84,7 +84,7 @@ router.delete("/:id", JwtOperations.verifyToken, async (req, res) => {
     const { user } = authData;
     let email = getEmail(user);
     const id = req.params.id;
-    const isUpdated = await PostsDbService.deletePost(email, id);
+    const isUpdated = await PostsRepository.deletePost(email, id);
     isUpdated ? res.status(201).send() : res.status(400).send();
   }
 });

@@ -3,8 +3,8 @@ const router = express.Router();
 const AuthValidation = require("../validation/auth");
 const AuthDbService = require("../repository/auth");
 const bcrypt = require("bcrypt");
-const JwtOperations = require("../../../config/JwtOperations");
-const MailOperations = require("../../../config/MailOperations");
+const JwtOperations = require("../../../config/jwt");
+const MailOperations = require("../../../config/mail");
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;

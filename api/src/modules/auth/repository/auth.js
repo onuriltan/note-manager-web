@@ -1,4 +1,4 @@
-const User = require("../entity/user.entity");
+const User = require("../entity/user");
 const mongodb = require("mongodb");
 const bcrypt = require("bcrypt");
 const uniqid = require("uniqid");

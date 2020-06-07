@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const UserDbService = require("../repository/user");
 const UserValidation = require("../validation/user");
-const JwtOperations = require("../../../config/JwtOperations");
+const JwtOperations = require("../../../config/jwt");
 const _ = require("lodash");
 
 router.get("/getUser", JwtOperations.verifyToken, async (req, res) => {

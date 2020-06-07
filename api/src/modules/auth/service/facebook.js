@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const JwtOperations = require("../../../config/JwtOperations");
+const JwtOperations = require("../../../config/jwt");
 
-const User = require("../entity/user.entity");
+const User = require("../entity/user");
 
 const passport = require("passport");
 const FacebookTokenStrategy = require("passport-facebook-token");

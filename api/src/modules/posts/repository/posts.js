@@ -1,5 +1,5 @@
-const Post = require("../entity/post");
 const mongodb = require("mongodb");
+const PostEntity = require("../entity/post");
 
 const createPost = async (text, email) => {
   const newPost = new Post({
@@ -12,7 +12,7 @@ const createPost = async (text, email) => {
 };
 
 const findNotes = async (email, options) => {
-  return await Post.paginate({ email }, options);
+  return await PostEntity.paginate({ email }, options);
 };
 
 const findNotesBetweenDatesandKeyword = async (
@@ -28,12 +28,15 @@ const findNotesBetweenDatesandKeyword = async (
     fromDate.toString() === "Invalid Date" &&
     toDate.toString() === "Invalid Date"
   ) {
-    return await Post.paginate({ email, text: { $regex: regex } }, options);
+    return await PostEntity.paginate(
+      { email, text: { $regex: regex } },
+      options
+    );
   } else if (
     fromDate.toString() === "Invalid Date" &&
     toDate.toString() !== "Invalid Date"
   ) {
-    return await Post.paginate(
+    return await PostEntity.paginate(
       { email, text: { $regex: regex }, createdAt: { $lte: toDate } },
       options
     );
@@ -41,12 +44,12 @@ const findNotesBetweenDatesandKeyword = async (
     fromDate.toString() !== "Invalid Date" &&
     toDate.toString() === "Invalid Date"
   ) {
-    return await Post.paginate(
+    return await PostEntity.paginate(
       { email, text: { $regex: regex }, createdAt: { $gte: fromDate } },
       options
     );
   } else {
-    return await Post.paginate(
+    return await Post.PostEntity(
       {
         email,
         text: { $regex: regex },
