@@ -13,7 +13,8 @@
         show
         variant="danger"
         size="lg"
-      >{{ error.msg }}</b-alert>
+        >{{ error.msg }}</b-alert
+      >
     </div>
     <div class="login-form__errors" v-if="messages.length > 0">
       <b-alert
@@ -23,7 +24,8 @@
         show
         variant="success"
         size="lg"
-      >{{ message.msg }}</b-alert>
+        >{{ message.msg }}</b-alert
+      >
     </div>
     <h2 class="login-form__header">Welcome to Note Manager</h2>
     <p>
