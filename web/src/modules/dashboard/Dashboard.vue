@@ -50,7 +50,7 @@ import Notes from "../notes/Notes";
 export default {
   name: "DashboardComponent",
   components: {
-    Notes
+    Notes,
   },
   data() {
     return {
@@ -59,19 +59,19 @@ export default {
         total: 0,
         limit: 0,
         page: 0,
-        pages: 0
+        pages: 0,
       },
       currentPage: 1,
       error: "",
       text: "",
       isLoading: false,
-      searchClicked: true
+      searchClicked: true,
     };
   },
   watch: {
     "$route.params.pageNumber": function() {
       this.getNotes(1000);
-    }
+    },
   },
   methods: {
     toPage(pageNum) {
@@ -121,11 +121,11 @@ export default {
         }
         this.isLoading = false;
       }, seconds);
-    }
+    },
   },
   beforeMount() {
     this.getNotes(1000);
-  }
+  },
 };
 </script>
 

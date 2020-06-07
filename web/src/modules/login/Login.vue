@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <b-form class="login-form" v-on:submit.prevent="login()">
+    <b-form class="login-form" v-on:submit.prevent="loginWithEmail()">
       <h2 class="login-form__header">Login</h2>
       <div class="login-form__errors" v-if="errors.length > 0">
         <b-alert
@@ -143,7 +143,7 @@ export default {
         this.fieldErrors.password = validatePassword(this.password);
       }, 600);
     },
-    async login() {
+    async loginWithEmail() {
       this.errors = [];
       this.fieldErrors = validateLogin(this.email, this.password);
       if (this.isValidForm) {
