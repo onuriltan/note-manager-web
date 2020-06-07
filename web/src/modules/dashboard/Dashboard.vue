@@ -30,8 +30,7 @@
         :number-of-pages="this.pagination.pages"
         v-model="currentPage"
         use-router
-      >
-      </b-pagination-nav>
+      ></b-pagination-nav>
 
       <Notes
         :editPost="editPost"
@@ -45,8 +44,8 @@
 </template>
 
 <script>
-import NotesService from "../services/NotesService";
-import Notes from "../components/Notes";
+import NotesService from "../../services/notes.service";
+import Notes from "../notes/Notes";
 
 export default {
   name: "DashboardComponent",
@@ -130,7 +129,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import "../styles/components/Dashboard";
+@import "./Dashboard.scss";
 </style>

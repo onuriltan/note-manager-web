@@ -10,8 +10,7 @@
           show
           variant="danger"
           size="lg"
-          >{{ error.msg }}</b-alert
-        >
+        >{{ error.msg }}</b-alert>
       </div>
       <b-form-group
         id="email"
@@ -46,9 +45,7 @@
         ></b-form-input>
       </b-form-group>
       <div style="font-weight: bold; margin: 30px 0; text-align: center">
-        <router-link to="/register"
-          >Dont have an account? Register from here!</router-link
-        >
+        <router-link to="/register">Dont have an account? Register from here!</router-link>
       </div>
       <b-button
         class="login-form__button"
@@ -75,30 +72,30 @@
 import {
   validateLogin,
   validateEmail,
-  validatePassword,
-} from "../helpers/validators";
-import FacebookLogin from "./FacebookLogin";
-import GoogleLogin from "./GoogleLogin";
+  validatePassword
+} from "../../helpers/validators";
+import FacebookLogin from "../facebook-login/FacebookLogin";
+import GoogleLogin from "../google-login/GoogleLogin";
 
 export default {
   name: "LoginComponent",
   components: {
     FacebookLogin,
     // eslint-disable-next-line vue/no-unused-components
-    GoogleLogin,
+    GoogleLogin
   },
   data() {
     return {
       errors: [],
       fieldErrors: {
         email: null,
-        password: null,
+        password: null
       },
       email: "",
       password: "",
       loginClicked: false,
       isEmailEntered: false,
-      isPasswordEntered: false,
+      isPasswordEntered: false
     };
   },
   computed: {
@@ -124,7 +121,7 @@ export default {
         return false;
       }
       return null;
-    },
+    }
   },
   methods: {
     validateEmail() {
@@ -147,7 +144,7 @@ export default {
         setTimeout(async () => {
           const res = await this.$store.dispatch("login", {
             email: this.email,
-            password: this.password,
+            password: this.password
           });
           this.loginClicked = false;
           if (res.data.fieldErrors) {
@@ -158,11 +155,11 @@ export default {
           }
         }, 1000);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style scoped lang="scss">
-@import "../styles/components/Login";
+@import "./Login";
 </style>

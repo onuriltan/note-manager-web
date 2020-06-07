@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import ChangePassword from "./ChangePassword";
+import ChangePassword from "../change-password/ChangePassword";
 
 export default {
   name: "Profile",
@@ -38,5 +38,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../styles/components/Profile";
+@import "./Profile";
 </style>

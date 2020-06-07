@@ -13,19 +13,12 @@
       justify-content: center;
       align-items: flex-end;
       flex-flow: wrap;
-      &__item {
-      }
-      &__button {
-      }
-
     }
   }
 }
 
 @media screen and (max-width: 768px) {
   .history {
-    &__header {
-    }
     &__form {
       display: flex;
       justify-content: center;
@@ -44,4 +37,3 @@
     }
   }
 }
-

@@ -1,10 +1,6 @@
 <template>
   <div class="login-container">
-    <b-form
-      class="login-form"
-      v-if="!emailAccepted"
-      v-on:submit.prevent="register()"
-    >
+    <b-form class="login-form" v-if="!emailAccepted" v-on:submit.prevent="register()">
       <h2 class="login-form__header">Register</h2>
       <div style="font-weight: bold; margin-bottom: 20px; text-align: center">
         <router-link to="/login">Go back to login page!</router-link>
@@ -12,33 +8,24 @@
       <div class="login-form__errors" v-if="errors.length > 0">
         <b-alert
           v-bind:key="index"
-          class="login-form__errors__error "
+          class="login-form__errors__error"
           v-for="(error, index) in errors"
           show
           variant="danger"
           size="lg"
-        >
-          {{ error.msg }}
-        </b-alert>
+        >{{ error.msg }}</b-alert>
       </div>
       <div class="login-form__errors" v-if="messages.length > 0">
         <b-alert
           v-bind:key="index"
-          class="login-form__errors__error "
+          class="login-form__errors__error"
           v-for="(message, index) in messages"
           show
           variant="success"
           size="lg"
-        >
-          {{ message.msg }}
-        </b-alert>
+        >{{ message.msg }}</b-alert>
       </div>
-      <b-form-group
-        id="email"
-        label="Email"
-        :invalid-feedback="invalidEmail"
-        label-for="email"
-      >
+      <b-form-group id="email" label="Email" :invalid-feedback="invalidEmail" label-for="email">
         <b-form-input
           id="email"
           type="email"
@@ -46,8 +33,7 @@
           :state="emailCorrectState"
           class="login-form__input"
           size="lg"
-        >
-        </b-form-input>
+        ></b-form-input>
       </b-form-group>
       <b-form-group
         id="password"
@@ -62,8 +48,7 @@
           v-model="password"
           :state="passwordCorrectState"
           size="lg"
-        >
-        </b-form-input>
+        ></b-form-input>
       </b-form-group>
       <b-form-group
         id="password2"
@@ -78,8 +63,7 @@
           v-model="password2"
           :state="password2CorrectState"
           size="lg"
-        >
-        </b-form-input>
+        ></b-form-input>
       </b-form-group>
       <b-button
         class="login-form__button"
@@ -92,9 +76,7 @@
           class="fa fa-refresh fa-spin hide--button--loading--icon"
           :class="{ 'show--button--loading--icon': registerValidated }"
         ></i>
-        <div style="margin: 0 5px;">
-          Register
-        </div>
+        <div style="margin: 0 5px;">Register</div>
       </b-button>
     </b-form>
 
@@ -108,8 +90,8 @@
 </template>
 
 <script>
-import { validateRegister } from "../helpers/validators";
-import ResendConfirmation from "./ResendConfirmation";
+import { validateRegister } from "../../helpers/validators";
+import ResendConfirmation from "../resend-confirmation/ResendConfirmation";
 
 export default {
   name: "RegisterComponent",
@@ -201,5 +183,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../styles/components/Login";
+@import "../login/Login";
 </style>

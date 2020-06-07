@@ -50,5 +50,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../styles/components/Header.scss";
+@import "./Header.scss";
 </style>

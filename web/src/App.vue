@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import HeaderComponent from "./components/Header";
-import SessionExpired from "./components/SessionExpired";
+import HeaderComponent from "./modules/header/Header";
+import SessionExpired from "./modules/session-expired/SessionExpired";
 export default {
   name: "App",
   components: {

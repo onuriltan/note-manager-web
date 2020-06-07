@@ -46,8 +46,7 @@
           type="submit"
           class="history__form__content__button mr-2 ml-2 mb-3"
           variant="success"
-          >Search</b-button
-        >
+        >Search</b-button>
       </div>
     </b-form>
 
@@ -76,8 +75,8 @@
 </template>
 
 <script>
-import NotesService from "../services/NotesService";
-import Notes from "../components/Notes";
+import NotesService from "../../services/notes.service";
+import Notes from "../notes/Notes";
 
 export default {
   name: "HistoryComponent",
@@ -165,5 +164,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../styles/components/History";
+@import "./History";
 </style>

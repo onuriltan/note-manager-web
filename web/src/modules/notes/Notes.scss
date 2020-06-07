@@ -43,22 +43,10 @@
 
 @media screen and (max-width: 768px) {
   .notes {
-    &__empty {
-      &__image {
-      }
-
-      &__message {
-      }
-    }
     &__content {
-      &__cards {
-      }
       &__card {
         max-width: 10rem;
         min-width: 10rem;
-        &__footer {
-
-        }
       }
     }
   }

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon api/app.js",
+    "prod": "NODE_ENV=production node api/app.js",
     "start": "node api/app.js",
     "heroku-prebuild": "cd web && yarn && yarn install --production=false",
     "heroku-postbuild": "cd web && yarn build"

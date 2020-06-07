@@ -8,26 +8,22 @@
     <div class="login-form__errors" v-if="errors.length > 0">
       <b-alert
         v-bind:key="index"
-        class="login-form__errors__error "
+        class="login-form__errors__error"
         v-for="(error, index) in errors"
         show
         variant="danger"
         size="lg"
-      >
-        {{ error.msg }}
-      </b-alert>
+      >{{ error.msg }}</b-alert>
     </div>
     <div class="login-form__errors" v-if="messages.length > 0">
       <b-alert
         v-bind:key="index"
-        class="login-form__errors__error "
+        class="login-form__errors__error"
         v-for="(message, index) in messages"
         show
         variant="success"
         size="lg"
-      >
-        {{ message.msg }}
-      </b-alert>
+      >{{ message.msg }}</b-alert>
     </div>
     <h2 class="login-form__header">Welcome to Note Manager</h2>
     <p>
@@ -47,9 +43,7 @@
           'show--button--loading--icon': resentConfirmationEmailClicked
         }"
       ></i>
-      <div style="margin: 0 5px;">
-        Resend Confirmation Link
-      </div>
+      <div style="margin: 0 5px;">Resend Confirmation Link</div>
     </b-button>
   </b-form>
 </template>
@@ -96,5 +90,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../styles/components/Login";
+@import "../login/Login";
 </style>

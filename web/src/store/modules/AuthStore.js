@@ -1,5 +1,5 @@
-import authService from "../../services/AuthService";
-import socialService from "../../services/SocialService";
+import authService from "../../services/auth.service";
+import socialService from "../../services/social.service";
 
 import router from "../../router";
 import jwtDecode from "jwt-decode";
