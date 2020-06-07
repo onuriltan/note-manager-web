@@ -101,13 +101,14 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import { validateRegister } from "../../helpers/validators";
 import ResendConfirmation from "../resend-confirmation/ResendConfirmation";
 
 export default {
   name: "RegisterComponent",
   components: {
-    ResendConfirmation
+    ResendConfirmation,
   },
   data() {
     return {
@@ -116,14 +117,14 @@ export default {
       fieldErrors: {
         email: "",
         password: "",
-        password2: ""
+        password2: "",
       },
       email: "",
       password: "",
       password2: "",
       registerClicked: false,
       registerValidated: false,
-      emailAccepted: false
+      emailAccepted: false,
     };
   },
   computed: {
@@ -157,9 +158,12 @@ export default {
       if (this.registerClicked && this.invalidPassword2 === "") return true;
       if (this.registerClicked && this.invalidPassword2 !== "") return false;
       return null;
-    }
+    },
   },
   methods: {
+    ...mapActions({
+      register: "auth/register",
+    }),
     async register() {
       this.errors = [];
       this.messages = [];
@@ -171,10 +175,10 @@ export default {
       this.registerClicked = true;
       if (this.isValidForm) {
         this.registerValidated = true;
-        const res = await this.$store.dispatch("register", {
+        const res = await this.register({
           email: this.email,
           password: this.password,
-          password2: this.password2
+          password2: this.password2,
         });
         if (res.data.errors) {
           this.registerClicked = false;
@@ -188,8 +192,8 @@ export default {
           this.emailAccepted = true;
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

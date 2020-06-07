@@ -18,7 +18,6 @@
           >Notes History</router-link
         >
       </b-navbar-nav>
-      <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <b-dropdown right text="Account" class="m-md-2">
           <b-dropdown-item to="/profile"
@@ -34,18 +33,20 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+
 export default {
   name: "HeaderComponent",
   computed: {
-    isAuthenticated() {
-      return this.$store.state.AuthStore.isAuthenticated;
-    }
+    ...mapGetters({
+      isAuthenticated: "auth/isAuthenticated",
+    }),
   },
   methods: {
-    async logout() {
-      await this.$store.dispatch("logout");
-    }
-  }
+    ...mapActions({
+      logout: "auth/logout",
+    }),
+  },
 };
 </script>
 

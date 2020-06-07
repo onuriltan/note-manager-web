@@ -18,17 +18,19 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "SessionExpired",
   computed: {
-    sessionExpired() {
-      return this.$store.state.AuthStore.sessionExpired;
-    }
+    ...mapGetters({
+      sessionExpired: "auth/sessionExpired",
+    }),
   },
   watch: {
     // eslint-disable-next-line no-unused-vars
-    sessionExpired(oldValue, newValue) {}
-  }
+    sessionExpired(oldValue, newValue) {},
+  },
 };
 </script>
 

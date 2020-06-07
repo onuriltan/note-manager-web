@@ -6,97 +6,101 @@ import jwtDecode from "jwt-decode";
 
 const state = {
   isAuthenticated: false,
-  sessionExpired: false
+  sessionExpired: false,
 };
 
-const AuthStore = {
+const auth = {
+  namespaced: true,
   state,
   getters: {
     isAuthenticated() {
       return state.isAuthenticated;
-    }
+    },
+    sessionExpired() {
+      return state.sessionExpired;
+    },
   },
   actions: {
     logout(context) {
       context.commit("deleteToken");
     },
     login(context, credentials) {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         authService
           .login(credentials)
-          .then(response => {
+          .then((response) => {
             context.commit("updateIsAuthenticated", response);
             return resolve(response);
           })
-          .catch(response => {
+          .catch((response) => {
             return resolve(response);
           });
       });
     },
 
     loginWithFacebook(context, token) {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         socialService
           .loginWithFacebook(token)
-          .then(response => {
+          .then((response) => {
             context.commit("updateIsAuthenticated", response);
             return resolve(response);
           })
-          .catch(response => {
+          .catch((response) => {
             return resolve(response);
           });
       });
     },
 
     loginWithGoogle(context, token) {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         socialService
           .loginWithGoogle(token)
-          .then(response => {
+          .then((response) => {
             context.commit("updateIsAuthenticated", response);
             return resolve(response);
           })
-          .catch(response => {
+          .catch((response) => {
             return resolve(response);
           });
       });
     },
 
     confirmUser(context, confirmationToken) {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         authService
           .confirmUser(confirmationToken)
-          .then(response => {
+          .then((response) => {
             context.commit("updateIsAuthenticated", response);
             return resolve(response);
           })
-          .catch(response => {
+          .catch((response) => {
             return resolve(response);
           });
       });
     },
 
     register(context, credentials) {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         authService
           .register(credentials)
-          .then(response => {
+          .then((response) => {
             return resolve(response);
           })
-          .catch(response => {
+          .catch((response) => {
             return resolve(response);
           });
       });
     },
 
     resendConfirmationEmail(context, credentials) {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         authService
           .resendConfirmationEmail(credentials)
-          .then(response => {
+          .then((response) => {
             return resolve(response);
           })
-          .catch(response => {
+          .catch((response) => {
             return resolve(response);
           });
       });
@@ -108,7 +112,7 @@ const AuthStore = {
 
     checkIsAuthenticated(context) {
       context.commit("checkIsAuthenticated");
-    }
+    },
   },
   mutations: {
     deleteToken(state) {
@@ -153,13 +157,16 @@ const AuthStore = {
       let expiration = null;
       if (token != null) {
         expiration = jwtDecode(token).exp;
+      } else {
+        state.isAuthenticated = false;
+        state.sessionExpired = false;
       }
       if (expiration != null && parseInt(expiration) - unixTimeStamp > 0) {
         state.isAuthenticated = true;
         state.sessionExpired = false;
       }
-    }
-  }
+    },
+  },
 };
 
-export default AuthStore;
+export default auth;

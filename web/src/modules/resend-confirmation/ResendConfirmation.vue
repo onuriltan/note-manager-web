@@ -42,7 +42,7 @@
       <i
         class="fa fa-refresh fa-spin hide--button--loading--icon"
         :class="{
-          'show--button--loading--icon': resentConfirmationEmailClicked
+          'show--button--loading--icon': resentConfirmationEmailClicked,
         }"
       ></i>
       <div style="margin: 0 5px;">Resend Confirmation Link</div>
@@ -51,31 +51,35 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "ResendConfirmation",
   props: {
     emailAccepted: Boolean,
     email: String,
     password: String,
-    password2: String
+    password2: String,
   },
   data() {
     return {
       errors: [],
       messages: [],
-      resentConfirmationEmailClicked: false
+      resentConfirmationEmailClicked: false,
     };
   },
   methods: {
+    ...mapActions({
+      resendConfirmationEmail: "auth/resendConfirmationEmail",
+    }),
     resendConfirmationEmail() {
       this.errors = [];
       this.messages = [];
       this.resentConfirmationEmailClicked = true;
       setTimeout(async () => {
-        const res = await this.$store.dispatch("resendConfirmationEmail", {
+        const res = await this.resendConfirmationEmail({
           email: this.email,
           password: this.password,
-          password2: this.password2
+          password2: this.password2,
         });
         if (res.data.errors) {
           this.resentConfirmationEmailClicked = false;
@@ -86,8 +90,8 @@ export default {
           this.messages = res.data.messages;
         }
       }, 2000);
-    }
-  }
+    },
+  },
 };
 </script>
 
