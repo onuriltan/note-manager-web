@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const AuthValidation = require("./validation/AuthValidation");
-const AuthDbService = require("./db/AuthDbService");
+const AuthValidation = require("../validation/auth");
+const AuthDbService = require("../repository/auth");
 const bcrypt = require("bcrypt");
-const JwtOperations = require("../../config/JwtOperations");
-const MailOperations = require("../../config/MailOperations");
+const JwtOperations = require("../../../config/JwtOperations");
+const MailOperations = require("../../../config/MailOperations");
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;

@@ -1,6 +1,6 @@
 const express = require("express");
-const JwtOperations = require("../../config/JwtOperations");
-const PostsDbService = require("./db/PostsDbService");
+const JwtOperations = require("../../../config/JwtOperations");
+const PostsDbService = require("../repository/posts");
 const router = express.Router();
 
 router.get("/", JwtOperations.verifyToken, async (req, res) => {
