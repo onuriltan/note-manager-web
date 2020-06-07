@@ -24,13 +24,13 @@ mongoose
   .catch((err) => console.log(err));
 
 // Routes
-const app = require("./routes/api");
-const posts = require("./routes/api/posts/PostsService");
-const auth = require("./routes/api/auth/AuthService");
-const facebook = require("./routes/api/auth/FacebookService");
+const app = require("./src/modules");
+const posts = require("./src/modules/posts/PostsService");
+const auth = require("./src/modules/auth/auth.service");
+const facebook = require("./src/modules/auth/facebook.service");
 // TODO : Update Google Auth
-// const google = require('./routes/api/auth/GooglePlusService');
-const user = require("./routes/api/auth/UserService");
+// const google = require('./routes/api/auth/googleplus.service');
+const user = require("./src/modules/auth/user.service");
 
 server.use("/api", app);
 server.use("/api/posts", posts);
