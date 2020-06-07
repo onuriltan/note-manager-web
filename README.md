@@ -15,11 +15,7 @@ the security.
 
 I have used Sass with BEM architecture, also I used bootstrap with Vue-Bootstrap.
 
-In the front-end I have used Vue.js and Vuex, in the last year
-I was using React.js with its other packages like React-Router
-and for the state management Redux.
-I'm also using Vue.js in my current company so this app is kind
-of a practice for that.
+In the front-end I have used Vue.js and Vuex.
 
 ## How to Use
 
@@ -62,13 +58,13 @@ their credentials in .env file.
 
 ### Development
 
-To run Node.js server, go to root folder and run `npm run dev`.
+To run Node.js server, go to root folder and run `yarn dev`.
 
-To run the Vue CLI client, go to client folder and run `npm run serve`.
+To run the Vue CLI client, go to client folder and run `yarn dev`.
 
 ### Production
 
 To run the Node.js server with public distribution folder,
 
-1. Go to client folder and run `npm run build` to create dist folder.
-2. Go to root folder and run `npm run start` .
+1. Go to client folder and run `yarn build` to create public folder.
+2. Go to root folder and run `yarn start` .
