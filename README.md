@@ -66,5 +66,5 @@ To run the Vue CLI client, go to client folder and run `yarn dev`.
 
 To run the Node.js server with public distribution folder,
 
-1. Go to client folder and run `yarn build` to create dist folder.
+1. Go to client folder and run `yarn build` to create public folder.
 2. Go to root folder and run `yarn start` .
