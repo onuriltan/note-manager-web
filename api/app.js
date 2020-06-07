@@ -28,17 +28,17 @@ const app = require("./src/modules");
 const posts = require("./src/modules/posts/service/posts");
 const auth = require("./src/modules/auth/service/auth");
 const facebook = require("./src/modules/auth/service/facebook");
-// TODO : Update Google Auth
-// const google = require('./routes/api/auth/googleplus.service');
 const user = require("./src/modules/auth/service/user");
+// TODO : Update Google Auth
+// const google = require('./routes/api/auth/GooglePlusService');
 
 server.use("/api", app);
 server.use("/api/posts", posts);
 server.use("/api/auth", auth);
 server.use("/api/auth/facebook", facebook);
+server.use("/api/user", user);
 // TODO : Update Google Auth
 // server.use('/api/auth/google', google);
-server.use("/api/user", user);
 
 if (process.env.NODE_ENV === "production") {
   // Static folder
