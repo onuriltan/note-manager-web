@@ -2,7 +2,7 @@ const mongodb = require("mongodb");
 const PostEntity = require("../entity/post");
 
 const createPost = async (text, email) => {
-  const newPost = new Post({
+  const newPost = new PostEntity({
     text,
     email,
   });
@@ -49,7 +49,7 @@ const findNotesBetweenDatesandKeyword = async (
       options
     );
   } else {
-    return await Post.PostEntity(
+    return await PostEntity.paginate(
       {
         email,
         text: { $regex: regex },
@@ -61,7 +61,7 @@ const findNotesBetweenDatesandKeyword = async (
 };
 
 const editPost = async (id, email, text) => {
-  await Post.findOneAndUpdate(
+  await PostEntity.findOneAndUpdate(
     { _id: id, email: email },
     { text: text, editedAt: new Date() },
     (err, updatedPost) => {
@@ -73,12 +73,13 @@ const editPost = async (id, email, text) => {
 
 const deletePost = async (email, id) => {
   let isUpdated = false;
-  await Post.deleteOne({ _id: new mongodb.ObjectID(id), email: email }).then(
-    () => {
-      // in mongo id is a special type of ObjectID
-      isUpdated = true;
-    }
-  );
+  await PostEntity.deleteOne({
+    _id: new mongodb.ObjectID(id),
+    email: email,
+  }).then(() => {
+    // in mongo id is a special type of ObjectID
+    isUpdated = true;
+  });
   return isUpdated;
 };
 

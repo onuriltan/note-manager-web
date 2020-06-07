@@ -1,6 +1,6 @@
 <template>
   <b-btn
-    @click="loginWithFacebook()"
+    @click="loginWithFB()"
     class="facebook-button"
     :class="{ 'button--loading': fbLoginClicked }"
   >
@@ -13,11 +13,12 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "FacebookLogin",
   data() {
     return {
-      fbLoginClicked: false
+      fbLoginClicked: false,
     };
   },
   mounted() {
@@ -28,7 +29,7 @@ export default {
         appId: appId,
         autoLogAppEvents: true,
         xfbml: true,
-        version: "v3.2"
+        version: "v3.2",
       });
     };
 
@@ -45,25 +46,26 @@ export default {
     })(document, "script", "facebook-jssdk");
   },
   methods: {
-    loginWithFacebook() {
+    ...mapActions({
+      loginWithFacebook: "auth/loginWithFacebook",
+    }),
+    loginWithFB() {
       this.fbLoginClicked = true;
-      // eslint-disable-next-line no-undef
+      // eslint-disable-next-line
       FB.login(
         async function(response) {
-          if (response.authResponse) {
-            await this.$store.dispatch(
-              "loginWithFacebook",
-              response.authResponse.accessToken
-            );
+          if (response.authResponse && response.authResponse.accessToken) {
+            this.loginWithFacebook(response.authResponse.accessToken);
           } else {
+            // TODO: handle this situation
             console.log("User cancelled login or did not fully authorize.");
           }
           this.fbLoginClicked = false;
         }.bind(this),
         { scope: "public_profile,email", return_scopes: true }
       );
-    }
-  }
+    },
+  },
 };
 </script>
 

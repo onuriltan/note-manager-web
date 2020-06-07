@@ -1,16 +1,16 @@
 import axios from "axios";
-import Store from "../store/index";
+import AuthStore from "../store/modules/auth.store";
 
 const url = process.env.VUE_APP_USER_URL;
 
 class UserService {
   // eslint-disable-next-line no-unused-vars
   static async getUser(credentials) {
-    Store.dispatch("checkIsAuthenticated");
+    AuthStore.actions["auth/checkIsAuthenticated"];
     const config = {
       headers: {
-        Authorization: `Bearer ${window.localStorage.getItem("token")}`
-      }
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+      },
     };
     try {
       const res = await axios.post(`${url}/getUser`, config);
@@ -21,11 +21,11 @@ class UserService {
   }
 
   static async changePassword(body) {
-    Store.dispatch("checkIsAuthenticated");
+    AuthStore.actions["auth/checkIsAuthenticated"];
     const config = {
       headers: {
-        Authorization: `Bearer ${window.localStorage.getItem("token")}`
-      }
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+      },
     };
     try {
       const res = await axios.post(`${url}/changePassword`, body, config);

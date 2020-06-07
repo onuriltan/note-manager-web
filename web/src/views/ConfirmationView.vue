@@ -13,21 +13,24 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "ConfirmationView",
   data() {
     return {
-      errors: []
+      errors: [],
     };
   },
+  methods: {
+    ...mapActions({
+      confirmUser: "auth/confirmUser",
+    }),
+  },
   async beforeMount() {
-    const res = await this.$store.dispatch(
-      "confirmUser",
-      this.$route.params.confirmationToken
-    );
+    const res = await this.confirmUser(this.$route.params.confirmationToken);
     if (res.data.errors) {
       this.errors = res.data.errors;
     }
-  }
+  },
 };
 </script>

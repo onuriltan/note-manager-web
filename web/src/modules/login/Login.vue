@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <b-form class="login-form" v-on:submit.prevent="login()">
+    <b-form class="login-form" v-on:submit.prevent="loginWithEmail()">
       <h2 class="login-form__header">Login</h2>
       <div class="login-form__errors" v-if="errors.length > 0">
         <b-alert
@@ -72,10 +72,11 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import {
   validateLogin,
   validateEmail,
-  validatePassword
+  validatePassword,
 } from "../../helpers/validators";
 import FacebookLogin from "../facebook-login/FacebookLogin";
 import GoogleLogin from "../google-login/GoogleLogin";
@@ -85,20 +86,20 @@ export default {
   components: {
     FacebookLogin,
     // eslint-disable-next-line vue/no-unused-components
-    GoogleLogin
+    GoogleLogin,
   },
   data() {
     return {
       errors: [],
       fieldErrors: {
         email: null,
-        password: null
+        password: null,
       },
       email: "",
       password: "",
       loginClicked: false,
       isEmailEntered: false,
-      isPasswordEntered: false
+      isPasswordEntered: false,
     };
   },
   computed: {
@@ -124,9 +125,12 @@ export default {
         return false;
       }
       return null;
-    }
+    },
   },
   methods: {
+    ...mapActions({
+      login: "auth/login",
+    }),
     validateEmail() {
       setTimeout(() => {
         this.isEmailEntered = true;
@@ -139,15 +143,15 @@ export default {
         this.fieldErrors.password = validatePassword(this.password);
       }, 600);
     },
-    async login() {
+    async loginWithEmail() {
       this.errors = [];
       this.fieldErrors = validateLogin(this.email, this.password);
       if (this.isValidForm) {
         this.loginClicked = true;
         setTimeout(async () => {
-          const res = await this.$store.dispatch("login", {
+          const res = await this.login({
             email: this.email,
-            password: this.password
+            password: this.password,
           });
           this.loginClicked = false;
           if (res.data.fieldErrors) {
@@ -158,8 +162,8 @@ export default {
           }
         }, 1000);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

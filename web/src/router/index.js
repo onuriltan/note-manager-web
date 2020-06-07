@@ -1,8 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "../views/HomeView.vue";
-import AuthStore from "../store/modules/AuthStore";
-import Store from "../store/index";
+import Store from "../store";
 
 const Login = () => import("../views/LoginView.vue");
 const Register = () => import("../views/RegisterView.vue");
@@ -15,24 +14,24 @@ Vue.use(Router);
 
 async function requireAuth(to, from, next) {
   function proceed() {
-    if (AuthStore.getters.isAuthenticated()) {
+    if (Store.getters["auth/isAuthenticated"]) {
       next();
     } else {
       next("/login");
     }
   }
-  await Store.dispatch("loadUser");
+  await Store.dispatch("auth/loadUser");
   proceed();
 }
 async function alreadyLoggedIn(to, from, next) {
   function proceed() {
-    if (!AuthStore.getters.isAuthenticated()) {
+    if (!Store.getters["auth/isAuthenticated"]) {
       next();
     } else {
       next("/");
     }
   }
-  await Store.dispatch("loadUser");
+  await Store.dispatch("auth/loadUser");
   proceed();
 }
 
@@ -44,47 +43,47 @@ export default new Router({
   routes: [
     {
       path: "/",
-      redirect: "/dashboard"
+      redirect: "/dashboard",
     },
     {
       path: "*",
-      component: NotFound
+      component: NotFound,
     },
     {
       path: "/dashboard/:pageNumber?",
       name: "home",
       component: Home,
-      beforeEnter: requireAuth
+      beforeEnter: requireAuth,
     },
     {
       path: "/notes-history/:pageNumber?",
       name: "history",
       component: History,
-      beforeEnter: requireAuth
+      beforeEnter: requireAuth,
     },
     {
       path: "/profile",
       name: "profile",
       component: Profile,
-      beforeEnter: requireAuth
+      beforeEnter: requireAuth,
     },
     {
       path: "/confirm/:confirmationToken",
       name: "confirm",
       component: Confirmation,
-      beforeEnter: alreadyLoggedIn
+      beforeEnter: alreadyLoggedIn,
     },
     {
       path: "/login",
       name: "login",
       component: Login,
-      beforeEnter: alreadyLoggedIn
+      beforeEnter: alreadyLoggedIn,
     },
     {
       path: "/register",
       name: "register",
       component: Register,
-      beforeEnter: alreadyLoggedIn
-    }
-  ]
+      beforeEnter: alreadyLoggedIn,
+    },
+  ],
 });
