@@ -3,11 +3,11 @@
 </template>
 
 <script>
-import RegisterComponent from '../components/Register.vue'
+import RegisterComponent from "../modules/register/Register";
 export default {
-  name: 'register',
+  name: "register",
   components: {
     RegisterComponent
   }
-}
+};
 </script>

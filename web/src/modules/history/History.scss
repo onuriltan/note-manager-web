@@ -1,0 +1,39 @@
+.history-container {
+  padding-top: 50px;
+}
+.history {
+  &__header {
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 30px;
+  }
+  &__form {
+    &__content {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      flex-flow: wrap;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .history {
+    &__form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &__content {
+        flex-direction: column;
+        align-items: flex-end;
+        flex-flow: wrap;
+        &__item {
+          width: 150px;
+        }
+        &__button {
+          width: 150px;
+        }
+      }
+    }
+  }
+}
