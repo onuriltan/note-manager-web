@@ -16,26 +16,26 @@ describe("Header.vue", () => {
     // Arrange
     const applicationName = "NoteManager";
     actions = {
-      logout: jest.fn(),
+      logout: jest.fn()
     };
     getters = {
-      isAuthenticated: () => false,
+      isAuthenticated: () => false
     };
     store = new Vuex.Store({
       modules: {
         auth: {
           namespaced: true,
           actions,
-          getters,
-        },
-      },
+          getters
+        }
+      }
     });
 
     // Act
     const wrapper = shallowMount(Header, {
       store,
       localVue,
-      stubs: ["router-link"],
+      stubs: ["router-link"]
     });
 
     // Assert
@@ -45,26 +45,26 @@ describe("Header.vue", () => {
   it("calls logout vuex action if isLoggedIn and logout is clicked", async () => {
     // Arrange
     actions = {
-      logout: jest.fn(),
+      logout: jest.fn()
     };
     getters = {
-      isAuthenticated: () => true,
+      isAuthenticated: () => true
     };
     store = new Vuex.Store({
       modules: {
         auth: {
           namespaced: true,
           actions,
-          getters,
-        },
-      },
+          getters
+        }
+      }
     });
 
     // Act
     const wrapper = shallowMount(Header, {
       store,
       localVue,
-      stubs: ["router-link"],
+      stubs: ["router-link"]
     });
     const logoutDropdown = wrapper.findComponent({ ref: "logout" });
     logoutDropdown.trigger("click");

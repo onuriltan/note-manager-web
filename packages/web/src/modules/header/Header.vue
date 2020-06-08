@@ -39,14 +39,14 @@ export default {
   name: "HeaderComponent",
   computed: {
     ...mapGetters({
-      isAuthenticated: "auth/isAuthenticated",
-    }),
+      isAuthenticated: "auth/isAuthenticated"
+    })
   },
   methods: {
     ...mapActions({
-      logout: "auth/logout",
-    }),
-  },
+      logout: "auth/logout"
+    })
+  }
 };
 </script>
 

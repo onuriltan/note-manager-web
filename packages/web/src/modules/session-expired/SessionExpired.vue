@@ -24,13 +24,13 @@ export default {
   name: "SessionExpired",
   computed: {
     ...mapGetters({
-      sessionExpired: "auth/sessionExpired",
-    }),
+      sessionExpired: "auth/sessionExpired"
+    })
   },
   watch: {
     // eslint-disable-next-line no-unused-vars
-    sessionExpired(oldValue, newValue) {},
-  },
+    sessionExpired(oldValue, newValue) {}
+  }
 };
 </script>
 

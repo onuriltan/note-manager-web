@@ -76,7 +76,7 @@ import { mapActions } from "vuex";
 import {
   validateLogin,
   validateEmail,
-  validatePassword,
+  validatePassword
 } from "../../helpers/validators";
 import FacebookLogin from "../facebook-login/FacebookLogin";
 import GoogleLogin from "../google-login/GoogleLogin";
@@ -86,20 +86,20 @@ export default {
   components: {
     FacebookLogin,
     // eslint-disable-next-line vue/no-unused-components
-    GoogleLogin,
+    GoogleLogin
   },
   data() {
     return {
       errors: [],
       fieldErrors: {
         email: null,
-        password: null,
+        password: null
       },
       email: "",
       password: "",
       loginClicked: false,
       isEmailEntered: false,
-      isPasswordEntered: false,
+      isPasswordEntered: false
     };
   },
   computed: {
@@ -125,11 +125,11 @@ export default {
         return false;
       }
       return null;
-    },
+    }
   },
   methods: {
     ...mapActions({
-      login: "auth/login",
+      login: "auth/login"
     }),
     validateEmail() {
       setTimeout(() => {
@@ -151,7 +151,7 @@ export default {
         setTimeout(async () => {
           const res = await this.login({
             email: this.email,
-            password: this.password,
+            password: this.password
           });
           this.loginClicked = false;
           if (res.data.fieldErrors) {
@@ -162,8 +162,8 @@ export default {
           }
         }, 1000);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
