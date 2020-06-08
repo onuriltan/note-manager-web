@@ -1,13 +1,14 @@
-.idea
 
+# System directories and files
 .DS_Store
 node_modules
+
+# Build directories
 dist
 public
 
-# Env
+# System environments
 .env
-
 
 # Log files
 npm-debug.log*
