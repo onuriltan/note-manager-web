@@ -51,7 +51,7 @@ router.post("/", passport.authenticate("google-token"), async function (
   res
 ) {
   if (req.user) {
-    let token = await JwtOperations.signToken(req.user, process.env.JWT_SECRET);
+    let token = await JwtOperations.signToken(req.user);
     res.json({ token });
   } else {
     res.status(401);

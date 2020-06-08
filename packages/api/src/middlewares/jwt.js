@@ -22,13 +22,18 @@ const decodeToken = (req, res, next) => {
   });
 };
 
-const signToken = async (user, secretKey) => {
+const signToken = async (user) => {
   const email = user[user.method].email;
   return await new Promise((resolve, reject) => {
-    jwt.sign({ email }, secretKey, { expiresIn: "10m" }, (err, token) => {
-      if (err) reject(err);
-      resolve(token);
-    });
+    jwt.sign(
+      { email },
+      process.env.JWT_SECRET,
+      { expiresIn: "10m" },
+      (err, token) => {
+        if (err) reject(err);
+        resolve(token);
+      }
+    );
   });
 };
 
