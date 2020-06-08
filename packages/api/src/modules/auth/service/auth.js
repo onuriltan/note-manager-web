@@ -3,7 +3,7 @@ const router = express.Router();
 const AuthValidation = require("../validation/auth");
 const AuthDbService = require("../repository/auth");
 const bcrypt = require("bcrypt");
-const JwtOperations = require("../../../config/jwt");
+const JwtOperations = require("../../../middlewares/jwt");
 const MailOperations = require("../../../config/mail");
 
 router.post("/login", async (req, res) => {

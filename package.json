@@ -8,6 +8,7 @@
     "bootstrap": "lerna bootstrap",
     "dev:api": "lerna run --scope @notemanager/api dev --stream",
     "dev:web": "lerna run --scope @notemanager/web dev --stream",
+    "test:api": "lerna run --scope @notemanager/api test:ci --stream",
     "test:web": "lerna run --scope @notemanager/web test:ci --stream",
     "lint:web": "lerna run --scope @notemanager/web lint --stream",
     "build:web": "lerna run --scope @notemanager/web build",

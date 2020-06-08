@@ -25,7 +25,7 @@ mongoose
 
 // Routes
 const app = require("./src/modules");
-const posts = require("./src/modules/posts/service/posts");
+const posts = require("./src/modules/posts/service/posts.service");
 const auth = require("./src/modules/auth/service/auth");
 const facebook = require("./src/modules/auth/service/facebook");
 const user = require("./src/modules/auth/service/user");

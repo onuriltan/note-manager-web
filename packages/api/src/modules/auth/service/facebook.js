@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const JwtOperations = require("../../../config/jwt");
+const JwtOperations = require("../../../middlewares/jwt");
 
 const User = require("../entity/user");
 

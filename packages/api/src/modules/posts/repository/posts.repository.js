@@ -1,5 +1,5 @@
 const mongodb = require("mongodb");
-const PostEntity = require("../entity/post");
+const PostEntity = require("../entity/post.entity");
 
 const createPost = async (text, email) => {
   const newPost = new PostEntity({

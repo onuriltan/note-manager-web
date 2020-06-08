@@ -1,13 +1,15 @@
 const express = require("express");
-const JwtOperations = require("../../../config/jwt");
-const PostsRepository = require("../repository/posts");
+const jwtConfig = require("../../../utils/jwt");
+const postsRepository = require("../repository/posts.repository");
+const postsService = require("../service/posts.service");
 const router = express.Router();
 
-router.get("/", JwtOperations.verifyToken, async (req, res) => {
-  const authData = JwtOperations.decodeToken(req, res);
+router.get("/", jwtConfig.verifyToken, async (req, res) => {
+  const authData = jwtConfig.decodeToken(req, res);
   const { page, perPage } = req.query;
   if (typeof authData !== "undefined") {
     const { user } = authData;
+    console.log(authData);
     let email = null;
     if (user.method === "google") {
       email = user.google.email;
@@ -20,16 +22,16 @@ router.get("/", JwtOperations.verifyToken, async (req, res) => {
       page: parseInt(page, 10) || 1,
       limit: parseInt(perPage, 10) || 10,
     };
-    const notes = await PostsRepository.findNotes(email, options);
+    const notes = await postsRepository.findNotes(email, options);
     res.send(notes);
   }
 });
 
 router.get(
   "/:fromDate/:toDate/:keyword",
-  JwtOperations.verifyToken,
+  jwtConfig.verifyToken,
   async (req, res) => {
-    const authData = JwtOperations.decodeToken(req, res);
+    const authData = jwtConfig.decodeToken(req, res);
     const { page, perPage } = req.query;
     if (typeof authData !== "undefined") {
       const { user } = authData;
@@ -43,7 +45,7 @@ router.get(
         limit: parseInt(perPage, 10) || 10,
       };
 
-      const notes = await PostsRepository.findNotesBetweenDatesandKeyword(
+      const notes = await postsRepository.findNotesBetweenDatesandKeyword(
         fromDate,
         toDate,
         keyword,
@@ -55,36 +57,36 @@ router.get(
   }
 );
 
-router.post("/", JwtOperations.verifyToken, async (req, res) => {
-  const authData = JwtOperations.decodeToken(req, res);
+router.post("/", jwtConfig.verifyToken, async (req, res) => {
+  const authData = jwtConfig.decodeToken(req, res);
   if (typeof authData !== "undefined") {
     const { user } = authData;
     let email = getEmail(user);
     const { text } = req.body;
-    const newPost = await PostsRepository.createPost(text, email, res);
+    const newPost = await postsRepository.createPost(text, email, res);
     res.status(201).send(newPost);
   }
 });
 
-router.put("/:id", JwtOperations.verifyToken, async (req, res) => {
-  const authData = JwtOperations.decodeToken(req, res);
+router.put("/:id", jwtConfig.verifyToken, async (req, res) => {
+  const authData = jwtConfig.decodeToken(req, res);
   if (typeof authData !== "undefined") {
     const { user } = authData;
     let email = getEmail(user);
     const { text } = req.body;
     const id = req.params.id;
-    const updatedPost = await PostsRepository.editPost(id, email, text);
+    const updatedPost = await postsRepository.editPost(id, email, text);
     res.send(updatedPost);
   }
 });
 
-router.delete("/:id", JwtOperations.verifyToken, async (req, res) => {
-  const authData = JwtOperations.decodeToken(req, res);
+router.delete("/:id", jwtConfig.verifyToken, async (req, res) => {
+  const authData = jwtConfig.decodeToken(req, res);
   if (typeof authData !== "undefined") {
     const { user } = authData;
     let email = getEmail(user);
     const id = req.params.id;
-    const isUpdated = await PostsRepository.deletePost(email, id);
+    const isUpdated = await postsRepository.deletePost(email, id);
     isUpdated ? res.status(201).send() : res.status(400).send();
   }
 });
