@@ -109,7 +109,7 @@ export default {
           if (this.$route.params.pageNumber) {
             postss = await NotesService.getPosts(this.$route.params.pageNumber);
           } else {
-            postss = await NotesService.getPosts();
+            postss = await NotesService.getPosts(1);
           }
           this.posts = postss.docs;
           this.pagination.total = postss.total;

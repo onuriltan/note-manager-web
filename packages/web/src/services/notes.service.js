@@ -10,9 +10,9 @@ class NotesService {
     AuthStore.actions["auth/checkIsAuthenticated"];
     const config = {
       headers: {
-        Authorization: `Bearer ${window.localStorage.getItem("token")}`
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
       },
-      params: { page: pageNumber }
+      params: { page: pageNumber, limit: 10 },
     };
 
     try {
@@ -29,9 +29,9 @@ class NotesService {
     AuthStore.actions["auth/checkIsAuthenticated"];
     const config = {
       headers: {
-        Authorization: `Bearer ${window.localStorage.getItem("token")}`
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
       },
-      params: { page: pageNumber }
+      params: { page: pageNumber },
     };
     if (fromDate === "") fromDate = "%20";
     if (toDate === "") toDate = "%20";
@@ -58,8 +58,8 @@ class NotesService {
       { text },
       {
         headers: {
-          Authorization: `Bearer ${window.localStorage.getItem("token")}`
-        }
+          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+        },
       }
     );
   }
@@ -69,8 +69,8 @@ class NotesService {
     AuthStore.actions["auth/checkIsAuthenticated"];
     return axios.delete(`${url}/${id}`, {
       headers: {
-        Authorization: `Bearer ${window.localStorage.getItem("token")}`
-      }
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+      },
     });
   }
 
@@ -82,8 +82,8 @@ class NotesService {
       { text },
       {
         headers: {
-          Authorization: `Bearer ${window.localStorage.getItem("token")}`
-        }
+          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+        },
       }
     );
   }
