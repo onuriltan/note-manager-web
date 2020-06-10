@@ -1,9 +1,9 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
-let UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
   method: {
     type: String,
-    enum: ["local", "google", "facebook"],
+    enum: ['local', 'google', 'facebook'],
     required: true,
   },
   local: {
@@ -51,6 +51,6 @@ let UserSchema = new mongoose.Schema({
     type: Date,
     default: new Date(),
   },
-});
-const User = mongoose.model("User", UserSchema);
-module.exports = User;
+})
+const User = mongoose.model('User', UserSchema)
+module.exports = User

@@ -1,6 +1,6 @@
-const express = require("express");
-const router = express.Router();
-const jwtConfig = require("../../middlewares/jwt");
+const express = require('express')
+const router = express.Router()
+const jwtConfig = require('../../middlewares/jwt')
 
 const {
   validateFindNotes,
@@ -8,7 +8,7 @@ const {
   validateCreatePost,
   validateEditPost,
   validateDeletePost,
-} = require("./validator");
+} = require('./validator')
 
 const {
   findNotes,
@@ -16,19 +16,19 @@ const {
   createPost,
   editPost,
   deletePost,
-} = require("./controller/posts.controller");
+} = require('./controller/posts.controller')
 
-router.use(jwtConfig.verifyToken);
-router.use(jwtConfig.decodeToken);
+router.use(jwtConfig.verifyToken)
+router.use(jwtConfig.decodeToken)
 
-router.get("/", validateFindNotes, findNotes);
+router.get('/', validateFindNotes, findNotes)
 router.get(
-  "/:fromDate/:toDate/:keyword",
+  '/:fromDate/:toDate/:keyword',
   validateFindNotesBetweenDatesandKeyword,
   findNotesBetweenDatesandKeyword
-);
-router.post("/", validateCreatePost, createPost);
-router.put("/:id", validateEditPost, editPost);
-router.delete("/:id", validateDeletePost, deletePost);
+)
+router.post('/', validateCreatePost, createPost)
+router.put('/:id', validateEditPost, editPost)
+router.delete('/:id', validateDeletePost, deletePost)
 
-module.exports = router;
+module.exports = router

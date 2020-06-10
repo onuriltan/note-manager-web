@@ -1,14 +1,14 @@
-const express = require("express");
-const router = express.Router();
-const JwtOperations = require("../../../middlewares/jwt");
+const express = require('express')
+const router = express.Router()
+const JwtOperations = require('../../../middlewares/jwt')
 
-const User = require("../entity/user");
+const User = require('../entity/user')
 
-const passport = require("passport");
-const FacebookTokenStrategy = require("passport-facebook-token");
+const passport = require('passport')
+const FacebookTokenStrategy = require('passport-facebook-token')
 
 passport.use(
-  "facebook-token",
+  'facebook-token',
   new FacebookTokenStrategy(
     {
       clientID: process.env.FACEBOOK_APP_ID,
@@ -16,46 +16,46 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        const existingUser = await User.findOne({ "facebook.id": profile.id });
+        const existingUser = await User.findOne({ 'facebook.id': profile.id })
         if (existingUser) {
-          return done(null, existingUser);
+          return done(null, existingUser)
         }
         const newUser = new User({
           active: true,
-          method: "facebook",
+          method: 'facebook',
           facebook: {
             id: profile.id,
             email: profile._json.email,
           },
-        });
-        await newUser.save();
-        done(null, newUser);
+        })
+        await newUser.save()
+        done(null, newUser)
       } catch (e) {
-        console.log(e.message);
-        done(e, false, e.message);
+        console.log(e.message)
+        done(e, false, e.message)
       }
     }
   )
-);
+)
 
 passport.serializeUser(function (user, done) {
-  done(null, user);
-});
+  done(null, user)
+})
 
 passport.deserializeUser(function (user, done) {
-  done(null, user);
-});
+  done(null, user)
+})
 
-router.post("/", passport.authenticate("facebook-token"), async function (
+router.post('/', passport.authenticate('facebook-token'), async function (
   req,
   res
 ) {
   if (req.user) {
-    let token = await JwtOperations.signToken(req.user);
-    res.json({ token });
+    const token = await JwtOperations.signToken(req.user)
+    res.json({ token })
   } else {
-    res.status(401);
+    res.status(401)
   }
-});
+})
 
-module.exports = router;
+module.exports = router

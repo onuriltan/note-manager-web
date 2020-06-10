@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const mongoosePaginate = require("mongoose-paginate");
+const mongoose = require('mongoose')
+const mongoosePaginate = require('mongoose-paginate')
 
 const PostSchema = new mongoose.Schema({
   text: {
@@ -17,7 +17,7 @@ const PostSchema = new mongoose.Schema({
   editedAt: {
     type: Date,
   },
-});
-PostSchema.plugin(mongoosePaginate);
-const Post = mongoose.model("Post", PostSchema);
-module.exports = Post;
+})
+PostSchema.plugin(mongoosePaginate)
+const Post = mongoose.model('Post', PostSchema)
+module.exports = Post

@@ -1,14 +1,14 @@
-const express = require("express");
-const router = express.Router();
-const JwtOperations = require("../../../config/JwtOperations");
+const express = require('express')
+const router = express.Router()
+const JwtOperations = require('../../../config/JwtOperations')
 
-const User = require("../entity/user.entity");
+const User = require('../entity/user.entity')
 
-const passport = require("passport");
-const googlePlusTokenStrategy = require("passport-google-plus-token");
+const passport = require('passport')
+const googlePlusTokenStrategy = require('passport-google-plus-token')
 
 passport.use(
-  "google-token",
+  'google-token',
   new googlePlusTokenStrategy(
     {
       clientID: process.env.GOOGLE_APP_ID,
@@ -16,46 +16,46 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        const existingUser = await User.findOne({ "google.id": profile.id });
+        const existingUser = await User.findOne({ 'google.id': profile.id })
         if (existingUser) {
-          return done(null, existingUser);
+          return done(null, existingUser)
         }
         const newUser = new User({
-          method: "google",
+          method: 'google',
           active: true,
           google: {
             id: profile.id,
             email: profile._json.emails[0].value,
           },
-        });
-        await newUser.save();
-        done(null, newUser);
+        })
+        await newUser.save()
+        done(null, newUser)
       } catch (e) {
-        console.log(e.message);
-        done(e, false, e.message);
+        console.log(e.message)
+        done(e, false, e.message)
       }
     }
   )
-);
+)
 
 passport.serializeUser(function (user, done) {
-  done(null, user);
-});
+  done(null, user)
+})
 
 passport.deserializeUser(function (user, done) {
-  done(null, user);
-});
+  done(null, user)
+})
 
-router.post("/", passport.authenticate("google-token"), async function (
+router.post('/', passport.authenticate('google-token'), async function (
   req,
   res
 ) {
   if (req.user) {
-    let token = await JwtOperations.signToken(req.user);
-    res.json({ token });
+    const token = await JwtOperations.signToken(req.user)
+    res.json({ token })
   } else {
-    res.status(401);
+    res.status(401)
   }
-});
+})
 
-module.exports = router;
+module.exports = router
