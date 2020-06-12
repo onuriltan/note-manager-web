@@ -29,6 +29,7 @@ const posts = require('./modules/posts')
 const auth = require('./modules/auth/service/auth')
 const facebook = require('./modules/auth/service/facebook')
 const user = require('./modules/auth/service/user')
+
 // TODO : Update Google Auth
 // const google = require('./routes/api/auth/GooglePlusService');
 
