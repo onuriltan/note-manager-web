@@ -16,7 +16,7 @@
     "build:all": "lerna run build",
     "lint:all": "lerna run lint",
     "publish": "lerna publish",
-    "heroku-prebuild": "npm install && npm install --only=dev && cd packages/web && npm install --only=dev && npm run build"
+    "heroku-prebuild": "npm install && npm install --only=dev && cd packages/web && npm install && npm install --only=dev && npm run build"
   },
   "devDependencies": {
     "lerna": "^3.22.0",
