@@ -14,8 +14,8 @@
     "build:web": "lerna run --scope @notemanager/web build",
     "build:all": "lerna run build",
     "publish": "lerna publish",
-    "heroku-prebuild": "yarn build:web",
-    "heroku-postbuild": "cd web && yarn build"
+    "heroku-prebuild": "yarn install --production=false",
+    "heroku-postbuild": "yarn build:web"
   },
   "devDependencies": {
     "lerna": "^3.22.0",

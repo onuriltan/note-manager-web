@@ -1,5 +1,6 @@
 const validateLogin = (requestBody) => {
   const { email, password } = requestBody
+
   const fieldErrors = {
     email: '',
     password: '',
@@ -57,10 +58,9 @@ const validateRegister = (requestBody) => {
 }
 
 function validEmail(email) {
-  const re = new RegExp(
-    '/^(([^<>()[]\\.,;:s@"]+(.[^<>()[]\\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/'
-  )
-  return re.test(email)
+  // eslint-disable-next-line
+  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  return re.test(String(email).toLowerCase())
 }
 
 module.exports.validateLogin = validateLogin
