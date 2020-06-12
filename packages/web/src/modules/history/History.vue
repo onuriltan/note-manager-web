@@ -46,8 +46,8 @@
           type="submit"
           class="history__form__content__button mr-2 ml-2 mb-3"
           variant="success"
-          >Search</b-button
-        >
+          :disabled="!fromDate || !toDate"
+        >Search</b-button>
       </div>
     </b-form>
 
@@ -131,6 +131,7 @@ export default {
       setTimeout(async () => {
         this.posts = [];
         let postss = [];
+        if (!this.toDate) this.toDate = new Date();
         if (this.$route.params.pageNumber) {
           postss = await NotesService.getPostsByCriteria(
             this.fromDate,
