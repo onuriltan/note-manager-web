@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon app.js",
-    "prod": "NODE_ENV=production node app.js",
-    "lint": "eslint --fix .",
+    "prod": "NODE_ENV=production node src/app.js",
+    "lint": "eslint --fix src",
     "test": "jest",
     "test:watch": "jest --watch",
     "start": "node app.js"

@@ -5,18 +5,18 @@
   "author": "Onur Iltan",
   "license": "MIT",
   "scripts": {
-    "pre-commit": "lint-staged",
     "bootstrap": "lerna bootstrap",
     "dev:api": "lerna run --scope @notemanager/api dev --stream",
     "dev:web": "lerna run --scope @notemanager/web dev --stream",
     "test:api": "lerna run --scope @notemanager/api test:ci --stream",
     "test:web": "lerna run --scope @notemanager/web test:ci --stream",
     "lint:web": "lerna run --scope @notemanager/web lint --stream",
+    "lint:api": "lerna run --scope @notemanager/api lint --stream",
     "build:web": "lerna run --scope @notemanager/web build",
     "build:all": "lerna run build",
-    "lint:all": "lerna run lint",
+    "lint:all": "lerna run lint --concurrency 1",
     "publish": "lerna publish",
-    "heroku-postbuild": "yarn install --production=false && yarn build:web"
+    "heroku-prebuild": "NODE_ENV=production yarn install --production=false && yarn build:web"
   },
   "devDependencies": {
     "lerna": "^3.22.0",
