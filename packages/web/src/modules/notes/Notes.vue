@@ -30,7 +30,12 @@
         <b-input-group>
           <b-form-input v-model="tobeEditedText" type="text"></b-form-input>
           <b-input-group-append>
-            <b-btn v-on:click="neditPost()" variant="success">EDIT</b-btn>
+            <b-btn
+              v-on:click="neditPost()"
+              variant="success"
+              :disabled="!tobeEditedText"
+              >EDIT</b-btn
+            >
           </b-input-group-append>
         </b-input-group>
       </b-modal>
@@ -92,13 +97,13 @@ export default {
     deletePost: Function,
     posts: Array,
     parentComponentName: String,
-    searchClicked: Boolean
+    searchClicked: Boolean,
   },
   data() {
     return {
       tobeEditedText: "",
       tobeDeletedId: "",
-      tobeEditedId: ""
+      tobeEditedId: "",
     };
   },
   methods: {
@@ -128,15 +133,15 @@ export default {
       this.tobeEditedId = "";
       this.tobeEditedText = "";
       this.$refs.editNoteModal.hide();
-    }
+    },
   },
   filters: {
     convertDate: function(date) {
       const theDate = new Date(date);
       return `${theDate.getDate()}/${theDate.getMonth() +
         1}/${theDate.getFullYear()}`;
-    }
-  }
+    },
+  },
 };
 </script>
 

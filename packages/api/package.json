@@ -4,11 +4,11 @@
   "description": "Note manager app with Vue.js",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon app.js",
+    "dev": "nodemon src/app.js",
     "lint": "eslint --fix src",
     "test": "jest",
     "test:watch": "jest --watch",
-    "start": "node app.js"
+    "start": "node src/app.js"
   },
   "author": "Onur Iltan",
   "license": "MIT",
