@@ -18,7 +18,7 @@ export default {
   name: "FacebookLogin",
   data() {
     return {
-      fbLoginClicked: false
+      fbLoginClicked: false,
     };
   },
   mounted() {
@@ -29,7 +29,7 @@ export default {
         appId: appId,
         autoLogAppEvents: true,
         xfbml: true,
-        version: "v3.2"
+        version: "v3.2",
       });
     };
 
@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      loginWithFacebook: "auth/loginWithFacebook"
+      loginWithFacebook: "auth/loginWithFacebook",
     }),
     loginWithFB() {
       this.fbLoginClicked = true;
@@ -58,14 +58,15 @@ export default {
             this.loginWithFacebook(response.authResponse.accessToken);
           } else {
             // TODO: handle this situation
+            // eslint-disable-next-line
             console.log("User cancelled login or did not fully authorize.");
           }
           this.fbLoginClicked = false;
         }.bind(this),
         { scope: "public_profile,email", return_scopes: true }
       );
-    }
-  }
+    },
+  },
 };
 </script>
 
