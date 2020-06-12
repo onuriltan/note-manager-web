@@ -5,6 +5,7 @@
   "author": "Onur Iltan",
   "license": "MIT",
   "scripts": {
+    "pre-commit": "lint-staged",
     "bootstrap": "lerna bootstrap",
     "dev:api": "lerna run --scope @notemanager/api dev --stream",
     "dev:web": "lerna run --scope @notemanager/web dev --stream",
@@ -13,21 +14,22 @@
     "lint:web": "lerna run --scope @notemanager/web lint --stream",
     "build:web": "lerna run --scope @notemanager/web build",
     "build:all": "lerna run build",
+    "lint:all": "lerna run lint",
     "publish": "lerna publish",
-    "heroku-prebuild": "yarn install --production=false",
-    "heroku-postbuild": "yarn build:web"
+    "heroku-postbuild": "yarn install --production=false && yarn build:web"
   },
   "devDependencies": {
     "lerna": "^3.22.0",
-    "husky": "^4.2.5",
-    "lint-staged": "^9.5.0"
+    "husky": "^4.2.5"
   },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint:all"
+    }
   },
   "lint-staged": {
-    "*.{js,jsx,vue}": [
-      "lerna run --concurrency 1 lint",
+    "**/*.{js,jsx,vue}": [
+      "lerna run lint --stream",
       "git add"
     ]
   }
