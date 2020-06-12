@@ -30,7 +30,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,vue}": [
+    "**/*.{js,jsx,vue}": [
       "lerna run lint --stream",
       "git add"
     ]
