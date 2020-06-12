@@ -1,1 +1,1 @@
-web: packages/api/app.js
+web: packages/api/src/app.js
