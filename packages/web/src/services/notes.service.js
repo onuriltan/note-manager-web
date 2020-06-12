@@ -4,7 +4,6 @@ import Store from "../store";
 const url = process.env.VUE_APP_NOTES_URL;
 
 class NotesService {
-  // Get Posts
   static async getPosts(pageNumber) {
     Store.dispatch("auth/checkIsAuthenticated");
     const config = {
@@ -31,6 +30,9 @@ class NotesService {
       },
       params: { page: pageNumber },
     };
+    if (fromDate === "") fromDate = "%20";
+    if (toDate === "") toDate = "%20";
+    if (keyword === "") keyword = "%20";
     try {
       const res = await axios.get(
         `${url}/${fromDate}/${toDate}/${keyword}`,
@@ -45,9 +47,8 @@ class NotesService {
     }
   }
 
-  // Create Post
   static insertPost(text) {
-    Store.dispatch("auth/checkIsAuthenticated");
+    Store.actions["auth/checkIsAuthenticated"];
     return axios.post(
       url,
       { text },
@@ -59,7 +60,6 @@ class NotesService {
     );
   }
 
-  // Delete Post
   static deletePost(id) {
     Store.dispatch("auth/checkIsAuthenticated");
     return axios.delete(`${url}/${id}`, {
@@ -69,7 +69,6 @@ class NotesService {
     });
   }
 
-  // Edit Post
   static editPost(id, text) {
     Store.dispatch("auth/checkIsAuthenticated");
     return axios.put(
