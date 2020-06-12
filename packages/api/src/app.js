@@ -42,13 +42,13 @@ server.use('/api/user', user)
 
 if (process.env.NODE_ENV === 'production') {
   // Static folder
-  server.use(express.static(path.join(__dirname, '/public')))
+  server.use(express.static(path.join(__dirname, '../public')))
   // Handle SPA
   server.get('*', (req, res) =>
-    res.sendFile(path.join(__dirname, '/public/index.html'))
+    res.sendFile(path.join(__dirname, '../public/index.html'))
   )
   server.get(/.*/, (req, res) =>
-    res.sendFile(path.join(__dirname, '/public/index.html'))
+    res.sendFile(path.join(__dirname, '../public/index.html'))
   )
 }
 
