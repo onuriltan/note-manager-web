@@ -16,13 +16,11 @@
     "build:all": "lerna run build",
     "lint:all": "lerna run lint",
     "publish": "lerna publish",
-    "heroku-prebuild": "yarn install --production=false",
-    "heroku-postbuild": "yarn build:web"
+    "heroku-postbuild": "yarn install --production=false && yarn build:web"
   },
   "devDependencies": {
     "lerna": "^3.22.0",
-    "husky": "^4.2.5",
-    "lint-staged": "^9.5.0"
+    "husky": "^4.2.5"
   },
   "husky": {
     "hooks": {
