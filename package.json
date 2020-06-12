@@ -16,7 +16,8 @@
     "build:all": "lerna run build",
     "lint:all": "lerna run lint",
     "publish": "lerna publish",
-    "heroku-prebuild": "npm install && npm install --only=dev && npm run bootstrap && npm run build:web"
+    "heroku-prebuild": "npm install && npm install --only=dev && export NODE_ENV=production; NODE_ENV=npm run bootstrap",
+    "heroku-postbuild": "export NODE_ENV=production; npm run build:web"
   },
   "devDependencies": {
     "lerna": "^3.22.0",
