@@ -16,7 +16,8 @@
     "build:all": "lerna run build",
     "lint:all": "lerna run lint",
     "publish": "lerna publish",
-    "heroku-prebuild": "NODE_ENV=production yarn install --production=false && yarn build:web"
+    "heroku-prebuild": "NODE_ENV= yarn install --production=false && yarn build:web",
+    "heroku-postbuild": "export NODE_ENV=production"
   },
   "devDependencies": {
     "lerna": "^3.22.0",
@@ -26,11 +27,5 @@
     "hooks": {
       "pre-commit": "yarn lint:all"
     }
-  },
-  "lint-staged": {
-    "**/*.{js,jsx,vue}": [
-      "lerna run lint --stream",
-      "git add"
-    ]
   }
 }
