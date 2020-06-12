@@ -14,7 +14,7 @@
     "lint:api": "lerna run --scope @notemanager/api lint --stream",
     "build:web": "lerna run --scope @notemanager/web build",
     "build:all": "lerna run build",
-    "lint:all": "lerna run lint --concurrency 1",
+    "lint:all": "lerna run lint",
     "publish": "lerna publish",
     "heroku-prebuild": "NODE_ENV=production yarn install --production=false && yarn build:web"
   },
