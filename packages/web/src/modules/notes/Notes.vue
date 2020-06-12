@@ -1,9 +1,6 @@
 <template>
   <div class="notes">
-    <div
-      class="notes__content"
-      v-if="searchClicked && posts.length !== 0 && isLoading === false"
-    >
+    <div class="notes__content" v-if="searchClicked && posts.length !== 0 && isLoading === false">
       <b-card-group deck class="notes__content__cards">
         <b-card
           :title="post.createdAt | convertDate()"
@@ -14,15 +11,8 @@
         >
           <p class="card-text">{{ post.text }}</p>
           <div slot="footer" class="notes__content__card__footer">
-            <b-button
-              size="sm"
-              variant="danger"
-              @click="showDeleteModal(post._id)"
-              >Delete</b-button
-            >
-            <b-button size="sm" @click="showEditModal(post._id, post.text)"
-              >Edit</b-button
-            >
+            <b-button size="sm" variant="danger" @click="showDeleteModal(post._id)">Delete</b-button>
+            <b-button size="sm" @click="showEditModal(post._id, post.text)">Edit</b-button>
           </div>
         </b-card>
       </b-card-group>
@@ -37,15 +27,8 @@
       <b-modal ref="deleteNoteModal" id="modal" title="Delete">
         <p class="my-4">Do you want to delete the note?</p>
         <div slot="modal-footer">
-          <b-btn
-            class="float-right"
-            variant="primary"
-            @click="hideDeleteModal()"
-            >NO</b-btn
-          >
-          <b-btn class="float-right" variant="danger" @click="ndeletePost()"
-            >YES</b-btn
-          >
+          <b-btn class="float-right" variant="primary" @click="hideDeleteModal()">NO</b-btn>
+          <b-btn class="float-right" variant="danger" @click="ndeletePost()">YES</b-btn>
         </div>
       </b-modal>
     </div>
@@ -53,21 +36,15 @@
       class="notes__empty slide--in--from--left"
       v-if="searchClicked && posts.length === 0 && isLoading === false"
     >
-      <img
-        :src="getImgUrl(tobeDeletedId)"
-        class="notes__empty__image"
-        alt="notes-empty"
-      />
+      <img :src="getImgUrl(tobeDeletedId)" class="notes__empty__image" alt="notes-empty" />
       <span
         v-if="this.$parent.$vnode.componentOptions.tag === 'Dashboard'"
         class="notes__empty__message"
-        >No notes found.</span
-      >
+      >No notes found.</span>
       <span
         v-if="this.$parent.$vnode.componentOptions.tag === 'History'"
         class="notes__empty__message"
-        >No notes were found in the criteria you searched for.</span
-      >
+      >No notes were found in the criteria you searched for.</span>
     </div>
 
     <div class="notes__empty" v-if="searchClicked && isLoading">

@@ -12,7 +12,7 @@ class NotesService {
       headers: {
         Authorization: `Bearer ${window.localStorage.getItem("token")}`
       },
-      params: { page: pageNumber }
+      params: { page: pageNumber, limit: 10 }
     };
 
     try {
