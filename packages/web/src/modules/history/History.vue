@@ -47,7 +47,8 @@
           class="history__form__content__button mr-2 ml-2 mb-3"
           variant="success"
           :disabled="!fromDate || !toDate"
-        >Search</b-button>
+          >Search</b-button
+        >
       </div>
     </b-form>
 
