@@ -16,9 +16,11 @@ const decodeToken = (req, res, next) => {
   jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
     if (err) {
       res.sendStatus(403)
+    } else {
+      // console.log('authData.email: ' + authData.email)
+      req.query.email = authData.email
+      next()
     }
-    req.query.email = authData.email
-    next()
   })
 }
 

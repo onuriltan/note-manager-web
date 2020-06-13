@@ -2,9 +2,16 @@
   <div class="container">
     <b-card no-body class="profile-container">
       <b-tabs pills card :vertical="alignTab">
-        <b-tab title="Change Password" active class="profile-container__tab">
-          <ChangePassword />
-        </b-tab>
+        <div>
+          <b-tab
+            title="Change Password"
+            active
+            class="profile-container__tab"
+            v-if="loginMethod !== 'facebook'"
+          >
+            <ChangePassword />
+          </b-tab>
+        </div>
         <b-tab title="Edit Profile" class="profile-container__tab">
           Edit Profile
         </b-tab>
@@ -14,12 +21,18 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import ChangePassword from '../change-password/ChangePassword';
 
 export default {
   name: 'Profile',
   components: {
     ChangePassword
+  },
+  computed: {
+    ...mapGetters({
+      loginMethod: 'auth/loginMethod'
+    })
   },
   created() {
     window.addEventListener('resize', this.handleResize);

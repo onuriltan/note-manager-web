@@ -27,7 +27,7 @@ exports.loginWithEmail = async (req, res) => {
           user,
           process.env.JWT_SECRET
         )
-        res.json({ token })
+        res.json({ token, method: user.method })
       } else {
         errors.push({ msg: 'Username or password is wrong' })
         res.status(401).json({ errors })

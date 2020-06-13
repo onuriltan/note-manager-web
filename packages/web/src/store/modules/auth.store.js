@@ -6,7 +6,8 @@ import jwtDecode from 'jwt-decode';
 
 const state = {
   isAuthenticated: false,
-  sessionExpired: false
+  sessionExpired: false,
+  loginMethod: ''
 };
 
 const auth = {
@@ -18,6 +19,9 @@ const auth = {
     },
     sessionExpired() {
       return state.sessionExpired;
+    },
+    loginMethod() {
+      return state.loginMethod;
     }
   },
   actions: {
@@ -143,6 +147,7 @@ const auth = {
         window.localStorage.setItem('token', response.data.token);
         state.isAuthenticated = true;
         state.sessionExpired = false;
+        state.loginMethod = response.data.method;
         router.push('/dashboard');
       } else {
         setTimeout(() => {
