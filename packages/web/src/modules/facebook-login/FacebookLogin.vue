@@ -76,11 +76,11 @@ export default {
   align-items: center;
   background-color: #3b5998;
   border-color: white;
+  width: 100%;
 }
 
 @media screen and (max-width: 768px) {
   .facebook-button {
-    width: 100%;
     margin: 10px 0;
   }
 }

@@ -11,7 +11,8 @@
   background-color: white;
   border-radius: 10px;
   height: 100%;
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+    0px 2px 1px -1px rgba(0, 0, 0, 0.12);
   padding: 30px;
   &__header {
     text-align: center;
@@ -24,7 +25,7 @@
       cursor: pointer;
     }
   }
-  &__errors{
+  &__errors {
     padding: 10px 0;
     &__error {
       text-align: center;
@@ -50,7 +51,7 @@
     padding-top: 20px;
 
     &:after {
-      content: "";
+      content: '';
       background: url('~@/assets/takingnotes.jpg') no-repeat fixed center;
       background-size: cover;
       opacity: 0.5;
@@ -68,7 +69,7 @@
       text-align: center;
       padding-bottom: 5px;
     }
-    &__errors{
+    &__errors {
       padding: 5px 0;
       &__error {
         font-size: 13px;

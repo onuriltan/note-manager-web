@@ -66,7 +66,12 @@ const editPost = async (id, email, text) => {
     { _id: id, email: email },
     { text: text, editedAt: new Date() },
     (err, updatedPost) => {
-      if (err) console.log(err)
+      if (err) {
+        // TODO: Handle error
+        // eslint-disable-next-line
+        console.log(err)
+      }
+
       return updatedPost
     }
   )
