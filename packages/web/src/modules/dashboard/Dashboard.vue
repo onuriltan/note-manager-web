@@ -11,7 +11,7 @@
             placeholder="Create a note ..."
           ></b-form-input>
           <b-input-group-append>
-            <b-btn type="submit" variant="success">Post!</b-btn>
+            <b-btn type="submit" variant="success" :disabled="!text || isLoading">Post!</b-btn>
           </b-input-group-append>
         </b-input-group>
       </form>
@@ -78,6 +78,7 @@ export default {
       setTimeout(async () => {
         await NotesService.insertPost(this.text);
         await this.getNotes(0);
+        this.text = '';
         this.isLoading = false;
       }, 1000);
     },
