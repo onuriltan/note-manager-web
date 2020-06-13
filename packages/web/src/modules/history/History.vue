@@ -1,7 +1,7 @@
 <template>
   <div class="history-container">
     <h1 class="history__header">Notes History</h1>
-    <b-form class="history__form" v-on:submit.prevent="getNotes()">
+    <b-form class="history__form" v-on:submit.prevent="getNotes(600)">
       <div class="history__form__content">
         <b-form-group
           id="fromDate"
@@ -104,7 +104,7 @@ export default {
   },
   watch: {
     '$route.params.pageNumber': function() {
-      this.getNotes(1000);
+      this.getNotes(600);
     }
   },
 
@@ -116,20 +116,19 @@ export default {
       this.isLoading = true;
       setTimeout(async () => {
         await NotesService.deletePost(tobeDeletedId);
-        await this.getNotes(1000);
+        await this.getNotes(0);
         this.isLoading = false;
-      }, 1000);
+      }, 600);
     },
     async editPost(tobeEditedId, tobeEditedText) {
       setTimeout(async () => {
         await NotesService.editPost(tobeEditedId, tobeEditedText);
-        await this.getNotes(1000);
-      }, 1000);
+        await this.getNotes(0);
+      }, 600);
     },
     async getNotes(seconds) {
       this.isLoading = true;
       this.searchClicked = true;
-      console.log(this.fromDate);
       setTimeout(async () => {
         this.posts = [];
         let postss = [];

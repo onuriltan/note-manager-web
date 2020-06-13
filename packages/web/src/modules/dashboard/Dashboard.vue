@@ -66,7 +66,7 @@ export default {
   },
   watch: {
     '$route.params.pageNumber': function() {
-      this.getNotes(1000);
+      this.getNotes(600);
     }
   },
   methods: {
@@ -80,7 +80,7 @@ export default {
         await this.getNotes(0);
         this.text = '';
         this.isLoading = false;
-      }, 1000);
+      }, 600);
     },
     async deletePost(tobeDeletedId) {
       this.isLoading = true;
@@ -88,7 +88,7 @@ export default {
         await NotesService.deletePost(tobeDeletedId);
         await this.getNotes(0);
         this.isLoading = false;
-      }, 1000);
+      }, 600);
     },
     async editPost(tobeEditedId, tobeEditedText) {
       this.isLoading = true;
@@ -96,7 +96,7 @@ export default {
         await NotesService.editPost(tobeEditedId, tobeEditedText);
         await this.getNotes(0);
         this.isLoading = false;
-      }, 1000);
+      }, 600);
     },
     async getNotes(seconds) {
       this.isLoading = true;
@@ -121,7 +121,7 @@ export default {
     }
   },
   beforeMount() {
-    this.getNotes(1000);
+    this.getNotes(600);
   }
 };
 </script>
