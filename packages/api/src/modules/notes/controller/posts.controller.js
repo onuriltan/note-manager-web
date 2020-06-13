@@ -7,8 +7,8 @@ exports.findNotes = async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() })
   }
-  const { page, perPage, email } = req.query
-  const notes = await postsService.findNotes(email, { page, perPage })
+  const { email, limit, page } = req.query
+  const notes = await postsService.findNotes(email, { limit, page })
   res.send(notes)
 }
 

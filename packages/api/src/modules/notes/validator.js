@@ -2,8 +2,8 @@ const { query, param, body } = require('express-validator')
 
 exports.validateFindNotes = [
   query('email').isEmail(),
-  query('page').isNumeric(),
-  query('limit').isNumeric(),
+  query('page').isInt().toInt(),
+  query('limit').isInt().toInt(),
 ]
 
 exports.validateFindNotesBetweenDatesandKeyword = [

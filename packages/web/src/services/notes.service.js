@@ -10,13 +10,12 @@ class NotesService {
       headers: {
         Authorization: `Bearer ${window.localStorage.getItem('token')}`
       },
-      params: { page: pageNumber, perPage: 10, limit: 10 }
+      params: { page: pageNumber, limit: 6 }
     };
-
     try {
       const res = await axios.get(url, config);
-      const data = res.data;
-      return data;
+      console.log(res.data);
+      return res.data;
     } catch (e) {
       return e;
     }
