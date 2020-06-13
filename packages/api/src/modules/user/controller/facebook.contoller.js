@@ -1,11 +1,16 @@
-const express = require('express')
-const router = express.Router()
 const JwtOperations = require('../../../middlewares/jwt')
-
-const User = require('../entity/user')
-
 const passport = require('passport')
 const FacebookTokenStrategy = require('passport-facebook-token')
+const User = require('../entity/user')
+
+exports.loginWithFacebook = async (req, res) => {
+  if (req.user) {
+    const token = await JwtOperations.signToken(req.user)
+    res.json({ token })
+  } else {
+    res.status(401)
+  }
+}
 
 passport.use(
   'facebook-token',
@@ -46,16 +51,6 @@ passport.deserializeUser(function (user, done) {
   done(null, user)
 })
 
-router.post('/', passport.authenticate('facebook-token'), async function (
-  req,
-  res
-) {
-  if (req.user) {
-    const token = await JwtOperations.signToken(req.user)
-    res.json({ token })
-  } else {
-    res.status(401)
-  }
-})
-
-module.exports = router
+exports.passportWithFacebook = () => {
+  return passport
+}

@@ -5,7 +5,7 @@ const url = process.env.VUE_APP_AUTH_URL;
 class AuthService {
   static async login(credentials) {
     try {
-      const res = await axios.post(`${url}/login`, credentials);
+      const res = await axios.post(`${url}/loginWithEmail`, credentials);
       return res;
     } catch (e) {
       return e.response;
@@ -14,7 +14,7 @@ class AuthService {
 
   static async register(credentials) {
     try {
-      const res = await axios.post(`${url}/register`, credentials);
+      const res = await axios.post(`${url}/registerWithEmail`, credentials);
       return res;
     } catch (e) {
       return e.response;

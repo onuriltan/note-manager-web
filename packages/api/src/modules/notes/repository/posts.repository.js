@@ -12,7 +12,7 @@ const createPost = async (text, email) => {
 }
 
 const findNotes = async (email, options) => {
-  return await PostEntity.paginate({ email }, options)
+  return await PostEntity.paginate({ email }, { options })
 }
 
 const findNotesBetweenDatesandKeyword = async (

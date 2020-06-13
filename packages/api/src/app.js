@@ -5,6 +5,7 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const passport = require('passport')
 const mongoose = require('mongoose')
+const { configurePassport } = require('./config/passport')
 
 // Environment Variables
 const dotenv = require('dotenv')
@@ -24,31 +25,28 @@ mongoose
   .then(() => console.log('MongoDB connected.'))
   .catch((err) => console.log(err))
 
+configurePassport()
+
 // Routes
-const posts = require('./modules/posts')
-const auth = require('./modules/auth/service/auth')
-const facebook = require('./modules/auth/service/facebook')
-const user = require('./modules/auth/service/user')
+const notes = require('./modules/notes')
+const user = require('./modules/user')
 
 // TODO : Update Google Auth
 // const google = require('./routes/api/auth/GooglePlusService');
 
-server.use('/api/posts', posts)
-server.use('/api/auth', auth)
-server.use('/api/auth/facebook', facebook)
+server.use('/api/posts', notes)
 server.use('/api/user', user)
+
 // TODO : Update Google Auth
 // server.use('/api/auth/google', google);
 
 if (process.env.NODE_ENV === 'production') {
-  // Static folder
-  server.use(express.static(path.join(__dirname, '../public')))
-  // Handle SPA
+  server.use(express.static(path.join(__dirname, '../dist')))
   server.get('*', (req, res) =>
-    res.sendFile(path.join(__dirname, '../public/index.html'))
+    res.sendFile(path.join(__dirname, '../dist/index.html'))
   )
   server.get(/.*/, (req, res) =>
-    res.sendFile(path.join(__dirname, '../public/index.html'))
+    res.sendFile(path.join(__dirname, '../dist/index.html'))
   )
 }
 

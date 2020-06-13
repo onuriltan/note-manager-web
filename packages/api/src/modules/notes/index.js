@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const jwtConfig = require('../../middlewares/jwt')
-
 const {
   validateFindNotes,
   validateFindNotesBetweenDatesandKeyword,
@@ -18,6 +17,7 @@ const {
   deletePost,
 } = require('./controller/posts.controller')
 
+// Middlewares
 router.use(jwtConfig.verifyToken)
 router.use(jwtConfig.decodeToken)
 

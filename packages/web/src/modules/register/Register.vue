@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <b-form class="login-form" v-if="!emailAccepted" v-on:submit.prevent="register()">
+    <b-form class="login-form" v-if="!emailAccepted" v-on:submit.prevent="registerWithEmail()">
       <h2 class="login-form__header">Register</h2>
       <div style="font-weight: bold; margin-bottom: 20px; text-align: center">
         <router-link to="/login">Go back to login page!</router-link>
@@ -155,7 +155,7 @@ export default {
     ...mapActions({
       register: 'auth/register'
     }),
-    async register() {
+    async registerWithEmail() {
       this.errors = [];
       this.messages = [];
       this.fieldErrors = validateRegister(this.email, this.password, this.password2);

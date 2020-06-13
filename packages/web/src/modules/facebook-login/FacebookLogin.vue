@@ -58,7 +58,7 @@ export default {
           } else {
             // TODO: handle this situation
             // eslint-disable-next-line
-            console.log("User cancelled login or did not fully authorize.");
+            console.log('User cancelled login or did not fully authorize.');
           }
           this.fbLoginClicked = false;
         }.bind(this),

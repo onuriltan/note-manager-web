@@ -1,7 +1,7 @@
 const { query, param, body } = require('express-validator')
 
 exports.validateFindNotes = [
-  query('email').isEmail().normalizeEmail(),
+  query('email').isEmail(),
   query('page').isNumeric(),
   query('limit').isNumeric(),
 ]
