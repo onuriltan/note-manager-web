@@ -5,7 +5,7 @@ node_modules
 
 # Build directories
 dist
-public
+build
 
 # System environments
 .env
