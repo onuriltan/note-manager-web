@@ -13,9 +13,9 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex';
 export default {
-  name: "FacebookLogin",
+  name: 'FacebookLogin',
   data() {
     return {
       fbLoginClicked: false
@@ -29,10 +29,9 @@ export default {
         appId: appId,
         autoLogAppEvents: true,
         xfbml: true,
-        version: "v3.2"
+        version: 'v3.2'
       });
     };
-
     (function(d, s, id) {
       let js;
       const fjs = d.getElementsByTagName(s)[0];
@@ -41,13 +40,13 @@ export default {
       }
       js = d.createElement(s);
       js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      js.src = 'https://connect.facebook.net/en_US/sdk.js';
       fjs.parentNode.insertBefore(js, fjs);
-    })(document, "script", "facebook-jssdk");
+    })(document, 'script', 'facebook-jssdk');
   },
   methods: {
     ...mapActions({
-      loginWithFacebook: "auth/loginWithFacebook"
+      loginWithFacebook: 'auth/loginWithFacebook'
     }),
     loginWithFB() {
       this.fbLoginClicked = true;
@@ -63,7 +62,7 @@ export default {
           }
           this.fbLoginClicked = false;
         }.bind(this),
-        { scope: "public_profile,email", return_scopes: true }
+        { scope: 'public_profile,email', return_scopes: true }
       );
     }
   }

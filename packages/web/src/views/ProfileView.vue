@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import ProfileComponent from "../modules/profile/Profile";
+import ProfileComponent from '../modules/profile/Profile';
 
 export default {
-  name: "Profileview",
+  name: 'Profileview',
   components: {
     ProfileComponent
   }

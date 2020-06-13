@@ -14,15 +14,15 @@
 </template>
 
 <script>
-import ChangePassword from "../change-password/ChangePassword";
+import ChangePassword from '../change-password/ChangePassword';
 
 export default {
-  name: "Profile",
+  name: 'Profile',
   components: {
     ChangePassword
   },
   created() {
-    window.addEventListener("resize", this.handleResize);
+    window.addEventListener('resize', this.handleResize);
   },
   data() {
     return {
@@ -38,5 +38,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "./Profile";
+@import './Profile';
 </style>

@@ -1,8 +1,8 @@
-import authService from "../../services/auth.service";
-import socialService from "../../services/social.service";
+import authService from '../../services/auth.service';
+import socialService from '../../services/social.service';
 
-import router from "../../router";
-import jwtDecode from "jwt-decode";
+import router from '../../router';
+import jwtDecode from 'jwt-decode';
 
 const state = {
   isAuthenticated: false,
@@ -22,14 +22,14 @@ const auth = {
   },
   actions: {
     logout(context) {
-      context.commit("deleteToken");
+      context.commit('deleteToken');
     },
     login(context, credentials) {
       return new Promise(resolve => {
         authService
           .login(credentials)
           .then(response => {
-            context.commit("updateIsAuthenticated", response);
+            context.commit('updateIsAuthenticated', response);
             return resolve(response);
           })
           .catch(response => {
@@ -43,7 +43,7 @@ const auth = {
         socialService
           .loginWithFacebook(token)
           .then(response => {
-            context.commit("updateIsAuthenticated", response);
+            context.commit('updateIsAuthenticated', response);
             return resolve(response);
           })
           .catch(response => {
@@ -57,7 +57,7 @@ const auth = {
         socialService
           .loginWithGoogle(token)
           .then(response => {
-            context.commit("updateIsAuthenticated", response);
+            context.commit('updateIsAuthenticated', response);
             return resolve(response);
           })
           .catch(response => {
@@ -71,7 +71,7 @@ const auth = {
         authService
           .confirmUser(confirmationToken)
           .then(response => {
-            context.commit("updateIsAuthenticated", response);
+            context.commit('updateIsAuthenticated', response);
             return resolve(response);
           })
           .catch(response => {
@@ -107,22 +107,22 @@ const auth = {
     },
 
     loadUser(context) {
-      context.commit("loadUser");
+      context.commit('loadUser');
     },
 
     checkIsAuthenticated(context) {
-      context.commit("checkIsAuthenticated");
+      context.commit('checkIsAuthenticated');
     }
   },
   mutations: {
     deleteToken(state) {
-      window.localStorage.removeItem("token");
+      window.localStorage.removeItem('token');
       state.isAuthenticated = false;
-      router.push("/login");
+      router.push('/login');
     },
 
     checkIsAuthenticated(state) {
-      const token = window.localStorage.getItem("token");
+      const token = window.localStorage.getItem('token');
       const unixTimeStamp = new Date().getTime() / 1000;
       let expiration = null;
       if (token != null) {
@@ -132,7 +132,7 @@ const auth = {
         state.sessionExpired = true;
         setTimeout(() => {
           state.isAuthenticated = false;
-          router.push("/login");
+          router.push('/login');
           state.sessionExpired = false;
         }, 2000);
       }
@@ -140,19 +140,19 @@ const auth = {
 
     updateIsAuthenticated(state, response) {
       if (response.status === 200) {
-        window.localStorage.setItem("token", response.data.token);
+        window.localStorage.setItem('token', response.data.token);
         state.isAuthenticated = true;
         state.sessionExpired = false;
-        router.push("/dashboard");
+        router.push('/dashboard');
       } else {
         setTimeout(() => {
-          router.push("/login");
+          router.push('/login');
         }, 2000);
       }
     },
 
     loadUser(state) {
-      const token = window.localStorage.getItem("token");
+      const token = window.localStorage.getItem('token');
       const unixTimeStamp = new Date().getTime() / 1000;
       let expiration = null;
       if (token != null) {

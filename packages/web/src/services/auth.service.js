@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 const url = process.env.VUE_APP_AUTH_URL;
 
@@ -23,10 +23,7 @@ class AuthService {
 
   static async resendConfirmationEmail(credentials) {
     try {
-      const res = await axios.post(
-        `${url}/resendConfirmationEmail`,
-        credentials
-      );
+      const res = await axios.post(`${url}/resendConfirmationEmail`, credentials);
       return res;
     } catch (e) {
       return e.response;

@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import Dashboard from "../modules/dashboard/Dashboard";
+import Dashboard from '../modules/dashboard/Dashboard';
 
 export default {
-  name: "home",
+  name: 'home',
   components: {
     Dashboard
   }

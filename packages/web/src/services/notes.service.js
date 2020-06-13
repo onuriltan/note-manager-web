@@ -1,14 +1,14 @@
-import axios from "axios";
-import Store from "../store";
+import axios from 'axios';
+import Store from '../store';
 
 const url = process.env.VUE_APP_NOTES_URL;
 
 class NotesService {
   static async getPosts(pageNumber) {
-    Store.dispatch("auth/checkIsAuthenticated");
+    Store.dispatch('auth/checkIsAuthenticated');
     const config = {
       headers: {
-        Authorization: `Bearer ${window.localStorage.getItem("token")}`
+        Authorization: `Bearer ${window.localStorage.getItem('token')}`
       },
       params: { page: pageNumber, limit: 10 }
     };
@@ -23,21 +23,18 @@ class NotesService {
   }
 
   static async getPostsByCriteria(fromDate, toDate, keyword, pageNumber) {
-    Store.dispatch("auth/checkIsAuthenticated");
+    Store.dispatch('auth/checkIsAuthenticated');
     const config = {
       headers: {
-        Authorization: `Bearer ${window.localStorage.getItem("token")}`
+        Authorization: `Bearer ${window.localStorage.getItem('token')}`
       },
       params: { page: pageNumber }
     };
-    if (fromDate === "") fromDate = "%20";
-    if (toDate === "") toDate = "%20";
-    if (keyword === "") keyword = "%20";
+    if (fromDate === '') fromDate = '%20';
+    if (toDate === '') toDate = '%20';
+    if (keyword === '') keyword = '%20';
     try {
-      const res = await axios.get(
-        `${url}/${fromDate}/${toDate}/${keyword}`,
-        config
-      );
+      const res = await axios.get(`${url}/${fromDate}/${toDate}/${keyword}`, config);
       const data = res.data;
       if (data.docs !== []) {
         return data;
@@ -48,35 +45,35 @@ class NotesService {
   }
 
   static insertPost(text) {
-    Store.dispatch("auth/checkIsAuthenticated");
+    Store.dispatch('auth/checkIsAuthenticated');
     return axios.post(
       url,
       { text },
       {
         headers: {
-          Authorization: `Bearer ${window.localStorage.getItem("token")}`
+          Authorization: `Bearer ${window.localStorage.getItem('token')}`
         }
       }
     );
   }
 
   static deletePost(id) {
-    Store.dispatch("auth/checkIsAuthenticated");
+    Store.dispatch('auth/checkIsAuthenticated');
     return axios.delete(`${url}/${id}`, {
       headers: {
-        Authorization: `Bearer ${window.localStorage.getItem("token")}`
+        Authorization: `Bearer ${window.localStorage.getItem('token')}`
       }
     });
   }
 
   static editPost(id, text) {
-    Store.dispatch("auth/checkIsAuthenticated");
+    Store.dispatch('auth/checkIsAuthenticated');
     return axios.put(
       `${url}/${id}`,
       { text },
       {
         headers: {
-          Authorization: `Bearer ${window.localStorage.getItem("token")}`
+          Authorization: `Bearer ${window.localStorage.getItem('token')}`
         }
       }
     );

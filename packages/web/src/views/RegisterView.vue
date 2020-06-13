@@ -3,9 +3,9 @@
 </template>
 
 <script>
-import RegisterComponent from "../modules/register/Register";
+import RegisterComponent from '../modules/register/Register';
 export default {
-  name: "register",
+  name: 'register',
   components: {
     RegisterComponent
   }

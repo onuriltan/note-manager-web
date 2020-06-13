@@ -77,11 +77,11 @@
 </template>
 
 <script>
-import NotesService from "../../services/notes.service";
-import Notes from "../notes/Notes";
+import NotesService from '../../services/notes.service';
+import Notes from '../notes/Notes';
 
 export default {
-  name: "HistoryComponent",
+  name: 'HistoryComponent',
   components: {
     Notes
   },
@@ -95,22 +95,22 @@ export default {
         pages: 0
       },
       currentPage: 1,
-      toDate: "",
-      fromDate: "",
-      keyword: "",
+      toDate: '',
+      fromDate: '',
+      keyword: '',
       isLoading: false,
       searchClicked: false
     };
   },
   watch: {
-    "$route.params.pageNumber": function() {
+    '$route.params.pageNumber': function() {
       this.getNotes(1000);
     }
   },
 
   methods: {
     toPage(pageNum) {
-      return "/notes-history/" + pageNum;
+      return '/notes-history/' + pageNum;
     },
     async deletePost(tobeDeletedId) {
       this.isLoading = true;
@@ -141,11 +141,7 @@ export default {
             this.$route.params.pageNumber
           );
         } else {
-          postss = await NotesService.getPostsByCriteria(
-            this.fromDate,
-            this.toDate,
-            this.keyword
-          );
+          postss = await NotesService.getPostsByCriteria(this.fromDate, this.toDate, this.keyword);
         }
         this.posts = postss.docs;
         this.pagination.total = postss.total;
@@ -158,14 +154,12 @@ export default {
   },
   filters: {
     convertDate: date => {
-      return (
-        date.getFullYear() + "-" + date.getMonth() + 1 + "-" + date.getDate()
-      );
+      return date.getFullYear() + '-' + date.getMonth() + 1 + '-' + date.getDate();
     }
   }
 };
 </script>
 
 <style scoped lang="scss">
-@import "./History";
+@import './History';
 </style>

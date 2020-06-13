@@ -1,83 +1,83 @@
 /* eslint-disable no-useless-escape */
 export function validateRegister(email, password, password2) {
   const fieldErrors = {
-    email: "",
-    password: "",
-    password2: ""
+    email: '',
+    password: '',
+    password2: ''
   };
 
   if (!email) {
-    fieldErrors.email = "Email required.";
+    fieldErrors.email = 'Email required.';
   } else if (!validEmail(email)) {
-    fieldErrors.email = "Email is not valid.";
+    fieldErrors.email = 'Email is not valid.';
   } else {
-    fieldErrors.email = "";
+    fieldErrors.email = '';
   }
   if (!password) {
-    fieldErrors.password = "Password required.";
+    fieldErrors.password = 'Password required.';
   } else if (password.length < 6) {
-    fieldErrors.password = "Password length should be 6.";
+    fieldErrors.password = 'Password length should be 6.';
   } else {
-    fieldErrors.password = "";
+    fieldErrors.password = '';
   }
 
   if (!password2) {
-    fieldErrors.password2 = "Repeat password required.";
+    fieldErrors.password2 = 'Repeat password required.';
   } else if (password2.length < 6) {
-    fieldErrors.password2 = "Repeat password length should be 6.";
+    fieldErrors.password2 = 'Repeat password length should be 6.';
   } else if (password2 !== password) {
-    fieldErrors.password = "Passwords does not match.";
-    fieldErrors.password2 = "Passwords does not match.";
+    fieldErrors.password = 'Passwords does not match.';
+    fieldErrors.password2 = 'Passwords does not match.';
   } else {
-    fieldErrors.password2 = "";
-    fieldErrors.password = "";
+    fieldErrors.password2 = '';
+    fieldErrors.password = '';
   }
   return fieldErrors;
 }
 
 export function validateEmail(email) {
-  let error = "";
+  let error = '';
   if (!email) {
-    error = "Email required.";
+    error = 'Email required.';
   } else if (!validEmail(email)) {
-    error = "Email is not valid.";
+    error = 'Email is not valid.';
   } else {
-    error = "";
+    error = '';
   }
   return error;
 }
 
 export function validatePassword(password) {
-  let error = "";
+  let error = '';
   if (!password) {
-    error = "Password required.";
+    error = 'Password required.';
   } else if (password.length < 6) {
-    error = "Password length should be 6.";
+    error = 'Password length should be 6.';
   } else {
-    error = "";
+    error = '';
   }
   return error;
 }
 
 export function validateLogin(email, password) {
   const fieldErrors = {
-    email: "",
-    password: ""
+    email: '',
+    password: ''
   };
 
   if (!email) {
-    fieldErrors.email = "Email required.";
+    fieldErrors.email = 'Email required.';
   } else if (!validEmail(email)) {
-    fieldErrors.email = "Email is not valid.";
+    fieldErrors.email = 'Email is not valid.';
   } else {
-    fieldErrors.email = "";
+    fieldErrors.email = '';
   }
   if (!password) {
-    fieldErrors.password = "Password required.";
+    fieldErrors.password = 'Password required.';
   } else if (password.length < 6) {
-    fieldErrors.password = "Password length should be 6.";
+    fieldErrors.password = 'Password length should be 6.';
   } else {
-    fieldErrors.password = "";
+    fieldErrors.password = '';
   }
 
   return fieldErrors;
@@ -85,18 +85,18 @@ export function validateLogin(email, password) {
 
 export function validateChangePassword(oldPassword, newPassword) {
   const fieldErrors = {
-    oldPassword: "",
-    newPassword: ""
+    oldPassword: '',
+    newPassword: ''
   };
   if (!oldPassword) {
-    fieldErrors.oldPassword = "Old password required.";
+    fieldErrors.oldPassword = 'Old password required.';
   } else if (oldPassword.length < 6) {
-    fieldErrors.oldPassword = "Password length should be 6.";
+    fieldErrors.oldPassword = 'Password length should be 6.';
   }
   if (!newPassword) {
-    fieldErrors.newPassword = "New password required.";
+    fieldErrors.newPassword = 'New password required.';
   } else if (newPassword.length < 6) {
-    fieldErrors.newPassword = "Password length should be 6.";
+    fieldErrors.newPassword = 'Password length should be 6.';
   }
   return fieldErrors;
 }

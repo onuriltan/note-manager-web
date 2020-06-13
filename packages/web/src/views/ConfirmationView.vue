@@ -13,9 +13,9 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex';
 export default {
-  name: "ConfirmationView",
+  name: 'ConfirmationView',
   data() {
     return {
       errors: []
@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      confirmUser: "auth/confirmUser"
+      confirmUser: 'auth/confirmUser'
     })
   },
   async beforeMount() {

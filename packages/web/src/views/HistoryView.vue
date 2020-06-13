@@ -5,9 +5,9 @@
 </template>
 
 <script>
-import History from "../modules/history/History";
+import History from '../modules/history/History';
 export default {
-  name: "HistoryView",
+  name: 'HistoryView',
   components: {
     History
   }

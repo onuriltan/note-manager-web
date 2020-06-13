@@ -21,11 +21,7 @@
       <br />
 
       <b-pagination-nav
-        v-if="
-          !!this.pagination.page &&
-            !!this.pagination.pages &&
-            this.pagination.pages > 1
-        "
+        v-if="!!this.pagination.page && !!this.pagination.pages && this.pagination.pages > 1"
         :link-gen="toPage"
         :number-of-pages="this.pagination.pages"
         v-model="currentPage"
@@ -44,11 +40,11 @@
 </template>
 
 <script>
-import NotesService from "../../services/notes.service";
-import Notes from "../notes/Notes";
+import NotesService from '../../services/notes.service';
+import Notes from '../notes/Notes';
 
 export default {
-  name: "DashboardComponent",
+  name: 'DashboardComponent',
   components: {
     Notes
   },
@@ -62,20 +58,20 @@ export default {
         pages: 0
       },
       currentPage: 1,
-      error: "",
-      text: "",
+      error: '',
+      text: '',
       isLoading: false,
       searchClicked: true
     };
   },
   watch: {
-    "$route.params.pageNumber": function() {
+    '$route.params.pageNumber': function() {
       this.getNotes(1000);
     }
   },
   methods: {
     toPage(pageNum) {
-      return "/dashboard/" + pageNum;
+      return '/dashboard/' + pageNum;
     },
     async createPost() {
       this.isLoading = true;
@@ -130,5 +126,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "./Dashboard.scss";
+@import './Dashboard.scss';
 </style>

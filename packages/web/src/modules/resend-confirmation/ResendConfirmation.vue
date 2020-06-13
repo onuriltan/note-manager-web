@@ -29,9 +29,8 @@
     </div>
     <h2 class="login-form__header">Welcome to Note Manager</h2>
     <p>
-      We've send you a confirmation e-mail. Click the link in your e-mail to
-      confirm your account. If you cant find the e-mail check the spam folder or
-      click the button below to-resend
+      We've send you a confirmation e-mail. Click the link in your e-mail to confirm your account.
+      If you cant find the e-mail check the spam folder or click the button below to-resend
     </p>
     <b-button
       class="login-form__button"
@@ -51,9 +50,9 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex';
 export default {
-  name: "ResendConfirmation",
+  name: 'ResendConfirmation',
   props: {
     emailAccepted: Boolean,
     email: String,
@@ -69,7 +68,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      resendConfirmationEmail: "auth/resendConfirmationEmail"
+      resendConfirmationEmail: 'auth/resendConfirmationEmail'
     }),
     resendConfirmationEmail() {
       this.errors = [];
@@ -96,5 +95,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../login/Login";
+@import '../login/Login';
 </style>

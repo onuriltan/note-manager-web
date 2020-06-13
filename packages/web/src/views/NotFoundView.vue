@@ -1,14 +1,7 @@
 <template>
   <div class="notfound">
     <p>You're probably not looking for Nyan Cat. Or are you?</p>
-    <audio
-      id="audio"
-      controls
-      autoplay
-      preload="auto"
-      loop
-      style="display: none; padding: 10px 0"
-    >
+    <audio id="audio" controls autoplay preload="auto" loop style="display: none; padding: 10px 0">
       <source src="../assets/nyan-cat-short.mp3" type="audio/mp3" />
     </audio>
     <img
@@ -31,9 +24,9 @@
 
 <script>
 export default {
-  name: "NotFound",
+  name: 'NotFound',
   mounted() {
-    const promise = document.getElementById("audio").play();
+    const promise = document.getElementById('audio').play();
     if (promise !== undefined) {
       promise
         .then(() => {
@@ -41,7 +34,7 @@ export default {
           // eslint-disable-next-line handle-callback-err
         })
         .catch(() => {
-          document.getElementById("audio").style.display = "block";
+          document.getElementById('audio').style.display = 'block';
         });
     }
   }

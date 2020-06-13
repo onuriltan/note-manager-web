@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import HeaderComponent from "./modules/header/Header";
-import SessionExpired from "./modules/session-expired/SessionExpired";
+import HeaderComponent from './modules/header/Header';
+import SessionExpired from './modules/session-expired/SessionExpired';
 export default {
-  name: "App",
+  name: 'App',
   components: {
     SessionExpired,
     HeaderComponent
@@ -21,5 +21,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "styles/global.scss";
+@import 'styles/global.scss';
 </style>

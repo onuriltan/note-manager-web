@@ -46,9 +46,7 @@
         ></b-form-input>
       </b-form-group>
       <div style="font-weight: bold; margin: 30px 0; text-align: center">
-        <router-link to="/register"
-          >Dont have an account? Register from here!</router-link
-        >
+        <router-link to="/register">Dont have an account? Register from here!</router-link>
       </div>
       <b-button
         class="login-form__button"
@@ -72,17 +70,13 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import {
-  validateLogin,
-  validateEmail,
-  validatePassword
-} from "../../helpers/validators";
-import FacebookLogin from "../facebook-login/FacebookLogin";
-import GoogleLogin from "../google-login/GoogleLogin";
+import { mapActions } from 'vuex';
+import { validateLogin, validateEmail, validatePassword } from '../../helpers/validators';
+import FacebookLogin from '../facebook-login/FacebookLogin';
+import GoogleLogin from '../google-login/GoogleLogin';
 
 export default {
-  name: "LoginComponent",
+  name: 'LoginComponent',
   components: {
     FacebookLogin,
     // eslint-disable-next-line vue/no-unused-components
@@ -95,8 +89,8 @@ export default {
         email: null,
         password: null
       },
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       loginClicked: false,
       isEmailEntered: false,
       isPasswordEntered: false
@@ -110,18 +104,18 @@ export default {
       return this.fieldErrors.password;
     },
     isValidForm() {
-      return this.fieldErrors.email === "" && this.fieldErrors.password === "";
+      return this.fieldErrors.email === '' && this.fieldErrors.password === '';
     },
     emailCorrectState() {
-      if (this.isEmailEntered && this.invalidEmailMessage === "") return true;
-      if (this.isEmailEntered && this.invalidEmailMessage !== "") return false;
+      if (this.isEmailEntered && this.invalidEmailMessage === '') return true;
+      if (this.isEmailEntered && this.invalidEmailMessage !== '') return false;
       return null;
     },
     passwordCorrectState() {
-      if (this.isPasswordEntered && this.invalidPasswordMessage === "") {
+      if (this.isPasswordEntered && this.invalidPasswordMessage === '') {
         return true;
       }
-      if (this.isPasswordEntered && this.invalidPasswordMessage !== "") {
+      if (this.isPasswordEntered && this.invalidPasswordMessage !== '') {
         return false;
       }
       return null;
@@ -129,7 +123,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      login: "auth/login"
+      login: 'auth/login'
     }),
     validateEmail() {
       setTimeout(() => {
@@ -168,5 +162,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "./Login";
+@import './Login';
 </style>

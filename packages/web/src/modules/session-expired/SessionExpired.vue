@@ -1,15 +1,7 @@
 <template>
-  <div
-    id="theWarning"
-    style="display:none"
-    :class="{ 'session-expired-alert': sessionExpired }"
-  >
+  <div id="theWarning" style="display:none" :class="{ 'session-expired-alert': sessionExpired }">
     <div class="session-expired-alert__content">
-      <b-alert
-        show
-        variant="warning"
-        class="session-expired-alert__content__message"
-      >
+      <b-alert show variant="warning" class="session-expired-alert__content__message">
         <h4 class="alert-heading">Warning!</h4>
         <p>Your session is expired. Redirecting to login ...</p>
       </b-alert>
@@ -18,13 +10,13 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 
 export default {
-  name: "SessionExpired",
+  name: 'SessionExpired',
   computed: {
     ...mapGetters({
-      sessionExpired: "auth/sessionExpired"
+      sessionExpired: 'auth/sessionExpired'
     })
   },
   watch: {

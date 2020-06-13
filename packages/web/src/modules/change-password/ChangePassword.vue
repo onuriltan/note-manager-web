@@ -2,10 +2,7 @@
   <b-form class="change-password-form" v-on:submit.prevent="changePassword()">
     <div class="change-password-form__content">
       <h2 class="change-password-form__content__header">Change Password</h2>
-      <div
-        class="change-password-form__content__errors"
-        v-if="errors.length > 0"
-      >
+      <div class="change-password-form__content__errors" v-if="errors.length > 0">
         <b-alert
           v-bind:key="index"
           class="change-password-form__errors__error"
@@ -16,10 +13,7 @@
           >{{ error.msg }}</b-alert
         >
       </div>
-      <div
-        class="change-password-form__content__errors"
-        v-if="messages.length > 0"
-      >
+      <div class="change-password-form__content__errors" v-if="messages.length > 0">
         <b-alert
           v-bind:key="index"
           class="change-password-form__errors__error"
@@ -76,36 +70,33 @@
 </template>
 
 <script>
-import UserService from "../../services/user.service";
-import { validateChangePassword } from "../../helpers/validators";
+import UserService from '../../services/user.service';
+import { validateChangePassword } from '../../helpers/validators';
 
 export default {
-  name: "ChangePassword",
+  name: 'ChangePassword',
   computed: {
     oldPasswordCorrectState() {
       if (this.fieldErrors.oldPassword === null) return null;
-      if (this.fieldErrors.oldPassword === "") return true;
-      if (this.fieldErrors.oldPassword !== "") return false;
+      if (this.fieldErrors.oldPassword === '') return true;
+      if (this.fieldErrors.oldPassword !== '') return false;
       return false;
     },
     newPasswordCorrectState() {
       if (this.fieldErrors.newPassword === null) return null;
-      else if (this.fieldErrors.newPassword === "") return true;
-      else if (this.fieldErrors.newPassword !== "") return false;
+      else if (this.fieldErrors.newPassword === '') return true;
+      else if (this.fieldErrors.newPassword !== '') return false;
       return false;
     },
     isValidForm() {
-      return (
-        this.fieldErrors.oldPassword === "" &&
-        this.fieldErrors.newPassword === ""
-      );
+      return this.fieldErrors.oldPassword === '' && this.fieldErrors.newPassword === '';
     },
     changePasswordDisabled() {
       return (
         this.newPassword === null ||
-        this.newPassword === "" ||
+        this.newPassword === '' ||
         this.oldPassword === null ||
-        this.oldPassword === ""
+        this.oldPassword === ''
       );
     }
   },
@@ -117,18 +108,15 @@ export default {
         newPassword: null
       },
       messages: [],
-      oldPassword: "",
-      newPassword: "",
+      oldPassword: '',
+      newPassword: '',
       changePasswordClicked: false
     };
   },
   methods: {
     changePassword() {
       this.clearErrors();
-      this.fieldErrors = validateChangePassword(
-        this.oldPassword,
-        this.newPassword
-      );
+      this.fieldErrors = validateChangePassword(this.oldPassword, this.newPassword);
       if (this.isValidForm) {
         this.changePasswordClicked = true;
         setTimeout(async () => {
@@ -144,7 +132,7 @@ export default {
             this.errors = res.data.errors;
           }
           if (res.status === 200) {
-            this.messages.push({ msg: "Password is changed!" });
+            this.messages.push({ msg: 'Password is changed!' });
           }
         }, 1000);
       }
@@ -160,5 +148,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "./ChangePassword";
+@import './ChangePassword';
 </style>

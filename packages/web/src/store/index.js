@@ -1,7 +1,7 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-import AuthStore from "./modules/auth.store";
+import AuthStore from './modules/auth.store';
 
 Vue.use(Vuex);
 

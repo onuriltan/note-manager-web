@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 const url = process.env.VUE_APP_AUTH_URL;
 

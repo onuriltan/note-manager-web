@@ -1,10 +1,6 @@
 <template>
   <div class="login-container">
-    <b-form
-      class="login-form"
-      v-if="!emailAccepted"
-      v-on:submit.prevent="register()"
-    >
+    <b-form class="login-form" v-if="!emailAccepted" v-on:submit.prevent="register()">
       <h2 class="login-form__header">Register</h2>
       <div style="font-weight: bold; margin-bottom: 20px; text-align: center">
         <router-link to="/login">Go back to login page!</router-link>
@@ -31,12 +27,7 @@
           >{{ message.msg }}</b-alert
         >
       </div>
-      <b-form-group
-        id="email"
-        label="Email"
-        :invalid-feedback="invalidEmail"
-        label-for="email"
-      >
+      <b-form-group id="email" label="Email" :invalid-feedback="invalidEmail" label-for="email">
         <b-form-input
           id="email"
           type="email"
@@ -101,12 +92,12 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import { validateRegister } from "../../helpers/validators";
-import ResendConfirmation from "../resend-confirmation/ResendConfirmation";
+import { mapActions } from 'vuex';
+import { validateRegister } from '../../helpers/validators';
+import ResendConfirmation from '../resend-confirmation/ResendConfirmation';
 
 export default {
-  name: "RegisterComponent",
+  name: 'RegisterComponent',
   components: {
     ResendConfirmation
   },
@@ -115,13 +106,13 @@ export default {
       errors: [],
       messages: [],
       fieldErrors: {
-        email: "",
-        password: "",
-        password2: ""
+        email: '',
+        password: '',
+        password2: ''
       },
-      email: "",
-      password: "",
-      password2: "",
+      email: '',
+      password: '',
+      password2: '',
       registerClicked: false,
       registerValidated: false,
       emailAccepted: false
@@ -139,39 +130,35 @@ export default {
     },
     isValidForm() {
       return (
-        this.fieldErrors.email === "" &&
-        this.fieldErrors.password === "" &&
-        this.fieldErrors.password2 === ""
+        this.fieldErrors.email === '' &&
+        this.fieldErrors.password === '' &&
+        this.fieldErrors.password2 === ''
       );
     },
     emailCorrectState() {
-      if (this.registerClicked && this.invalidEmail === "") return true;
-      if (this.registerClicked && this.invalidEmail !== "") return false;
+      if (this.registerClicked && this.invalidEmail === '') return true;
+      if (this.registerClicked && this.invalidEmail !== '') return false;
       return null;
     },
     passwordCorrectState() {
-      if (this.registerClicked && this.invalidPassword === "") return true;
-      if (this.registerClicked && this.invalidPassword !== "") return false;
+      if (this.registerClicked && this.invalidPassword === '') return true;
+      if (this.registerClicked && this.invalidPassword !== '') return false;
       return null;
     },
     password2CorrectState() {
-      if (this.registerClicked && this.invalidPassword2 === "") return true;
-      if (this.registerClicked && this.invalidPassword2 !== "") return false;
+      if (this.registerClicked && this.invalidPassword2 === '') return true;
+      if (this.registerClicked && this.invalidPassword2 !== '') return false;
       return null;
     }
   },
   methods: {
     ...mapActions({
-      register: "auth/register"
+      register: 'auth/register'
     }),
     async register() {
       this.errors = [];
       this.messages = [];
-      this.fieldErrors = validateRegister(
-        this.email,
-        this.password,
-        this.password2
-      );
+      this.fieldErrors = validateRegister(this.email, this.password, this.password2);
       this.registerClicked = true;
       if (this.isValidForm) {
         this.registerValidated = true;
@@ -198,5 +185,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../login/Login";
+@import '../login/Login';
 </style>
