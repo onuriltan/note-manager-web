@@ -1,4 +1,4 @@
-const postsRepository = require('../repository/posts.repository')
+const postsRepository = require('../repository/note.repository')
 
 exports.findNotes = async (email, pageAndLimit) => {
   pageAndLimit.sort = { date: -1 }

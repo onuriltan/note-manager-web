@@ -17,7 +17,6 @@ const decodeToken = (req, res, next) => {
     if (err) {
       res.sendStatus(403)
     } else {
-      // console.log('authData.email: ' + authData.email)
       req.query.email = authData.email
       next()
     }

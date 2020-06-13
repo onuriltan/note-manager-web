@@ -9,8 +9,10 @@ exports.validateFindNotes = [
 exports.validateFindNotesBetweenDatesandKeyword = [
   param('fromDate').isISO8601().toDate(),
   param('toDate').isISO8601().toDate(),
+  query('page').isInt().toInt(),
+  query('limit').isInt().toInt(),
 ]
 
-exports.validateCreatePost = [body('text').notEmpty()]
-exports.validateEditPost = [body('text').notEmpty(), param('id').isMongoId()]
-exports.validateDeletePost = [param('id').isMongoId()]
+exports.validateCreateNote = [body('text').notEmpty()]
+exports.validateEditNote = [body('text').notEmpty(), param('id').isMongoId()]
+exports.validateDeleteNote = [param('id').isMongoId()]

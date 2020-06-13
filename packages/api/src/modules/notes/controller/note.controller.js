@@ -1,5 +1,5 @@
-const postsRepository = require('../repository/posts.repository')
-const postsService = require('../service/posts.service')
+const postsRepository = require('../repository/note.repository')
+const postsService = require('../service/note.service')
 const { validationResult } = require('express-validator')
 
 exports.findNotes = async (req, res) => {
@@ -17,34 +17,33 @@ exports.findNotesBetweenDatesandKeyword = async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() })
   }
-  const { page, perPage, email } = req.query
+  const { email, limit, page } = req.query
   const fromDate = req.params.fromDate
   const toDate = req.params.toDate
   const keyword = req.params.keyword
-  toDate.setDate(toDate.getDate() + 1)
 
   const notes = await postsRepository.findNotesBetweenDatesandKeyword(
     fromDate,
     toDate,
     keyword,
     email,
-    { page, perPage }
+    { page, limit }
   )
   res.send(notes)
 }
 
-exports.createPost = async (req, res) => {
+exports.createNote = async (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() })
   }
   const { email } = req.query
   const { text } = req.body
-  const newPost = await postsRepository.createPost(text, email)
+  const newPost = await postsRepository.createNote(text, email)
   res.status(201).send(newPost)
 }
 
-exports.editPost = async (req, res) => {
+exports.editNote = async (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() })
@@ -52,17 +51,17 @@ exports.editPost = async (req, res) => {
   const { email } = req.query
   const { text } = req.body
   const id = req.params.id
-  const updatedPost = await postsRepository.editPost(id, email, text)
+  const updatedPost = await postsRepository.editNote(id, email, text)
   res.send(updatedPost)
 }
 
-exports.deletePost = async (req, res) => {
+exports.deleteNote = async (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() })
   }
   const { email } = req.query
   const id = req.params.id
-  const isUpdated = await postsRepository.deletePost(email, id)
+  const isUpdated = await postsRepository.deleteNote(email, id)
   isUpdated ? res.status(201).send() : res.status(400).send()
 }

@@ -116,23 +116,23 @@ export default {
       this.isLoading = true;
       setTimeout(async () => {
         await NotesService.deletePost(tobeDeletedId);
-        await this.getNotes(0);
+        await this.getNotes(1000);
         this.isLoading = false;
       }, 1000);
     },
     async editPost(tobeEditedId, tobeEditedText) {
       setTimeout(async () => {
         await NotesService.editPost(tobeEditedId, tobeEditedText);
-        await this.getNotes(0);
+        await this.getNotes(1000);
       }, 1000);
     },
     async getNotes(seconds) {
       this.isLoading = true;
       this.searchClicked = true;
+      console.log(this.fromDate);
       setTimeout(async () => {
         this.posts = [];
         let postss = [];
-        if (!this.toDate) this.toDate = new Date();
         if (this.$route.params.pageNumber) {
           postss = await NotesService.getPostsByCriteria(
             this.fromDate,
@@ -141,7 +141,12 @@ export default {
             this.$route.params.pageNumber
           );
         } else {
-          postss = await NotesService.getPostsByCriteria(this.fromDate, this.toDate, this.keyword);
+          postss = await NotesService.getPostsByCriteria(
+            this.fromDate,
+            this.toDate,
+            this.keyword,
+            1
+          );
         }
         this.posts = postss.docs;
         this.pagination.total = postss.total;

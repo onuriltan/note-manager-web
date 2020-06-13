@@ -26,10 +26,8 @@ class NotesService {
       headers: {
         Authorization: `Bearer ${window.localStorage.getItem('token')}`
       },
-      params: { page: pageNumber }
+      params: { page: pageNumber, limit: 6 }
     };
-    if (fromDate === '') fromDate = '%20';
-    if (toDate === '') toDate = '%20';
     if (keyword === '') keyword = '%20';
     try {
       const res = await axios.get(`${url}/${fromDate}/${toDate}/${keyword}`, config);

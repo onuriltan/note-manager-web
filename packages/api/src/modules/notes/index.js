@@ -4,18 +4,18 @@ const jwtConfig = require('../../middlewares/jwt')
 const {
   validateFindNotes,
   validateFindNotesBetweenDatesandKeyword,
-  validateCreatePost,
-  validateEditPost,
-  validateDeletePost,
+  validateCreateNote,
+  validateDeleteNote,
+  validateEditNote,
 } = require('./validator')
 
 const {
   findNotes,
   findNotesBetweenDatesandKeyword,
-  createPost,
-  editPost,
-  deletePost,
-} = require('./controller/posts.controller')
+  createNote,
+  editNote,
+  deleteNote,
+} = require('./controller/note.controller')
 
 // Middlewares
 router.use(jwtConfig.verifyToken)
@@ -27,8 +27,8 @@ router.get(
   validateFindNotesBetweenDatesandKeyword,
   findNotesBetweenDatesandKeyword
 )
-router.post('/', validateCreatePost, createPost)
-router.put('/:id', validateEditPost, editPost)
-router.delete('/:id', validateDeletePost, deletePost)
+router.post('/', validateCreateNote, createNote)
+router.put('/:id', validateEditNote, editNote)
+router.delete('/:id', validateDeleteNote, deleteNote)
 
 module.exports = router
