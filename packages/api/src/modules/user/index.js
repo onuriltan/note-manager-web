@@ -9,6 +9,11 @@ const {
 } = require('./controller/auth.controller')
 const { loginWithFacebook } = require('./controller/facebook.contoller')
 const { getUser, changePassword } = require('./controller/user.controller')
+const {
+  validateRegisterWithEmail,
+  validateLoginWithEmail,
+  returnValidationErrors,
+} = require('./validator')
 
 const router = express.Router()
 const authRoutes = express.Router()
@@ -16,8 +21,18 @@ const userRoutes = express.Router()
 
 // Auth
 router.use('/auth', authRoutes)
-authRoutes.post('/loginWithEmail', loginWithEmail)
-authRoutes.post('/registerWithEmail', registerWithEmail)
+authRoutes.post(
+  '/loginWithEmail',
+  validateLoginWithEmail,
+  returnValidationErrors,
+  loginWithEmail
+)
+authRoutes.post(
+  '/registerWithEmail',
+  validateRegisterWithEmail,
+  returnValidationErrors,
+  registerWithEmail
+)
 authRoutes.get('/confirm/:confirmationToken', findUserWithConfirmationToken)
 authRoutes.post('/resendConfirmationEmail', resendConfirmationEmail)
 authRoutes.post(

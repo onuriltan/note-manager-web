@@ -167,14 +167,14 @@ export default {
           password: this.password,
           password2: this.password2
         });
-        if (res.data.errors) {
-          this.registerClicked = false;
-          this.registerValidated = false;
-          this.errors = res.data.errors;
+        this.registerClicked = false;
+        this.registerValidated = false;
+        if (res.data.errors || res.data.fieldErrors) {
+          res.data.errors
+            ? (this.errors = res.data.errors)
+            : (this.fieldErrors = { ...this.fieldErrors, ...res.data.fieldErrors });
         }
         if (res.data.messages) {
-          this.registerClicked = false;
-          this.registerValidated = false;
           this.messages = res.data.messages;
           this.emailAccepted = true;
         }

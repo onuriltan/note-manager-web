@@ -15,16 +15,16 @@ export function validateRegister(email, password, password2) {
   }
   if (!password) {
     fieldErrors.password = 'Password required.';
-  } else if (password.length < 6) {
-    fieldErrors.password = 'Password length should be 6.';
+  } else if (password.length < 6 || password.length > 20) {
+    fieldErrors.password = 'Password length should between 6 and 20.';
   } else {
     fieldErrors.password = '';
   }
 
   if (!password2) {
     fieldErrors.password2 = 'Repeat password required.';
-  } else if (password2.length < 6) {
-    fieldErrors.password2 = 'Repeat password length should be 6.';
+  } else if (password.length < 6 || password.length > 20) {
+    fieldErrors.password2 = 'Repeat password length should between 6 and 20.';
   } else if (password2 !== password) {
     fieldErrors.password = 'Passwords does not match.';
     fieldErrors.password2 = 'Passwords does not match.';
@@ -64,21 +64,6 @@ export function validateLogin(email, password) {
     email: '',
     password: ''
   };
-
-  if (!email) {
-    fieldErrors.email = 'Email required.';
-  } else if (!validEmail(email)) {
-    fieldErrors.email = 'Email is not valid.';
-  } else {
-    fieldErrors.email = '';
-  }
-  if (!password) {
-    fieldErrors.password = 'Password required.';
-  } else if (password.length < 6) {
-    fieldErrors.password = 'Password length should be 6.';
-  } else {
-    fieldErrors.password = '';
-  }
 
   return fieldErrors;
 }

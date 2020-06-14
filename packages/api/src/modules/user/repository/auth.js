@@ -3,7 +3,7 @@ const mongodb = require('mongodb')
 const bcrypt = require('bcrypt')
 const uniqid = require('uniqid')
 
-const findUser = async (email) => {
+exports.findUser = async (email) => {
   let theUser = null
   await User.findOne({ 'local.email': email }).then((user) => {
     theUser = user
@@ -11,7 +11,7 @@ const findUser = async (email) => {
   return theUser
 }
 
-const findUserWithConfirmationToken = async (confirmationToken) => {
+exports.findUserWithConfirmationToken = async (confirmationToken) => {
   let theUser = null
   await User.findOne({ confirmationToken }).then((user) => {
     theUser = user
@@ -19,7 +19,7 @@ const findUserWithConfirmationToken = async (confirmationToken) => {
   return theUser
 }
 
-const createUser = async (email, password) => {
+exports.createUser = async (email, password) => {
   let theUser = null
   const newUser = new User({
     method: 'local',
@@ -42,7 +42,7 @@ const createUser = async (email, password) => {
   return theUser
 }
 
-const regenerateUserConfirmationToken = async (email) => {
+exports.regenerateUserConfirmationToken = async (email) => {
   let theUser = ''
   await User.findOne({ 'local.email': email }).then((user) => {
     theUser = user
@@ -59,7 +59,7 @@ const regenerateUserConfirmationToken = async (email) => {
   return theUser
 }
 
-const deleteUser = async (id) => {
+exports.deleteUser = async (id) => {
   let isDeleted = null
   await User.deleteOne({ _id: new mongodb.ObjectID(id) })
     .then(() => (isDeleted = true))
@@ -77,9 +77,3 @@ async function hashPassword(user) {
     })
   })
 }
-
-module.exports.findUser = findUser
-module.exports.createUser = createUser
-module.exports.deleteUser = deleteUser
-module.exports.findUserWithConfirmationToken = findUserWithConfirmationToken
-module.exports.regenerateUserConfirmationToken = regenerateUserConfirmationToken
