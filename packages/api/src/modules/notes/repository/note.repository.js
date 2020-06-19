@@ -1,19 +1,9 @@
 const mongodb = require('mongodb')
 const NoteEntity = require('../entity/note.entity')
 
-const createNote = async (text, email) => {
-  const newPost = new NoteEntity({
-    text,
-    email,
-  })
-  await newPost.save().then(() => {
-    return newPost
-  })
-}
-
 const findNotes = async (email, options) => {
-  options.lean = true
-  return await NoteEntity.paginate({ email }, options)
+  const extendedOptions = { ...options, lean: true }
+  return await NoteEntity.paginate({ email }, extendedOptions)
 }
 
 const findNotesBetweenDatesandKeyword = async (
@@ -23,8 +13,7 @@ const findNotesBetweenDatesandKeyword = async (
   email,
   options
 ) => {
-  options.lean = true
-  options.sort = { date: -1 }
+  const extendedOptions = { ...options, lean: true, sort: { date: -1 } }
   const regex = new RegExp(`${keyword}`, 'i')
   const query = {
     email,
@@ -36,7 +25,17 @@ const findNotesBetweenDatesandKeyword = async (
   if (keyword && keyword !== ' ') {
     query.text = { $regex: regex }
   }
-  return await NoteEntity.paginate(query, options)
+  return await NoteEntity.paginate(query, extendedOptions)
+}
+
+const createNote = async (text, email) => {
+  const newPost = new NoteEntity({
+    text,
+    email,
+  })
+  await newPost.save().then(() => {
+    return newPost
+  })
 }
 
 const editNote = async (id, email, text) => {

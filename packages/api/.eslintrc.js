@@ -2,7 +2,7 @@ module.exports = {
   plugins: ['import', 'prettier', 'standard', 'jest'],
   extends: ['standard', 'prettier', 'prettier/standard', 'plugin:jest/style'],
   parserOptions: {
-    ecmaVersion: 2017,
+    ecmaVersion: 2018,
   },
   env: {
     node: true,

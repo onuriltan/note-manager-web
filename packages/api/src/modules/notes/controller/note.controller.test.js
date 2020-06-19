@@ -5,7 +5,7 @@ const noteService = require('../service/note.service')
 jest.mock('../service/note.service')
 jest.mock('../repository/note.repository')
 
-describe(`${noteController.findNotes.name}`, () => {
+describe(`${noteController.findNotes.name} Controller`, () => {
   const resSend = jest.fn()
   const resStatus = jest.fn()
   const resSet = jest.fn()
@@ -41,7 +41,7 @@ describe(`${noteController.findNotes.name}`, () => {
   })
 })
 
-describe(`${noteController.findNotesBetweenDatesandKeyword.name}`, () => {
+describe(`${noteController.findNotesBetweenDatesandKeyword.name} Controller`, () => {
   const resSend = jest.fn()
   const resStatus = jest.fn()
   const resSet = jest.fn()
@@ -90,7 +90,7 @@ describe(`${noteController.findNotesBetweenDatesandKeyword.name}`, () => {
   })
 })
 
-describe(`${noteController.createNote.name}`, () => {
+describe(`${noteController.createNote.name} Controller`, () => {
   const resSend = jest.fn()
   const resStatus = jest.fn()
   const resSet = jest.fn()
@@ -133,7 +133,7 @@ describe(`${noteController.createNote.name}`, () => {
   })
 })
 
-describe(`${noteController.editNote.name}`, () => {
+describe(`${noteController.editNote.name} Controller`, () => {
   const resSend = jest.fn()
   const resStatus = jest.fn()
   const resSet = jest.fn()
@@ -179,7 +179,7 @@ describe(`${noteController.editNote.name}`, () => {
   })
 })
 
-describe(`${noteController.deleteNote.name}`, () => {
+describe(`${noteController.deleteNote.name} Controller`, () => {
   const resSend = jest.fn()
   const resStatus = jest.fn()
   const resSet = jest.fn()
