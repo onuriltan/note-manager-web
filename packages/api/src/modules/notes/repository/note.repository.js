@@ -1,8 +1,8 @@
 const mongodb = require('mongodb')
-const PostEntity = require('../entity/note.entity')
+const NoteEntity = require('../entity/note.entity')
 
 const createNote = async (text, email) => {
-  const newPost = new PostEntity({
+  const newPost = new NoteEntity({
     text,
     email,
   })
@@ -13,7 +13,7 @@ const createNote = async (text, email) => {
 
 const findNotes = async (email, options) => {
   options.lean = true
-  return await PostEntity.paginate({ email }, options)
+  return await NoteEntity.paginate({ email }, options)
 }
 
 const findNotesBetweenDatesandKeyword = async (
@@ -36,11 +36,11 @@ const findNotesBetweenDatesandKeyword = async (
   if (keyword && keyword !== ' ') {
     query.text = { $regex: regex }
   }
-  return await PostEntity.paginate(query, options)
+  return await NoteEntity.paginate(query, options)
 }
 
 const editNote = async (id, email, text) => {
-  await PostEntity.findOneAndUpdate(
+  await NoteEntity.findOneAndUpdate(
     { _id: id, email: email },
     { text: text, editedAt: new Date() },
     (err, updatedPost) => {
@@ -57,7 +57,7 @@ const editNote = async (id, email, text) => {
 
 const deleteNote = async (email, id) => {
   let isUpdated = false
-  await PostEntity.deleteOne({
+  await NoteEntity.deleteOne({
     _id: new mongodb.ObjectID(id),
     email: email,
   }).then(() => {

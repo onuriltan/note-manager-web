@@ -1,4 +1,4 @@
-const { query, param, body } = require('express-validator')
+const { query, param, body, validationResult } = require('express-validator')
 
 exports.validateFindNotes = [
   query('email').isEmail(),
@@ -16,3 +16,15 @@ exports.validateFindNotesBetweenDatesandKeyword = [
 exports.validateCreateNote = [body('text').notEmpty()]
 exports.validateEditNote = [body('text').notEmpty(), param('id').isMongoId()]
 exports.validateDeleteNote = [param('id').isMongoId()]
+
+exports.returnValidationErrors = function (req, res, next) {
+  const validationErrors = validationResult(req)
+  const errors = {} // instead of sending errors as arrays, send object with keys, easier search
+  validationErrors.array().forEach((error) => {
+    errors[error.param] = error.msg
+  })
+  if (!validationErrors.isEmpty()) {
+    return res.status(422).json({ fieldErrors: errors })
+  }
+  next()
+}

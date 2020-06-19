@@ -1,6 +1,6 @@
 module.exports = {
-  extends: ['standard', 'prettier', 'prettier/standard'],
-  plugins: ['import', 'prettier', 'standard'],
+  plugins: ['import', 'prettier', 'standard', 'jest'],
+  extends: ['standard', 'prettier', 'prettier/standard', 'plugin:jest/style'],
   parserOptions: {
     ecmaVersion: 2017,
   },
@@ -14,5 +14,6 @@ module.exports = {
     'new-cap': 0,
     'prettier/prettier': 2,
     'no-console': 1,
+    'require-await': 2,
   },
 }

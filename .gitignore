@@ -7,6 +7,9 @@ node_modules
 dist
 build
 
+# Test
+coverage
+
 # System environments
 .env
 
