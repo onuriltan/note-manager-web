@@ -34,13 +34,13 @@ exports.editNote = async (req, res) => {
   const { email } = req.query
   const { text } = req.body
   const id = req.params.id
-  const updatedPost = await noteRepository.editNote(id, email, text)
-  res.send(updatedPost)
+  const updatedNote = await noteRepository.editNote(id, email, text)
+  res.send(updatedNote)
 }
 
 exports.deleteNote = async (req, res) => {
   const { email } = req.query
   const id = req.params.id
-  const isUpdated = await noteRepository.deleteNote(email, id)
-  isUpdated ? res.status(201).send() : res.status(400).send()
+  const deletedNote = await noteRepository.deleteNote(email, id)
+  deletedNote ? res.status(201).send() : res.status(400).send()
 }
