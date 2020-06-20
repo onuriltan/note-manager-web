@@ -1,8 +1,15 @@
 const NoteEntity = require('../entity/note.entity')
+const { logger } = require('../../../config/pino')
 
 exports.findNotes = async (email, options) => {
   const extendedOptions = { ...options, lean: true }
-  return await NoteEntity.paginate({ email }, extendedOptions)
+  const result = []
+  try {
+    return await NoteEntity.paginate({ email }, extendedOptions)
+  } catch (e) {
+    logger.error(e.toString())
+  }
+  return result
 }
 
 exports.findNotesBetweenDatesandKeyword = async (
@@ -28,7 +35,7 @@ exports.findNotesBetweenDatesandKeyword = async (
   try {
     result = await NoteEntity.paginate(query, extendedOptions)
   } catch (e) {
-    console.log(e)
+    logger.error(e.toString())
   }
   return result
 }
@@ -38,10 +45,9 @@ exports.createNote = async (text, email) => {
   try {
     newNote = await new NoteEntity({
       text,
-      email,
     }).save()
   } catch (e) {
-    console.log(e)
+    logger.error(e.toString())
   }
   return newNote
 }
@@ -54,7 +60,7 @@ exports.editNote = async (id, email, text, editedAt) => {
       { text: text, editedAt }
     )
   } catch (e) {
-    console.log(e)
+    logger.error(e.toString())
   }
   return editedNote
 }
@@ -67,7 +73,7 @@ exports.deleteNote = async (email, id) => {
       email,
     })
   } catch (e) {
-    console.log(e)
+    logger.error(e.toString())
   }
   return !!deletedNote
 }
