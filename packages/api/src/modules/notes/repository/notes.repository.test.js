@@ -1,10 +1,15 @@
 const noteEntity = require('../entity/note.entity')
-const noteRepository = require('./note.repository')
+const {
+  findNotes,
+  findNotesBetweenDatesandKeyword,
+  createNote,
+  editNote,
+  deleteNote,
+} = require('./note.repository')
 
-jest.mock('mongodb')
 jest.mock('../entity/note.entity')
 
-describe(`${noteRepository.findNotes.name} Repository`, () => {
+describe(`${findNotes.name} Repository`, () => {
   it(`should return the result of NoteEntity.paginate`, async () => {
     // Arrange
     const email = 'onur@iltan.com'
@@ -12,14 +17,14 @@ describe(`${noteRepository.findNotes.name} Repository`, () => {
     const paginate = jest.spyOn(noteEntity, 'paginate').mockReturnValue([])
 
     // Act
-    await noteRepository.findNotes(email, options)
+    await findNotes(email, options)
 
     // Assert
     expect(paginate).toHaveBeenCalledWith({ email }, { ...options, lean: true })
   })
 })
 
-describe(`${noteRepository.findNotesBetweenDatesandKeyword.name} Repository`, () => {
+describe(`${findNotesBetweenDatesandKeyword.name} Repository`, () => {
   const fromDate = new Date(1995, 11, 17)
   const toDate = new Date(1995, 11, 18)
   const keyword = 'keyword'
@@ -39,7 +44,7 @@ describe(`${noteRepository.findNotesBetweenDatesandKeyword.name} Repository`, ()
     }
 
     // Act
-    await noteRepository.findNotesBetweenDatesandKeyword(
+    await findNotesBetweenDatesandKeyword(
       fromDate,
       toDate,
       keyword,
@@ -67,7 +72,7 @@ describe(`${noteRepository.findNotesBetweenDatesandKeyword.name} Repository`, ()
     }
 
     // Act
-    await noteRepository.findNotesBetweenDatesandKeyword(
+    await findNotesBetweenDatesandKeyword(
       fromDate,
       toDate,
       keyword,
@@ -81,5 +86,86 @@ describe(`${noteRepository.findNotesBetweenDatesandKeyword.name} Repository`, ()
       lean: true,
       sort: { date: -1 },
     })
+  })
+})
+
+describe(`${createNote.name} Repository`, () => {
+  it(`should return the result of NoteEntity.save`, async () => {
+    // Arrange
+    const email = 'onur@iltan.com'
+    const text = 'text'
+    const save = (noteEntity.prototype.save = jest
+      .fn()
+      .mockResolvedValue({ text, email }))
+
+    // Act
+    const result = await createNote(text, email)
+
+    // Assert
+    expect(noteEntity).toHaveBeenCalledWith({
+      text,
+      email,
+    })
+    expect(save).toHaveBeenCalledWith()
+    expect(result).toEqual({ text, email })
+  })
+})
+
+describe(`${editNote.name} Repository`, () => {
+  it(`should return the result of NoteEntity.findOneAndUpdate`, async () => {
+    // Arrange
+    const id = 'asd324rsdf2'
+    const email = 'onur@iltan.com'
+    const text = 'text'
+    const editedAt = new Date()
+    jest
+      .spyOn(noteEntity, 'findOneAndUpdate')
+      .mockResolvedValue({ text, email })
+
+    // Act
+    const result = await editNote(id, email, text, editedAt)
+
+    // Assert
+    expect(noteEntity.findOneAndUpdate).toHaveBeenCalledWith(
+      { _id: id, email },
+      { text, editedAt }
+    )
+    expect(result).toEqual({ text, email })
+  })
+})
+
+describe(`${deleteNote.name} Repository`, () => {
+  it(`should return true if NoteEntity.deleteOne is not empty`, async () => {
+    // Arrange
+    const id = 'asd324rsdf2'
+    const email = 'onur@iltan.com'
+    jest.spyOn(noteEntity, 'deleteOne').mockResolvedValue('')
+
+    // Act
+    const result = await deleteNote(email, id)
+
+    // Assert
+    expect(noteEntity.deleteOne).toHaveBeenCalledWith({
+      _id: id,
+      email,
+    })
+    expect(result).toEqual(false)
+  })
+
+  it(`should return false if NoteEntity.deleteOne is empty`, async () => {
+    // Arrange
+    const id = 'asd324rsdf2'
+    const email = 'onur@iltan.com'
+    jest.spyOn(noteEntity, 'deleteOne').mockResolvedValue({ _id: id })
+
+    // Act
+    const result = await deleteNote(email, id)
+
+    // Assert
+    expect(noteEntity.deleteOne).toHaveBeenCalledWith({
+      _id: id,
+      email,
+    })
+    expect(result).toEqual(true)
   })
 })

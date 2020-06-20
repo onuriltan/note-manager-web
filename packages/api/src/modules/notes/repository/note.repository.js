@@ -1,12 +1,11 @@
-const mongodb = require('mongodb')
 const NoteEntity = require('../entity/note.entity')
 
-const findNotes = async (email, options) => {
+exports.findNotes = async (email, options) => {
   const extendedOptions = { ...options, lean: true }
   return await NoteEntity.paginate({ email }, extendedOptions)
 }
 
-const findNotesBetweenDatesandKeyword = async (
+exports.findNotesBetweenDatesandKeyword = async (
   fromDate,
   toDate,
   keyword,
@@ -28,46 +27,41 @@ const findNotesBetweenDatesandKeyword = async (
   return await NoteEntity.paginate(query, extendedOptions)
 }
 
-const createNote = async (text, email) => {
-  const newPost = new NoteEntity({
-    text,
-    email,
-  })
-  await newPost.save().then(() => {
-    return newPost
-  })
+exports.createNote = async (text, email) => {
+  let newNote = ''
+  try {
+    newNote = await new NoteEntity({
+      text,
+      email,
+    }).save()
+  } catch (e) {
+    console.log(e)
+  }
+  return newNote
 }
 
-const editNote = async (id, email, text) => {
-  await NoteEntity.findOneAndUpdate(
-    { _id: id, email: email },
-    { text: text, editedAt: new Date() },
-    (err, updatedPost) => {
-      if (err) {
-        // TODO: Handle error
-        // eslint-disable-next-line
-        console.log(err)
-      }
-
-      return updatedPost
-    }
-  )
+exports.editNote = async (id, email, text, editedAt) => {
+  let editedNote = ''
+  try {
+    editedNote = await NoteEntity.findOneAndUpdate(
+      { _id: id, email: email },
+      { text: text, editedAt }
+    )
+  } catch (e) {
+    console.log(e)
+  }
+  return editedNote
 }
 
-const deleteNote = async (email, id) => {
-  let isUpdated = false
-  await NoteEntity.deleteOne({
-    _id: new mongodb.ObjectID(id),
-    email: email,
-  }).then(() => {
-    // in mongo id is a special type of ObjectID
-    isUpdated = true
-  })
-  return isUpdated
+exports.deleteNote = async (email, id) => {
+  let deletedNote = ''
+  try {
+    deletedNote = await NoteEntity.deleteOne({
+      _id: id,
+      email,
+    })
+  } catch (e) {
+    console.log(e)
+  }
+  return !!deletedNote
 }
-
-module.exports.createNote = createNote
-module.exports.deleteNote = deleteNote
-module.exports.findNotes = findNotes
-module.exports.findNotesBetweenDatesandKeyword = findNotesBetweenDatesandKeyword
-module.exports.editNote = editNote

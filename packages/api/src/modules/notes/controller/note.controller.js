@@ -34,7 +34,8 @@ exports.editNote = async (req, res) => {
   const { email } = req.query
   const { text } = req.body
   const id = req.params.id
-  const updatedNote = await noteRepository.editNote(id, email, text)
+  const editedAt = new Date()
+  const updatedNote = await noteRepository.editNote(id, email, text, editedAt)
   res.send(updatedNote)
 }
 
