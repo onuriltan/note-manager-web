@@ -33,7 +33,7 @@ exports.createUser = async (email, password) => {
   newUser.local.password = await hashPassword(newUser) // Set password to hashed
   newUser.confirmationToken = uniqid()
   await newUser
-    .save() // save user
+    .save()
     .then(() => {
       theUser = newUser
     })
@@ -50,7 +50,7 @@ exports.regenerateUserConfirmationToken = async (email) => {
   })
   theUser.confirmationToken = uniqid()
   await theUser
-    .save() // save user
+    .save()
     .then((user) => {
       theUser = user
     })
