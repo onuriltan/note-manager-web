@@ -1,6 +1,7 @@
 const passport = require('passport')
 const UserEntity = require('../modules/user/entity/user')
 const FacebookTokenStrategy = require('passport-facebook-token')
+const { logger } = require('..config/pino')
 
 exports.configurePassport = () => {
   passport.use(
@@ -29,7 +30,7 @@ exports.configurePassport = () => {
           await newUser.save()
           done(null, newUser)
         } catch (e) {
-          console.log(e.message)
+          logger.error(e.message)
           done(e, false, e.message)
         }
       }

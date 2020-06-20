@@ -7,6 +7,7 @@ const passport = require('passport')
 const mongoose = require('mongoose')
 const { configurePassport } = require('./config/passport')
 const helmet = require('helmet')
+const { logger } = require('./config/pino')
 
 // Environment Variables
 const dotenv = require('dotenv')
@@ -22,10 +23,13 @@ server.use(helmet())
 
 // Connect to Mongo
 const dbAddress = process.env.MONGO_URL
+
 mongoose
   .connect(dbAddress, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB connected.'))
-  .catch((err) => console.log(err))
+  .then(() => logger.info('MongoDB connected.'))
+  .catch((err) => {
+    throw new Error(err)
+  })
 
 configurePassport()
 
@@ -55,5 +59,5 @@ if (process.env.NODE_ENV === 'production') {
 const port = process.env.PORT || 5000
 
 server.listen(port, () => {
-  console.log(`Server started at port ${port}`)
+  logger.info(`Server started at port ${port}`)
 })

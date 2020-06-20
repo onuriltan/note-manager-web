@@ -13,7 +13,7 @@ module.exports = {
     'space-before-function-paren': 0,
     'new-cap': 0,
     'prettier/prettier': 2,
-    'no-console': 1,
+    'no-console': 2,
     'require-await': 2,
   },
 }

@@ -2,6 +2,7 @@ const AuthDbService = require('../repository/auth')
 const bcrypt = require('bcrypt')
 const JwtOperations = require('../../../middlewares/jwt')
 const MailOperations = require('../../../config/mail')
+const { logger } = require('../../../config/pino')
 
 exports.loginWithEmail = async (req, res) => {
   const { email, password } = req.body
@@ -101,8 +102,8 @@ exports.findUserWithConfirmationToken = async (req, res) => {
       user.confirmationTokenExpiry = undefined
       user.active = true
       user.save((err, updatedUser) => {
-        if (err) console.log(err)
-        else console.log(updatedUser.name + ' activated')
+        if (err) logger.error(err)
+        else logger.info(updatedUser.name + ' activated')
       })
       const token = await JwtOperations.signToken(user)
       res.json({ token })
