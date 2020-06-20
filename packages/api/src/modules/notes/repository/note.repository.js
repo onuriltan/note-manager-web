@@ -3,9 +3,9 @@ const { logger } = require('../../../config/pino')
 
 exports.findNotes = async (email, options) => {
   const extendedOptions = { ...options, lean: true }
-  const result = []
+  let result = []
   try {
-    return await NoteEntity.paginate({ email }, extendedOptions)
+    result = await NoteEntity.paginate({ email }, extendedOptions)
   } catch (e) {
     logger.error(e.toString())
   }
@@ -45,6 +45,7 @@ exports.createNote = async (text, email) => {
   try {
     newNote = await new NoteEntity({
       text,
+      email,
     }).save()
   } catch (e) {
     logger.error(e.toString())

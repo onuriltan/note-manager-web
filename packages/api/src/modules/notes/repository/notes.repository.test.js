@@ -6,10 +6,16 @@ const {
   editNote,
   deleteNote,
 } = require('./note.repository')
+const { logger } = require('../../../config/pino')
 
 jest.mock('../entity/note.entity')
+jest.mock('../../../config/pino')
 
-describe(`${findNotes.name} Repository`, () => {
+describe(`findNotes repository`, () => {
+  const loggerError = jest.spyOn(logger, 'error')
+
+  beforeEach(() => jest.clearAllMocks())
+
   it(`should return the result of NoteEntity.paginate`, async () => {
     // Arrange
     const email = 'onur@iltan.com'
@@ -22,15 +28,31 @@ describe(`${findNotes.name} Repository`, () => {
     // Assert
     expect(paginate).toHaveBeenCalledWith({ email }, { ...options, lean: true })
   })
+
+  it(`should log the error if NoteEntity.paginate throws error`, async () => {
+    // Arrange
+    const email = 'onur@iltan.com'
+    const options = {}
+    jest.spyOn(noteEntity, 'paginate').mockRejectedValue('database error')
+
+    // Act
+    await findNotes(email, options)
+
+    // Assert
+    expect(loggerError).toHaveBeenCalledWith('database error')
+  })
 })
 
-describe(`${findNotesBetweenDatesandKeyword.name} Repository`, () => {
+describe(`findNotesBetweenDatesandKeyword repository`, () => {
   const fromDate = new Date(1995, 11, 17)
   const toDate = new Date(1995, 11, 18)
   const keyword = 'keyword'
   const email = 'onur@iltan.com'
   const options = {}
   const paginate = jest.spyOn(noteEntity, 'paginate').mockReturnValue([])
+  const loggerError = jest.spyOn(logger, 'error')
+
+  beforeEach(() => jest.clearAllMocks())
 
   it(`should return the result of NoteEntity.paginate`, async () => {
     // Arrange
@@ -87,9 +109,30 @@ describe(`${findNotesBetweenDatesandKeyword.name} Repository`, () => {
       sort: { date: -1 },
     })
   })
+
+  it(`should log the error if NoteEntity.paginate throws error`, async () => {
+    // Arrange
+    const keyword = ''
+
+    // Act
+    await findNotesBetweenDatesandKeyword(
+      fromDate,
+      toDate,
+      keyword,
+      email,
+      options
+    )
+
+    // Assert
+    expect(loggerError).toHaveBeenCalledWith('database error')
+  })
 })
 
-describe(`${createNote.name} Repository`, () => {
+describe(`createNote Repository`, () => {
+  const loggerError = jest.spyOn(logger, 'error')
+
+  beforeEach(() => jest.clearAllMocks())
+
   it(`should return the result of NoteEntity.save`, async () => {
     // Arrange
     const email = 'onur@iltan.com'
@@ -109,15 +152,32 @@ describe(`${createNote.name} Repository`, () => {
     expect(save).toHaveBeenCalledWith()
     expect(result).toEqual({ text, email })
   })
-})
 
-describe(`${editNote.name} Repository`, () => {
-  it(`should return the result of NoteEntity.findOneAndUpdate`, async () => {
+  it(`should log the error if NoteEntity.paginate throws error`, async () => {
     // Arrange
-    const id = 'asd324rsdf2'
     const email = 'onur@iltan.com'
     const text = 'text'
-    const editedAt = new Date()
+    noteEntity.prototype.save = jest.fn().mockRejectedValue('database error')
+
+    // Act
+    await createNote(text, email)
+
+    // Assert
+    expect(loggerError).toHaveBeenCalledWith('database error')
+  })
+})
+
+describe(`editNote Repository`, () => {
+  const loggerError = jest.spyOn(logger, 'error')
+  const id = 'asd324rsdf2'
+  const email = 'onur@iltan.com'
+  const text = 'text'
+  const editedAt = new Date()
+
+  beforeEach(() => jest.clearAllMocks())
+
+  it(`should return the result of NoteEntity.findOneAndUpdate`, async () => {
+    // Arrange
     jest
       .spyOn(noteEntity, 'findOneAndUpdate')
       .mockResolvedValue({ text, email })
@@ -132,13 +192,30 @@ describe(`${editNote.name} Repository`, () => {
     )
     expect(result).toEqual({ text, email })
   })
+
+  it(`should log the error if NoteEntity.findOneAndUpdate throws error`, async () => {
+    // Arrange
+    jest
+      .spyOn(noteEntity, 'findOneAndUpdate')
+      .mockRejectedValue('database error')
+
+    // Act
+    await editNote(id, email, text, editedAt)
+
+    // Assert
+    expect(loggerError).toHaveBeenCalledWith('database error')
+  })
 })
 
-describe(`${deleteNote.name} Repository`, () => {
+describe(`deleteNote repository`, () => {
+  const loggerError = jest.spyOn(logger, 'error')
+  const id = 'asd324rsdf2'
+  const email = 'onur@iltan.com'
+
+  beforeEach(() => jest.clearAllMocks())
+
   it(`should return true if NoteEntity.deleteOne is not empty`, async () => {
     // Arrange
-    const id = 'asd324rsdf2'
-    const email = 'onur@iltan.com'
     jest.spyOn(noteEntity, 'deleteOne').mockResolvedValue('')
 
     // Act
@@ -154,8 +231,6 @@ describe(`${deleteNote.name} Repository`, () => {
 
   it(`should return false if NoteEntity.deleteOne is empty`, async () => {
     // Arrange
-    const id = 'asd324rsdf2'
-    const email = 'onur@iltan.com'
     jest.spyOn(noteEntity, 'deleteOne').mockResolvedValue({ _id: id })
 
     // Act
@@ -167,5 +242,16 @@ describe(`${deleteNote.name} Repository`, () => {
       email,
     })
     expect(result).toEqual(true)
+  })
+
+  it(`should log the error if NoteEntity.deleteOne throws error`, async () => {
+    // Arrange
+    jest.spyOn(noteEntity, 'deleteOne').mockRejectedValue('database error')
+
+    // Act
+    await deleteNote(email, id)
+
+    // Assert
+    expect(loggerError).toHaveBeenCalledWith('database error')
   })
 })
