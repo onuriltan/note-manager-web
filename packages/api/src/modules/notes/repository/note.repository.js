@@ -45,7 +45,6 @@ exports.createNote = async (text, email) => {
   try {
     newNote = await new NoteEntity({
       text,
-      email,
     }).save()
   } catch (e) {
     logger.error(e.toString())
