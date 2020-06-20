@@ -24,7 +24,13 @@ exports.findNotesBetweenDatesandKeyword = async (
   if (keyword && keyword !== ' ') {
     query.text = { $regex: regex }
   }
-  return await NoteEntity.paginate(query, extendedOptions)
+  let result = []
+  try {
+    result = await NoteEntity.paginate(query, extendedOptions)
+  } catch (e) {
+    console.log(e)
+  }
+  return result
 }
 
 exports.createNote = async (text, email) => {

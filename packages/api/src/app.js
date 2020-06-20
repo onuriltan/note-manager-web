@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser')
 const passport = require('passport')
 const mongoose = require('mongoose')
 const { configurePassport } = require('./config/passport')
+const helmet = require('helmet')
 
 // Environment Variables
 const dotenv = require('dotenv')
@@ -17,6 +18,7 @@ server.use(bodyParser.json())
 server.use(cors())
 server.use(cookieParser())
 server.use(passport.initialize())
+server.use(helmet())
 
 // Connect to Mongo
 const dbAddress = process.env.MONGO_URL
