@@ -1,7 +1,7 @@
 const passport = require('passport')
 const UserEntity = require('../modules/user/entity/user')
 const FacebookTokenStrategy = require('passport-facebook-token')
-const { logger } = require('..config/pino')
+const { logger } = require('./pino')
 
 exports.configurePassport = () => {
   passport.use(
