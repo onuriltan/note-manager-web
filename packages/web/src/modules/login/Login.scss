@@ -39,7 +39,7 @@
   }
   &__social-container {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     margin-top: 20px;
   }
 }

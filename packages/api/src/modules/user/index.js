@@ -7,9 +7,13 @@ const {
   registerWithEmail,
   resendConfirmationEmail,
 } = require('./controller/auth.controller')
+
 const {
   loginWithFacebook,
 } = require('./controller/facebook/facebook.contoller')
+
+const { loginWithGoogle } = require('./controller/google/google.controller')
+
 const { getUser, changePassword } = require('./controller/user/user.controller')
 const {
   validateRegisterWithEmail,
@@ -41,6 +45,16 @@ authRoutes.post(
   '/loginWithFacebook',
   passport.authenticate('facebook-token'),
   loginWithFacebook
+)
+
+authRoutes.get(
+  '/loginWithGoogle',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+)
+authRoutes.get(
+  '/loginWithGoogle/callback',
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  loginWithGoogle
 )
 
 // User

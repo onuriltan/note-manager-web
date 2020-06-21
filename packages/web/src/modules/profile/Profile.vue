@@ -7,7 +7,7 @@
             title="Change Password"
             active
             class="profile-container__tab"
-            v-if="loginMethod !== 'facebook'"
+            v-if="loginMethod === 'local'"
           >
             <ChangePassword />
           </b-tab>
