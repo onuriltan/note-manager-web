@@ -7,8 +7,10 @@ const {
   registerWithEmail,
   resendConfirmationEmail,
 } = require('./controller/auth.controller')
-const { loginWithFacebook } = require('./controller/facebook.contoller')
-const { getUser, changePassword } = require('./controller/user.controller')
+const {
+  loginWithFacebook,
+} = require('./controller/facebook/facebook.contoller')
+const { getUser, changePassword } = require('./controller/user/user.controller')
 const {
   validateRegisterWithEmail,
   validateLoginWithEmail,
