@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
     <b-card no-body class="profile-container">
       <b-tabs pills card :vertical="alignTab">
         <div>

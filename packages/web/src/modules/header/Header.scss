@@ -1,14 +1,30 @@
 .header {
   border-style: unset;
+  background-color: var(--green);
   &__brand {
     text-decoration: none;
-    color: white !important;
+    color: var(--light) !important;
     font-weight: bold;
   }
   &__link {
-    color: white;
+    color: var(--light);
     &:hover {
-      color: black !important;
+      color: var(--pitch-dark) !important;
+    }
+  }
+  &__navbar {
+    justify-content: center;
+    align-items: center;
+  }
+  &__mode {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    &:hover {
+      cursor: pointer;
+    }
+    &__img {
+      width: 100%;
     }
   }
 }

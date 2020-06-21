@@ -5,9 +5,22 @@
 @import "basics/_animations.scss";
 @import "basics/_inputs";
 @import "basics/_positionings.scss";
-@import "basics/buttons.scss";
+@import "basics/_buttons.scss";
 
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.main-container {
+  height: calc(100vh - 60px);
+  background-color: var(--white);
+}
+.card {
+  background-color: var(--white) !important;
+  color: var(--pitch-dark) !important;
+}
+:root {
+  --pitch-dark: black;
+  --active-page: black;
+  --header-color: #212529
 }
