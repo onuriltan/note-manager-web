@@ -19,8 +19,8 @@
     padding-bottom: 30px;
   }
   &__resend {
-    text-decoration: #28a745 underline;
-    color: #28a745;
+    text-decoration: var(--green) underline;
+    color: var(--green);
     &:hover {
       cursor: pointer;
     }

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="main-container">
     <div v-if="errors.length > 0">
       <div v-for="error in errors" :key="error">
         <p
