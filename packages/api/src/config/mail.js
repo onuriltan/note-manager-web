@@ -20,7 +20,7 @@ function sendConfirmationMail(to, confirmationToken) {
       '/' +
       confirmationToken +
       '>Click to activate your account</a>' +
-      '<p> Please note that this link will expire in 72 hours, if the link is expired, you need to register again</p>', // html body
+      '<p> Please note that this link will expire in 72 hours, if the link is expired, you need to register again</p>',
   }
   // send mail with defined transport object
   return new Promise(function (resolve, reject) {

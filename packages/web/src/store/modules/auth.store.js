@@ -57,17 +57,7 @@ const auth = {
     },
 
     loginWithGoogle(context, token) {
-      return new Promise(resolve => {
-        socialService
-          .loginWithGoogle(token)
-          .then(response => {
-            context.commit('updateIsAuthenticated', response);
-            return resolve(response);
-          })
-          .catch(response => {
-            return resolve(response);
-          });
-      });
+      context.commit('updateIsAuthenticated', { status: 200, data: { token, method: 'google' } });
     },
 
     confirmUser(context, confirmationToken) {

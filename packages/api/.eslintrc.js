@@ -10,6 +10,7 @@ module.exports = {
     jest: true,
   },
   rules: {
+    'max-len': [2, 120, 4],
     'space-before-function-paren': 0,
     'new-cap': 0,
     'prettier/prettier': 2,

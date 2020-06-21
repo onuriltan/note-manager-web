@@ -77,11 +77,6 @@ export default {
   background-color: #3b5998;
   border-color: white;
   width: 100%;
-}
-
-@media screen and (max-width: 768px) {
-  .facebook-button {
-    margin: 10px 0;
-  }
+  margin: 5px;
 }
 </style>

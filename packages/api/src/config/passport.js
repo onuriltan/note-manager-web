@@ -1,6 +1,8 @@
 const passport = require('passport')
 const UserEntity = require('../modules/user/entity/user')
 const FacebookTokenStrategy = require('passport-facebook-token')
+const GoogleStrategy = require('passport-google-oauth20').Strategy
+
 const { logger } = require('./pino')
 
 exports.configurePassport = () => {
@@ -11,13 +13,13 @@ exports.configurePassport = () => {
         clientID: process.env.FACEBOOK_APP_ID,
         clientSecret: process.env.FACEBOOK_APP_SECRET,
       },
-      async (accessToken, refreshToken, profile, done) => {
+      async (accessToken, refreshToken, profile, callback) => {
         try {
           const existingUser = await UserEntity.findOne({
             'facebook.id': profile.id,
           })
           if (existingUser) {
-            return done(null, existingUser)
+            return callback(null, existingUser)
           }
           const newUser = new UserEntity({
             active: true,
@@ -28,10 +30,43 @@ exports.configurePassport = () => {
             },
           })
           await newUser.save()
-          done(null, newUser)
+          callback(null, newUser)
         } catch (e) {
           logger.error(e.message)
-          done(e, false, e.message)
+          callback(e, false, e.message)
+        }
+      }
+    )
+  )
+
+  passport.use(
+    new GoogleStrategy(
+      {
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: process.env.GOOGLE_CLIENT_CALLBACK_URL,
+      },
+      async (accessToken, refreshToken, profile, callback) => {
+        try {
+          const existingUser = await UserEntity.findOne({
+            'google.id': profile.id,
+          })
+          if (existingUser) {
+            return callback(null, existingUser)
+          }
+          const newUser = new UserEntity({
+            active: true,
+            method: 'google',
+            google: {
+              id: profile.id,
+              email: profile._json.email,
+            },
+          })
+          await newUser.save()
+          callback(null, newUser)
+        } catch (e) {
+          logger.error(e.message)
+          callback(e, false, e.message)
         }
       }
     )

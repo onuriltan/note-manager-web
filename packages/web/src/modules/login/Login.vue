@@ -63,7 +63,7 @@
       </b-button>
       <div class="login-form__social-container">
         <FacebookLogin />
-        <!--<GoogleLogin /> -->
+        <GoogleLogin />
       </div>
     </b-form>
   </div>
@@ -79,7 +79,6 @@ export default {
   name: 'LoginComponent',
   components: {
     FacebookLogin,
-    // eslint-disable-next-line vue/no-unused-components
     GoogleLogin
   },
   data() {
@@ -95,6 +94,12 @@ export default {
       isEmailEntered: false,
       isPasswordEntered: false
     };
+  },
+  mounted() {
+    const googleToken = this.$route.query.googleToken;
+    if (googleToken) {
+      this.loginWithGoogle(googleToken);
+    }
   },
   computed: {
     invalidEmailMessage() {
@@ -123,7 +128,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      login: 'auth/login'
+      login: 'auth/login',
+      loginWithGoogle: 'auth/loginWithGoogle'
     }),
     validateEmail() {
       setTimeout(() => {
