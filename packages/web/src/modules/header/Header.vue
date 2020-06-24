@@ -47,7 +47,7 @@ export default {
       if (newValue) {
         this.image = sun;
       } else {
-        this.image = moon;
+        this.image = honeymoon;
       }
     }
   },
@@ -56,6 +56,15 @@ export default {
       logout: 'auth/logout',
       toggleDarkMode: 'general/toggleDarkMode'
     })
+  },
+  watch: {
+    isDarkMode(newValue, oldValue) {
+      if (newValue) {
+        this.image = sun;
+      } else {
+        this.image = moon;
+      }
+    }
   }
 };
 </script>
