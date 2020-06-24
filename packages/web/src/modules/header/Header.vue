@@ -47,7 +47,7 @@ export default {
       if (newValue) {
         this.image = sun;
       } else {
-        this.image = honeymoon;
+        this.image = moon;
       }
     }
   },
