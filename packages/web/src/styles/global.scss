@@ -10,10 +10,14 @@
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--white);
 }
+
 .main-container {
   height: calc(100vh - 60px);
-  background-color: var(--white);
+  max-width: 1200px;
+  margin: 0 auto;
+  
 }
 .card {
   background-color: var(--white) !important;
@@ -22,5 +26,6 @@
 :root {
   --pitch-dark: black;
   --active-page: black;
+  --page-link--hover: black;
   --header-color: #212529
 }
