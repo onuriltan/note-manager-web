@@ -26,7 +26,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import honeymoon from '../../assets/honeymoon.svg';
+import moon from '../../assets/moon.svg';
 import sun from '../../assets/sun.svg';
 
 export default {
@@ -39,8 +39,7 @@ export default {
   },
   data: () => {
     return {
-<<<<<<< HEAD
-      image: honeymoon
+      image: moon
     };
   },
   watch: {
@@ -48,7 +47,7 @@ export default {
       if (newValue) {
         this.image = sun;
       } else {
-        this.image = honeymoon;
+        this.image = moon;
       }
     }
   },
@@ -57,43 +56,6 @@ export default {
       logout: 'auth/logout',
       toggleDarkMode: 'general/toggleDarkMode'
     })
-=======
-      isDarkMode: false,
-      image: honeymoon
-    };
-  },
-  methods: {
-    ...mapActions({
-      logout: 'auth/logout'
-    }),
-    toggleMode() {
-      if (!this.isDarkMode) {
-        this.toggleDarkMode();
-        this.image = sun;
-        this.isDarkMode = true;
-      } else {
-        this.toggleLightMode();
-        this.image = honeymoon;
-        this.isDarkMode = false;
-      }
-    },
-    toggleDarkMode() {
-      document.documentElement.style.setProperty('--green', 'black');
-      document.documentElement.style.setProperty('--light', '#28a745');
-      document.documentElement.style.setProperty('--white', 'black');
-      document.documentElement.style.setProperty('--pitch-dark', 'white');
-      document.documentElement.style.setProperty('--active-page', '#28a745');
-      document.documentElement.style.setProperty('--header-color', 'white');
-    },
-    toggleLightMode() {
-      document.documentElement.style.setProperty('--green', '#28a745');
-      document.documentElement.style.setProperty('--light', 'white');
-      document.documentElement.style.setProperty('--pitch-dark', 'black');
-      document.documentElement.style.setProperty('--white', 'white');
-      document.documentElement.style.setProperty('--active-page', 'black');
-      document.documentElement.style.setProperty('--header-color', '#212529');
-    }
->>>>>>> 79150e0fa47b5a77f12af84d5009e88617f9e4d9
   }
 };
 </script>
