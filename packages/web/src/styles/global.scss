@@ -29,3 +29,16 @@
   --page-link--hover: black;
   --header-color: #212529
 }
+.main-container {
+  height: calc(100vh - 60px);
+  background-color: var(--white);
+}
+.card {
+  background-color: var(--white) !important;
+  color: var(--pitch-dark) !important;
+}
+:root {
+  --pitch-dark: black;
+  --active-page: black;
+  --header-color: #212529
+}
