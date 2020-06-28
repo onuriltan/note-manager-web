@@ -23,26 +23,6 @@ export default {
   },
   mounted() {
     const appId = process.env.VUE_APP_FACEBOOK_APP_ID;
-    window.fbAsyncInit = function() {
-      // eslint-disable-next-line no-undef
-      FB.init({
-        appId: appId,
-        autoLogAppEvents: true,
-        xfbml: true,
-        version: 'v3.2'
-      });
-    };
-    (function(d, s, id) {
-      let js;
-      const fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {
-        return;
-      }
-      js = d.createElement(s);
-      js.id = id;
-      js.src = 'https://connect.facebook.net/en_US/sdk.js';
-      fjs.parentNode.insertBefore(js, fjs);
-    })(document, 'script', 'facebook-jssdk');
   },
   methods: {
     ...mapActions({
@@ -50,20 +30,7 @@ export default {
     }),
     loginWithFB() {
       this.fbLoginClicked = true;
-      // eslint-disable-next-line
-      FB.login(
-        async function(response) {
-          if (response.authResponse && response.authResponse.accessToken) {
-            this.loginWithFacebook(response.authResponse.accessToken);
-          } else {
-            // TODO: handle this situation
-            // eslint-disable-next-line
-            console.log('User cancelled login or did not fully authorize.');
-          }
-          this.fbLoginClicked = false;
-        }.bind(this),
-        { scope: 'public_profile,email', return_scopes: true }
-      );
+      window.location.href = `${process.env.VUE_APP_AUTH_URL}/loginWithFacebook`;
     }
   }
 };

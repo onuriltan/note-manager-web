@@ -56,8 +56,8 @@ const auth = {
       });
     },
 
-    loginWithGoogle(context, token) {
-      context.commit('updateIsAuthenticated', { status: 200, data: { token, method: 'google' } });
+    loginWithSocial(context, token, method) {
+      context.commit('updateIsAuthenticated', { status: 200, data: { token, method } });
     },
 
     confirmUser(context, confirmationToken) {

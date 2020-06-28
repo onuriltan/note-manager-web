@@ -97,8 +97,12 @@ export default {
   },
   mounted() {
     const googleToken = this.$route.query.googleToken;
+    const facebookToken = this.$route.query.facebookToken;
     if (googleToken) {
-      this.loginWithGoogle(googleToken);
+      this.loginWithSocial(googleToken, 'google');
+    }
+    if (facebookToken) {
+      this.loginWithSocial(facebookToken, 'facebook');
     }
   },
   computed: {
@@ -129,7 +133,7 @@ export default {
   methods: {
     ...mapActions({
       login: 'auth/login',
-      loginWithGoogle: 'auth/loginWithGoogle'
+      loginWithSocial: 'auth/loginWithSocial'
     }),
     validateEmail() {
       setTimeout(() => {

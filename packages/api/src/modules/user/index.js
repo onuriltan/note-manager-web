@@ -36,11 +36,6 @@ authRoutes.post(
 )
 authRoutes.get('/confirm/:confirmationToken', findUserWithConfirmationToken)
 authRoutes.post('/resendConfirmationEmail', resendConfirmationEmail)
-authRoutes.post(
-  '/loginWithFacebook',
-  passport.authenticate('facebook-token'),
-  loginWithSocial
-)
 
 authRoutes.get(
   '/loginWithGoogle',
@@ -49,6 +44,16 @@ authRoutes.get(
 authRoutes.get(
   '/loginWithGoogle/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
+  loginWithSocial
+)
+
+authRoutes.get(
+  '/loginWithFacebook',
+  passport.authenticate('facebook', { scope: ['email'] })
+)
+authRoutes.get(
+  '/loginWithFacebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
   loginWithSocial
 )
 
