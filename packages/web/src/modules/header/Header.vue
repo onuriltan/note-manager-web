@@ -9,10 +9,12 @@
         <router-link to="/dashboard" class="header__link nav-link">Latest Notes</router-link>
         <router-link to="/notes-history" class="header__link nav-link">Notes History</router-link>
       </b-navbar-nav>
-      <b-navbar-nav class="ml-auto header__navbar">
-        <div class="header__mode" @click="toggleDarkMode(!isDarkMode)">
-          <img class="header__mode__img" :src="image" />
-        </div>
+    </b-collapse>
+    <div class="header__right">
+      <div class="header__right__mode" @click="toggleDarkMode(!isDarkMode)">
+        <img class="header__right__mode__img" :src="image" />
+      </div>
+      <b-navbar-nav class="ml-auto header__right__navbar">
         <b-dropdown right text="Account" class="m-md-2">
           <b-dropdown-item to="/profile"><i class="fa fa-user mr-2"></i>Profile</b-dropdown-item>
           <b-dropdown-item ref="logout" @click.native="logout()"
@@ -20,7 +22,7 @@
           >
         </b-dropdown>
       </b-navbar-nav>
-    </b-collapse>
+    </div>
   </b-navbar>
 </template>
 

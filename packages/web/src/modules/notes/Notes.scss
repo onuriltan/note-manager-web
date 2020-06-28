@@ -9,11 +9,12 @@
     flex-direction: column;
     min-height: calc(100vh - 600px);
 
-    &__image {
-      width: 100px;
+    &__icon {
+      color: var(--pitch-dark);     
     }
 
     &__message {
+      color: var(--pitch-dark);
       padding-top: 30px;
       text-align: center;
     }

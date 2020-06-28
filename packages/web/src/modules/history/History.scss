@@ -15,6 +15,9 @@
       justify-content: center;
       align-items: flex-end;
       flex-flow: wrap;
+      &__item {
+        color: var(--header-color);     
+      }
     }
   }
 }
