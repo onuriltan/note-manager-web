@@ -6,17 +6,24 @@ const { logger } = require('../../../config/pino')
 
 exports.findUser = async (email) => {
   let theUser = null
-  await User.findOne({ 'local.email': email }).then((user) => {
-    theUser = user
-  })
+  try {
+    theUser = await User.findOne({ 'local.email': email })
+  } catch (e) {
+    logger.error('An error occured  while finding user with email', e)
+  }
   return theUser
 }
 
 exports.findUserWithConfirmationToken = async (confirmationToken) => {
   let theUser = null
-  await User.findOne({ confirmationToken }).then((user) => {
-    theUser = user
-  })
+  try {
+    theUser = await User.findOne({ confirmationToken })
+  } catch (e) {
+    logger.error(
+      'An error occured  while finding user with confirmationToken',
+      e
+    )
+  }
   return theUser
 }
 

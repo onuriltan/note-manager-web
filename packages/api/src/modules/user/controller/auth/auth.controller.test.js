@@ -1,7 +1,7 @@
 const jwt = require('../../../../middlewares/jwt')
 const { loginWithSocial } = require('./auth.controller')
 
-jest.mock('../../../middlewares/jwt.js')
+jest.mock('../../../../middlewares/jwt')
 
 describe('loginWithSocial tests', () => {
   const mockRequest = {
