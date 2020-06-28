@@ -37,10 +37,10 @@
       </b-modal>
     </div>
     <div
-      class="notes__empty slide--in--from--left"
+      class="notes__empty easein"
       v-if="searchClicked && posts.length === 0 && isLoading === false"
     >
-      <img :src="getImgUrl(tobeDeletedId)" class="notes__empty__image" alt="notes-empty" />
+      <i class="fa fa-file-o fa-5x notes__empty__icon" aria-hidden="true"></i>
       <span
         v-if="this.$parent.$vnode.componentOptions.tag === 'Dashboard'"
         class="notes__empty__message"
@@ -54,7 +54,7 @@
     </div>
 
     <div class="notes__empty" v-if="searchClicked && isLoading">
-      <i class="fa fa-refresh fa-spin fa-5x"></i>
+      <i class="fa fa-refresh fa-spin fa-5x icon-color"></i>
     </div>
 
     <div
@@ -83,9 +83,6 @@ export default {
     };
   },
   methods: {
-    getImgUrl() {
-      return require('../../assets/empty-paper.png');
-    },
     showEditModal(id, text) {
       this.tobeEditedId = id;
       this.tobeEditedText = text;

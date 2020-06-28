@@ -14,8 +14,9 @@
 }
 
 .main-container {
-  height: calc(100vh - 60px);
   max-width: 1200px;
+  height: calc(100vh - 60px);
+  background-color: var(--white);
   margin: 0 auto;
   
 }
@@ -29,10 +30,7 @@
   --page-link--hover: black;
   --header-color: #212529
 }
-.main-container {
-  height: calc(100vh - 60px);
-  background-color: var(--white);
-}
+
 .card {
   background-color: var(--white) !important;
   color: var(--pitch-dark) !important;
@@ -41,4 +39,10 @@
   --pitch-dark: black;
   --active-page: black;
   --header-color: #212529
+}
+
+@media only screen and (max-width: 768px) {
+  .main-container {
+    height: 100%;
+  }
 }
