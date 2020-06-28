@@ -36,42 +36,36 @@ exports.createUser = async (email, password) => {
       password: password,
     },
   })
-  // Hash password
   newUser.local.password = await hashPassword(newUser) // Set password to hashed
   newUser.confirmationToken = uniqid()
-  await newUser
-    .save()
-    .then(() => {
-      theUser = newUser
-    })
-    .catch((err) => {
-      logger.error(err)
-    })
+  try {
+    theUser = await newUser.save()
+  } catch (e) {
+    logger.error(`An error occured while createUser`, e)
+  }
   return theUser
 }
 
 exports.regenerateUserConfirmationToken = async (email) => {
   let theUser = ''
-  await User.findOne({ 'local.email': email }).then((user) => {
-    theUser = user
-  })
-  theUser.confirmationToken = uniqid()
-  await theUser
-    .save()
-    .then((user) => {
-      theUser = user
-    })
-    .catch((err) => {
-      logger.error(err)
-    })
+  try {
+    theUser = await User.findOne({ 'local.email': email })
+    theUser.confirmationToken = uniqid()
+    theUser = await theUser.save()
+  } catch (e) {
+    logger.error(`An error occured while regenerateUserConfirmationToken`, e)
+  }
   return theUser
 }
 
 exports.deleteUser = async (id) => {
-  let isDeleted = null
-  await User.deleteOne({ _id: new mongodb.ObjectID(id) })
-    .then(() => (isDeleted = true))
-    .catch(() => (isDeleted = false))
+  let isDeleted = false
+  try {
+    await User.deleteOne({ _id: new mongodb.ObjectID(id) })
+    isDeleted = true
+  } catch (e) {
+    logger.error(`An error occured while deleteUser`, e)
+  }
   return isDeleted
 }
 

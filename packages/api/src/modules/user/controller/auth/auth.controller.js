@@ -116,7 +116,7 @@ exports.findUserWithConfirmationToken = async (req, res) => {
       res.json({ token })
     } else {
       await authRepository.deleteUser(user.id)
-      errors.push({ msg: 'Your account is expired, please re-register' })
+      errors.push({ msg: 'Your account is expired, please re-register again' })
       res.status(401).json({ errors })
     }
   } else {
