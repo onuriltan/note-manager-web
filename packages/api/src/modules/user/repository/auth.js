@@ -2,7 +2,7 @@ const User = require('../entity/user')
 const mongodb = require('mongodb')
 const bcrypt = require('bcrypt')
 const uniqid = require('uniqid')
-const { logger } = require('../../../config/pino')
+const { logger } = require('@config/pino')
 
 exports.findUser = async (email) => {
   let theUser = null

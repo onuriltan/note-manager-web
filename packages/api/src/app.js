@@ -1,3 +1,4 @@
+require('module-alias/register')
 const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -5,9 +6,9 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const passport = require('passport')
 const mongoose = require('mongoose')
-const { configurePassport } = require('./config/passport')
 const helmet = require('helmet')
-const { logger } = require('./config/pino')
+const { configurePassport } = require('@config/passport')
+const { logger } = require('@config/pino')
 
 // Environment Variables
 const dotenv = require('dotenv')

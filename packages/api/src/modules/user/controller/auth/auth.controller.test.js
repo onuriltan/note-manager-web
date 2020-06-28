@@ -1,4 +1,4 @@
-const jwt = require('../../../../middlewares/jwt')
+const jwt = require('@middleware/jwt')
 const { loginWithSocial } = require('./auth.controller')
 
 jest.mock('../../../../middlewares/jwt')

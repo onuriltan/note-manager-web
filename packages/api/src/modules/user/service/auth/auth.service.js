@@ -1,5 +1,5 @@
-const mail = require('../../../../config/mail')
-const { logger } = require('../../../../config/pino')
+const mail = require('@config/mail')
+const { logger } = require('@config/pino')
 
 exports.sendConfirmationMail = async (user) => {
   let isSent = false
