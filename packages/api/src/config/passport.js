@@ -1,17 +1,17 @@
 const passport = require('passport')
 const UserEntity = require('../modules/user/entity/user')
-const FacebookTokenStrategy = require('passport-facebook-token')
+const FacebookStrategy = require('passport-facebook').Strategy
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 
 const { logger } = require('./pino')
 
 exports.configurePassport = () => {
   passport.use(
-    'facebook-token',
-    new FacebookTokenStrategy(
+    new FacebookStrategy(
       {
         clientID: process.env.FACEBOOK_APP_ID,
         clientSecret: process.env.FACEBOOK_APP_SECRET,
+        callbackURL: process.env.FACEBOOK_APP_CALLBACK_URL,
       },
       async (accessToken, refreshToken, profile, callback) => {
         try {

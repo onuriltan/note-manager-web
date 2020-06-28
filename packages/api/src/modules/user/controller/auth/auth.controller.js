@@ -7,7 +7,11 @@ const { logger } = require('@config/pino')
 exports.loginWithSocial = async (req, res) => {
   if (req.user) {
     const token = await jwt.signToken(req.user)
-    res.json({ token, method: req.user.method })
+    res.redirect(
+      `${process.env.CLIENT_URL}/login/?${
+        req.user.method
+      }Token=${encodeURIComponent(token)}`
+    )
   } else {
     res.status(401)
   }
