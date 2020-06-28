@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const jwtConfig = require('../../middlewares/jwt')
+const jwtConfig = require('@middleware/jwt')
 const {
   validateFindNotes,
   validateFindNotesBetweenDatesandKeyword,

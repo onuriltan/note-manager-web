@@ -1,8 +1,8 @@
-const authRepository = require('../../repository/auth')
 const bcrypt = require('bcrypt')
-const jwt = require('../../../../middlewares/jwt')
+const authRepository = require('../../repository/auth')
 const authService = require('../../service/auth/auth.service')
-const { logger } = require('../../../../config/pino')
+const jwt = require('@middleware/jwt')
+const { logger } = require('@config/pino')
 
 exports.loginWithSocial = async (req, res) => {
   if (req.user) {

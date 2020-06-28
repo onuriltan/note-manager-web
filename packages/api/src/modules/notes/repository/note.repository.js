@@ -1,5 +1,5 @@
 const NoteEntity = require('../entity/note.entity')
-const { logger } = require('../../../config/pino')
+const { logger } = require('@config/pino')
 
 exports.findNotes = async (email, options) => {
   const extendedOptions = { ...options, lean: true }
