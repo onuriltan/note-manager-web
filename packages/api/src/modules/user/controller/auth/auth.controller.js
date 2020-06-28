@@ -1,8 +1,17 @@
-const AuthDbService = require('../repository/auth')
+const AuthDbService = require('../../repository/auth')
 const bcrypt = require('bcrypt')
-const JwtOperations = require('../../../middlewares/jwt')
-const MailOperations = require('../../../config/mail')
-const { logger } = require('../../../config/pino')
+const jwt = require('../../../../middlewares/jwt')
+const MailOperations = require('../../../../config/mail')
+const { logger } = require('../../../../config/pino')
+
+exports.loginWithSocial = async (req, res) => {
+  if (req.user) {
+    const token = await jwt.signToken(req.user)
+    res.json({ token, method: req.user.method })
+  } else {
+    res.status(401)
+  }
+}
 
 exports.loginWithEmail = async (req, res) => {
   const { email, password } = req.body
@@ -14,7 +23,7 @@ exports.loginWithEmail = async (req, res) => {
       errors.push({ msg: 'You need to activate your account' })
       res.status(401).json({ errors })
     } else if (user.active && isPasswordCorrect) {
-      const token = await JwtOperations.signToken(user, process.env.JWT_SECRET)
+      const token = await jwt.signToken(user, process.env.JWT_SECRET)
       res.json({ token, method: user.method })
     } else {
       errors.push({ msg: 'Username or password is wrong' })
@@ -105,7 +114,7 @@ exports.findUserWithConfirmationToken = async (req, res) => {
         if (err) logger.error(err)
         else logger.info(updatedUser.name + ' activated')
       })
-      const token = await JwtOperations.signToken(user)
+      const token = await jwt.signToken(user)
       res.json({ token })
     } else {
       await AuthDbService.deleteUser(user.id)
