@@ -3,16 +3,11 @@ const jwtConfig = require('../../middlewares/jwt')
 const passport = require('passport')
 const {
   loginWithEmail,
+  loginWithSocial,
   findUserWithConfirmationToken,
   registerWithEmail,
   resendConfirmationEmail,
-} = require('./controller/auth.controller')
-
-const {
-  loginWithFacebook,
-} = require('./controller/facebook/facebook.contoller')
-
-const { loginWithGoogle } = require('./controller/google/google.controller')
+} = require('./controller/auth/auth.controller')
 
 const { getUser, changePassword } = require('./controller/user/user.controller')
 const {
@@ -44,7 +39,7 @@ authRoutes.post('/resendConfirmationEmail', resendConfirmationEmail)
 authRoutes.post(
   '/loginWithFacebook',
   passport.authenticate('facebook-token'),
-  loginWithFacebook
+  loginWithSocial
 )
 
 authRoutes.get(
@@ -54,7 +49,7 @@ authRoutes.get(
 authRoutes.get(
   '/loginWithGoogle/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
-  loginWithGoogle
+  loginWithSocial
 )
 
 // User

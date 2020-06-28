@@ -6,17 +6,24 @@ const { logger } = require('../../../config/pino')
 
 exports.findUser = async (email) => {
   let theUser = null
-  await User.findOne({ 'local.email': email }).then((user) => {
-    theUser = user
-  })
+  try {
+    theUser = await User.findOne({ 'local.email': email })
+  } catch (e) {
+    logger.error('An error occured  while finding user with email', e)
+  }
   return theUser
 }
 
 exports.findUserWithConfirmationToken = async (confirmationToken) => {
   let theUser = null
-  await User.findOne({ confirmationToken }).then((user) => {
-    theUser = user
-  })
+  try {
+    theUser = await User.findOne({ confirmationToken })
+  } catch (e) {
+    logger.error(
+      'An error occured  while finding user with confirmationToken',
+      e
+    )
+  }
   return theUser
 }
 
@@ -29,52 +36,50 @@ exports.createUser = async (email, password) => {
       password: password,
     },
   })
-  // Hash password
-  newUser.local.password = await hashPassword(newUser) // Set password to hashed
-  newUser.confirmationToken = uniqid()
-  await newUser
-    .save()
-    .then(() => {
-      theUser = newUser
-    })
-    .catch((err) => {
-      logger.error(err)
-    })
+  try {
+    const hashedPwd = await hashPassword(newUser)
+    if (hashedPwd) {
+      newUser.local.password = hashedPwd
+      newUser.confirmationToken = uniqid()
+      theUser = await newUser.save()
+    }
+  } catch (e) {
+    logger.error(`An error occured while createUser`, e)
+  }
   return theUser
 }
 
 exports.regenerateUserConfirmationToken = async (email) => {
-  let theUser = ''
-  await User.findOne({ 'local.email': email }).then((user) => {
-    theUser = user
-  })
-  theUser.confirmationToken = uniqid()
-  await theUser
-    .save()
-    .then((user) => {
-      theUser = user
-    })
-    .catch((err) => {
-      logger.error(err)
-    })
+  let theUser = null
+  try {
+    theUser = await User.findOne({ 'local.email': email })
+    theUser.confirmationToken = uniqid()
+    theUser = await theUser.save()
+  } catch (e) {
+    logger.error(`An error occured while regenerateUserConfirmationToken`, e)
+  }
   return theUser
 }
 
 exports.deleteUser = async (id) => {
-  let isDeleted = null
-  await User.deleteOne({ _id: new mongodb.ObjectID(id) })
-    .then(() => (isDeleted = true))
-    .catch(() => (isDeleted = false))
+  let isDeleted = false
+  try {
+    await User.deleteOne({ _id: new mongodb.ObjectID(id) })
+    isDeleted = true
+  } catch (e) {
+    logger.error(`An error occured while deleteUser`, e)
+  }
   return isDeleted
 }
 
 async function hashPassword(user) {
   const password = user.local.password
   const saltRounds = 10
-  return await new Promise((resolve, reject) => {
-    bcrypt.hash(password, saltRounds, function (err, hash) {
-      if (err) reject(err)
-      resolve(hash)
-    })
-  })
+  let hash = null
+  try {
+    hash = await bcrypt.hash(password, saltRounds)
+  } catch (e) {
+    logger.error(`An error occured while hashPassword`, e)
+  }
+  return hash
 }

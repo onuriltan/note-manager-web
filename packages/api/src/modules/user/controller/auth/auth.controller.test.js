@@ -1,9 +1,9 @@
 const jwt = require('../../../../middlewares/jwt')
-const { loginWithFacebook } = require('./facebook.contoller')
+const { loginWithSocial } = require('./auth.controller')
 
 jest.mock('../../../../middlewares/jwt')
 
-describe('loginWithFacebook tests', () => {
+describe('loginWithSocial tests', () => {
   const mockRequest = {
     user: {
       method: 'facebook',
@@ -25,7 +25,7 @@ describe('loginWithFacebook tests', () => {
     const signToken = jest.spyOn(jwt, 'signToken').mockResolvedValue('token')
 
     // Act
-    await loginWithFacebook(req, res)
+    await loginWithSocial(req, res)
 
     // Assert
     expect(signToken).toHaveBeenCalledWith(req.user)
@@ -41,7 +41,7 @@ describe('loginWithFacebook tests', () => {
     const res = { ...mockResponse }
 
     // Act
-    await loginWithFacebook(req, res)
+    await loginWithSocial(req, res)
 
     // Assert
     expect(res.status).toHaveBeenCalledWith(401)
