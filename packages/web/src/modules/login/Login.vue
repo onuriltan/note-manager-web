@@ -1,5 +1,5 @@
 <template>
-  <div class="login-container">
+  <div class="login-container" :class="{ 'login-container__dark': isDarkMode }">
     <b-form class="login-form" v-on:submit.prevent="loginWithEmail()">
       <h2 class="login-form__header">Login</h2>
       <div class="login-form__errors" v-if="errors.length > 0">
@@ -45,7 +45,7 @@
           size="lg"
         ></b-form-input>
       </b-form-group>
-      <div style="font-weight: bold; margin: 30px 0; text-align: center">
+      <div class="login-form__register-link">
         <router-link to="/register">Dont have an account? Register from here!</router-link>
       </div>
       <b-button
@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import { validateLogin, validateEmail, validatePassword } from '../../helpers/validators';
 import FacebookLogin from '../facebook-login/FacebookLogin';
 import GoogleLogin from '../google-login/GoogleLogin';
@@ -106,6 +106,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      isDarkMode: 'general/isDarkMode'
+    }),
     invalidEmailMessage() {
       return this.fieldErrors.email;
     },

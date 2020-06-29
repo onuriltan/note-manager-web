@@ -1,8 +1,8 @@
 <template>
-  <div class="login-container">
+  <div class="login-container" :class="{ 'login-container__dark': isDarkMode }">
     <b-form class="login-form" v-if="!emailAccepted" v-on:submit.prevent="registerWithEmail()">
       <h2 class="login-form__header">Register</h2>
-      <div style="font-weight: bold; margin-bottom: 20px; text-align: center">
+      <div class="login-form__register-link">
         <router-link to="/login">Go back to login page!</router-link>
       </div>
       <div class="login-form__errors" v-if="errors.length > 0">
@@ -92,7 +92,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import { validateRegister } from '../../helpers/validators';
 import ResendConfirmation from '../resend-confirmation/ResendConfirmation';
 
@@ -119,6 +119,9 @@ export default {
     };
   },
   computed: {
+    ...mapGetters({
+      isDarkMode: 'general/isDarkMode'
+    }),
     invalidEmail() {
       return this.fieldErrors.email;
     },
