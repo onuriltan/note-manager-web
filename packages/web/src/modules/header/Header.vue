@@ -14,7 +14,7 @@
       <div class="header__right__mode" @click="toggleDarkMode(!isDarkMode)">
         <img class="header__right__mode__img" :src="image" />
       </div>
-      <b-navbar-nav class="ml-auto header__right__navbar">
+      <b-navbar-nav class="header__right__navbar">
         <b-dropdown right text="Account" class="m-md-2" v-if="isAuthenticated">
           <b-dropdown-item to="/profile"><i class="fa fa-user mr-2"></i>Profile</b-dropdown-item>
           <b-dropdown-item ref="logout" @click.native="logout()"

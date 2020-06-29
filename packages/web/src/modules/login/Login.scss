@@ -5,6 +5,10 @@
   padding-top: 50px;
   background: url('~@/assets/takingnotes.jpg') no-repeat fixed center;
   background-size: cover;
+  &__dark {
+    background: url('~@/assets/note-dark.jpg') no-repeat fixed center;
+    background-size: cover;
+  }
 }
 .login-form {
   width: 400px;
@@ -14,10 +18,21 @@
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
     0px 2px 1px -1px rgba(0, 0, 0, 0.12);
   padding: 30px;
+  background-color: var(--white);
+  color: var(--pitch-dark);
   &__header {
     text-align: center;
     padding-bottom: 30px;
   }
+  &__register-link {
+    font-weight: bold;
+     margin: 30px 0;
+    text-align: center;
+    a {
+      color: var(--pitch-dark);
+    }
+  }
+  
   &__resend {
     text-decoration: var(--green) underline;
     color: var(--green);

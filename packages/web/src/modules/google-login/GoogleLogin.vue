@@ -39,7 +39,7 @@ export default {
   justify-content: center;
   align-items: center;
   background-color: #db3236;
-  border-color: white;
+  border-color: var(--white);
   width: 100%;
   margin: 5px;
 }

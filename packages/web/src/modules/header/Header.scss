@@ -8,14 +8,16 @@
   }
   &__link {
     color: var(--light);
+    white-space: nowrap;
     &:hover {
       color: var(--page-link-hover) !important;
     }
   }
   &__right {
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-items: center;
+    width: 100%;
  
     &__navbar {
       justify-content: center;

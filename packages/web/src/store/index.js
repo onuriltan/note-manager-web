@@ -1,15 +1,15 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import AuthStore from './modules/auth.store';
-import GeneralStore from './modules/general.store';
+import auth from './modules/auth.store';
+import general from './modules/general.store';
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
   modules: {
-    auth: AuthStore,
-    general: GeneralStore
+    auth,
+    general
   }
 });
 
