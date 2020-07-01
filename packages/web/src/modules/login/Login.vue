@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import { validateLogin, validateEmail, validatePassword } from '../../helpers/validators';
 import FacebookLogin from '../facebook-login/FacebookLogin';
 import GoogleLogin from '../google-login/GoogleLogin';
@@ -106,9 +106,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({
-      isDarkMode: 'general/isDarkMode'
-    }),
+    ...mapState('general', ['isDarkMode']),
     invalidEmailMessage() {
       return this.fieldErrors.email;
     },

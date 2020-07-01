@@ -92,7 +92,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import { validateRegister } from '../../helpers/validators';
 import ResendConfirmation from '../resend-confirmation/ResendConfirmation';
 
@@ -119,9 +119,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters({
-      isDarkMode: 'general/isDarkMode'
-    }),
+    ...mapState('general', ['isDarkMode']),
     invalidEmail() {
       return this.fieldErrors.email;
     },
