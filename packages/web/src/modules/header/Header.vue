@@ -27,22 +27,23 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import moon from '../../assets/moon.svg';
 import sun from '../../assets/sun.svg';
 
 export default {
   name: 'HeaderComponent',
   computed: {
-    ...mapGetters({
-      isAuthenticated: 'auth/isAuthenticated',
-      isDarkMode: 'general/isDarkMode'
-    })
+    ...mapState('general', ['isDarkMode']),
+    ...mapState('auth', ['isAuthenticated'])
   },
   data: () => {
     return {
       image: moon
     };
+  },
+  mounted() {
+    this.isDarkMode ? (this.image = sun) : (this.image = moon);
   },
   watch: {
     isDarkMode(newValue, oldValue) {
@@ -58,15 +59,6 @@ export default {
       logout: 'auth/logout',
       toggleDarkMode: 'general/toggleDarkMode'
     })
-  },
-  watch: {
-    isDarkMode(newValue, oldValue) {
-      if (newValue) {
-        this.image = sun;
-      } else {
-        this.image = moon;
-      }
-    }
   }
 };
 </script>

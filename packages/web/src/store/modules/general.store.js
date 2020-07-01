@@ -24,6 +24,7 @@ const general = {
   mutations: {
     setDarkMode(state, isDarkMode) {
       state.isDarkMode = isDarkMode;
+      console.log('faaaaaaaak');
       if (isDarkMode) {
         document.documentElement.style.setProperty('--green', 'black');
         document.documentElement.style.setProperty('--light', '#28a745');

@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 import HeaderComponent from './modules/header/Header';
 import SessionExpired from './modules/session-expired/SessionExpired';
 export default {
@@ -16,6 +17,17 @@ export default {
   components: {
     SessionExpired,
     HeaderComponent
+  },
+  computed: {
+    ...mapState('general', ['isDarkMode'])
+  },
+  methods: {
+    ...mapActions({
+      toggleDarkMode: 'general/toggleDarkMode'
+    })
+  },
+  mounted() {
+    this.isDarkMode ? this.toggleDarkMode(true) : this.toggleDarkMode(false);
   }
 };
 </script>

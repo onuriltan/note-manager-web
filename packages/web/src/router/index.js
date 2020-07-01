@@ -14,7 +14,7 @@ Vue.use(Router);
 
 async function requireAuth(to, from, next) {
   function proceed() {
-    if (Store.getters['auth/isAuthenticated']) {
+    if (Store.state['auth'].isAuthenticated) {
       next();
     } else {
       next('/login');
@@ -25,7 +25,7 @@ async function requireAuth(to, from, next) {
 }
 async function alreadyLoggedIn(to, from, next) {
   function proceed() {
-    if (!Store.getters['auth/isAuthenticated']) {
+    if (!Store.state['auth'].isAuthenticated) {
       next();
     } else {
       next('/');

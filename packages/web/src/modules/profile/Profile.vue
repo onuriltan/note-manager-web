@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState } from 'vuex';
 import ChangePassword from '../change-password/ChangePassword';
 
 export default {
@@ -30,9 +30,7 @@ export default {
     ChangePassword
   },
   computed: {
-    ...mapGetters({
-      loginMethod: 'auth/loginMethod'
-    })
+    ...mapState('auth', ['loginMethod'])
   },
   created() {
     window.addEventListener('resize', this.handleResize);
