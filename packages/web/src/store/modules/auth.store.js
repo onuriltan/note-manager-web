@@ -128,6 +128,7 @@ const auth = {
           state.isAuthenticated = false;
           router.push('/login');
           state.sessionExpired = false;
+          window.localStorage.removeItem('token');
         }, 2000);
       }
     },
@@ -142,6 +143,7 @@ const auth = {
       } else {
         setTimeout(() => {
           router.push('/login');
+          window.localStorage.removeItem('token');
         }, 2000);
       }
     },
