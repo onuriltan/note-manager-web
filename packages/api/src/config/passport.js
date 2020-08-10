@@ -12,6 +12,7 @@ exports.configurePassport = () => {
         clientID: process.env.FACEBOOK_APP_ID,
         clientSecret: process.env.FACEBOOK_APP_SECRET,
         callbackURL: process.env.FACEBOOK_APP_CALLBACK_URL,
+        profileFields: ['id', 'emails', 'name'],
       },
       async (accessToken, refreshToken, profile, callback) => {
         try {

@@ -5,7 +5,7 @@
       <div class="login-form__register-link">
         <router-link to="/login">Go back to login page!</router-link>
       </div>
-      <div class="login-form__errors" v-if="errors.length > 0">
+      <div class="login-form__errors" v-if="errors && errors.length > 0">
         <b-alert
           v-bind:key="index"
           class="login-form__errors__error"
@@ -16,7 +16,7 @@
           >{{ error.msg }}</b-alert
         >
       </div>
-      <div class="login-form__errors" v-if="messages.length > 0">
+      <div class="login-form__errors" v-if="messages && messages.length > 0">
         <b-alert
           v-bind:key="index"
           class="login-form__errors__error"
