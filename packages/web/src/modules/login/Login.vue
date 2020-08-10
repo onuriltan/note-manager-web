@@ -2,7 +2,7 @@
   <div class="login-container" :class="{ 'login-container__dark': isDarkMode }">
     <b-form class="login-form" v-on:submit.prevent="loginWithEmail()">
       <h2 class="login-form__header">Login</h2>
-      <div class="login-form__errors" v-if="errors.length > 0">
+      <div class="login-form__errors" v-if="errors && errors.length > 0">
         <b-alert
           v-bind:key="index"
           class="login-form__errors__error"

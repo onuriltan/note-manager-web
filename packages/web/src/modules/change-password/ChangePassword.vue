@@ -2,7 +2,7 @@
   <b-form class="change-password-form" v-on:submit.prevent="changePassword()">
     <div class="change-password-form__content">
       <h2 class="change-password-form__content__header">Change Password</h2>
-      <div class="change-password-form__content__errors" v-if="errors.length > 0">
+      <div class="change-password-form__content__errors" v-if="errors && errors.length > 0">
         <b-alert
           v-bind:key="index"
           class="change-password-form__errors__error"
@@ -13,7 +13,7 @@
           >{{ error.msg }}</b-alert
         >
       </div>
-      <div class="change-password-form__content__errors" v-if="messages.length > 0">
+      <div class="change-password-form__content__errors" v-if="messages && messages.length > 0">
         <b-alert
           v-bind:key="index"
           class="change-password-form__errors__error"

@@ -1,6 +1,9 @@
 <template>
   <div class="notes">
-    <div class="notes__content" v-if="searchClicked && posts.length !== 0 && isLoading === false">
+    <div
+      class="notes__content"
+      v-if="searchClicked && posts && posts.length !== 0 && isLoading === false"
+    >
       <b-card-group deck class="notes__content__cards">
         <b-card
           :title="post.createdAt | convertDate()"
@@ -38,7 +41,7 @@
     </div>
     <div
       class="notes__empty easein"
-      v-if="searchClicked && posts.length === 0 && isLoading === false"
+      v-if="searchClicked && posts && posts.length === 0 && isLoading === false"
     >
       <i class="fa fa-file-o fa-5x notes__empty__icon" aria-hidden="true"></i>
       <span
