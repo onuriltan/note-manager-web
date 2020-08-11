@@ -16,22 +16,31 @@ exports.configurePassport = () => {
       },
       async (accessToken, refreshToken, profile, callback) => {
         try {
-          const existingUser = await UserEntity.findOne({
-            'facebook.id': profile.id,
-          })
-          if (existingUser) {
-            return callback(null, existingUser)
+          if (profile && profile.id && profile._json && profile._json.email) {
+            const existingUser = await UserEntity.findOne({
+              'facebook.id': profile.id,
+            })
+            if (existingUser) {
+              return callback(null, existingUser)
+            }
+            const newUser = new UserEntity({
+              active: true,
+              method: 'facebook',
+              facebook: {
+                id: profile.id,
+                email: profile._json.email,
+              },
+            })
+            await newUser.save()
+            callback(null, newUser)
+          } else {
+            logger.error('Could not get email and facebookId of the user')
+            callback(
+              null,
+              false,
+              'An error occured while logging in with facebook'
+            )
           }
-          const newUser = new UserEntity({
-            active: true,
-            method: 'facebook',
-            facebook: {
-              id: profile.id,
-              email: profile._json.email,
-            },
-          })
-          await newUser.save()
-          callback(null, newUser)
         } catch (e) {
           logger.error(e.message)
           callback(e, false, e.message)
@@ -48,26 +57,31 @@ exports.configurePassport = () => {
         callbackURL: process.env.GOOGLE_CLIENT_CALLBACK_URL,
       },
       async (accessToken, refreshToken, profile, callback) => {
-        try {
-          const existingUser = await UserEntity.findOne({
-            'google.id': profile.id,
-          })
-          if (existingUser) {
-            return callback(null, existingUser)
+        if (profile && profile.id && profile._json && profile._json.email) {
+          try {
+            const existingUser = await UserEntity.findOne({
+              'google.id': profile.id,
+            })
+            if (existingUser) {
+              return callback(null, existingUser)
+            }
+            const newUser = new UserEntity({
+              active: true,
+              method: 'google',
+              google: {
+                id: profile.id,
+                email: profile._json.email,
+              },
+            })
+            await newUser.save()
+            callback(null, newUser)
+          } catch (e) {
+            logger.error(e.message)
+            callback(e, false, e.message)
           }
-          const newUser = new UserEntity({
-            active: true,
-            method: 'google',
-            google: {
-              id: profile.id,
-              email: profile._json.email,
-            },
-          })
-          await newUser.save()
-          callback(null, newUser)
-        } catch (e) {
-          logger.error(e.message)
-          callback(e, false, e.message)
+        } else {
+          logger.error('Could not get email and googleId of the user')
+          callback(null, false, 'An error occured while login with google')
         }
       }
     )
