@@ -12,10 +12,19 @@ describe('loginWithSocial tests', () => {
   const mockResponse = {
     json: jest.fn(),
     status: jest.fn(),
+    redirect: jest.fn(),
   }
+
+  const OLD_ENV = process.env
 
   beforeEach(() => {
     jest.clearAllMocks()
+    jest.resetModules() // most important - it clears the cache
+    process.env = { ...OLD_ENV } // make a copy
+  })
+
+  afterAll(() => {
+    process.env = OLD_ENV // restore old env
   })
 
   it('should call jwt.signToken and call the res.json with jwt.signToken result', async () => {
@@ -23,16 +32,18 @@ describe('loginWithSocial tests', () => {
     const req = { ...mockRequest }
     const res = { ...mockResponse }
     const signToken = jest.spyOn(jwt, 'signToken').mockResolvedValue('token')
+    process.env.CLIENT_URL = 'http://localhost:8080'
 
     // Act
     await loginWithSocial(req, res)
 
     // Assert
     expect(signToken).toHaveBeenCalledWith(req.user)
-    expect(res.json).toHaveBeenCalledWith({
-      token: 'token',
-      method: req.user.method,
-    })
+    expect(res.redirect).toHaveBeenCalledWith(
+      `${process.env.CLIENT_URL}/login/?${
+        req.user.method
+      }Token=${encodeURIComponent('token')}`
+    )
   })
 
   it('should call res.status as 401 if no user is in the req object', async () => {

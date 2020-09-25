@@ -10,4 +10,10 @@ module.exports = {
       lines: 90,
     },
   },
+  moduleNameMapper: {
+    '@app/(.*)': '<rootDir>/src/$1',
+    '@config/(.*)': '<rootDir>/src/config/$1',
+    '@middleware/(.*)': '<rootDir>/src/middlewares/$1',
+    '@modules/(.*)': '<rootDir>/src/modules/$1',
+  },
 }
