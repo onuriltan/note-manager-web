@@ -24,7 +24,6 @@ const bootServer = async () => {
   server.use(helmet())
 
   // Connect to Mongo
-
   try {
     logger.warn('Connecting to MongoDB...')
     await mongoose.connect(process.env.MONGO_URL, {
