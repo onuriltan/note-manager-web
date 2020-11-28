@@ -2,13 +2,13 @@
   <div class="notes">
     <div
       class="notes__content"
-      v-if="searchClicked && posts && posts.length !== 0 && isLoading === false"
+      v-if="searchClicked && notes && notes.length !== 0 && isLoading === false"
     >
       <b-card-group deck class="notes__content__cards">
         <b-card
           :title="post.createdAt | convertDate()"
           tag="article"
-          v-for="post in posts"
+          v-for="post in notes"
           v-bind:key="post._id"
           class="mb-2 notes__content__card slide--in--from--left"
         >
@@ -41,7 +41,7 @@
     </div>
     <div
       class="notes__empty easein"
-      v-if="searchClicked && posts && posts.length === 0 && isLoading === false"
+      v-if="searchClicked && notes && notes.length === 0 && isLoading === false"
     >
       <i class="fa fa-file-o fa-5x notes__empty__icon" aria-hidden="true"></i>
       <span
@@ -74,7 +74,7 @@ export default {
     editPost: Function,
     isLoading: Boolean,
     deletePost: Function,
-    posts: Array,
+    notes: Array,
     parentComponentName: String,
     searchClicked: Boolean
   },

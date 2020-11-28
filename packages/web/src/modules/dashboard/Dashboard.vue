@@ -1,12 +1,12 @@
 <template>
-  <div class="posts-container">
-    <div class="posts">
-      <h1 class="posts__header">Latest Notes</h1>
-      <form class="posts__create-form" @submit.prevent="createPost">
-        <b-input-group class="posts__create-form__inputgroup">
+  <div class="notes-container">
+    <div class="notes">
+      <h1 class="notes__header">Latest Notes</h1>
+      <form class="notes__create-form" @submit.prevent="createPost">
+        <b-input-group class="notes__create-form__inputgroup">
           <b-form-input
             v-model="text"
-            class="posts__create-form__input"
+            class="notes__create-form__input"
             type="text"
             placeholder="Create a note ..."
           ></b-form-input>
@@ -31,7 +31,7 @@
       <Notes
         :editPost="editPost"
         :deletePost="deletePost"
-        :posts="posts"
+        :notes="notes"
         :isLoading="isLoading"
         :searchClicked="searchClicked"
       />
@@ -50,7 +50,7 @@ export default {
   },
   data() {
     return {
-      posts: [],
+      notes: [],
       pagination: {
         total: 0,
         limit: 0,
@@ -101,18 +101,18 @@ export default {
     async getNotes(seconds) {
       this.isLoading = true;
       setTimeout(async () => {
-        let postss = [];
+        let notess = [];
         try {
           if (this.$route.params.pageNumber) {
-            postss = await NotesService.getPosts(this.$route.params.pageNumber);
+            notess = await NotesService.getNotes(this.$route.params.pageNumber);
           } else {
-            postss = await NotesService.getPosts(1);
+            notess = await NotesService.getNotes(1);
           }
-          this.posts = postss.docs;
-          this.pagination.total = postss.total;
-          this.pagination.limit = postss.limit;
-          this.pagination.page = postss.page;
-          this.pagination.pages = postss.pages;
+          this.notes = notess.docs;
+          this.pagination.total = notess.total;
+          this.pagination.limit = notess.limit;
+          this.pagination.page = notess.page;
+          this.pagination.pages = notess.pages;
         } catch (e) {
           this.error = e.message;
         }

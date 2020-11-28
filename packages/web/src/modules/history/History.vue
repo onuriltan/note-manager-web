@@ -69,7 +69,7 @@
       v-cloak
       :deletePost="deletePost"
       :editPost="editPost"
-      :posts="posts"
+      :notes="notes"
       :isLoading="isLoading"
       :searchClicked="searchClicked"
     />
@@ -87,7 +87,7 @@ export default {
   },
   data() {
     return {
-      posts: [],
+      notes: [],
       pagination: {
         total: 0,
         limit: 0,
@@ -130,28 +130,28 @@ export default {
       this.isLoading = true;
       this.searchClicked = true;
       setTimeout(async () => {
-        this.posts = [];
-        let postss = [];
+        this.notes = [];
+        let notess = [];
         if (this.$route.params.pageNumber) {
-          postss = await NotesService.getPostsByCriteria(
+          notess = await NotesService.getNotesByCriteria(
             this.fromDate,
             this.toDate,
             this.keyword,
             this.$route.params.pageNumber
           );
         } else {
-          postss = await NotesService.getPostsByCriteria(
+          notess = await NotesService.getNotesByCriteria(
             this.fromDate,
             this.toDate,
             this.keyword,
             1
           );
         }
-        this.posts = postss.docs;
-        this.pagination.total = postss.total;
-        this.pagination.limit = postss.limit;
-        this.pagination.page = postss.page;
-        this.pagination.pages = postss.pages;
+        this.notes = notess.docs;
+        this.pagination.total = notess.total;
+        this.pagination.limit = notess.limit;
+        this.pagination.page = notess.page;
+        this.pagination.pages = notess.pages;
         this.isLoading = false;
       }, seconds);
     }

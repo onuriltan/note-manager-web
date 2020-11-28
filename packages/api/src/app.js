@@ -46,7 +46,7 @@ const bootServer = async () => {
   // TODO : Update Google Auth
   // const google = require('./routes/api/auth/GooglePlusService');
 
-  server.use('/api/posts', notes)
+  server.use('/api/notes', notes)
   server.use('/api/user', user)
 
   // TODO : Update Google Auth
