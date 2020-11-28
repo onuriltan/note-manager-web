@@ -49,6 +49,7 @@
         <router-link to="/register">Dont have an account? Register from here!</router-link>
       </div>
       <b-button
+        id="login-button"
         class="login-form__button"
         :class="{ 'button--loading': loginClicked }"
         type="submit"

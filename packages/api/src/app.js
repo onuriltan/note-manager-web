@@ -10,55 +10,75 @@ const helmet = require('helmet')
 const { configurePassport } = require('@config/passport')
 const { logger } = require('@config/pino')
 
-// Environment Variables
-const dotenv = require('dotenv')
-dotenv.config()
+const bootServer = async () => {
+  // Environment Variables
+  const dotenv = require('dotenv')
+  dotenv.config()
 
-// Middleware
-const server = express()
-server.use(bodyParser.json())
-server.use(cors())
-server.use(cookieParser())
-server.use(passport.initialize())
-server.use(helmet())
+  // Middleware
+  const server = express()
+  server.use(bodyParser.json())
+  server.use(cors())
+  server.use(cookieParser())
+  server.use(passport.initialize())
+  server.use(helmet())
 
-// Connect to Mongo
-const dbAddress = process.env.MONGO_URL
+  // Connect to Mongo
+  try {
+    logger.warn('Connecting to MongoDB...')
+    await mongoose.connect(process.env.MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    logger.info('MongoDB connected.')
+  } catch (e) {
+    logger.error('MongoDB failed to connect.')
+    throw new Error(e)
+  }
 
-mongoose
-  .connect(dbAddress, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => logger.info('MongoDB connected.'))
-  .catch((err) => {
-    throw new Error(err)
-  })
+  configurePassport()
 
-configurePassport()
+  // Routes
+  const notes = require('./modules/notes')
+  const user = require('./modules/user')
 
-// Routes
-const notes = require('./modules/notes')
-const user = require('./modules/user')
+  // TODO : Update Google Auth
+  // const google = require('./routes/api/auth/GooglePlusService');
 
-// TODO : Update Google Auth
-// const google = require('./routes/api/auth/GooglePlusService');
+  server.use('/api/posts', notes)
+  server.use('/api/user', user)
 
-server.use('/api/posts', notes)
-server.use('/api/user', user)
+  // TODO : Update Google Auth
+  // server.use('/api/auth/google', google);
 
-// TODO : Update Google Auth
-// server.use('/api/auth/google', google);
+  if (process.env.NODE_ENV === 'production') {
+    server.use(express.static(path.join(__dirname, '../dist')))
+    server.get('*', (req, res) =>
+      res.sendFile(path.join(__dirname, '../dist/index.html'))
+    )
+    server.get(/.*/, (req, res) =>
+      res.sendFile(path.join(__dirname, '../dist/index.html'))
+    )
+  }
 
-if (process.env.NODE_ENV === 'production') {
-  server.use(express.static(path.join(__dirname, '../dist')))
-  server.get('*', (req, res) =>
-    res.sendFile(path.join(__dirname, '../dist/index.html'))
-  )
-  server.get(/.*/, (req, res) =>
-    res.sendFile(path.join(__dirname, '../dist/index.html'))
-  )
+  const port = process.env.PORT || 5000
+
+  try {
+    logger.warn('Server is starting...')
+    await server.listen(port)
+    logger.info(`Server has started at port ${port}.`)
+  } catch (e) {
+    logger.error(`Error while starting the server`)
+    throw new Error(e)
+  }
 }
 
-const port = process.env.PORT || 5000
-
-server.listen(port, () => {
-  logger.info(`Server started at port ${port}`)
-})
+bootServer()
+  .then(() => {
+    logger.info('Server is ready.')
+  })
+  .catch((e) => {
+    logger.error('Server is failed to boot.')
+    // eslint-disable-next-line no-console
+    console.log(e)
+  })
