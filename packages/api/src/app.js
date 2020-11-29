@@ -9,6 +9,7 @@ const mongoose = require('mongoose')
 const helmet = require('helmet')
 const { configurePassport } = require('@config/passport')
 const { logger } = require('@config/pino')
+const { configureAndRunMigrations } = require('@app/migrations')
 
 const bootServer = async () => {
   // Environment Variables
@@ -36,6 +37,9 @@ const bootServer = async () => {
     throw new Error(e)
   }
 
+  // Run Mongo migrations
+  await configureAndRunMigrations()
+
   configurePassport()
 
   // Routes
@@ -45,7 +49,7 @@ const bootServer = async () => {
   // TODO : Update Google Auth
   // const google = require('./routes/api/auth/GooglePlusService');
 
-  server.use('/api/posts', notes)
+  server.use('/api/notes', notes)
   server.use('/api/user', user)
 
   // TODO : Update Google Auth

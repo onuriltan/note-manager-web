@@ -16,8 +16,8 @@
     "build:all": "lerna run build",
     "lint:all": "lerna run lint",
     "publish": "lerna publish",
-    "heroku-prebuild": "cd packages/api && npm install",
-    "heroku-postbuild": "cd packages/web && npm install && npm install --only=dev && npm run build"
+    "heroku-prebuild": "cd packages/api && yarn",
+    "heroku-postbuild": "cd packages/web && yarn && yarn --only=dev && yarn build"
   },
   "devDependencies": {
     "lerna": "^3.22.0",
