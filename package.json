@@ -17,7 +17,7 @@
     "lint:all": "lerna run lint",
     "publish": "lerna publish",
     "heroku-prebuild": "cd packages/api && yarn",
-    "heroku-postbuild": "cd packages/web && yarn && yarn --dev && yarn build"
+    "heroku-postbuild": "cd packages/web && yarn && yarn install --production=false && yarn build"
   },
   "devDependencies": {
     "lerna": "^3.22.0",
