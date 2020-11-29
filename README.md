@@ -36,7 +36,7 @@ Also you need to create .env.development and .env.production files in the client
 #### WEB Environment
 
 * **VUE_APP_AUTH_URL**        = <http://localhost:5000/api/auth>
-* **VUE_APP_NOTES_URL**       = <http://localhost:5000/api/posts>
+* **VUE_APP_NOTES_URL**       = <http://localhost:5000/api/notes>
 * **VUE_APP_USER_URL**        = <http://localhost:5000/api/use>
 * **VUE_APP_FACEBOOK_APP_ID** = "your facebook app id"
 * **VUE_APP_GOOGLE_APP_ID**   = "your google app id"

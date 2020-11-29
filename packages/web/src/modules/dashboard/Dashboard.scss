@@ -1,6 +1,6 @@
-.posts-container {
+.notes-container {
   padding-top: 50px;
-  .posts {
+  .notes {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,8 +36,8 @@
 }
 
 @media screen and (max-width: 768px) {
-  .posts-container {
-    .posts {
+  .notes-container {
+    .notes {
       &__header {
       }
       &__create-form {

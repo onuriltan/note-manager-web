@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const mongoosePaginate = require('mongoose-paginate')
 
-const PostSchema = new mongoose.Schema({
+const Noteschema = new mongoose.Schema({
   text: {
     type: String,
     required: true,
@@ -18,6 +18,6 @@ const PostSchema = new mongoose.Schema({
     type: Date,
   },
 })
-PostSchema.plugin(mongoosePaginate)
-const Post = mongoose.model('Post', PostSchema)
-module.exports = Post
+Noteschema.plugin(mongoosePaginate)
+const Note = mongoose.model('Note', Noteschema)
+module.exports = Note

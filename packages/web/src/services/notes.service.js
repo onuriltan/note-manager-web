@@ -4,7 +4,7 @@ import Store from '../store';
 const url = process.env.VUE_APP_NOTES_URL;
 
 class NotesService {
-  static async getPosts(pageNumber) {
+  static async getNotes(pageNumber) {
     Store.dispatch('auth/checkIsAuthenticated');
     const config = {
       headers: {
@@ -20,7 +20,7 @@ class NotesService {
     }
   }
 
-  static async getPostsByCriteria(fromDate, toDate, keyword, pageNumber) {
+  static async getNotesByCriteria(fromDate, toDate, keyword, pageNumber) {
     Store.dispatch('auth/checkIsAuthenticated');
     const config = {
       headers: {
