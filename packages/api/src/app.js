@@ -9,6 +9,7 @@ const mongoose = require('mongoose')
 const helmet = require('helmet')
 const { configurePassport } = require('@config/passport')
 const { logger } = require('@config/pino')
+const { configureAndRunMigrations } = require('@app/migrations')
 
 const bootServer = async () => {
   // Environment Variables
@@ -24,7 +25,6 @@ const bootServer = async () => {
   server.use(helmet())
 
   // Connect to Mongo
-
   try {
     logger.warn('Connecting to MongoDB...')
     await mongoose.connect(process.env.MONGO_URL, {
@@ -36,6 +36,9 @@ const bootServer = async () => {
     logger.error('MongoDB failed to connect.')
     throw new Error(e)
   }
+
+  // Run Mongo migrations
+  await configureAndRunMigrations()
 
   configurePassport()
 
