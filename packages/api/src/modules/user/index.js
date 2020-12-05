@@ -13,6 +13,7 @@ const { getUser, changePassword } = require('./controller/user/user.controller')
 const {
   validateRegisterWithEmail,
   validateLoginWithEmail,
+  validateChangePassword,
   returnValidationErrors,
 } = require('./validator')
 
@@ -62,6 +63,6 @@ router.use('/', userRoutes)
 userRoutes.use(jwtConfig.verifyToken)
 userRoutes.use(jwtConfig.decodeToken)
 userRoutes.get('/', getUser)
-userRoutes.post('/changePassword', changePassword)
+userRoutes.post('/changePassword', validateChangePassword, changePassword)
 
 module.exports = router
