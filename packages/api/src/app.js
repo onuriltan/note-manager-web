@@ -44,17 +44,8 @@ const bootServer = async () => {
   configurePassport()
 
   // Routes
-  const notes = require('./modules/notes')
-  const user = require('./modules/user')
-
-  // TODO : Update Google Auth
-  // const google = require('./routes/api/auth/GooglePlusService');
-
-  server.use('/api/notes', notes)
-  server.use('/api/user', user)
-
-  // TODO : Update Google Auth
-  // server.use('/api/auth/google', google);
+  server.use('/api/notes', require('./modules/notes'))
+  server.use('/api/user', require('./modules/user'))
 
   if (process.env.NODE_ENV === 'production') {
     server.use(express.static(path.join(__dirname, '../dist')))
@@ -84,6 +75,5 @@ bootServer()
   })
   .catch((e) => {
     logger.error('Server is failed to boot.')
-    // eslint-disable-next-line no-console
-    console.log(e)
+    logger.error(e)
   })
