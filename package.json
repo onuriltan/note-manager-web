@@ -25,7 +25,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint:all"
+      "pre-commit": "yarn lint:all"
     }
   }
 }
