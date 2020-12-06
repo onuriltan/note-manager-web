@@ -11,8 +11,8 @@ const store = new Vuex.Store({
   plugins: [new VuexPersistence().plugin],
   modules: {
     auth,
-    general
-  }
+    general,
+  },
 });
 
 export default store;

@@ -80,20 +80,20 @@ export default {
   name: 'LoginComponent',
   components: {
     FacebookLogin,
-    GoogleLogin
+    GoogleLogin,
   },
   data() {
     return {
       errors: [],
       fieldErrors: {
         email: null,
-        password: null
+        password: null,
       },
       email: '',
       password: '',
       loginClicked: false,
       isEmailEntered: false,
-      isPasswordEntered: false
+      isPasswordEntered: false,
     };
   },
   mounted() {
@@ -130,12 +130,12 @@ export default {
         return false;
       }
       return null;
-    }
+    },
   },
   methods: {
     ...mapActions({
       login: 'auth/login',
-      loginWithSocial: 'auth/loginWithSocial'
+      loginWithSocial: 'auth/loginWithSocial',
     }),
     validateEmail() {
       setTimeout(() => {
@@ -157,7 +157,7 @@ export default {
         setTimeout(async () => {
           const res = await this.login({
             email: this.email,
-            password: this.password
+            password: this.password,
           });
           this.loginClicked = false;
           if (res.data.fieldErrors) {
@@ -168,8 +168,8 @@ export default {
           }
         }, 1000);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

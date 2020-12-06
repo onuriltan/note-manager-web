@@ -16,19 +16,19 @@ export default {
   name: 'App',
   components: {
     SessionExpired,
-    HeaderComponent
+    HeaderComponent,
   },
   computed: {
-    ...mapState('general', ['isDarkMode'])
+    ...mapState('general', ['isDarkMode']),
   },
   methods: {
     ...mapActions({
-      toggleDarkMode: 'general/toggleDarkMode'
-    })
+      toggleDarkMode: 'general/toggleDarkMode',
+    }),
   },
   mounted() {
     this.isDarkMode ? this.toggleDarkMode(true) : this.toggleDarkMode(false);
-  }
+  },
 };
 </script>
 

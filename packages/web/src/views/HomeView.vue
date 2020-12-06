@@ -10,7 +10,7 @@ import Dashboard from '../modules/dashboard/Dashboard';
 export default {
   name: 'home',
   components: {
-    Dashboard
-  }
+    Dashboard,
+  },
 };
 </script>

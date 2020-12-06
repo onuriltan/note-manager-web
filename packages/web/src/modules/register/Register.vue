@@ -99,7 +99,7 @@ import ResendConfirmation from '../resend-confirmation/ResendConfirmation';
 export default {
   name: 'RegisterComponent',
   components: {
-    ResendConfirmation
+    ResendConfirmation,
   },
   data() {
     return {
@@ -108,14 +108,14 @@ export default {
       fieldErrors: {
         email: '',
         password: '',
-        password2: ''
+        password2: '',
       },
       email: '',
       password: '',
       password2: '',
       registerClicked: false,
       registerValidated: false,
-      emailAccepted: false
+      emailAccepted: false,
     };
   },
   computed: {
@@ -150,11 +150,11 @@ export default {
       if (this.registerClicked && this.invalidPassword2 === '') return true;
       if (this.registerClicked && this.invalidPassword2 !== '') return false;
       return null;
-    }
+    },
   },
   methods: {
     ...mapActions({
-      register: 'auth/register'
+      register: 'auth/register',
     }),
     async registerWithEmail() {
       this.errors = [];
@@ -166,7 +166,7 @@ export default {
         const res = await this.register({
           email: this.email,
           password: this.password,
-          password2: this.password2
+          password2: this.password2,
         });
         this.registerClicked = false;
         this.registerValidated = false;
@@ -180,8 +180,8 @@ export default {
           this.emailAccepted = true;
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

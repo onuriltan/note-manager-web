@@ -98,19 +98,19 @@ export default {
         this.oldPassword === null ||
         this.oldPassword === ''
       );
-    }
+    },
   },
   data() {
     return {
       errors: [],
       fieldErrors: {
         oldPassword: null,
-        newPassword: null
+        newPassword: null,
       },
       messages: [],
       oldPassword: '',
       newPassword: '',
-      changePasswordClicked: false
+      changePasswordClicked: false,
     };
   },
   methods: {
@@ -122,7 +122,7 @@ export default {
         setTimeout(async () => {
           const res = await UserService.changePassword({
             oldPassword: this.oldPassword,
-            newPassword: this.newPassword
+            newPassword: this.newPassword,
           });
           this.changePasswordClicked = false;
           if (res.data.fieldErrors) {
@@ -142,8 +142,8 @@ export default {
       this.fieldErrors.newPassword = null;
       this.errors = [];
       this.messages = [];
-    }
-  }
+    },
+  },
 };
 </script>
 

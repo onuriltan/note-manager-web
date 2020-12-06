@@ -18,7 +18,7 @@ export default {
   name: 'FacebookLogin',
   data() {
     return {
-      fbLoginClicked: false
+      fbLoginClicked: false,
     };
   },
   mounted() {
@@ -26,13 +26,13 @@ export default {
   },
   methods: {
     ...mapActions({
-      loginWithFacebook: 'auth/loginWithFacebook'
+      loginWithFacebook: 'auth/loginWithFacebook',
     }),
     loginWithFB() {
       this.fbLoginClicked = true;
       window.location.href = `${process.env.VUE_APP_AUTH_URL}/loginWithFacebook`;
-    }
-  }
+    },
+  },
 };
 </script>
 
