@@ -3,6 +3,7 @@ export function validateRegister(email, password, password2) {
     email: '',
     password: '',
     password2: '',
+    errorCount: 0,
   };
 
   if (!email) {
@@ -17,14 +18,19 @@ export function validateRegister(email, password, password2) {
     fieldErrors.password = 'Password required.';
   } else if (password.length < 10 || password.length > 20) {
     fieldErrors.password = 'Password length should between 10 and 20.';
+    errorCount++;
   } else if (!password.match(/[a-z]/)) {
     fieldErrors.password = 'Password should have at least one lowercase character.';
+    errorCount++;
   } else if (!password.match(/[A-Z]/)) {
     fieldErrors.password = 'Password should have at least one uppercase character.';
+    errorCount++;
   } else if (!password.match(/[0-9]/)) {
     fieldErrors.password = 'Password should have at least one uppercase character.';
+    errorCount++;
   } else if (!password.match(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/)) {
     fieldErrors.password = 'Password should have at least one special character.';
+    errorCount++;
   }
 
   if (!password2) {
@@ -45,6 +51,7 @@ export function validateRegister(email, password, password2) {
   } else {
     fieldErrors.password = '';
     fieldErrors.password2 = '';
+    errorCount = 0;
   }
 
   return fieldErrors;

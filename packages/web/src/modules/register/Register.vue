@@ -67,6 +67,32 @@
           size="lg"
         ></b-form-input>
       </b-form-group>
+
+      <b-progress class="mt-2" max="100" v-if="passwordStrength">
+        <b-progress-bar
+          :value="
+            passwordStrength === 'weak'
+              ? 33.3
+              : passwordStrength === 'medium'
+              ? 66.6
+              : passwordStrength === 'strong'
+              ? 100
+              : 0
+          "
+          :variant="
+            passwordStrength === 'weak'
+              ? 'danger'
+              : passwordStrength === 'medium'
+              ? 'warning'
+              : passwordStrength === 'strong'
+              ? 'success'
+              : 'danger'
+          "
+        >
+        </b-progress-bar>
+      </b-progress>
+      <div class=" mb-4">{{ passwordStrength }}</div>
+
       <b-button
         class="login-form__button"
         type="submit"
@@ -116,7 +142,26 @@ export default {
       registerClicked: false,
       registerValidated: false,
       emailAccepted: false,
+      passwordStrength: '',
     };
+  },
+  watch: {
+    password: function(oldPwd, newPwd) {
+      console.log(oldPwd);
+      if (oldPwd) {
+        if (oldPwd.length === 0) {
+          this.passwordStrength = undefined;
+        } else if (oldPwd.length < 6) {
+          this.passwordStrength = 'weak';
+        } else if ((oldPwd.length >= 6) & (oldPwd.length <= 10)) {
+          this.passwordStrength = 'medium';
+        } else if (oldPwd.length >= 10) {
+          this.passwordStrength = 'strong';
+        }
+      } else {
+        this.passwordStrength = undefined;
+      }
+    },
   },
   computed: {
     ...mapState('general', ['isDarkMode']),
