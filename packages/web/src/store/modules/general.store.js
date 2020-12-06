@@ -5,7 +5,7 @@ import router from '../../router';
 import jwtDecode from 'jwt-decode';
 
 const state = {
-  isDarkMode: false
+  isDarkMode: false,
 };
 
 const general = {
@@ -14,12 +14,12 @@ const general = {
   getters: {
     isDarkMode() {
       return state.isDarkMode;
-    }
+    },
   },
   actions: {
     toggleDarkMode(context, isDarkMode) {
       context.commit('setDarkMode', isDarkMode);
-    }
+    },
   },
   mutations: {
     setDarkMode(state, isDarkMode) {
@@ -41,8 +41,8 @@ const general = {
         document.documentElement.style.setProperty('--header-color', '#212529');
         document.documentElement.style.setProperty('--page-link-hover', 'black');
       }
-    }
-  }
+    },
+  },
 };
 
 export default general;

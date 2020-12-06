@@ -37,7 +37,7 @@ export default {
           document.getElementById('audio').style.display = 'block';
         });
     }
-  }
+  },
 };
 </script>
 

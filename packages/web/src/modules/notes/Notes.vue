@@ -76,13 +76,13 @@ export default {
     deletePost: Function,
     notes: Array,
     parentComponentName: String,
-    searchClicked: Boolean
+    searchClicked: Boolean,
   },
   data() {
     return {
       tobeEditedText: '',
       tobeDeletedId: '',
-      tobeEditedId: ''
+      tobeEditedId: '',
     };
   },
   methods: {
@@ -109,14 +109,14 @@ export default {
       this.tobeEditedId = '';
       this.tobeEditedText = '';
       this.$refs.editNoteModal.hide();
-    }
+    },
   },
   filters: {
     convertDate: function(date) {
       const theDate = new Date(date);
       return `${theDate.getDate()}/${theDate.getMonth() + 1}/${theDate.getFullYear()}`;
-    }
-  }
+    },
+  },
 };
 </script>
 

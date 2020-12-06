@@ -7,7 +7,7 @@ import LoginComponent from '../modules/login/Login';
 export default {
   name: 'login',
   components: {
-    LoginComponent
-  }
+    LoginComponent,
+  },
 };
 </script>

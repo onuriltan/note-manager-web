@@ -8,9 +8,9 @@ class NotesService {
     Store.dispatch('auth/checkIsAuthenticated');
     const config = {
       headers: {
-        Authorization: `Bearer ${window.localStorage.getItem('token')}`
+        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
       },
-      params: { page: pageNumber, limit: 6 }
+      params: { page: pageNumber, limit: 6 },
     };
     try {
       const res = await axios.get(url, config);
@@ -24,9 +24,9 @@ class NotesService {
     Store.dispatch('auth/checkIsAuthenticated');
     const config = {
       headers: {
-        Authorization: `Bearer ${window.localStorage.getItem('token')}`
+        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
       },
-      params: { page: pageNumber, limit: 6 }
+      params: { page: pageNumber, limit: 6 },
     };
     if (keyword === '') keyword = '%20';
     try {
@@ -47,9 +47,9 @@ class NotesService {
       { text },
       {
         headers: {
-          Authorization: `Bearer ${window.localStorage.getItem('token')}`
-        }
-      }
+          Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+        },
+      },
     );
   }
 
@@ -57,8 +57,8 @@ class NotesService {
     Store.dispatch('auth/checkIsAuthenticated');
     return axios.delete(`${url}/${id}`, {
       headers: {
-        Authorization: `Bearer ${window.localStorage.getItem('token')}`
-      }
+        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+      },
     });
   }
 
@@ -69,9 +69,9 @@ class NotesService {
       { text },
       {
         headers: {
-          Authorization: `Bearer ${window.localStorage.getItem('token')}`
-        }
-      }
+          Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+        },
+      },
     );
   }
 }

@@ -9,7 +9,7 @@ import History from '../modules/history/History';
 export default {
   name: 'HistoryView',
   components: {
-    History
-  }
+    History,
+  },
 };
 </script>

@@ -9,8 +9,8 @@ class UserService {
     AuthStore.actions['auth/checkIsAuthenticated'];
     const config = {
       headers: {
-        Authorization: `Bearer ${window.localStorage.getItem('token')}`
-      }
+        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+      },
     };
     try {
       const res = await axios.post(`${url}/getUser`, config);
@@ -24,8 +24,8 @@ class UserService {
     AuthStore.actions['auth/checkIsAuthenticated'];
     const config = {
       headers: {
-        Authorization: `Bearer ${window.localStorage.getItem('token')}`
-      }
+        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+      },
     };
     try {
       const res = await axios.post(`${url}/changePassword`, body, config);

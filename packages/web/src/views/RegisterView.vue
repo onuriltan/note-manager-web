@@ -7,7 +7,7 @@ import RegisterComponent from '../modules/register/Register';
 export default {
   name: 'register',
   components: {
-    RegisterComponent
-  }
+    RegisterComponent,
+  },
 };
 </script>
