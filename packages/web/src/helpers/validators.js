@@ -1,4 +1,5 @@
-/* eslint-disable no-useless-escape */
+const common = require('@notemanager/common');
+
 export function validateRegister(email, password, password2) {
   const fieldErrors = {
     email: '',
@@ -13,24 +14,10 @@ export function validateRegister(email, password, password2) {
   } else {
     fieldErrors.email = '';
   }
-  if (!password) {
-    fieldErrors.password = 'Password required.';
-  } else if (password.length < 6 || password.length > 20) {
-    fieldErrors.password = 'Password length should between 6 and 20.';
-  } else {
-    fieldErrors.password = '';
-  }
-
-  if (!password2) {
-    fieldErrors.password2 = 'Repeat password required.';
-  } else if (password.length < 6 || password.length > 20) {
-    fieldErrors.password2 = 'Repeat password length should between 6 and 20.';
-  } else if (password2 !== password) {
-    fieldErrors.password = 'Passwords does not match.';
-    fieldErrors.password2 = 'Passwords does not match.';
-  } else {
-    fieldErrors.password2 = '';
-    fieldErrors.password = '';
+  const errors = common.passwordStrength(password, password2);
+  if (errors.password || errors.password2) {
+    fieldErrors.password = errors.password;
+    fieldErrors.password2 = errors.password2;
   }
   return fieldErrors;
 }
@@ -51,8 +38,8 @@ export function validatePassword(password) {
   let error = '';
   if (!password) {
     error = 'Password required.';
-  } else if (password.length < 6) {
-    error = 'Password length should be 6.';
+  } else if (password.length < 10) {
+    error = 'Password length should be at least 10.';
   } else {
     error = '';
   }
@@ -75,13 +62,13 @@ export function validateChangePassword(oldPassword, newPassword) {
   };
   if (!oldPassword) {
     fieldErrors.oldPassword = 'Old password required.';
-  } else if (oldPassword.length < 6) {
-    fieldErrors.oldPassword = 'Password length should be 6.';
+  } else if (oldPassword.length < 10) {
+    fieldErrors.oldPassword = 'Password length should be 10.';
   }
   if (!newPassword) {
     fieldErrors.newPassword = 'New password required.';
-  } else if (newPassword.length < 6) {
-    fieldErrors.newPassword = 'Password length should be 6.';
+  } else if (newPassword.length < 10) {
+    fieldErrors.newPassword = 'Password length should be 10.';
   }
   return fieldErrors;
 }

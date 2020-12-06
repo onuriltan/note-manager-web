@@ -19,7 +19,7 @@ exports.validateRegisterWithEmail = [
     .isLength({ min: 10, max: 20 })
     .withMessage('Password length should between 10 and 20'),
   check('password')
-    .matches(/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/)
+    .matches(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/)
     .withMessage('Password should have at least one special character.'),
   check('password')
     .matches(/[a-z]/)
@@ -31,7 +31,7 @@ exports.validateRegisterWithEmail = [
     .matches(/[0-9]/)
     .withMessage('Password should have at least one number.'),
   check('password2')
-    .matches(/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/)
+    .matches(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/)
     .withMessage('Password should have at least one special character.'),
   check('password2')
     .matches(/[a-z]/)
@@ -70,7 +70,7 @@ exports.validateChangePassword = [
     .isLength({ min: 10, max: 20 })
     .withMessage('Password length should between 10 and 20'),
   check('oldPassword')
-    .matches(/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/)
+    .matches(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/)
     .withMessage('Password should have at least one special character.'),
   check('oldPassword')
     .matches(/[a-z]/)
@@ -82,7 +82,7 @@ exports.validateChangePassword = [
     .matches(/[0-9]/)
     .withMessage('Password should have at least one number.'),
   check('newPassword')
-    .matches(/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/)
+    .matches(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/)
     .withMessage('Password should have at least one special character.'),
   check('newPassword')
     .matches(/[a-z]/)
