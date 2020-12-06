@@ -1,10 +1,8 @@
-const common = require('@notemanager/common');
-
 export function validateRegister(email, password, password2) {
   const fieldErrors = {
     email: '',
     password: '',
-    password2: ''
+    password2: '',
   };
 
   if (!email) {
@@ -14,11 +12,41 @@ export function validateRegister(email, password, password2) {
   } else {
     fieldErrors.email = '';
   }
-  const errors = common.passwordStrength(password, password2);
-  if (errors.password || errors.password2) {
-    fieldErrors.password = errors.password;
-    fieldErrors.password2 = errors.password2;
+
+  if (!password) {
+    fieldErrors.password = 'Password required.';
+  } else if (password.length < 10 || password.length > 20) {
+    fieldErrors.password = 'Password length should between 10 and 20.';
+  } else if (!password.match(/[a-z]/)) {
+    fieldErrors.password = 'Password should have at least one lowercase character.';
+  } else if (!password.match(/[A-Z]/)) {
+    fieldErrors.password = 'Password should have at least one uppercase character.';
+  } else if (!password.match(/[0-9]/)) {
+    fieldErrors.password = 'Password should have at least one uppercase character.';
+  } else if (!password.match(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/)) {
+    fieldErrors.password = 'Password should have at least one special character.';
   }
+
+  if (!password2) {
+    fieldErrors.password2 = 'Repeat password required.';
+  } else if (password.length < 10 || password.length > 20) {
+    fieldErrors.password2 = 'Repeat password length should between 10 and 20.';
+  } else if (!password2.match(/[a-z]/)) {
+    fieldErrors.password = 'Password should have at least one lowercase character.';
+  } else if (!password2.match(/[A-Z]/)) {
+    fieldErrors.password = 'Password should have at least one uppercase character.';
+  } else if (!password2.match(/[0-9]/)) {
+    fieldErrors.password = 'Password should have at least one uppercase character.';
+  } else if (!password2.match(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/)) {
+    fieldErrors.password = 'Password should have at least one special character.';
+  } else if (password2 !== password) {
+    fieldErrors.password = 'Passwords does not match.';
+    fieldErrors.password2 = 'Passwords does not match.';
+  } else {
+    fieldErrors.password = '';
+    fieldErrors.password2 = '';
+  }
+
   return fieldErrors;
 }
 
@@ -49,7 +77,7 @@ export function validatePassword(password) {
 export function validateLogin(email, password) {
   const fieldErrors = {
     email: '',
-    password: ''
+    password: '',
   };
 
   return fieldErrors;
@@ -58,7 +86,7 @@ export function validateLogin(email, password) {
 export function validateChangePassword(oldPassword, newPassword) {
   const fieldErrors = {
     oldPassword: '',
-    newPassword: ''
+    newPassword: '',
   };
   if (!oldPassword) {
     fieldErrors.oldPassword = 'Old password required.';
