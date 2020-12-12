@@ -119,7 +119,7 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import { validateRegister } from '../../helpers/validators';
+import { validateRegister, measureStrengthOfPassword } from '../../helpers/validators';
 import ResendConfirmation from '../resend-confirmation/ResendConfirmation';
 
 export default {
@@ -147,20 +147,8 @@ export default {
   },
   watch: {
     password: function(oldPwd, newPwd) {
-      console.log(oldPwd);
-      if (oldPwd) {
-        if (oldPwd.length === 0) {
-          this.passwordStrength = undefined;
-        } else if (oldPwd.length < 6) {
-          this.passwordStrength = 'weak';
-        } else if ((oldPwd.length >= 6) & (oldPwd.length <= 10)) {
-          this.passwordStrength = 'medium';
-        } else if (oldPwd.length >= 10) {
-          this.passwordStrength = 'strong';
-        }
-      } else {
-        this.passwordStrength = undefined;
-      }
+      const strength = measureStrengthOfPassword(oldPwd);
+      this.passwordStrength = strength;
     },
   },
   computed: {
