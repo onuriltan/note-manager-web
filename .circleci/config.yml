@@ -10,7 +10,7 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-           - run:
+            - run:
                 name: Clean yarn cache
                 command: yarn cache clean
             - run:
