@@ -17,7 +17,7 @@ jobs:
                   NODE_ENV: development
             - run:
                 name: Install all package dependencies
-                command: yarn lerna run bootstrap
+                command: yarn bootstrap
                 environment:
                   NODE_ENV: development
             - run:
