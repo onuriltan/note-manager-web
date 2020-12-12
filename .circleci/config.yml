@@ -12,7 +12,7 @@ jobs:
           steps:
             - run:
                 name: Install all root dependencies
-                command: yarn install --production=false
+                command: yarn install-package-dependencies
                 environment:
                   NODE_ENV: development
             - run:

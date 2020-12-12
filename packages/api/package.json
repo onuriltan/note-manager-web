@@ -4,7 +4,7 @@
   "description": "Note manager app with Vue.js",
   "main": "index.js",
   "scripts": {
-    "install": "yarn",
+    "install-package-dependencies": "yarn install --production=false",
     "dev": "nodemon src/app.js",
     "lint": "eslint --fix src",
     "test:ci": "jest src --coverage",
