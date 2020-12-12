@@ -10,7 +10,7 @@ import ProfileComponent from '../modules/profile/Profile';
 export default {
   name: 'Profileview',
   components: {
-    ProfileComponent
-  }
+    ProfileComponent,
+  },
 };
 </script>

@@ -35,11 +35,11 @@ export default {
   name: 'HeaderComponent',
   computed: {
     ...mapState('general', ['isDarkMode']),
-    ...mapState('auth', ['isAuthenticated'])
+    ...mapState('auth', ['isAuthenticated']),
   },
   data: () => {
     return {
-      image: moon
+      image: moon,
     };
   },
   mounted() {
@@ -52,14 +52,14 @@ export default {
       } else {
         this.image = moon;
       }
-    }
+    },
   },
   methods: {
     ...mapActions({
       logout: 'auth/logout',
-      toggleDarkMode: 'general/toggleDarkMode'
-    })
-  }
+      toggleDarkMode: 'general/toggleDarkMode',
+    }),
+  },
 };
 </script>
 

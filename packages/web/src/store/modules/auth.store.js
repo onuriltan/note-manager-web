@@ -7,7 +7,7 @@ import jwtDecode from 'jwt-decode';
 const state = {
   isAuthenticated: false,
   sessionExpired: false,
-  loginMethod: ''
+  loginMethod: '',
 };
 
 const auth = {
@@ -22,7 +22,7 @@ const auth = {
     },
     loginMethod() {
       return state.loginMethod;
-    }
+    },
   },
   actions: {
     logout(context) {
@@ -106,7 +106,7 @@ const auth = {
 
     checkIsAuthenticated(context) {
       context.commit('checkIsAuthenticated');
-    }
+    },
   },
   mutations: {
     deleteToken(state) {
@@ -162,8 +162,8 @@ const auth = {
         state.isAuthenticated = true;
         state.sessionExpired = false;
       }
-    }
-  }
+    },
+  },
 };
 
 export default auth;

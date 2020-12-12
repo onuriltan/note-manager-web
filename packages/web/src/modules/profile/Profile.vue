@@ -27,24 +27,24 @@ import ChangePassword from '../change-password/ChangePassword';
 export default {
   name: 'Profile',
   components: {
-    ChangePassword
+    ChangePassword,
   },
   computed: {
-    ...mapState('auth', ['loginMethod'])
+    ...mapState('auth', ['loginMethod']),
   },
   created() {
     window.addEventListener('resize', this.handleResize);
   },
   data() {
     return {
-      alignTab: false
+      alignTab: false,
     };
   },
   methods: {
     handleResize() {
       this.alignTab = window.innerWidth > 768;
-    }
-  }
+    },
+  },
 };
 </script>
 

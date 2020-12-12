@@ -15,12 +15,12 @@ import { mapState } from 'vuex';
 export default {
   name: 'SessionExpired',
   computed: {
-    ...mapState('auth', ['sessionExpired'])
+    ...mapState('auth', ['sessionExpired']),
   },
   watch: {
     // eslint-disable-next-line no-unused-vars
-    sessionExpired(oldValue, newValue) {}
-  }
+    sessionExpired(oldValue, newValue) {},
+  },
 };
 </script>
 

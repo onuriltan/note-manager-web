@@ -83,7 +83,7 @@ import Notes from '../notes/Notes';
 export default {
   name: 'HistoryComponent',
   components: {
-    Notes
+    Notes,
   },
   data() {
     return {
@@ -92,20 +92,20 @@ export default {
         total: 0,
         limit: 0,
         page: 0,
-        pages: 0
+        pages: 0,
       },
       currentPage: 1,
       toDate: '',
       fromDate: '',
       keyword: '',
       isLoading: false,
-      searchClicked: false
+      searchClicked: false,
     };
   },
   watch: {
     '$route.params.pageNumber': function() {
       this.getNotes(600);
-    }
+    },
   },
 
   methods: {
@@ -137,14 +137,14 @@ export default {
             this.fromDate,
             this.toDate,
             this.keyword,
-            this.$route.params.pageNumber
+            this.$route.params.pageNumber,
           );
         } else {
           notess = await NotesService.getNotesByCriteria(
             this.fromDate,
             this.toDate,
             this.keyword,
-            1
+            1,
           );
         }
         this.notes = notess.docs;
@@ -154,13 +154,13 @@ export default {
         this.pagination.pages = notess.pages;
         this.isLoading = false;
       }, seconds);
-    }
+    },
   },
   filters: {
     convertDate: date => {
       return date.getFullYear() + '-' + date.getMonth() + 1 + '-' + date.getDate();
-    }
-  }
+    },
+  },
 };
 </script>
 

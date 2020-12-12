@@ -67,6 +67,32 @@
           size="lg"
         ></b-form-input>
       </b-form-group>
+
+      <b-progress class="mt-2" max="100" v-if="passwordStrength">
+        <b-progress-bar
+          :value="
+            passwordStrength === 'weak'
+              ? 33.3
+              : passwordStrength === 'medium'
+              ? 66.6
+              : passwordStrength === 'strong'
+              ? 100
+              : 0
+          "
+          :variant="
+            passwordStrength === 'weak'
+              ? 'danger'
+              : passwordStrength === 'medium'
+              ? 'warning'
+              : passwordStrength === 'strong'
+              ? 'success'
+              : 'danger'
+          "
+        >
+        </b-progress-bar>
+      </b-progress>
+      <div class=" mb-4">{{ passwordStrength }}</div>
+
       <b-button
         class="login-form__button"
         type="submit"
@@ -93,13 +119,13 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import { validateRegister } from '../../helpers/validators';
+import { validateRegister, measureStrengthOfPassword } from '../../helpers/validators';
 import ResendConfirmation from '../resend-confirmation/ResendConfirmation';
 
 export default {
   name: 'RegisterComponent',
   components: {
-    ResendConfirmation
+    ResendConfirmation,
   },
   data() {
     return {
@@ -108,15 +134,22 @@ export default {
       fieldErrors: {
         email: '',
         password: '',
-        password2: ''
+        password2: '',
       },
       email: '',
       password: '',
       password2: '',
       registerClicked: false,
       registerValidated: false,
-      emailAccepted: false
+      emailAccepted: false,
+      passwordStrength: '',
     };
+  },
+  watch: {
+    password: function(oldPwd, newPwd) {
+      const strength = measureStrengthOfPassword(oldPwd);
+      this.passwordStrength = strength;
+    },
   },
   computed: {
     ...mapState('general', ['isDarkMode']),
@@ -150,11 +183,11 @@ export default {
       if (this.registerClicked && this.invalidPassword2 === '') return true;
       if (this.registerClicked && this.invalidPassword2 !== '') return false;
       return null;
-    }
+    },
   },
   methods: {
     ...mapActions({
-      register: 'auth/register'
+      register: 'auth/register',
     }),
     async registerWithEmail() {
       this.errors = [];
@@ -166,7 +199,7 @@ export default {
         const res = await this.register({
           email: this.email,
           password: this.password,
-          password2: this.password2
+          password2: this.password2,
         });
         this.registerClicked = false;
         this.registerValidated = false;
@@ -180,8 +213,8 @@ export default {
           this.emailAccepted = true;
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

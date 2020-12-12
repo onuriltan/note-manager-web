@@ -41,7 +41,7 @@
       <i
         class="fa fa-refresh fa-spin hide--button--loading--icon"
         :class="{
-          'show--button--loading--icon': resentConfirmationEmailClicked
+          'show--button--loading--icon': resentConfirmationEmailClicked,
         }"
       ></i>
       <div style="margin: 0 5px;">Resend Confirmation Link</div>
@@ -57,18 +57,18 @@ export default {
     emailAccepted: Boolean,
     email: String,
     password: String,
-    password2: String
+    password2: String,
   },
   data() {
     return {
       errors: [],
       messages: [],
-      resentConfirmationEmailClicked: false
+      resentConfirmationEmailClicked: false,
     };
   },
   methods: {
     ...mapActions({
-      resendConfirmationEmail: 'auth/resendConfirmationEmail'
+      resendConfirmationEmail: 'auth/resendConfirmationEmail',
     }),
     resendConfirmationEmail() {
       this.errors = [];
@@ -78,7 +78,7 @@ export default {
         const res = await this.resendConfirmationEmail({
           email: this.email,
           password: this.password,
-          password2: this.password2
+          password2: this.password2,
         });
         if (res.data.errors) {
           this.resentConfirmationEmailClicked = false;
@@ -89,8 +89,8 @@ export default {
           this.messages = res.data.messages;
         }
       }, 2000);
-    }
-  }
+    },
+  },
 };
 </script>
 
