@@ -4,9 +4,10 @@
   "description": "Note manager app with Vue.js",
   "main": "index.js",
   "scripts": {
+    "install": "yarn",
     "dev": "nodemon src/app.js",
     "lint": "eslint --fix src",
-    "test": "jest src",
+    "test:ci": "jest src --coverage",
     "test:watch": "jest src --watch --coverage",
     "start": "node src/app.js"
   },

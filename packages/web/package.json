@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "install": "yarn",
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:watch": "vue-cli-service test:unit --watch",
