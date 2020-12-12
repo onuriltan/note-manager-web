@@ -1,0 +1,37 @@
+version: 2.1
+orbs:
+  node: circleci/node@1.1.6
+  codecov: codecov/codecov@1.0.5
+jobs:
+  lint-test-codecov:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run:
+                name: Install All Dependencies for Unit Testing
+                command: yarn install --production=false
+                environment:
+                  NODE_ENV: development
+            - run:
+                name: Lint All the Packages
+                command: yarn lerna run lint
+                environment:
+                  NODE_ENV: development
+            - run:
+                name: Test All the Packages
+                command: yarn lerna run test:ci
+                environment:
+                  NODE_ENV: development
+            - codecov/upload:
+                file: packages/api/coverage/*.json
+                flags: api
+            - codecov/upload:
+                file: packages/web/coverage/*.json
+                flags: web
+workflows:
+  lint-test-codecov:
+    jobs:
+      - lint-test-codecov
