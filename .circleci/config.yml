@@ -11,9 +11,6 @@ jobs:
       - node/with-cache:
           steps:
             - run:
-                name: Clean yarn cache
-                command: yarn cache clean
-            - run:
                 name: Install all root dependencies
                 command: yarn install --production=false
                 environment:
