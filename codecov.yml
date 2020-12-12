@@ -10,7 +10,7 @@ coverage:
         flags:
           - api
       web:
-        target: 50%
+        target: 0%
         flags:
           - web
     patch:
