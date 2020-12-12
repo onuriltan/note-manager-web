@@ -1,5 +1,7 @@
 # NoteManager
 
+[![onuriltan](https://circleci.com/gh/onuriltan/note-manager.svg?style=shield)](https://circleci.com/gh/onuriltan/note-manager) [![codecov](https://codecov.io/gh/onuriltan/note-manager/branch/master/graph/badge.svg)](https://codecov.io/gh/onuriltan/note-manager)
+
 Notemanager is an app that you can register with your email
 and start taking and managing your daily notes.
 You can manage the notes by editing them, also you can filter
@@ -24,22 +26,22 @@ give parameters as;
 
 #### API Environment
 
-* **MONGO_URL**         = "your mongodb connection url"
-* **MAIL**              = "your yandex email for sending confirmation emails"
-* **MAIL_USERNAME**     = "your yandex email"
-* **MAIL_PASSWORD**     = "your yandex email password"
-* **CONFIRM_EMAIL_URL** = "your confirmation page url"
-* **JWT_SECRET**        = "secret to parse jwt tokens"
+- **MONGO_URL** = "your mongodb connection url"
+- **MAIL** = "your yandex email for sending confirmation emails"
+- **MAIL_USERNAME** = "your yandex email"
+- **MAIL_PASSWORD** = "your yandex email password"
+- **CONFIRM_EMAIL_URL** = "your confirmation page url"
+- **JWT_SECRET** = "secret to parse jwt tokens"
 
 Also you need to create .env.development and .env.production files in the client folder to justify backend url's and social app id's on development and production, for example in .env.development;
 
 #### WEB Environment
 
-* **VUE_APP_AUTH_URL**        = <http://localhost:5000/api/auth>
-* **VUE_APP_NOTES_URL**       = <http://localhost:5000/api/notes>
-* **VUE_APP_USER_URL**        = <http://localhost:5000/api/use>
-* **VUE_APP_FACEBOOK_APP_ID** = "your facebook app id"
-* **VUE_APP_GOOGLE_APP_ID**   = "your google app id"
+- **VUE_APP_AUTH_URL** = <http://localhost:5000/api/auth>
+- **VUE_APP_NOTES_URL** = <http://localhost:5000/api/notes>
+- **VUE_APP_USER_URL** = <http://localhost:5000/api/use>
+- **VUE_APP_FACEBOOK_APP_ID** = "your facebook app id"
+- **VUE_APP_GOOGLE_APP_ID** = "your google app id"
 
 ### Social Authentication
 
@@ -48,13 +50,13 @@ their credentials in .env file.
 
 #### Facebook Auth
 
-* **FACEBOOK_APP_ID**     = "your app id"
-* **FACEBOOK_APP_SECRET** = "your app secret"
+- **FACEBOOK_APP_ID** = "your app id"
+- **FACEBOOK_APP_SECRET** = "your app secret"
 
 #### Google Auth
 
-* **GOOGLE_APP_ID**     = "your app id"
-* **GOOGLE_APP_SECRET** = "your app secret"
+- **GOOGLE_APP_ID** = "your app id"
+- **GOOGLE_APP_SECRET** = "your app secret"
 
 ### Development
 
