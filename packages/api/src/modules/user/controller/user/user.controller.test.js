@@ -2,7 +2,6 @@ const userRepository = require('../../repository/user')
 const { getUser } = require('./user.controller')
 
 jest.mock('../../repository/user')
-jest.mock('../../validation/user')
 jest.mock('lodash')
 
 describe('getUser tests', () => {
