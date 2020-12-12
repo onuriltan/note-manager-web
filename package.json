@@ -20,8 +20,9 @@
     "heroku-postbuild": "cd packages/web && yarn && yarn install --production=false && yarn build"
   },
   "devDependencies": {
-    "lerna": "^3.22.0",
-    "husky": "^4.2.5"
+    "eslint": "^7.15.0",
+    "husky": "^4.2.5",
+    "lerna": "^3.22.0"
   },
   "husky": {
     "hooks": {
