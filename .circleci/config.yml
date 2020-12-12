@@ -12,12 +12,12 @@ jobs:
           steps:
             - run:
                 name: Install all root dependencies
-                command: yarn install-package-dependencies
+                command: yarn lerna run install --production=false
                 environment:
                   NODE_ENV: development
             - run:
-                name: Install all dependencies
-                command: yarn lerna run install --production=false
+                name: Install all package dependencies
+                command: yarn lerna run install-package-dependencies
                 environment:
                   NODE_ENV: development
             - run:
