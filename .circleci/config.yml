@@ -16,6 +16,11 @@ jobs:
                 environment:
                   NODE_ENV: development
             - run:
+                name: Clean yarn cache
+                command: yarn cache clean
+                environment:
+                  NODE_ENV: development
+            - run:
                 name: Install all package dependencies
                 command: yarn lerna run install-package-dependencies
                 environment:
