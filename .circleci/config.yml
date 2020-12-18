@@ -22,7 +22,7 @@ jobs:
                   NODE_ENV: development
             - run:
                 name: Lint All the Packages
-                command: yarn lerna run lint
+                command: yarn lerna run lint:check
                 environment:
                   NODE_ENV: development
             - run:
