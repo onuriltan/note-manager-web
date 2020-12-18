@@ -1,1 +1,1 @@
-web: node packages/api/src/app.js
+web: node packages/api/src/build/index.js
