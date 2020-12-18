@@ -1,20 +1,20 @@
-const passport = require('passport')
-const UserEntity = require('../modules/user/entity/user')
-const FacebookStrategy = require('passport-facebook').Strategy
-const GoogleStrategy = require('passport-google-oauth20').Strategy
+import passport from 'passport'
+import UserEntity from '../modules/user/entity/user.entity'
+import FacebookStrategy from 'passport-facebook'
+import GoogleStrategy from 'passport-google-oauth20'
 
-const { logger } = require('./pino')
+import { logger } from './pino'
 
-exports.configurePassport = () => {
+export const configurePassport = () => {
   passport.use(
-    new FacebookStrategy(
+    new FacebookStrategy.Strategy(
       {
         clientID: process.env.FACEBOOK_APP_ID,
         clientSecret: process.env.FACEBOOK_APP_SECRET,
         callbackURL: process.env.FACEBOOK_APP_CALLBACK_URL,
         profileFields: ['id', 'emails', 'name'],
       },
-      async (accessToken, refreshToken, profile, callback) => {
+      async (_accessToken, _refreshToken, profile, callback) => {
         try {
           if (profile && profile.id && profile._json && profile._json.email) {
             const existingUser = await UserEntity.findOne({
@@ -50,7 +50,7 @@ exports.configurePassport = () => {
   )
 
   passport.use(
-    new GoogleStrategy(
+    new GoogleStrategy.Strategy(
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -63,7 +63,7 @@ exports.configurePassport = () => {
               'google.id': profile.id,
             })
             if (existingUser) {
-              return callback(null, existingUser)
+              return callback('', existingUser)
             }
             const newUser = new UserEntity({
               active: true,
@@ -74,14 +74,14 @@ exports.configurePassport = () => {
               },
             })
             await newUser.save()
-            callback(null, newUser)
+            callback('', newUser)
           } catch (e) {
             logger.error(e.message)
             callback(e, false, e.message)
           }
         } else {
           logger.error('Could not get email and googleId of the user')
-          callback(null, false, 'An error occured while login with google')
+          callback('', false, 'An error occured while login with google')
         }
       }
     )

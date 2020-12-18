@@ -1,34 +1,31 @@
-const User = require('../entity/user')
-const mongodb = require('mongodb')
-const bcrypt = require('bcrypt')
-const uniqid = require('uniqid')
-const { logger } = require('@config/pino')
+import User from '../entity/user.entity'
+import mongodb from 'mongodb'
+import bcrypt from 'bcrypt'
+import uniqid from 'uniqid'
+import { logger } from '../../../config/pino'
 
-exports.findUser = async (email) => {
-  let theUser = null
+export const findUser = async (email) => {
   try {
-    theUser = await User.findOne({ 'local.email': email })
+    return await User.findOne({ 'local.email': email })
   } catch (e) {
     logger.error('An error occured  while finding user with email', e)
+    return null
   }
-  return theUser
 }
 
-exports.findUserWithConfirmationToken = async (confirmationToken) => {
-  let theUser = null
+export const findUserWithConfirmationToken = async (confirmationToken) => {
   try {
-    theUser = await User.findOne({ confirmationToken })
+    return await User.findOne({ confirmationToken })
   } catch (e) {
     logger.error(
       'An error occured  while finding user with confirmationToken',
       e
     )
+    return null
   }
-  return theUser
 }
 
-exports.createUser = async (email, password) => {
-  let theUser = null
+export const createUser = async (email, password) => {
   const newUser = new User({
     method: 'local',
     local: {
@@ -39,29 +36,31 @@ exports.createUser = async (email, password) => {
   try {
     const hashedPwd = await hashPassword(newUser)
     if (hashedPwd) {
+      // @ts-ignore
       newUser.local.password = hashedPwd
       newUser.confirmationToken = uniqid()
-      theUser = await newUser.save()
+      return await newUser.save()
     }
   } catch (e) {
     logger.error(`An error occured while createUser`, e)
+    return null
   }
-  return theUser
 }
 
-exports.regenerateUserConfirmationToken = async (email) => {
-  let theUser = null
+export const regenerateUserConfirmationToken = async (email) => {
   try {
-    theUser = await User.findOne({ 'local.email': email })
-    theUser.confirmationToken = uniqid()
-    theUser = await theUser.save()
+    const theUser = await User.findOne({ 'local.email': email })
+    if (theUser) {
+      theUser.confirmationToken = uniqid()
+      return await theUser.save()
+    }
   } catch (e) {
     logger.error(`An error occured while regenerateUserConfirmationToken`, e)
+    return null
   }
-  return theUser
 }
 
-exports.deleteUser = async (id) => {
+export const deleteUser = async (id) => {
   let isDeleted = false
   try {
     await User.deleteOne({ _id: new mongodb.ObjectID(id) })
@@ -75,11 +74,10 @@ exports.deleteUser = async (id) => {
 async function hashPassword(user) {
   const password = user.local.password
   const saltRounds = 10
-  let hash = null
   try {
-    hash = await bcrypt.hash(password, saltRounds)
+    return await bcrypt.hash(password, saltRounds)
   } catch (e) {
     logger.error(`An error occured while hashPassword`, e)
+    return null
   }
-  return hash
 }

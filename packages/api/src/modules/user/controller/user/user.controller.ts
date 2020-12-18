@@ -1,6 +1,7 @@
-const userRepository = require('../../repository/user')
+import * as userRepository from '../../repository/user'
+import { Request, Response } from 'express'
 
-exports.getUser = async (req, res) => {
+export const getUser = async (req: Request, res: Response) => {
   const { email } = req.query
   const userProfile = await userRepository.getUser(email)
   if (userProfile !== null) {
@@ -10,7 +11,7 @@ exports.getUser = async (req, res) => {
   }
 }
 
-exports.changePassword = async (req, res) => {
+export const changePassword = async (req: Request, res: Response) => {
   const { email } = req.query
   const { oldPassword, newPassword } = req.body
 

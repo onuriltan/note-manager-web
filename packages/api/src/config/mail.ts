@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer')
+import nodemailer from 'nodemailer'
 
 const transporter = nodemailer.createTransport({
   service: 'Yandex',
@@ -8,7 +8,7 @@ const transporter = nodemailer.createTransport({
   },
 })
 
-function sendConfirmationMail(to, confirmationToken) {
+export const sendConfirmationMail = (to, confirmationToken) => {
   const mailOptions = {
     from: '"📒 NOTE MANAGER 📒" <' + process.env.MAIL + '>', // sender address
     to: to, // list of receivers
@@ -33,5 +33,3 @@ function sendConfirmationMail(to, confirmationToken) {
     })
   })
 }
-
-module.exports.sendConfirmationMail = sendConfirmationMail

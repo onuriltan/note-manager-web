@@ -1,7 +1,8 @@
 /* eslint-disable no-useless-escape */
-const { check, validationResult } = require('express-validator')
+import { check, validationResult } from 'express-validator'
+import { Request, Response, NextFunction } from 'express'
 
-exports.validateRegisterWithEmail = [
+export const validateRegisterWithEmail = [
   check('email').notEmpty().withMessage('Email required.'),
   check('email').isEmail().withMessage('Email is not valid.'),
   check('password').notEmpty().withMessage('Password required.'),
@@ -43,7 +44,7 @@ exports.validateRegisterWithEmail = [
     .matches(/[0-9]/)
     .withMessage('Password should have at least one number.'),
 ]
-exports.validateLoginWithEmail = [
+export const validateLoginWithEmail = [
   check('email').notEmpty().withMessage('Email required.'),
   check('email').isEmail().withMessage('Email is not valid.'),
   check('password').notEmpty().withMessage('Password required.'),
@@ -52,7 +53,7 @@ exports.validateLoginWithEmail = [
     .withMessage('Password length should between 10 and 20'),
 ]
 
-exports.validateChangePassword = [
+export const validateChangePassword = [
   check('email').notEmpty().withMessage('Email required.'),
   check('email').isEmail().withMessage('Email is not valid.'),
   check('oldPassword').notEmpty().withMessage('Password required.'),
@@ -95,7 +96,11 @@ exports.validateChangePassword = [
     .withMessage('Password should have at least one number.'),
 ]
 
-exports.returnValidationErrors = function (req, res, next) {
+export const returnValidationErrors = function (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   const validationErrors = validationResult(req)
   const errors = {} // instead of sending errors as arrays, send object with keys, easier search
   validationErrors.array().forEach((error) => {

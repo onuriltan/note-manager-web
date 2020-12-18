@@ -1,6 +1,23 @@
-const mongoose = require('mongoose')
+import { Document, Schema, model } from 'mongoose'
 
-const UserSchema = new mongoose.Schema({
+export interface LocalDoc {
+  email: string
+  password: string
+}
+
+export interface UserDoc extends Document {
+  method: string
+  local?: LocalDoc
+  google?: LocalDoc
+  facebook?: LocalDoc
+  active: boolean
+  confirmationToken?: string
+  confirmationTokenExpiry?: Date
+  password?: string
+  date: Date
+}
+
+const UserSchema = new Schema({
   method: {
     type: String,
     enum: ['local', 'google', 'facebook'],
@@ -52,5 +69,4 @@ const UserSchema = new mongoose.Schema({
     default: new Date(),
   },
 })
-const User = mongoose.model('User', UserSchema)
-module.exports = User
+export default model<UserDoc>('User', UserSchema)

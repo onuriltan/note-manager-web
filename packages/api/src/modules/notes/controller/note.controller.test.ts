@@ -1,6 +1,6 @@
-const noteController = require('./note.controller')
-const noteRepository = require('../repository/note.repository')
-const noteService = require('../service/note.service')
+import * as noteController from './note.controller'
+import * as noteRepository from '../repository/note.repository'
+import * as noteService from '../service/note.service'
 
 jest.mock('../service/note.service')
 jest.mock('../repository/note.repository')
@@ -27,10 +27,12 @@ describe(`${noteController.findNotes.name} Controller`, () => {
         page: 1,
       },
     }
-    const findNotes = jest.spyOn(noteService, 'findNotes').mockReturnValue([])
+    const findNotes = jest
+      .spyOn(noteService, 'findNotes')
+      .mockReturnValue([] as any)
 
     // Act
-    await noteController.findNotes(mockRequest, mockResponse)
+    await noteController.findNotes(mockRequest as any, mockResponse as any)
 
     // Assert
     expect(findNotes).toHaveBeenCalledWith(mockRequest.query.email, {
@@ -70,12 +72,12 @@ describe(`${noteController.findNotesBetweenDatesandKeyword.name} Controller`, ()
     }
     const findNotes = jest
       .spyOn(noteRepository, 'findNotesBetweenDatesandKeyword')
-      .mockReturnValue([])
+      .mockReturnValue([] as any)
 
     // Act
     await noteController.findNotesBetweenDatesandKeyword(
-      mockRequest,
-      mockResponse
+      mockRequest as any,
+      mockResponse as any
     )
 
     // Assert
@@ -121,10 +123,10 @@ describe(`${noteController.createNote.name} Controller`, () => {
     }
     const createNote = jest
       .spyOn(noteRepository, 'createNote')
-      .mockReturnValue([])
+      .mockReturnValue([] as any)
 
     // Act
-    await noteController.createNote(mockRequest, mockResponse)
+    await noteController.createNote(mockRequest as any, mockResponse as any)
 
     // Assert
     expect(createNote).toHaveBeenCalledWith('text', mockRequest.query.email)
@@ -164,18 +166,18 @@ describe(`${noteController.editNote.name} Controller`, () => {
         id: '123',
       },
     }
-    const editedAt = new Date()
-    const editNote = jest.spyOn(noteRepository, 'editNote').mockReturnValue({})
+    const editNote = jest
+      .spyOn(noteRepository, 'editNote')
+      .mockReturnValue({} as any)
 
     // Act
-    await noteController.editNote(mockRequest, mockResponse)
+    await noteController.editNote(mockRequest as any, mockResponse as any)
 
     // Assert
     expect(editNote).toHaveBeenCalledWith(
       mockRequest.params.id,
       mockRequest.query.email,
-      mockRequest.body.text,
-      editedAt
+      mockRequest.body.text
     )
     expect(mockResponse.send).toHaveBeenCalledWith({})
   })
@@ -211,10 +213,10 @@ describe(`${noteController.deleteNote.name} Controller`, () => {
     // Arrange
     const deleteNote = jest
       .spyOn(noteRepository, 'deleteNote')
-      .mockResolvedValue('deletedNote')
+      .mockResolvedValue('deletedNote' as any)
 
     // Act
-    await noteController.deleteNote(mockRequest, mockResponse)
+    await noteController.deleteNote(mockRequest as any, mockResponse as any)
 
     // Assert
     expect(deleteNote).toHaveBeenCalledWith(
@@ -229,10 +231,10 @@ describe(`${noteController.deleteNote.name} Controller`, () => {
     // Arrange
     const deleteNote = jest
       .spyOn(noteRepository, 'deleteNote')
-      .mockResolvedValue('')
+      .mockResolvedValue('' as any)
 
     // Act
-    await noteController.deleteNote(mockRequest, mockResponse)
+    await noteController.deleteNote(mockRequest as any, mockResponse as any)
 
     // Assert
     expect(deleteNote).toHaveBeenCalledWith(

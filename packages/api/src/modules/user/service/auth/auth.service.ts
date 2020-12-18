@@ -1,7 +1,7 @@
-const mail = require('@config/mail')
-const { logger } = require('@config/pino')
+import * as mail from '../../../../config/mail'
+import { logger } from '../../../../config/pino'
 
-exports.sendConfirmationMail = async (user) => {
+export const sendConfirmationMail = async (user) => {
   let isSent = false
   try {
     await mail.sendConfirmationMail(user.local.email, user.confirmationToken)
