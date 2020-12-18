@@ -5,6 +5,7 @@ export const modifyPostsSchema = (migrator) => {
     up: (db) => {
       db.collection('posts').rename('notes')
     },
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     down() {},
   })
 }

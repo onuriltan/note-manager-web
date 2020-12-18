@@ -1,9 +1,8 @@
 module.exports = {
-  plugins: ['import', 'prettier', 'standard', 'jest'],
-  extends: ['standard', 'prettier', 'prettier/standard', 'plugin:jest/style'],
-  parserOptions: {
-    ecmaVersion: 2018,
-  },
+  parser: '@typescript-eslint/parser',
+  extends: ['plugin:@typescript-eslint/recommended', 'prettier'],
+  parserOptions: { ecmaVersion: 2018, sourceType: 'module' },
+  plugins: ['prettier'],
   env: {
     node: true,
     es6: true,
@@ -16,5 +15,8 @@ module.exports = {
     'prettier/prettier': 2,
     'no-console': 2,
     'require-await': 2,
+    '@typescript-eslint/no-explicit-any': 1,
+    '@typescript-eslint/ban-ts-comment': 1,
+    '@typescript-eslint/explicit-module-boundary-types': 0,
   },
 }

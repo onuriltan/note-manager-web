@@ -49,7 +49,7 @@ export const createUser = async (email, password) => {
 
 export const regenerateUserConfirmationToken = async (email) => {
   try {
-    let theUser = await User.findOne({ 'local.email': email })
+    const theUser = await User.findOne({ 'local.email': email })
     if (theUser) {
       theUser.confirmationToken = uniqid()
       return await theUser.save()

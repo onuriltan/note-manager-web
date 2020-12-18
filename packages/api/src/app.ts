@@ -1,4 +1,3 @@
-require('module-alias/register')
 import path from 'path'
 import express from 'express'
 import bodyParser from 'body-parser'
@@ -13,6 +12,7 @@ import { configureAndRunMigrations } from './migrations'
 import dotenv from 'dotenv'
 import noteModule from './modules/notes'
 import userModule from './modules/user'
+require('module-alias/register')
 
 const bootServer = async () => {
   // Environment Variables

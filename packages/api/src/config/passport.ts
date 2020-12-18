@@ -14,7 +14,7 @@ export const configurePassport = () => {
         callbackURL: process.env.FACEBOOK_APP_CALLBACK_URL,
         profileFields: ['id', 'emails', 'name'],
       },
-      async (accessToken, refreshToken, profile, callback) => {
+      async (_accessToken, _refreshToken, profile, callback) => {
         try {
           if (profile && profile.id && profile._json && profile._json.email) {
             const existingUser = await UserEntity.findOne({

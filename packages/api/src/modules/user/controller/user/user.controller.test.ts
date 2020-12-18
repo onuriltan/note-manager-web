@@ -1,5 +1,5 @@
-const userRepository = require('../../repository/user')
-const { getUser } = require('./user.controller')
+import * as userRepository from '../../repository/user'
+import { getUser } from './user.controller'
 
 jest.mock('../../repository/user')
 jest.mock('lodash')
@@ -33,10 +33,10 @@ describe('getUser tests', () => {
     // Arrange
     const getUserRepo = jest
       .spyOn(userRepository, 'getUser')
-      .mockResolvedValue('user')
+      .mockResolvedValue('user' as any)
 
     // Act
-    await getUser(mockRequest, mockResponse)
+    await getUser(mockRequest as any, mockResponse as any)
 
     // Assert
     expect(getUserRepo).toHaveBeenCalledWith(mockRequest.query.email)
@@ -50,7 +50,7 @@ describe('getUser tests', () => {
       .mockResolvedValue(null)
 
     // Act
-    await getUser(mockRequest, mockResponse)
+    await getUser(mockRequest as any, mockResponse as any)
 
     // Assert
     expect(getUserRepo).toHaveBeenCalledWith(mockRequest.query.email)

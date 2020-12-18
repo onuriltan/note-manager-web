@@ -19,7 +19,7 @@ export const findNotesBetweenDatesandKeyword = async (
 ) => {
   const extendedOptions = { ...options, lean: true, sort: { date: -1 } }
   const regex = new RegExp(`${keyword}`, 'i')
-  let query = {
+  const query = {
     email,
     createdAt: {
       $gte: fromDate,
@@ -49,7 +49,7 @@ export const createNote = async (text, email) => {
 }
 
 export const editNote = async (id, email, text, editedAt) => {
-  let editedNote = ''
+  const editedNote = ''
   try {
     return await NoteEntity.findOneAndUpdate(
       { _id: id, email: email },
@@ -62,10 +62,11 @@ export const editNote = async (id, email, text, editedAt) => {
 
 export const deleteNote = async (email, id) => {
   try {
-    return await NoteEntity.deleteOne({
+    const deletedNote = await NoteEntity.deleteOne({
       _id: id,
       email,
     })
+    return !!deletedNote
   } catch (e) {
     logger.error(e.toString())
   }

@@ -6,7 +6,7 @@ export const getUser = async (email) => {
 }
 
 export const changePassword = async (email, oldPassword, newPassword) => {
-  let theUser = await User.findOne({ 'local.email': email })
+  const theUser = await User.findOne({ 'local.email': email })
   if (theUser != null) {
     const isPasswordCorrect = bcrypt.compareSync(
       oldPassword,
