@@ -3,7 +3,6 @@ declare global {
     interface ProcessEnv {
       LOG_LEVEL: string
       MONGO_URL: string
-      MONGO_URL: string
       CLIENT_URL: string
       CONFIRM_EMAIL_URL: string
       FACEBOOK_APP_ID: string
