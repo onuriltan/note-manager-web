@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon --files src/app.ts",
     "lint": "eslint --fix src",
-    "test": "jest src",
+    "test:ci": "jest src --coverage",
     "test:watch": "jest src --watch --coverage",
     "build": "rimraf ./build && tsc",
     "start": "npm run build && node build/index.js"
