@@ -17,7 +17,7 @@
     "lint:check": "lerna run lint:check",
     "test:ci": "lerna run test:unit",
     "publish": "lerna publish",
-    "heroku-prebuild": "cd packages/api && yarn install --production=false && yarn build",
+    "heroku-prebuild": "yarn install --production=false && cd packages/api && yarn install --production=false && yarn build",
     "heroku-postbuild": "cd packages/web && yarn && yarn install --production=false && yarn build"
   },
   "devDependencies": {
