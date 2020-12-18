@@ -1,6 +1,6 @@
-const notesRepository = require('../repository/note.repository')
+import * as notesRepository from '../repository/note.repository'
 
-exports.findNotes = async (email, pageAndLimit) => {
+export const findNotes = async (email, pageAndLimit) => {
   const pageLimitAndSort = { ...pageAndLimit, sort: { date: -1 } }
   const notes = await notesRepository.findNotes(email, pageLimitAndSort)
   return notes

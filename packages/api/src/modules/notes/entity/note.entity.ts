@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const mongoosePaginate = require('mongoose-paginate')
+import mongoose from 'mongoose'
+import mongoosePaginate from 'mongoose-paginate'
 
 const Noteschema = new mongoose.Schema({
   text: {
@@ -19,5 +19,4 @@ const Noteschema = new mongoose.Schema({
   },
 })
 Noteschema.plugin(mongoosePaginate)
-const Note = mongoose.model('Note', Noteschema)
-module.exports = Note
+export default mongoose.model('Note', Noteschema)
