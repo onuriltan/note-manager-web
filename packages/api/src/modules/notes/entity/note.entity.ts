@@ -1,7 +1,13 @@
-import mongoose from 'mongoose'
+import { Document, Schema, model } from 'mongoose'
 import mongoosePaginate from 'mongoose-paginate'
+export interface NoteDoc extends Document {
+  text: string
+  email: string
+  createdAt: Date
+  editedAt?: Date
+}
 
-const Noteschema = new mongoose.Schema({
+const NoteSchema = new Schema({
   text: {
     type: String,
     required: true,
@@ -18,5 +24,5 @@ const Noteschema = new mongoose.Schema({
     type: Date,
   },
 })
-Noteschema.plugin(mongoosePaginate)
-export default mongoose.model('Note', Noteschema)
+NoteSchema.plugin(mongoosePaginate)
+export default model<NoteDoc>('Note', NoteSchema)

@@ -1,5 +1,5 @@
 import passport from 'passport'
-import UserEntity from '../modules/user/entity/user'
+import UserEntity from '../modules/user/entity/user.entity'
 import FacebookStrategy from 'passport-facebook'
 import GoogleStrategy from 'passport-google-oauth20'
 
