@@ -10,10 +10,12 @@ import helmet from 'helmet'
 import { configurePassport } from './config/passport'
 import { logger } from './config/pino'
 import { configureAndRunMigrations } from './migrations'
+import dotenv from 'dotenv'
+import noteModule from './modules/notes'
+import userModule from './modules/user'
 
 const bootServer = async () => {
   // Environment Variables
-  const dotenv = require('dotenv')
   dotenv.config()
 
   // Middleware
@@ -43,8 +45,8 @@ const bootServer = async () => {
   configurePassport()
 
   // Routes
-  server.use('/api/notes', require('./modules/notes'))
-  server.use('/api/user', require('./modules/user'))
+  server.use('/api/notes', noteModule)
+  server.use('/api/user', userModule)
 
   if (process.env.NODE_ENV === 'production') {
     server.use(express.static(path.join(__dirname, '../dist')))
