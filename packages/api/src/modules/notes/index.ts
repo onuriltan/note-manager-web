@@ -1,26 +1,27 @@
-const express = require('express')
-const router = express.Router()
-const jwtConfig = require('@middleware/jwt')
-const {
+import express from 'express'
+import { verifyToken, decodeToken } from '../../middlewares/jwt'
+import {
   validateFindNotes,
   validateFindNotesBetweenDatesandKeyword,
   validateCreateNote,
   validateDeleteNote,
   validateEditNote,
   returnValidationErrors,
-} = require('./validator')
+} from './validator'
 
-const {
+import {
   findNotes,
   findNotesBetweenDatesandKeyword,
   createNote,
   editNote,
   deleteNote,
-} = require('./controller/note.controller')
+} from './controller/note.controller'
+
+const router = express.Router()
 
 // Middlewares
-router.use(jwtConfig.verifyToken)
-router.use(jwtConfig.decodeToken)
+router.use(verifyToken)
+router.use(decodeToken)
 
 router.get('/', validateFindNotes, returnValidationErrors, findNotes)
 router.get(
@@ -33,4 +34,4 @@ router.post('/', validateCreateNote, returnValidationErrors, createNote)
 router.put('/:id', validateEditNote, returnValidationErrors, editNote)
 router.delete('/:id', validateDeleteNote, returnValidationErrors, deleteNote)
 
-module.exports = router
+export default router

@@ -1,4 +1,4 @@
-const pino = require('pino')
+import pino from 'pino'
 
 // TODO: Add file path to log info
 /*
@@ -11,7 +11,7 @@ const formatters = {
   },
 }
 
-exports.logger = pino({
+export const logger = pino({
   level: process.env.LOG_LEVEL || 'info',
   formatters,
   prettyPrint: {

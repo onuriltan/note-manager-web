@@ -1,12 +1,12 @@
-const noteEntity = require('../entity/note.entity')
-const {
+import noteEntity from '../entity/note.entity'
+import {
   findNotes,
   findNotesBetweenDatesandKeyword,
   createNote,
   editNote,
   deleteNote,
-} = require('./note.repository')
-const { logger } = require('../../../config/pino')
+} from './note.repository'
+import { logger } from '../../../config/pino'
 
 jest.mock('../entity/note.entity')
 jest.mock('../../../config/pino')
@@ -20,7 +20,9 @@ describe(`findNotes repository`, () => {
     // Arrange
     const email = 'onur@iltan.com'
     const options = {}
-    const paginate = jest.spyOn(noteEntity, 'paginate').mockReturnValue([])
+    const paginate = jest
+      .spyOn(noteEntity, 'paginate')
+      .mockReturnValue([] as any)
 
     // Act
     await findNotes(email, options)
@@ -49,7 +51,7 @@ describe(`findNotesBetweenDatesandKeyword repository`, () => {
   const keyword = 'keyword'
   const email = 'onur@iltan.com'
   const options = {}
-  const paginate = jest.spyOn(noteEntity, 'paginate').mockReturnValue([])
+  const paginate = jest.spyOn(noteEntity, 'paginate').mockReturnValue([] as any)
   const loggerError = jest.spyOn(logger, 'error')
 
   beforeEach(() => jest.clearAllMocks())
@@ -91,6 +93,7 @@ describe(`findNotesBetweenDatesandKeyword repository`, () => {
         $gte: fromDate,
         $lt: toDate,
       },
+      text: '',
     }
 
     // Act
@@ -172,7 +175,6 @@ describe(`editNote Repository`, () => {
   const id = 'asd324rsdf2'
   const email = 'onur@iltan.com'
   const text = 'text'
-  const editedAt = new Date()
 
   beforeEach(() => jest.clearAllMocks())
 
@@ -180,15 +182,15 @@ describe(`editNote Repository`, () => {
     // Arrange
     jest
       .spyOn(noteEntity, 'findOneAndUpdate')
-      .mockResolvedValue({ text, email })
+      .mockResolvedValue({ text, email } as any)
 
     // Act
-    const result = await editNote(id, email, text, editedAt)
+    const result = await editNote(id, email, text)
 
     // Assert
     expect(noteEntity.findOneAndUpdate).toHaveBeenCalledWith(
       { _id: id, email },
-      { text, editedAt }
+      { text }
     )
     expect(result).toEqual({ text, email })
   })
@@ -200,7 +202,7 @@ describe(`editNote Repository`, () => {
       .mockRejectedValue('database error')
 
     // Act
-    await editNote(id, email, text, editedAt)
+    await editNote(id, email, text)
 
     // Assert
     expect(loggerError).toHaveBeenCalledWith('database error')
@@ -216,7 +218,7 @@ describe(`deleteNote repository`, () => {
 
   it(`should return true if NoteEntity.deleteOne is not empty`, async () => {
     // Arrange
-    jest.spyOn(noteEntity, 'deleteOne').mockResolvedValue('')
+    jest.spyOn(noteEntity, 'deleteOne').mockResolvedValue('' as any)
 
     // Act
     const result = await deleteNote(email, id)
@@ -231,7 +233,7 @@ describe(`deleteNote repository`, () => {
 
   it(`should return false if NoteEntity.deleteOne is empty`, async () => {
     // Arrange
-    jest.spyOn(noteEntity, 'deleteOne').mockResolvedValue({ _id: id })
+    jest.spyOn(noteEntity, 'deleteOne').mockResolvedValue({ _id: id } as any)
 
     // Act
     const result = await deleteNote(email, id)

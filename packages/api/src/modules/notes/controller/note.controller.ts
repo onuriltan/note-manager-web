@@ -1,13 +1,17 @@
-const noteRepository = require('../repository/note.repository')
-const noteService = require('../service/note.service')
+import * as noteRepository from '../repository/note.repository'
+import * as noteService from '../service/note.service'
+import { Request, Response } from 'express'
 
-exports.findNotes = async (req, res) => {
+export const findNotes = async (req: Request, res: Response) => {
   const { email, limit, page } = req.query
   const notes = await noteService.findNotes(email, { limit, page })
   res.send(notes)
 }
 
-exports.findNotesBetweenDatesandKeyword = async (req, res) => {
+export const findNotesBetweenDatesandKeyword = async (
+  req: Request,
+  res: Response
+) => {
   const { email, limit, page } = req.query
   const fromDate = req.params.fromDate
   const toDate = req.params.toDate
@@ -23,23 +27,22 @@ exports.findNotesBetweenDatesandKeyword = async (req, res) => {
   res.send(notes)
 }
 
-exports.createNote = async (req, res) => {
+export const createNote = async (req: Request, res: Response) => {
   const { email } = req.query
   const { text } = req.body
   const newPost = await noteRepository.createNote(text, email)
   res.status(201).send(newPost)
 }
 
-exports.editNote = async (req, res) => {
+export const editNote = async (req: Request, res: Response) => {
   const { email } = req.query
   const { text } = req.body
   const id = req.params.id
-  const editedAt = new Date()
-  const updatedNote = await noteRepository.editNote(id, email, text, editedAt)
+  const updatedNote = await noteRepository.editNote(id, email, text)
   res.send(updatedNote)
 }
 
-exports.deleteNote = async (req, res) => {
+export const deleteNote = async (req: Request, res: Response) => {
   const { email } = req.query
   const id = req.params.id
   const deletedNote = await noteRepository.deleteNote(email, id)

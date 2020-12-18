@@ -1,5 +1,5 @@
-const jwt = require('@middleware/jwt')
-const { loginWithSocial } = require('./auth.controller')
+import * as jwt from '../../../../middlewares/jwt'
+import { loginWithSocial } from './auth.controller'
 
 jest.mock('../../../../middlewares/jwt')
 
@@ -29,8 +29,8 @@ describe('loginWithSocial tests', () => {
 
   it('should call jwt.signToken and call the res.json with jwt.signToken result', async () => {
     // Arrange
-    const req = { ...mockRequest }
-    const res = { ...mockResponse }
+    const req = { ...mockRequest } as any
+    const res = { ...mockResponse } as any
     const signToken = jest.spyOn(jwt, 'signToken').mockResolvedValue('token')
     process.env.CLIENT_URL = 'http://localhost:8080'
 
@@ -48,8 +48,8 @@ describe('loginWithSocial tests', () => {
 
   it('should call res.status as 401 if no user is in the req object', async () => {
     // Arrange
-    const req = { ...mockRequest, user: null }
-    const res = { ...mockResponse }
+    const req = { ...mockRequest, user: null } as any
+    const res = { ...mockResponse } as any
 
     // Act
     await loginWithSocial(req, res)

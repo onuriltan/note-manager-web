@@ -1,5 +1,5 @@
-const noteService = require('./note.service')
-const noteRepository = require('../repository/note.repository')
+import * as noteService from './note.service'
+import * as noteRepository from '../repository/note.repository'
 
 jest.mock('../repository/note.repository')
 
@@ -13,7 +13,7 @@ describe(`${noteService.findNotes.name} Service`, () => {
     }
     const findNotes = jest
       .spyOn(noteRepository, 'findNotes')
-      .mockReturnValue('note')
+      .mockReturnValue('note' as any)
 
     // Act
     const result = await noteService.findNotes(mockEmail, mockLimitAndPage)

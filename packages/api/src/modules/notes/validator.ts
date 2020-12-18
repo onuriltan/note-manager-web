@@ -1,23 +1,31 @@
-const { query, param, body, validationResult } = require('express-validator')
+import { query, param, body, validationResult } from 'express-validator'
+import { Request, Response, NextFunction } from 'express'
 
-exports.validateFindNotes = [
+export const validateFindNotes = [
   query('email').isEmail(),
   query('page').isInt().toInt(),
   query('limit').isInt().toInt(),
 ]
 
-exports.validateFindNotesBetweenDatesandKeyword = [
+export const validateFindNotesBetweenDatesandKeyword = [
   param('fromDate').isISO8601().toDate(),
   param('toDate').isISO8601().toDate(),
   query('page').isInt().toInt(),
   query('limit').isInt().toInt(),
 ]
 
-exports.validateCreateNote = [body('text').notEmpty()]
-exports.validateEditNote = [body('text').notEmpty(), param('id').isMongoId()]
-exports.validateDeleteNote = [param('id').isMongoId()]
+export const validateCreateNote = [body('text').notEmpty()]
+export const validateEditNote = [
+  body('text').notEmpty(),
+  param('id').isMongoId(),
+]
+export const validateDeleteNote = [param('id').isMongoId()]
 
-exports.returnValidationErrors = function (req, res, next) {
+export const returnValidationErrors = function (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   const validationErrors = validationResult(req)
   const errors = {} // instead of sending errors as arrays, send object with keys, easier search
   validationErrors.array().forEach((error) => {

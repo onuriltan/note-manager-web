@@ -1,25 +1,20 @@
-const User = require('../entity/user')
-const bcrypt = require('bcrypt')
+import User from '../entity/user.entity'
+import bcrypt from 'bcrypt'
 
-const getUser = async (email) => {
-  let theUser = null
-  await User.findOne({ 'local.email': email }).then((user) => {
-    theUser = user
-  })
-  return theUser
+export const getUser = async (email) => {
+  return await User.findOne({ 'local.email': email })
 }
 
-const changePassword = async (email, oldPassword, newPassword) => {
-  let theUser = null
-  await User.findOne({ 'local.email': email }).then((user) => {
-    theUser = user
-  })
+export const changePassword = async (email, oldPassword, newPassword) => {
+  const theUser = await User.findOne({ 'local.email': email })
   if (theUser != null) {
     const isPasswordCorrect = bcrypt.compareSync(
       oldPassword,
+      // @ts-ignore
       theUser.local.password
     )
     if (isPasswordCorrect) {
+      // @ts-ignore
       theUser.local.password = await hashPassword(newPassword)
       theUser.save()
       return true
@@ -39,6 +34,3 @@ async function hashPassword(password) {
     })
   })
 }
-
-module.exports.getUser = getUser
-module.exports.changePassword = changePassword

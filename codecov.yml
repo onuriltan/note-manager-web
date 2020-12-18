@@ -15,7 +15,7 @@ coverage:
           - web
     patch:
       default:
-        target: 50%
+        target: 40%
         threshold: 0%
         base: auto
         if_not_found: success

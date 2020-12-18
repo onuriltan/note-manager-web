@@ -1,13 +1,14 @@
-const { migrator } = require('mgdb-migrator')
-const { modifyPostsSchema } = require('./1-modify-posts-collection')
-const { logger } = require('@config/pino')
+import { migrator } from 'mgdb-migrator'
+import { modifyPostsSchema } from './1-modify-posts-collection'
+import { logger } from '../config/pino'
 
-exports.configureAndRunMigrations = async () => {
+export const configureAndRunMigrations = async () => {
   // Run migrations one by one
   try {
     logger.warn('Configuring migrator...')
     await migrator.config({
       log: true,
+      // @ts-ignore
       logger: (level, ...args) => logger.info(...args),
       logIfLatest: true,
       collectionName: 'migrations',
@@ -20,7 +21,7 @@ exports.configureAndRunMigrations = async () => {
         },
       },
     })
-    await modifyPostsSchema(migrator)
+    modifyPostsSchema(migrator)
   } catch (e) {
     logger.error('Error when running migrations.')
     throw new Error(e)

@@ -1,21 +1,21 @@
-const express = require('express')
-const jwtConfig = require('../../middlewares/jwt')
-const passport = require('passport')
-const {
+import express from 'express'
+import { verifyToken, decodeToken } from '../../middlewares/jwt'
+import passport from 'passport'
+import {
   loginWithEmail,
   loginWithSocial,
   findUserWithConfirmationToken,
   registerWithEmail,
   resendConfirmationEmail,
-} = require('./controller/auth/auth.controller')
+} from './controller/auth/auth.controller'
 
-const { getUser, changePassword } = require('./controller/user/user.controller')
-const {
+import { getUser, changePassword } from './controller/user/user.controller'
+import {
   validateRegisterWithEmail,
   validateLoginWithEmail,
   validateChangePassword,
   returnValidationErrors,
-} = require('./validator')
+} from './validator'
 
 const router = express.Router()
 const authRoutes = express.Router()
@@ -60,9 +60,9 @@ authRoutes.get(
 
 // User
 router.use('/', userRoutes)
-userRoutes.use(jwtConfig.verifyToken)
-userRoutes.use(jwtConfig.decodeToken)
+userRoutes.use(verifyToken)
+userRoutes.use(decodeToken)
 userRoutes.get('/', getUser)
 userRoutes.post('/changePassword', validateChangePassword, changePassword)
 
-module.exports = router
+export default router
