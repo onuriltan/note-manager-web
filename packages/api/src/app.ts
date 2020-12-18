@@ -1,15 +1,15 @@
 require('module-alias/register')
-const path = require('path')
-const express = require('express')
-const bodyParser = require('body-parser')
-const cors = require('cors')
-const cookieParser = require('cookie-parser')
-const passport = require('passport')
-const mongoose = require('mongoose')
-const helmet = require('helmet')
-const { configurePassport } = require('@config/passport')
-const { logger } = require('@config/pino')
-const { configureAndRunMigrations } = require('@app/migrations')
+import path from 'path'
+import express from 'express'
+import bodyParser from 'body-parser'
+import cors from 'cors'
+import cookieParser from 'cookie-parser'
+import passport from 'passport'
+import mongoose from 'mongoose'
+import helmet from 'helmet'
+import { configurePassport } from './config/passport'
+import { logger } from './config/pino'
+import { configureAndRunMigrations } from './migrations'
 
 const bootServer = async () => {
   // Environment Variables
@@ -25,10 +25,9 @@ const bootServer = async () => {
   server.use(helmet())
 
   // Connect to Mongo
-
   try {
     logger.warn('Connecting to MongoDB...')
-    await mongoose.connect(process.env.MONGO_URL, {
+    await mongoose.connect(process.env.MONGO_URL || '', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
@@ -59,14 +58,7 @@ const bootServer = async () => {
 
   const port = process.env.PORT || 5000
 
-  try {
-    logger.warn('Server is starting...')
-    await server.listen(port)
-    logger.info(`Server has started at port ${port}.`)
-  } catch (e) {
-    logger.error(`Error while starting the server`)
-    throw new Error(e)
-  }
+  server.listen(port)
 }
 
 bootServer()

@@ -2,7 +2,7 @@ const { migrator } = require('mgdb-migrator')
 const { modifyPostsSchema } = require('./1-modify-posts-collection')
 const { logger } = require('@config/pino')
 
-exports.configureAndRunMigrations = async () => {
+export const configureAndRunMigrations = async () => {
   // Run migrations one by one
   try {
     logger.warn('Configuring migrator...')
