@@ -15,6 +15,7 @@
     "build:web": "lerna run --scope @notemanager/web build",
     "build:all": "lerna run build",
     "lint:check": "lerna run lint:check",
+    "test:ci": "lerna run test:unit",
     "publish": "lerna publish",
     "heroku-prebuild": "cd packages/api && yarn install --production=false && yarn build",
     "heroku-postbuild": "cd packages/web && yarn && yarn install --production=false && yarn build"
@@ -26,7 +27,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint:check"
+      "pre-commit": "yarn lint:check && yarn test:ci"
     }
   }
 }

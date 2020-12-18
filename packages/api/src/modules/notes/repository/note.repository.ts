@@ -7,6 +7,7 @@ export const findNotes = async (email, options) => {
     return await NoteEntity.paginate({ email }, extendedOptions)
   } catch (e) {
     logger.error(e.toString())
+    return false
   }
 }
 
@@ -34,6 +35,7 @@ export const findNotesBetweenDatesandKeyword = async (
     return await NoteEntity.paginate(query, extendedOptions)
   } catch (e) {
     logger.error(e.toString())
+    return false
   }
 }
 
@@ -45,18 +47,19 @@ export const createNote = async (text, email) => {
     }).save()
   } catch (e) {
     logger.error(e.toString())
+    return false
   }
 }
 
-export const editNote = async (id, email, text, editedAt) => {
-  const editedNote = ''
+export const editNote = async (id, email, text) => {
   try {
     return await NoteEntity.findOneAndUpdate(
       { _id: id, email: email },
-      { text: text, editedAt }
+      { text: text }
     )
   } catch (e) {
     logger.error(e.toString())
+    return false
   }
 }
 
@@ -69,5 +72,6 @@ export const deleteNote = async (email, id) => {
     return !!deletedNote
   } catch (e) {
     logger.error(e.toString())
+    return false
   }
 }

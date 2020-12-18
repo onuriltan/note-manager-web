@@ -166,7 +166,6 @@ describe(`${noteController.editNote.name} Controller`, () => {
         id: '123',
       },
     }
-    const editedAt = new Date()
     const editNote = jest
       .spyOn(noteRepository, 'editNote')
       .mockReturnValue({} as any)
@@ -178,8 +177,7 @@ describe(`${noteController.editNote.name} Controller`, () => {
     expect(editNote).toHaveBeenCalledWith(
       mockRequest.params.id,
       mockRequest.query.email,
-      mockRequest.body.text,
-      editedAt
+      mockRequest.body.text
     )
     expect(mockResponse.send).toHaveBeenCalledWith({})
   })

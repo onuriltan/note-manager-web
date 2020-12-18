@@ -4,25 +4,21 @@ export interface NoteDoc extends Document {
   text: string
   email: string
   createdAt: Date
-  editedAt?: Date
+  updatedAt: Date
 }
 
-const NoteSchema = new Schema({
-  text: {
-    type: String,
-    required: true,
+const NoteSchema = new Schema(
+  {
+    text: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
   },
-  email: {
-    type: String,
-    required: true,
-  },
-  createdAt: {
-    type: Date,
-    default: new Date(),
-  },
-  editedAt: {
-    type: Date,
-  },
-})
+  { timestamps: true }
+)
 NoteSchema.plugin(mongoosePaginate)
 export default model<NoteDoc>('Note', NoteSchema)

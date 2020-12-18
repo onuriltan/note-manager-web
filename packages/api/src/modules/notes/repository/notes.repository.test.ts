@@ -175,7 +175,6 @@ describe(`editNote Repository`, () => {
   const id = 'asd324rsdf2'
   const email = 'onur@iltan.com'
   const text = 'text'
-  const editedAt = new Date()
 
   beforeEach(() => jest.clearAllMocks())
 
@@ -186,12 +185,12 @@ describe(`editNote Repository`, () => {
       .mockResolvedValue({ text, email } as any)
 
     // Act
-    const result = await editNote(id, email, text, editedAt)
+    const result = await editNote(id, email, text)
 
     // Assert
     expect(noteEntity.findOneAndUpdate).toHaveBeenCalledWith(
       { _id: id, email },
-      { text, editedAt }
+      { text }
     )
     expect(result).toEqual({ text, email })
   })
@@ -203,7 +202,7 @@ describe(`editNote Repository`, () => {
       .mockRejectedValue('database error')
 
     // Act
-    await editNote(id, email, text, editedAt)
+    await editNote(id, email, text)
 
     // Assert
     expect(loggerError).toHaveBeenCalledWith('database error')
