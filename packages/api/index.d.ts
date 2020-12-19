@@ -15,7 +15,7 @@ declare global {
       MAIL: string
       MAIL_PASSWORD: string
       MAIL_USERNAME: string
-      PORT: number
+      PORT: string
     }
   }
   namespace Express {
