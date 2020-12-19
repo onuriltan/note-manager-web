@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as jwt from '../../../../middlewares/jwt'
 import { loginWithSocial } from './auth.controller'
 
@@ -5,7 +6,7 @@ jest.mock('../../../../middlewares/jwt')
 
 describe('loginWithSocial tests', () => {
   const mockRequest = {
-    user: {
+    appUser: {
       method: 'facebook',
     },
   }
@@ -31,24 +32,26 @@ describe('loginWithSocial tests', () => {
     // Arrange
     const req = { ...mockRequest } as any
     const res = { ...mockResponse } as any
-    const signToken = jest.spyOn(jwt, 'signToken').mockResolvedValue('token')
+    const signToken = jest
+      .spyOn(jwt, 'signToken')
+      .mockResolvedValue('token' as never)
     process.env.CLIENT_URL = 'http://localhost:8080'
 
     // Act
     await loginWithSocial(req, res)
 
     // Assert
-    expect(signToken).toHaveBeenCalledWith(req.user)
+    expect(signToken).toHaveBeenCalledWith(req.appUser)
     expect(res.redirect).toHaveBeenCalledWith(
       `${process.env.CLIENT_URL}/login/?${
-        req.user.method
+        req.appUser.method
       }Token=${encodeURIComponent('token')}`
     )
   })
 
   it('should call res.status as 401 if no user is in the req object', async () => {
     // Arrange
-    const req = { ...mockRequest, user: null } as any
+    const req = { ...mockRequest, appUser: null } as any
     const res = { ...mockResponse } as any
 
     // Act

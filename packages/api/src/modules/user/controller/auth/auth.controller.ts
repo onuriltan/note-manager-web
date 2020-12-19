@@ -5,34 +5,44 @@ import * as jwt from '../../../../middlewares/jwt'
 import { logger } from '../../../../config/pino'
 import { Request, Response } from 'express'
 
-export const loginWithSocial = async (req: Request, res: Response) => {
-  if (req.user) {
-    const token = await jwt.signToken(req.user)
-    res.redirect(
-      `${process.env.CLIENT_URL}/login/?${
-        // @ts-ignore
-        req.user.method
-        // @ts-ignore
-      }Token=${encodeURIComponent(token)}`
-    )
+interface ReturnType {
+  msg: string
+}
+
+export const loginWithSocial = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  if (req?.appUser?.method) {
+    const token = await jwt.signToken(req.appUser)
+    if (token) {
+      res.redirect(
+        `${process.env.CLIENT_URL}/login/?${
+          req.appUser.method
+        }Token=${encodeURIComponent(token)}`
+      )
+    } else {
+      res.status(401)
+    }
   } else {
     res.status(401)
   }
 }
 
-export const loginWithEmail = async (req: Request, res: Response) => {
+export const loginWithEmail = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   const { email, password } = req.body
-  const errors = [] as any
+  const errors: ReturnType[] = []
   const user = await authRepository.findUser(email)
-  if (user) {
-    // @ts-ignore
+  if (user?.local?.password) {
     const isPasswordCorrect = bcrypt.compareSync(password, user.local.password)
     if (!user.active) {
       errors.push({ msg: 'You need to activate your account' })
       res.status(401).json({ errors })
     } else if (user.active && isPasswordCorrect) {
-      // @ts-ignore
-      const token = await jwt.signToken(user, process.env.JWT_SECRET)
+      const token = await jwt.signToken(user)
       res.json({ token, method: user.method })
     } else {
       errors.push({ msg: 'Username or password is wrong' })
@@ -44,12 +54,14 @@ export const loginWithEmail = async (req: Request, res: Response) => {
   }
 }
 
-export const registerWithEmail = async (req: Request, res: Response) => {
+export const registerWithEmail = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   const { email, password } = req.body
-  const errors = [] as any
-  const messages = [] as any
-  // @ts-ignore
-  const foundUser = await authRepository.findUser(email, password)
+  const errors: ReturnType[] = []
+  const messages: ReturnType[] = []
+  const foundUser = await authRepository.findUser(email)
   if (!foundUser) {
     const newUser = await authRepository.createUser(email, password)
     if (newUser) {
@@ -62,8 +74,6 @@ export const registerWithEmail = async (req: Request, res: Response) => {
         res.status(400).json({ errors })
       }
     } else {
-      // @ts-ignore
-      await authRepository.deleteUser(newUser.id)
       errors.push({ msg: 'An error occurred' })
       res.status(400).json({ messages })
     }
@@ -73,13 +83,15 @@ export const registerWithEmail = async (req: Request, res: Response) => {
   }
 }
 
-export const resendConfirmationEmail = async (req: Request, res: Response) => {
+export const resendConfirmationEmail = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   const { email, password } = req.body
-  const errors = [] as any
-  const messages = [] as any
+  const errors: ReturnType[] = []
+  const messages: ReturnType[] = []
   const foundUser = await authRepository.findUser(email)
-  if (foundUser && !foundUser.active) {
-    // @ts-ignore
+  if (foundUser && !foundUser.active && foundUser.password) {
     const isPasswordCorrect = bcrypt.compareSync(password, foundUser.password)
     if (isPasswordCorrect) {
       const user = await authRepository.regenerateUserConfirmationToken(email)
@@ -106,25 +118,23 @@ export const resendConfirmationEmail = async (req: Request, res: Response) => {
 export const findUserWithConfirmationToken = async (
   req: Request,
   res: Response
-) => {
-  const errors = [] as any
+): Promise<void> => {
+  const errors: ReturnType[] = []
   const confirmationToken = req.params.confirmationToken
   const user = await authRepository.findUserWithConfirmationToken(
     confirmationToken
   )
   if (user) {
-    const expiry = user.confirmationTokenExpiry
+    const expiry = user.confirmationTokenExpiry?.getDate()
     const compare = new Date().setDate(new Date().getDate() + 3)
-    // @ts-ignore
-    if (expiry < compare) {
+    if (expiry && expiry < compare) {
       user.confirmationToken = undefined
       user.confirmationTokenExpiry = undefined
       user.active = true
       try {
         const updatedUser = await user.save()
         logger.info(
-          // @ts-ignore
-          `User is activated by confirmation token: ${updatedUser.local.email}`
+          `User is activated by confirmation token: ${updatedUser?.local?.email}`
         )
       } catch (e) {
         logger.error(e)
@@ -132,7 +142,7 @@ export const findUserWithConfirmationToken = async (
       const token = await jwt.signToken(user)
       res.json({ token })
     } else {
-      await authRepository.deleteUser(user.id)
+      await authRepository.deleteUser(user._id.toString())
       errors.push({ msg: 'Your account is expired, please re-register again' })
       res.status(401).json({ errors })
     }

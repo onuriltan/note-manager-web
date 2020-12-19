@@ -19,8 +19,5 @@ module.exports = {
     'prettier/prettier': 2,
     'no-console': 2,
     'require-await': 2,
-    '@typescript-eslint/no-explicit-any': 1,
-    '@typescript-eslint/ban-ts-comment': 1,
-    '@typescript-eslint/explicit-module-boundary-types': 0,
   },
 }

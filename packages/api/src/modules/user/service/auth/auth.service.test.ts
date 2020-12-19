@@ -1,14 +1,18 @@
 import * as mail from '../../../../config/mail'
 import { logger } from '../../../../config/pino'
+import { SignUpMethod, AppUser } from '../../entity/user.entity'
 import { sendConfirmationMail } from './auth.service'
 
 jest.mock('../../../../config/mail')
 jest.mock('../../../../config/pino')
 
 describe('authService tests', () => {
-  const user = {
+  const user: AppUser = {
+    active: true,
+    method: SignUpMethod.LOCAL,
     local: {
       email: 'user@gmail.com',
+      password: '123',
     },
     confirmationToken: 'confirmationToken',
   }
@@ -26,11 +30,11 @@ describe('authService tests', () => {
     // Assert
 
     expect(mail.sendConfirmationMail).toHaveBeenCalledWith(
-      user.local.email,
+      user?.local?.email,
       user.confirmationToken
     )
     expect(logger.info).toHaveBeenCalledWith(
-      `Confirmation email has been sent for user:  ${user.local.email}`
+      `Confirmation email has been sent for user: ${user?.local?.email}`
     )
   })
 
@@ -43,11 +47,11 @@ describe('authService tests', () => {
 
     // Assert
     expect(mail.sendConfirmationMail).toHaveBeenCalledWith(
-      user.local.email,
+      user?.local?.email,
       user.confirmationToken
     )
     expect(logger.error).toHaveBeenCalledWith(
-      `An error occurred while sending confirmation email for user ${user.local.email}`
+      `An error occurred while sending confirmation email for user ${user?.local?.email}`
     )
   })
 })

@@ -6,6 +6,11 @@
     "outDir": "./build",
     "esModuleInterop": true,
     "strict": true ,
-    "noImplicitAny": false
+    "noImplicitAny": true,
+    "resolveJsonModule": true,
+    "typeRoots": [
+      "types",
+      "./node_modules/@types",
+    ] 
   }
 }

@@ -5,7 +5,7 @@ import GoogleStrategy from 'passport-google-oauth20'
 
 import { logger } from './pino'
 
-export const configurePassport = () => {
+export const configurePassport = (): void => {
   passport.use(
     new FacebookStrategy.Strategy(
       {

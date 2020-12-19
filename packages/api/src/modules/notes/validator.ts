@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { query, param, body, validationResult } from 'express-validator'
 import { Request, Response, NextFunction } from 'express'
 
@@ -25,9 +27,9 @@ export const returnValidationErrors = function (
   req: Request,
   res: Response,
   next: NextFunction
-) {
+): void | Response<any> {
   const validationErrors = validationResult(req)
-  const errors = {} // instead of sending errors as arrays, send object with keys, easier search
+  const errors = {} as any // instead of sending errors as arrays, send object with keys, easier search
   validationErrors.array().forEach((error) => {
     errors[error.param] = error.msg
   })

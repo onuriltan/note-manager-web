@@ -8,7 +8,10 @@ const transporter = nodemailer.createTransport({
   },
 })
 
-export const sendConfirmationMail = (to, confirmationToken) => {
+export const sendConfirmationMail = (
+  to: string,
+  confirmationToken: string
+): Promise<void> => {
   const mailOptions = {
     from: '"📒 NOTE MANAGER 📒" <' + process.env.MAIL + '>', // sender address
     to: to, // list of receivers

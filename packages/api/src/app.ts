@@ -9,7 +9,7 @@ import helmet from 'helmet'
 import { configurePassport } from './config/passport'
 import { logger } from './config/pino'
 import { configureAndRunMigrations } from './migrations'
-import dotenv from 'dotenv'
+import * as dotenv from 'dotenv'
 import noteModule from './modules/notes'
 import userModule from './modules/user'
 require('module-alias/register')
@@ -29,7 +29,7 @@ const bootServer = async () => {
   // Connect to Mongo
   try {
     logger.warn('Connecting to MongoDB...')
-    await mongoose.connect(process.env.MONGO_URL || '', {
+    await mongoose.connect(process.env.MONGO_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
