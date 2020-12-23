@@ -14,6 +14,7 @@ export const sendConfirmationMail = async (user: AppUser): Promise<boolean> => {
       logger.error(
         `An error occurred while sending confirmation email for user ${user.local.email}`
       )
+      logger.error(e)
       return false
     }
   }

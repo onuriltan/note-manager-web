@@ -13,6 +13,7 @@
     "lint:web": "lerna run --scope @notemanager/web lint --stream",
     "lint:api": "lerna run --scope @notemanager/api lint --stream",
     "build:web": "lerna run --scope @notemanager/web build",
+    "build:api": "lerna run --scope @notemanager/web api",
     "build:all": "lerna run build",
     "lint:check": "lerna run lint:check",
     "test:ci": "lerna run test:unit",
@@ -27,7 +28,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint:check && yarn test:ci"
+      "pre-commit": "yarn lint:check && yarn test:ci && yarn build:api && yarn build:web"
     }
   }
 }

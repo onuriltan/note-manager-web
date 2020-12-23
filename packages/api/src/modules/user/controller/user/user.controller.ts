@@ -1,24 +1,27 @@
 import * as userRepository from '../../repository/user'
 import { Request, Response } from 'express'
 
-export const getUser = async (req: Request, res: Response): Promise<void> => {
+export const getUser = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
   const { email } = req.query
   if (email && typeof email === 'string') {
     const userProfile = await userRepository.getUser(email)
     if (userProfile !== null) {
-      res.send(userProfile)
+      return res.send(userProfile)
     } else {
-      res.status(404).send()
+      return res.status(404).send()
     }
   } else {
-    res.status(404).send()
+    return res.status(404).send()
   }
 }
 
 export const changePassword = async (
   req: Request,
   res: Response
-): Promise<void> => {
+): Promise<Response> => {
   const { email } = req.query
   const { oldPassword, newPassword } = req.body
   if (email && typeof email === 'string') {
@@ -28,9 +31,9 @@ export const changePassword = async (
       newPassword
     )
     if (isPasswordChanged) {
-      res.status(200).send()
+      return res.status(200).send()
     } else {
-      res.status(400).json({
+      return res.status(400).json({
         fieldErrors: {
           oldPassword: 'Password is wrong',
           newPassword: '',
@@ -38,6 +41,6 @@ export const changePassword = async (
       })
     }
   } else {
-    res.status(404).send()
+    return res.status(404).send()
   }
 }
