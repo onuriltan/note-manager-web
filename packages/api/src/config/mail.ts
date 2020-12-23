@@ -1,5 +1,4 @@
 import nodemailer from 'nodemailer'
-import { logger } from '../config/pino'
 
 const transporter = nodemailer.createTransport({
   service: 'Yandex',

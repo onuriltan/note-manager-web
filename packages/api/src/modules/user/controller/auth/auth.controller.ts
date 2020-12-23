@@ -62,28 +62,27 @@ export const registerWithEmail = async (
   const errors: ReturnType[] = []
   const messages: ReturnType[] = []
   const foundUser = await authRepository.findUser(email)
-  if (!foundUser) {
-    const newUser = await authRepository.createUser(email, password)
-    if (newUser) {
-      try {
-        const isConfirmationEmailSent = authService.sendConfirmationMail(
-          newUser
-        )
-        if (isConfirmationEmailSent) {
-          messages.push({ msg: 'Check your email to confirm your account!' })
-          res.status(200).json({ messages })
-        }
-      } catch (e) {
-        errors.push({ msg: 'An error occurred, please try again' })
-        res.status(400).json({ errors })
-      }
-    } else {
-      errors.push({ msg: 'An error occurred' })
-      res.status(400).json({ messages })
-    }
-  } else {
+  if (foundUser) {
     errors.push({ msg: 'This email is already registered' })
     res.status(400).json({ errors })
+  }
+  const newUser = await authRepository.createUser(email, password)
+  if (newUser) {
+    try {
+      const isConfirmationEmailSent = await authService.sendConfirmationMail(
+        newUser
+      )
+      if (isConfirmationEmailSent) {
+        messages.push({ msg: 'Check your email to confirm your account!' })
+        res.status(200).json({ messages })
+      }
+    } catch (e) {
+      errors.push({ msg: 'An error occurred, please try again' })
+      res.status(400).json({ errors })
+    }
+  } else {
+    errors.push({ msg: 'An error occurred' })
+    res.status(400).json({ messages })
   }
 }
 
