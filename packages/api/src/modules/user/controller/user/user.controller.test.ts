@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { SignUpMethod, AppUser } from '../../entity/user.entity'
+import { SignUpMethod, UserEntityInput } from '../../entity/user.entity'
 import * as userRepository from '../../repository/user'
 import { getUser } from './user.controller'
 
@@ -23,7 +23,7 @@ describe('getUser tests', () => {
 
   it('should call userRepository.getUser and returns as result', async () => {
     // Arrange
-    const user: AppUser = {
+    const user: UserEntityInput = {
       active: true,
       method: SignUpMethod.LOCAL,
       confirmationToken: 'confirmationToken',

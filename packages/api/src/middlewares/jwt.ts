@@ -1,6 +1,9 @@
 import jwt from 'jsonwebtoken'
 import { Request, Response, NextFunction } from 'express'
-import { AppUser, SignUpMethod } from '../modules/user/entity/user.entity'
+import {
+  UserEntityInput,
+  SignUpMethod,
+} from '../modules/user/entity/user.entity'
 
 export const verifyToken = (
   req: Request,
@@ -39,7 +42,7 @@ export const decodeToken = (
   }
 }
 
-export const signToken = (user: AppUser): string => {
+export const signToken = (user: UserEntityInput): string => {
   if (user.method) {
     let email: string | undefined = ''
     switch (user.method) {

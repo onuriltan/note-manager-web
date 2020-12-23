@@ -1,8 +1,10 @@
 import * as mail from '../../../../config/mail'
 import { logger } from '../../../../config/pino'
-import { AppUser } from '../../entity/user.entity'
+import { UserEntityInput } from '../../entity/user.entity'
 
-export const sendConfirmationMail = async (user: AppUser): Promise<boolean> => {
+export const sendConfirmationMail = async (
+  user: UserEntityInput
+): Promise<boolean> => {
   if (user?.local?.email && user.confirmationToken) {
     try {
       await mail.sendConfirmationMail(user.local.email, user.confirmationToken)

@@ -68,7 +68,7 @@ export const registerWithEmail = async (
   } else {
     try {
       const newUser = await authRepository.createUser(email, password)
-      if (newUser) {
+      if (newUser && newUser.id) {
         const isConfirmationEmailSent = await authService.sendConfirmationMail(
           newUser
         )
@@ -79,6 +79,7 @@ export const registerWithEmail = async (
           errors.push({
             msg: 'An error occurred while sending confirmation email',
           })
+          await authRepository.deleteUser(newUser.id)
           return res.status(400).json({ errors })
         }
       } else {
