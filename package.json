@@ -16,7 +16,7 @@
     "build:api": "lerna run --scope @notemanager/web api",
     "build:all": "lerna run build",
     "lint:check": "lerna run lint:check",
-    "test:ci": "lerna run test:unit",
+    "test:ci": "lerna run test:ci",
     "publish": "lerna publish",
     "heroku-prebuild": "yarn install --production=false && cd packages/api && yarn install --production=false && yarn build",
     "heroku-postbuild": "cd packages/web && yarn && yarn install --production=false && yarn build"
