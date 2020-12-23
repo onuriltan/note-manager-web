@@ -8,9 +8,15 @@
     "strict": true ,
     "noImplicitAny": true,
     "resolveJsonModule": true,
+    "skipLibCheck": true,
     "typeRoots": [
       "types",
       "./node_modules/@types",
     ] 
-  }
+  },
+  "exclude": [
+    "node_modules/",
+    "build",
+    "coverage"
+  ]
 }
