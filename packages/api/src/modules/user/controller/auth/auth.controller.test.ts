@@ -1,10 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as jwt from '../../../../middlewares/jwt'
-import {
-  SignUpMethod,
-  UserDoc,
-  UserEntityInput,
-} from '../../entity/user.entity'
+import { SignUpMethod, UserEntityInput } from '../../entity/user.entity'
 import * as authRepository from '../../repository/auth'
 import * as authService from '../../service/auth/auth.service'
 
@@ -95,6 +91,9 @@ describe('registerWithEmail tests', () => {
       body: { email: 'onur@iltan.com', password: '1234' },
     } as unknown) as Request
     const createdUser: UserEntityInput = {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      id: '123',
       active: true,
       method: SignUpMethod.LOCAL,
     }
