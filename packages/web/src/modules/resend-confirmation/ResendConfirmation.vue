@@ -44,7 +44,7 @@
           'show--button--loading--icon': resentConfirmationEmailClicked,
         }"
       ></i>
-      <div style="margin: 0 5px;">Resend Confirmation Link</div>
+      <div style="margin: 0 5px">Resend Confirmation Link</div>
     </b-button>
   </b-form>
 </template>

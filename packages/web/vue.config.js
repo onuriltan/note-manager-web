@@ -8,7 +8,7 @@ module.exports = {
       patterns: [path.resolve(__dirname, './src/styles/global.scss')],
     },
   },
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     if (config.plugins.has('optimize-css')) {
       config.plugins.delete('optimize-css');
     }

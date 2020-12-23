@@ -103,7 +103,7 @@ export default {
     };
   },
   watch: {
-    '$route.params.pageNumber': function() {
+    '$route.params.pageNumber': function () {
       this.getNotes(600);
     },
   },
@@ -157,7 +157,7 @@ export default {
     },
   },
   filters: {
-    convertDate: date => {
+    convertDate: (date) => {
       return date.getFullYear() + '-' + date.getMonth() + 1 + '-' + date.getDate();
     },
   },
