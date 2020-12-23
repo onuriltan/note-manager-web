@@ -112,7 +112,7 @@ export default {
     },
   },
   filters: {
-    convertDate: function(date) {
+    convertDate: function (date) {
       const theDate = new Date(date);
       return `${theDate.getDate()}/${theDate.getMonth() + 1}/${theDate.getFullYear()}`;
     },

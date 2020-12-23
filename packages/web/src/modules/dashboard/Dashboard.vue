@@ -65,7 +65,7 @@ export default {
     };
   },
   watch: {
-    '$route.params.pageNumber': function() {
+    '$route.params.pageNumber': function () {
       this.getNotes(600);
     },
   },

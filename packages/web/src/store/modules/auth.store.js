@@ -29,28 +29,28 @@ const auth = {
       context.commit('deleteToken');
     },
     login(context, credentials) {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         authService
           .login(credentials)
-          .then(response => {
+          .then((response) => {
             context.commit('updateIsAuthenticated', response);
             return resolve(response);
           })
-          .catch(response => {
+          .catch((response) => {
             return resolve(response);
           });
       });
     },
 
     loginWithFacebook(context, token) {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         socialService
           .loginWithFacebook(token)
-          .then(response => {
+          .then((response) => {
             context.commit('updateIsAuthenticated', response);
             return resolve(response);
           })
-          .catch(response => {
+          .catch((response) => {
             return resolve(response);
           });
       });
@@ -61,40 +61,40 @@ const auth = {
     },
 
     confirmUser(context, confirmationToken) {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         authService
           .confirmUser(confirmationToken)
-          .then(response => {
+          .then((response) => {
             context.commit('updateIsAuthenticated', response);
             return resolve(response);
           })
-          .catch(response => {
+          .catch((response) => {
             return resolve(response);
           });
       });
     },
 
     register(context, credentials) {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         authService
           .register(credentials)
-          .then(response => {
+          .then((response) => {
             return resolve(response);
           })
-          .catch(response => {
+          .catch((response) => {
             return resolve(response);
           });
       });
     },
 
     resendConfirmationEmail(context, credentials) {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         authService
           .resendConfirmationEmail(credentials)
-          .then(response => {
+          .then((response) => {
             return resolve(response);
           })
-          .catch(response => {
+          .catch((response) => {
             return resolve(response);
           });
       });

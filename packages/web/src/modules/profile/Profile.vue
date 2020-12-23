@@ -12,9 +12,7 @@
             <ChangePassword />
           </b-tab>
         </div>
-        <b-tab title="Edit Profile" class="profile-container__tab">
-          Edit Profile
-        </b-tab>
+        <b-tab title="Edit Profile" class="profile-container__tab"> Edit Profile </b-tab>
       </b-tabs>
     </b-card>
   </div>

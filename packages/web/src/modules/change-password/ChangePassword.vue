@@ -63,7 +63,7 @@
           class="fa fa-refresh fa-spin hide--button--loading--icon"
           :class="{ 'show--button--loading--icon': changePasswordClicked }"
         ></i>
-        <div style="margin: 0 5px;">Change Password</div>
+        <div style="margin: 0 5px">Change Password</div>
       </b-button>
     </div>
   </b-form>

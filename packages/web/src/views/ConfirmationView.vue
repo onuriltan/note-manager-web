@@ -3,7 +3,13 @@
     <div v-if="errors && errors.length > 0">
       <div v-for="error in errors" :key="error">
         <p
-          style="display: flex; justify-content: center; align-items: center; font-size: 20px; min-height: calc(100vh - 70px);"
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            min-height: calc(100vh - 70px);
+          "
         >
           {{ error.msg }}
         </p>

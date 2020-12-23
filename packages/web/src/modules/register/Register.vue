@@ -91,7 +91,7 @@
         >
         </b-progress-bar>
       </b-progress>
-      <div class=" mb-4">{{ passwordStrength }}</div>
+      <div class="mb-4">{{ passwordStrength }}</div>
 
       <b-button
         class="login-form__button"
@@ -104,7 +104,7 @@
           class="fa fa-refresh fa-spin hide--button--loading--icon"
           :class="{ 'show--button--loading--icon': registerValidated }"
         ></i>
-        <div style="margin: 0 5px;">Register</div>
+        <div style="margin: 0 5px">Register</div>
       </b-button>
     </b-form>
 
@@ -146,7 +146,7 @@ export default {
     };
   },
   watch: {
-    password: function(oldPwd, newPwd) {
+    password: function (oldPwd, newPwd) {
       const strength = measureStrengthOfPassword(oldPwd);
       this.passwordStrength = strength;
     },
