@@ -8,7 +8,10 @@ const transporter = nodemailer.createTransport({
   },
 })
 
-export const sendConfirmationMail = (to, confirmationToken) => {
+export const sendConfirmationMail = async (
+  to: string,
+  confirmationToken: string
+): Promise<void> => {
   const mailOptions = {
     from: '"📒 NOTE MANAGER 📒" <' + process.env.MAIL + '>', // sender address
     to: to, // list of receivers
@@ -23,13 +26,9 @@ export const sendConfirmationMail = (to, confirmationToken) => {
       '<p> Please note that this link will expire in 72 hours, if the link is expired, you need to register again</p>',
   }
   // send mail with defined transport object
-  return new Promise(function (resolve, reject) {
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        reject(error)
-      } else {
-        resolve(info)
-      }
-    })
-  })
+  try {
+    await transporter.sendMail(mailOptions)
+  } catch (e) {
+    throw new Error(e)
+  }
 }

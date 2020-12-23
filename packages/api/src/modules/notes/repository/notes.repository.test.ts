@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import noteEntity from '../entity/note.entity'
 import {
   findNotes,
@@ -20,9 +21,10 @@ describe(`findNotes repository`, () => {
     // Arrange
     const email = 'onur@iltan.com'
     const options = {}
+
     const paginate = jest
       .spyOn(noteEntity, 'paginate')
-      .mockReturnValue([] as any)
+      .mockResolvedValue([] as any)
 
     // Act
     await findNotes(email, options)
@@ -199,6 +201,8 @@ describe(`editNote Repository`, () => {
     // Arrange
     jest
       .spyOn(noteEntity, 'findOneAndUpdate')
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       .mockRejectedValue('database error')
 
     // Act

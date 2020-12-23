@@ -1,4 +1,6 @@
-export const modifyPostsSchema = (migrator) => {
+import { Migrator } from 'mgdb-migrator'
+
+export const modifyPostsSchema = (migrator: Migrator): void => {
   migrator.add({
     version: 1,
     name: 'Change schema name from posts to notes',

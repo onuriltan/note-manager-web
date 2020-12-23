@@ -6,7 +6,7 @@ import pino from 'pino'
       path.basename(__dirname) + '/' + path.basename(__filename, '.js')
 */
 const formatters = {
-  bindings(bindings) {
+  bindings() {
     return { pid: '', hostname: '' }
   },
 }

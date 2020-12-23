@@ -1,21 +1,23 @@
-import User from '../entity/user.entity'
+import UserModel, { AppUser, UserDoc } from '../entity/user.entity'
 import mongodb from 'mongodb'
 import bcrypt from 'bcrypt'
 import uniqid from 'uniqid'
 import { logger } from '../../../config/pino'
 
-export const findUser = async (email) => {
+export const findUser = async (email: string): Promise<AppUser | null> => {
   try {
-    return await User.findOne({ 'local.email': email })
+    return await UserModel.findOne({ 'local.email': email })
   } catch (e) {
     logger.error('An error occured  while finding user with email', e)
     return null
   }
 }
 
-export const findUserWithConfirmationToken = async (confirmationToken) => {
+export const findUserWithConfirmationToken = async (
+  confirmationToken: string
+): Promise<UserDoc | null> => {
   try {
-    return await User.findOne({ confirmationToken })
+    return await UserModel.findOne({ confirmationToken })
   } catch (e) {
     logger.error(
       'An error occured  while finding user with confirmationToken',
@@ -25,8 +27,11 @@ export const findUserWithConfirmationToken = async (confirmationToken) => {
   }
 }
 
-export const createUser = async (email, password) => {
-  const newUser = new User({
+export const createUser = async (
+  email: string,
+  password: string
+): Promise<AppUser | null> => {
+  const newUser = new UserModel({
     method: 'local',
     local: {
       email: email,
@@ -35,11 +40,13 @@ export const createUser = async (email, password) => {
   })
   try {
     const hashedPwd = await hashPassword(newUser)
-    if (hashedPwd) {
-      // @ts-ignore
+    if (hashedPwd && newUser && newUser.local && newUser.local.password) {
       newUser.local.password = hashedPwd
       newUser.confirmationToken = uniqid()
       return await newUser.save()
+    } else {
+      logger.error(`An error occured while hashing the password`)
+      return null
     }
   } catch (e) {
     logger.error(`An error occured while createUser`, e)
@@ -47,12 +54,17 @@ export const createUser = async (email, password) => {
   }
 }
 
-export const regenerateUserConfirmationToken = async (email) => {
+export const regenerateUserConfirmationToken = async (
+  email: string
+): Promise<AppUser | null> => {
   try {
-    const theUser = await User.findOne({ 'local.email': email })
+    const theUser = await UserModel.findOne({ 'local.email': email })
     if (theUser) {
       theUser.confirmationToken = uniqid()
       return await theUser.save()
+    } else {
+      logger.error(`No user with email ${email} is found`)
+      return null
     }
   } catch (e) {
     logger.error(`An error occured while regenerateUserConfirmationToken`, e)
@@ -60,19 +72,18 @@ export const regenerateUserConfirmationToken = async (email) => {
   }
 }
 
-export const deleteUser = async (id) => {
-  let isDeleted = false
+export const deleteUser = async (id: string): Promise<boolean> => {
   try {
-    await User.deleteOne({ _id: new mongodb.ObjectID(id) })
-    isDeleted = true
+    await UserModel.deleteOne({ _id: new mongodb.ObjectID(id) })
+    return true
   } catch (e) {
     logger.error(`An error occured while deleteUser`, e)
+    return false
   }
-  return isDeleted
 }
 
-async function hashPassword(user) {
-  const password = user.local.password
+async function hashPassword(user: AppUser) {
+  const password = user?.local?.password
   const saltRounds = 10
   try {
     return await bcrypt.hash(password, saltRounds)

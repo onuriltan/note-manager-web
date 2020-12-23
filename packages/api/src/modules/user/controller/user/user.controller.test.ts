@@ -1,3 +1,5 @@
+import { Request, Response } from 'express'
+import { SignUpMethod, AppUser } from '../../entity/user.entity'
 import * as userRepository from '../../repository/user'
 import { getUser } from './user.controller'
 
@@ -5,42 +7,37 @@ jest.mock('../../repository/user')
 jest.mock('lodash')
 
 describe('getUser tests', () => {
-  const resSend = jest.fn()
-  const resStatus = jest.fn()
-  const resSet = jest.fn()
-  const mockResponse = {
-    set: resSet,
-    status: resStatus,
-    send: resSend,
-  }
-  const mockRequest = {
-    query: {
-      email: 'onur@iltan.com',
-    },
-  }
-
-  beforeAll(() => {
-    resSend.mockImplementation(() => mockResponse)
-    resStatus.mockImplementation(() => mockResponse)
-    resSet.mockImplementation(() => mockResponse)
-  })
-
+  let mockRequest: Partial<Request>
+  let mockResponse: Partial<Response>
   beforeEach(() => {
-    jest.clearAllMocks()
+    mockRequest = ({ query: { email: 'onur@gmail.com' } } as unknown) as Request
+    const resStatus = jest.fn()
+    const resSend = jest.fn()
+    mockResponse = ({
+      status: resStatus,
+      send: resSend,
+    } as unknown) as Response
+    resStatus.mockImplementation(() => mockResponse)
+    resSend.mockImplementation(() => mockResponse)
   })
 
   it('should call userRepository.getUser and returns as result', async () => {
     // Arrange
+    const user: AppUser = {
+      active: true,
+      method: SignUpMethod.LOCAL,
+      confirmationToken: 'confirmationToken',
+    }
     const getUserRepo = jest
       .spyOn(userRepository, 'getUser')
-      .mockResolvedValue('user' as any)
+      .mockResolvedValue(user)
 
     // Act
-    await getUser(mockRequest as any, mockResponse as any)
+    await getUser(mockRequest as Request, mockResponse as Response)
 
     // Assert
-    expect(getUserRepo).toHaveBeenCalledWith(mockRequest.query.email)
-    expect(mockResponse.send).toHaveBeenCalledWith('user')
+    expect(getUserRepo).toHaveBeenCalledWith(mockRequest?.query?.email)
+    expect(mockResponse.send).toHaveBeenCalledWith(user)
   })
 
   it('should call userRepository.getUser and returns response with status 404', async () => {
@@ -50,10 +47,10 @@ describe('getUser tests', () => {
       .mockResolvedValue(null)
 
     // Act
-    await getUser(mockRequest as any, mockResponse as any)
+    await getUser(mockRequest as Request, mockResponse as Response)
 
     // Assert
-    expect(getUserRepo).toHaveBeenCalledWith(mockRequest.query.email)
+    expect(getUserRepo).toHaveBeenCalledWith(mockRequest?.query?.email)
     expect(mockResponse.status).toHaveBeenCalledWith(404)
     expect(mockResponse.send).toHaveBeenCalledWith()
   })

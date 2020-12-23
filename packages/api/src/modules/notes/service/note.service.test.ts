@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as noteService from './note.service'
 import * as noteRepository from '../repository/note.repository'
 

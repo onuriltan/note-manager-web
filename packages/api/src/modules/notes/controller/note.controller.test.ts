@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as noteController from './note.controller'
 import * as noteRepository from '../repository/note.repository'
 import * as noteService from '../service/note.service'
@@ -65,8 +66,8 @@ describe(`${noteController.findNotesBetweenDatesandKeyword.name} Controller`, ()
         page: 1,
       },
       params: {
-        fromDate: 'fromDate',
-        toDate: 'toDate',
+        fromDate: new Date(),
+        toDate: new Date(),
         keyword: 'keyword',
       },
     }
