@@ -12,27 +12,27 @@ interface ReturnType {
 export const loginWithSocial = async (
   req: Request,
   res: Response
-): Promise<void> => {
+): Promise<Response | void> => {
   if (req?.appUser?.method) {
     const token = await jwt.signToken(req.appUser)
     if (token) {
-      res.redirect(
+      return res.redirect(
         `${process.env.CLIENT_URL}/login/?${
           req.appUser.method
         }Token=${encodeURIComponent(token)}`
       )
     } else {
-      res.status(401)
+      return res.status(401)
     }
   } else {
-    res.status(401)
+    return res.status(401)
   }
 }
 
 export const loginWithEmail = async (
   req: Request,
   res: Response
-): Promise<void> => {
+): Promise<Response> => {
   const { email, password } = req.body
   const errors: ReturnType[] = []
   const user = await authRepository.findUser(email)
@@ -40,56 +40,62 @@ export const loginWithEmail = async (
     const isPasswordCorrect = bcrypt.compareSync(password, user.local.password)
     if (!user.active) {
       errors.push({ msg: 'You need to activate your account' })
-      res.status(401).json({ errors })
+      return res.status(401).json({ errors })
     } else if (user.active && isPasswordCorrect) {
       const token = await jwt.signToken(user)
-      res.json({ token, method: user.method })
+      return res.json({ token, method: user.method })
     } else {
       errors.push({ msg: 'Username or password is wrong' })
-      res.status(401).json({ errors })
+      return res.status(401).json({ errors })
     }
   } else {
     errors.push({ msg: 'Username or password is wrong' })
-    res.status(401).json({ errors })
+    return res.status(401).json({ errors })
   }
 }
 
 export const registerWithEmail = async (
   req: Request,
   res: Response
-): Promise<void> => {
+): Promise<Response> => {
   const { email, password } = req.body
   const errors: ReturnType[] = []
   const messages: ReturnType[] = []
   const foundUser = await authRepository.findUser(email)
   if (foundUser) {
     errors.push({ msg: 'This email is already registered' })
-    res.status(400).json({ errors })
-  }
-  const newUser = await authRepository.createUser(email, password)
-  if (newUser) {
+    return res.status(400).json({ errors })
+  } else {
     try {
-      const isConfirmationEmailSent = await authService.sendConfirmationMail(
-        newUser
-      )
-      if (isConfirmationEmailSent) {
-        messages.push({ msg: 'Check your email to confirm your account!' })
-        res.status(200).json({ messages })
+      const newUser = await authRepository.createUser(email, password)
+      if (newUser) {
+        const isConfirmationEmailSent = await authService.sendConfirmationMail(
+          newUser
+        )
+        if (isConfirmationEmailSent) {
+          messages.push({ msg: 'Check your email to confirm your account!' })
+          return res.status(200).json({ messages })
+        } else {
+          errors.push({
+            msg: 'An error occurred while sending confirmation email',
+          })
+          return res.status(400).json({ errors })
+        }
+      } else {
+        errors.push({ msg: 'An error occurred' })
+        return res.status(400).json({ messages })
       }
     } catch (e) {
       errors.push({ msg: 'An error occurred, please try again' })
-      res.status(400).json({ errors })
+      return res.status(400).json({ errors })
     }
-  } else {
-    errors.push({ msg: 'An error occurred' })
-    res.status(400).json({ messages })
   }
 }
 
 export const resendConfirmationEmail = async (
   req: Request,
   res: Response
-): Promise<void> => {
+): Promise<Response> => {
   const { email, password } = req.body
   const errors: ReturnType[] = []
   const messages: ReturnType[] = []
@@ -102,26 +108,25 @@ export const resendConfirmationEmail = async (
         try {
           await authService.sendConfirmationMail(user)
           messages.push({ msg: 'Confirmation email is resent!' })
-          res.status(200).json({ messages })
+          return res.status(200).json({ messages })
         } catch (e) {
           errors.push({ msg: 'An error occurred, please try again' })
-          res.status(400).json({ errors })
+          return res.status(400).json({ errors })
         }
       }
     } else {
       errors.push({ msg: 'Username or password is wrong' })
-      res.status(400).json({ errors })
+      return res.status(400).json({ errors })
     }
-  } else {
-    errors.push({ msg: 'An error occurred' })
-    res.status(400).json({ errors })
   }
+  errors.push({ msg: 'An error occurred' })
+  return res.status(400).json({ errors })
 }
 
 export const findUserWithConfirmationToken = async (
   req: Request,
   res: Response
-): Promise<void> => {
+): Promise<Response> => {
   const errors: ReturnType[] = []
   const confirmationToken = req.params.confirmationToken
   const user = await authRepository.findUserWithConfirmationToken(
@@ -147,10 +152,9 @@ export const findUserWithConfirmationToken = async (
     } else {
       await authRepository.deleteUser(user._id.toString())
       errors.push({ msg: 'Your account is expired, please re-register again' })
-      res.status(401).json({ errors })
+      return res.status(401).json({ errors })
     }
-  } else {
-    errors.push({ msg: 'No new user found with that token' })
-    res.status(404).json({ errors })
   }
+  errors.push({ msg: 'No new user found with that token' })
+  return res.status(404).json({ errors })
 }
