@@ -5,10 +5,7 @@ import { AppUser } from '../../entity/user.entity'
 export const sendConfirmationMail = async (user: AppUser): Promise<boolean> => {
   if (user?.local?.email && user.confirmationToken) {
     try {
-      await mail.sendConfirmationMail(
-        user?.local?.email,
-        user.confirmationToken
-      )
+      await mail.sendConfirmationMail(user.local.email, user.confirmationToken)
       logger.info(
         `Confirmation email has been sent for user: ${user.local.email}`
       )

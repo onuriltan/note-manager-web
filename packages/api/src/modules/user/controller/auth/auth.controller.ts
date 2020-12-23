@@ -65,11 +65,15 @@ export const registerWithEmail = async (
   if (!foundUser) {
     const newUser = await authRepository.createUser(email, password)
     if (newUser) {
-      const isConfirmationEmailSent = authService.sendConfirmationMail(newUser)
-      if (isConfirmationEmailSent) {
-        messages.push({ msg: 'Check your email to confirm your account!' })
-        res.status(200).json({ messages })
-      } else {
+      try {
+        const isConfirmationEmailSent = authService.sendConfirmationMail(
+          newUser
+        )
+        if (isConfirmationEmailSent) {
+          messages.push({ msg: 'Check your email to confirm your account!' })
+          res.status(200).json({ messages })
+        }
+      } catch (e) {
         errors.push({ msg: 'An error occurred, please try again' })
         res.status(400).json({ errors })
       }
@@ -96,11 +100,11 @@ export const resendConfirmationEmail = async (
     if (isPasswordCorrect) {
       const user = await authRepository.regenerateUserConfirmationToken(email)
       if (user) {
-        const isConfirmationEmailSent = authService.sendConfirmationMail(user)
-        if (isConfirmationEmailSent) {
+        try {
+          await authService.sendConfirmationMail(user)
           messages.push({ msg: 'Confirmation email is resent!' })
           res.status(200).json({ messages })
-        } else {
+        } catch (e) {
           errors.push({ msg: 'An error occurred, please try again' })
           res.status(400).json({ errors })
         }

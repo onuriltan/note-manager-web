@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer'
+import { logger } from '../config/pino'
 
 const transporter = nodemailer.createTransport({
   service: 'Yandex',
@@ -8,7 +9,7 @@ const transporter = nodemailer.createTransport({
   },
 })
 
-export const sendConfirmationMail = (
+export const sendConfirmationMail = async (
   to: string,
   confirmationToken: string
 ): Promise<void> => {
@@ -26,13 +27,9 @@ export const sendConfirmationMail = (
       '<p> Please note that this link will expire in 72 hours, if the link is expired, you need to register again</p>',
   }
   // send mail with defined transport object
-  return new Promise(function (resolve, reject) {
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        reject(error)
-      } else {
-        resolve(info)
-      }
-    })
-  })
+  try {
+    await transporter.sendMail(mailOptions)
+  } catch (e) {
+    throw new Error(e)
+  }
 }

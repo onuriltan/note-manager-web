@@ -21,14 +21,15 @@ describe('authService tests', () => {
     logger.info = jest.fn()
     logger.error = jest.fn()
   })
+
   it(`should send confirmation mail with necessary parameteres from user object`, async () => {
     // Arrange
-    jest.spyOn(mail, 'sendConfirmationMail').mockResolvedValue(true)
+    jest.spyOn(mail, 'sendConfirmationMail').mockResolvedValue()
 
     // Act
     await sendConfirmationMail(user)
-    // Assert
 
+    // Assert
     expect(mail.sendConfirmationMail).toHaveBeenCalledWith(
       user?.local?.email,
       user.confirmationToken
@@ -40,7 +41,7 @@ describe('authService tests', () => {
 
   it(`should log error if sendConfirmationMail fails`, async () => {
     // Arrange
-    jest.spyOn(mail, 'sendConfirmationMail').mockRejectedValue(false)
+    jest.spyOn(mail, 'sendConfirmationMail').mockRejectedValue('fail')
 
     // Act
     await sendConfirmationMail(user)
