@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as jwt from '../../../../middlewares/jwt'
-import { SignUpMethod, UserEntityInput } from '../../entity/user.entity'
-import * as authRepository from '../../repository/auth'
 import * as authService from '../../service/auth/auth.service'
 
 import { loginWithSocial, registerWithEmail } from './auth.controller'
