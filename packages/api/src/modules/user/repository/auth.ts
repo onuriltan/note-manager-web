@@ -23,7 +23,7 @@ export const findUserWithConfirmationToken = async (
       'An error occured  while finding user with confirmationToken',
       e
     )
-    return null
+    throw new Error(e)
   }
 }
 

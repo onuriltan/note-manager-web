@@ -7,6 +7,7 @@ import {
   findUserWithConfirmationToken,
   registerWithEmail,
   resendConfirmationEmail,
+  loginWithSocialErrorHandler,
 } from './controller/auth/auth.controller'
 
 import { getUser, changePassword } from './controller/user/user.controller'
@@ -39,22 +40,24 @@ authRoutes.get('/confirm/:confirmationToken', findUserWithConfirmationToken)
 authRoutes.post('/resendConfirmationEmail', resendConfirmationEmail)
 
 authRoutes.get(
-  '/loginWithGoogle',
+  '/google',
   passport.authenticate('google', { scope: ['profile', 'email'] })
 )
 authRoutes.get(
-  '/loginWithGoogle/callback',
-  passport.authenticate('google', { failureRedirect: '/login' }),
+  '/google/callback',
+  passport.authenticate('google', { failureRedirect: process.env.CLIENT_URL }),
   loginWithSocial
 )
 
 authRoutes.get(
-  '/loginWithFacebook',
+  '/facebook',
   passport.authenticate('facebook', { scope: ['email'] })
 )
 authRoutes.get(
-  '/loginWithFacebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  '/facebook/callback',
+  passport.authenticate('facebook', {
+    failureRedirect: process.env.CLIENT_URL,
+  }),
   loginWithSocial
 )
 

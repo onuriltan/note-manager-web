@@ -3,29 +3,48 @@ import * as authRepository from '../../repository/auth'
 import * as authService from '../../service/auth/auth.service'
 import * as jwt from '../../../../middlewares/jwt'
 import { logger } from '../../../../config/pino'
-import { Request, Response } from 'express'
+import { Request, Response, NextFunction } from 'express'
+import { HttpException } from '../../../../types/express/custom'
 
 interface ReturnType {
   msg: string
+}
+
+export const loginWithSocialErrorHandler = (
+  err: HttpException,
+  req: Request,
+  res: Response
+): void => {
+  if (err.name === 'TokenError') {
+    return res.redirect(`${process.env.CLIENT_URL}/login`)
+  } else {
+    return res.redirect(`${process.env.CLIENT_URL}/login`)
+  }
 }
 
 export const loginWithSocial = async (
   req: Request,
   res: Response
 ): Promise<Response | void> => {
-  if (req?.appUser?.method) {
-    const token = await jwt.signToken(req.appUser)
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  if (req?.user?.method) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const token = await jwt.signToken(req.user)
     if (token) {
       return res.redirect(
         `${process.env.CLIENT_URL}/login/?${
-          req.appUser.method
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          req.user.method
         }Token=${encodeURIComponent(token)}`
       )
     } else {
-      return res.status(401)
+      return res.redirect(`${process.env.CLIENT_URL}/not-found`)
     }
   } else {
-    return res.status(401)
+    return res.redirect(`${process.env.CLIENT_URL}/not-found`)
   }
 }
 
@@ -99,6 +118,9 @@ export const resendConfirmationEmail = async (
   const { email, password } = req.body
   const errors: ReturnType[] = []
   const messages: ReturnType[] = []
+
+  authService.resendConfirmationMail(email, password)
+
   const foundUser = await authRepository.findUser(email)
   if (foundUser && !foundUser.active && foundUser.password) {
     const isPasswordCorrect = bcrypt.compareSync(password, foundUser.password)
@@ -106,7 +128,7 @@ export const resendConfirmationEmail = async (
       const user = await authRepository.regenerateUserConfirmationToken(email)
       if (user) {
         try {
-          await authService.sendConfirmationMail(user)
+          const asd = await authService.sendConfirmationMail(user)
           messages.push({ msg: 'Confirmation email is resent!' })
           return res.status(200).json({ messages })
         } catch (e) {
