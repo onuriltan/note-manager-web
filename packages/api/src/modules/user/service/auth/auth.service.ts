@@ -2,6 +2,7 @@ import * as mail from '../../../../config/mail'
 import { UserEntityInput } from '../../entity/user.entity'
 import * as authRepository from '../../repository/auth'
 import bcrypt from 'bcrypt'
+import { logger } from '../../../../config/pino'
 
 export const sendConfirmationMail = async (
   user: UserEntityInput
@@ -40,5 +41,34 @@ export const resendConfirmationMail = async (
     }
   } catch (e) {
     return false
+  }
+}
+
+export const registerWithEmail = async (
+  email: string,
+  password: string
+): Promise<boolean> => {
+  const foundUser = await authRepository.findUser(email)
+  if (foundUser) {
+    logger.error(`User already registered with email ${email}`)
+    return false
+  } else {
+    try {
+      const newUser = await authRepository.createUser(email, password)
+      if (newUser && newUser.id) {
+        const isConfirmationEmailSent = await sendConfirmationMail(newUser)
+        if (isConfirmationEmailSent) {
+          return true
+        } else {
+          authRepository.deleteUser(newUser.id)
+          return false
+        }
+      } else {
+        logger.error(`An error occured while creating new user: ${email}`)
+        return false
+      }
+    } catch (e) {
+      return false
+    }
   }
 }
