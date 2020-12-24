@@ -1,8 +1,10 @@
-import UserModel, { AppUser } from '../entity/user.entity'
+import UserModel, { UserEntityInput } from '../entity/user.entity'
 import bcrypt from 'bcrypt'
 import { logger } from '../../../config/pino'
 
-export const getUser = async (email: string): Promise<AppUser | null> => {
+export const getUser = async (
+  email: string
+): Promise<UserEntityInput | null> => {
   return await UserModel.findOne({ 'local.email': email })
 }
 

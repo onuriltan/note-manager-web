@@ -1,6 +1,6 @@
 import { Document, Schema, model } from 'mongoose'
 
-export interface AppUser {
+export interface UserEntityInput {
   method: SignUpMethod
   active: boolean
   local?: LocalDoc
@@ -21,7 +21,7 @@ export interface LocalDoc {
   password: string
 }
 
-export interface UserDoc extends Document, AppUser {}
+export interface UserDoc extends Document, UserEntityInput {}
 
 const UserSchema = new Schema(
   {

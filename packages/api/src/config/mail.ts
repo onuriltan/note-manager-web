@@ -1,9 +1,9 @@
 import nodemailer from 'nodemailer'
 
 const transporter = nodemailer.createTransport({
-  service: 'Yandex',
+  service: 'Gmail',
   auth: {
-    user: process.env.MAIL_USERNAME,
+    user: process.env.MAIL_ADDRESS,
     pass: process.env.MAIL_PASSWORD,
   },
 })
@@ -13,8 +13,8 @@ export const sendConfirmationMail = async (
   confirmationToken: string
 ): Promise<void> => {
   const mailOptions = {
-    from: '"📒 NOTE MANAGER 📒" <' + process.env.MAIL + '>', // sender address
-    to: to, // list of receivers
+    from: '"📒 NOTE MANAGER 📒" <' + process.env.MAIL_ADDRESS + '>', // sender address
+    to, // list of receivers
     subject: 'Welcome to Note Manager ✔', // Subject line
     text: 'Please confirm your account with this token = ' + confirmationToken, // plain text body
     html:

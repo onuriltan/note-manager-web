@@ -1,10 +1,10 @@
-import { AppUser } from '../../modules/user/entity/user.entity'
+import { UserEntityInput } from '../../modules/user/entity/user.entity'
 
 declare global {
   namespace Express {
     interface Request {
       token: string
-      appUser: AppUser
+      appUser: UserEntityInput
       email: string
       limit: string
       page: string
