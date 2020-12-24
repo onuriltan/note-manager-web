@@ -3,23 +3,10 @@ import * as authRepository from '../../repository/auth'
 import * as authService from '../../service/auth/auth.service'
 import * as jwt from '../../../../middlewares/jwt'
 import { logger } from '../../../../config/pino'
-import { Request, Response, NextFunction } from 'express'
-import { HttpException } from '../../../../types/express/custom'
+import { Request, Response } from 'express'
 
 interface ReturnType {
   msg: string
-}
-
-export const loginWithSocialErrorHandler = (
-  err: HttpException,
-  req: Request,
-  res: Response
-): void => {
-  if (err.name === 'TokenError') {
-    return res.redirect(`${process.env.CLIENT_URL}/login`)
-  } else {
-    return res.redirect(`${process.env.CLIENT_URL}/login`)
-  }
 }
 
 export const loginWithSocial = async (
@@ -129,7 +116,7 @@ export const resendConfirmationEmail = async (
       const user = await authRepository.regenerateUserConfirmationToken(email)
       if (user) {
         try {
-          const asd = await authService.sendConfirmationMail(user)
+          await authService.sendConfirmationMail(user)
           messages.push({ msg: 'Confirmation email is resent!' })
           return res.status(200).json({ messages })
         } catch (e) {

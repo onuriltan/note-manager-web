@@ -7,7 +7,6 @@ import {
   findUserWithConfirmationToken,
   registerWithEmail,
   resendConfirmationEmail,
-  loginWithSocialErrorHandler,
 } from './controller/auth/auth.controller'
 
 import { getUser, changePassword } from './controller/user/user.controller'

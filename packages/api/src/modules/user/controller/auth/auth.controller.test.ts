@@ -12,7 +12,7 @@ jest.mock('../../service/auth/auth.service')
 
 describe('loginWithSocial tests', () => {
   const mockRequest = {
-    appUser: {
+    user: {
       method: 'facebook',
     },
   }
@@ -47,24 +47,26 @@ describe('loginWithSocial tests', () => {
     await loginWithSocial(req, res)
 
     // Assert
-    expect(signToken).toHaveBeenCalledWith(req.appUser)
+    expect(signToken).toHaveBeenCalledWith(req.user)
     expect(res.redirect).toHaveBeenCalledWith(
       `${process.env.CLIENT_URL}/login/?${
-        req.appUser.method
+        req.user.method
       }Token=${encodeURIComponent('token')}`
     )
   })
 
   it('should call res.status as 401 if no user is in the req object', async () => {
     // Arrange
-    const req = { ...mockRequest, appUser: null } as any
+    const req = { ...mockRequest, user: null } as any
     const res = { ...mockResponse } as any
 
     // Act
     await loginWithSocial(req, res)
 
     // Assert
-    expect(res.status).toHaveBeenCalledWith(401)
+    expect(res.redirect).toHaveBeenCalledWith(
+      `${process.env.CLIENT_URL}/not-found`
+    )
   })
 })
 

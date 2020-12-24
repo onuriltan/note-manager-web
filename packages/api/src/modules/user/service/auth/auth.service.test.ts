@@ -34,9 +34,6 @@ describe('authService tests', () => {
       user?.local?.email,
       user.confirmationToken
     )
-    expect(logger.info).toHaveBeenCalledWith(
-      `Confirmation email has been sent for user: ${user?.local?.email}`
-    )
   })
 
   it(`should log error if sendConfirmationMail fails`, async () => {
@@ -50,9 +47,6 @@ describe('authService tests', () => {
     expect(mail.sendConfirmationMail).toHaveBeenCalledWith(
       user?.local?.email,
       user.confirmationToken
-    )
-    expect(logger.error).toHaveBeenCalledWith(
-      `An error occurred while sending confirmation email for user ${user?.local?.email}`
     )
   })
 })
