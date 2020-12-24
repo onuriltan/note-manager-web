@@ -25,7 +25,7 @@ export default {
   methods: {
     loginWithGoogle() {
       this.googleLoginClicked = true;
-      window.location.href = `${process.env.VUE_APP_AUTH_URL}/loginWithGoogle`;
+      window.location.href = `${process.env.VUE_APP_AUTH_URL}/google`;
     },
   },
 };

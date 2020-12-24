@@ -30,7 +30,7 @@ export default {
     }),
     loginWithFB() {
       this.fbLoginClicked = true;
-      window.location.href = `${process.env.VUE_APP_AUTH_URL}/loginWithFacebook`;
+      window.location.href = `${process.env.VUE_APP_AUTH_URL}/facebook`;
     },
   },
 };

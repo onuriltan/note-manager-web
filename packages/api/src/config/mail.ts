@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer'
+import { logger } from '../config/pino'
 
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
@@ -13,8 +14,8 @@ export const sendConfirmationMail = async (
   confirmationToken: string
 ): Promise<void> => {
   const mailOptions = {
-    from: '"📒 NOTE MANAGER 📒" <' + process.env.MAIL_ADDRESS + '>', // sender address
-    to, // list of receivers
+    from: '"📒 NOTE MANAGER 📒" <' + process.env.MAIL_USERNAME + '>', // sender address
+    to: to, // list of receivers
     subject: 'Welcome to Note Manager ✔', // Subject line
     text: 'Please confirm your account with this token = ' + confirmationToken, // plain text body
     html:
@@ -28,7 +29,11 @@ export const sendConfirmationMail = async (
   // send mail with defined transport object
   try {
     await transporter.sendMail(mailOptions)
+    logger.info(`Confirmation email has been sent for user:  ${to}`)
   } catch (e) {
+    logger.error(
+      `An error occurred while sending confirmation email for user ${to}`
+    )
     throw new Error(e)
   }
 }
