@@ -1,9 +1,11 @@
 import * as mail from '../../../../config/mail'
-import { AppUser } from '../../entity/user.entity'
+import { UserEntityInput } from '../../entity/user.entity'
 import * as authRepository from '../../repository/auth'
 import bcrypt from 'bcrypt'
 
-export const sendConfirmationMail = async (user: AppUser): Promise<boolean> => {
+export const sendConfirmationMail = async (
+  user: UserEntityInput
+): Promise<boolean> => {
   if (user?.local?.email && user.confirmationToken) {
     try {
       await mail.sendConfirmationMail(user.local.email, user.confirmationToken)

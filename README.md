@@ -28,7 +28,7 @@ give parameters as;
 
 - **MONGO_URL** = "your mongodb connection url"
 - **MAIL** = "your yandex email for sending confirmation emails"
-- **MAIL_USERNAME** = "your yandex email"
+- **MAIL_ADDRESS** = "your yandex email"
 - **MAIL_PASSWORD** = "your yandex email password"
 - **CONFIRM_EMAIL_URL** = "your confirmation page url"
 - **JWT_SECRET** = "secret to parse jwt tokens"

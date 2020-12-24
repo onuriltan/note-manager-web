@@ -2,9 +2,9 @@ import nodemailer from 'nodemailer'
 import { logger } from '../config/pino'
 
 const transporter = nodemailer.createTransport({
-  service: 'Yandex',
+  service: 'Gmail',
   auth: {
-    user: process.env.MAIL_USERNAME,
+    user: process.env.MAIL_ADDRESS,
     pass: process.env.MAIL_PASSWORD,
   },
 })

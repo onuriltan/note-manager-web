@@ -1,13 +1,13 @@
 import * as mail from '../../../../config/mail'
 import { logger } from '../../../../config/pino'
-import { SignUpMethod, AppUser } from '../../entity/user.entity'
+import { SignUpMethod, UserEntityInput } from '../../entity/user.entity'
 import { sendConfirmationMail } from './auth.service'
 
 jest.mock('../../../../config/mail')
 jest.mock('../../../../config/pino')
 
 describe('authService tests', () => {
-  const user: AppUser = {
+  const user: UserEntityInput = {
     active: true,
     method: SignUpMethod.LOCAL,
     local: {

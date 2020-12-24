@@ -14,9 +14,8 @@ declare global {
       GOOGLE_CLIENT_SECRET: string
       GOOGLE_CLIENT_CALLBACK_URL: string
       JWT_SECRET: string
-      MAIL: string
+      MAIL_ADDRESS: string
       MAIL_PASSWORD: string
-      MAIL_USERNAME: string
       PORT: string
     }
   }

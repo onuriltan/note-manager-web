@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as jwt from '../../../../middlewares/jwt'
-import { AppUser, SignUpMethod } from '../../entity/user.entity'
+import { SignUpMethod, UserEntityInput } from '../../entity/user.entity'
 import * as authRepository from '../../repository/auth'
 import * as authService from '../../service/auth/auth.service'
 
@@ -90,7 +90,10 @@ describe('registerWithEmail tests', () => {
     req = ({
       body: { email: 'onur@iltan.com', password: '1234' },
     } as unknown) as Request
-    const createdUser: AppUser = {
+    const createdUser: UserEntityInput = {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      id: '123',
       active: true,
       method: SignUpMethod.LOCAL,
     }
@@ -99,7 +102,7 @@ describe('registerWithEmail tests', () => {
       .mockResolvedValue(null)
     const createUser = jest
       .spyOn(authRepository, 'createUser')
-      .mockResolvedValue(createdUser)
+      .mockResolvedValue(createdUser as any)
     const sendConfirmationMail = jest
       .spyOn(authService, 'sendConfirmationMail')
       .mockResolvedValue(true)

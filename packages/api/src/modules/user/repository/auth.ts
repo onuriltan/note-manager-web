@@ -1,10 +1,12 @@
-import UserModel, { AppUser, UserDoc } from '../entity/user.entity'
+import UserModel, { UserEntityInput, UserDoc } from '../entity/user.entity'
 import mongodb from 'mongodb'
 import bcrypt from 'bcrypt'
 import uniqid from 'uniqid'
 import { logger } from '../../../config/pino'
 
-export const findUser = async (email: string): Promise<AppUser | null> => {
+export const findUser = async (
+  email: string
+): Promise<UserEntityInput | null> => {
   try {
     return await UserModel.findOne({ 'local.email': email })
   } catch (e) {
@@ -30,7 +32,7 @@ export const findUserWithConfirmationToken = async (
 export const createUser = async (
   email: string,
   password: string
-): Promise<AppUser | null> => {
+): Promise<UserDoc | null> => {
   const newUser = new UserModel({
     method: 'local',
     local: {
@@ -56,7 +58,7 @@ export const createUser = async (
 
 export const regenerateUserConfirmationToken = async (
   email: string
-): Promise<AppUser | null> => {
+): Promise<UserEntityInput | null> => {
   try {
     const theUser = await UserModel.findOne({ 'local.email': email })
     if (theUser) {
@@ -77,12 +79,13 @@ export const deleteUser = async (id: string): Promise<boolean> => {
     await UserModel.deleteOne({ _id: new mongodb.ObjectID(id) })
     return true
   } catch (e) {
-    logger.error(`An error occured while deleteUser`, e)
+    logger.error(`An error occured while deleting user with id ${id}`)
+    logger.error(e)
     return false
   }
 }
 
-async function hashPassword(user: AppUser) {
+async function hashPassword(user: UserEntityInput) {
   const password = user?.local?.password
   const saltRounds = 10
   try {
