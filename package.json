@@ -25,10 +25,5 @@
     "husky": "^4.2.5",
     "lerna": "^3.22.0",
     "typescript": "^4.1.3"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint:check && yarn test:ci && yarn build:api && yarn build:web"
-    }
   }
 }
