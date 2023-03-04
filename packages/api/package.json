@@ -9,8 +9,8 @@
     "lint:fix": "eslint --fix src",
     "test:ci": "jest src --coverage",
     "test:watch": "jest src --watch --coverage",
-    "build": "rimraf ./build && tsc",
-    "start": "npm run build && node build/index.js"
+    "build": "npx tsc",
+    "start": "yarn build && yarn dist/index.js"
   },
   "author": "Onur Iltan",
   "license": "MIT",
@@ -39,8 +39,8 @@
     "passport-facebook": "^3.0.0",
     "passport-facebook-token": "^4.0.0",
     "passport-google-oauth20": "^2.0.0",
-    "pino": "^6.3.2",
-    "pino-pretty": "^4.0.0",
+    "pino": "^8.11.0",
+    "pino-pretty": "^9.4.0",
     "serve-static": "^1.14.1",
     "uniqid": "^5.0.3",
     "yarn": "^1.22.4"
@@ -63,7 +63,9 @@
     "@types/passport": "^1.0.4",
     "@types/passport-facebook": "^2.1.10",
     "@types/passport-google-oauth20": "^2.0.4",
-    "@types/pino": "^6.3.4",
+    "@types/pino": "^7.0.5",
+    "@types/pino-pretty": "^5.0.0",
+    "@types/pino-std-serializers": "^4.0.0",
     "@types/uniqid": "^5.2.0",
     "eslint": "^7.15.0",
     "eslint-config-prettier": "^7.1.0",

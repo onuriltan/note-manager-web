@@ -1,15 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "ESNext",
     "module": "commonjs",
-    "rootDir": "./src",
-    "outDir": "./build",
+    "outDir": "./dist",
     "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "noImplicitAny": true,
-    "resolveJsonModule": true,
     "skipLibCheck": true,
-    "typeRoots": ["types", "./node_modules/@types"]
-  },
-  "exclude": ["node_modules/", "build", "coverage"]
+    "baseUrl": "./src"
+  }
 }
