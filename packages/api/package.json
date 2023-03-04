@@ -4,13 +4,13 @@
   "description": "notemanager api",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --files src/app.ts",
+    "dev": "nodemon --files src/index.ts",
     "lint:check": "eslint src",
     "lint:fix": "eslint --fix src",
     "test:ci": "jest src --coverage",
     "test:watch": "jest src --watch --coverage",
     "build": "npx tsc",
-    "start": "yarn build && yarn dist/index.js"
+    "start": "yarn build && node dist/index.js"
   },
   "author": "Onur Iltan",
   "license": "MIT",
