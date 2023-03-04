@@ -1,5 +1,4 @@
-import path from 'path'
-import express from 'express'
+import express, { Response } from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
@@ -43,22 +42,14 @@ const bootServer = async () => {
 
   // Run Mongo migrations
   await configureAndRunMigrations()
-
   configurePassport()
 
   // Routes
+  server.get('/', (_, res: Response) => {
+    res.send('Alive')
+  })
   server.use('/api/notes', noteModule)
   server.use('/api/user', userModule)
-
-  if (process.env.NODE_ENV === 'production') {
-    server.use(express.static(path.join(__dirname, '../dist')))
-    server.get('*', (req, res) =>
-      res.sendFile(path.join(__dirname, '../dist/index.html'))
-    )
-    server.get(/.*/, (req, res) =>
-      res.sendFile(path.join(__dirname, '../dist/index.html'))
-    )
-  }
 
   const port = process.env.PORT || 5000
 
