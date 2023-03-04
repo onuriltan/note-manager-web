@@ -118,7 +118,9 @@ export const findUserWithConfirmationToken = async (
           `User is activated by confirmation token: ${updatedUser?.local?.email}`
         )
       } catch (e) {
-        logger.error(e)
+        if (e instanceof Error) {
+          logger.error(e)
+        }
       }
       const token = await jwt.signToken(user)
       res.json({ token })

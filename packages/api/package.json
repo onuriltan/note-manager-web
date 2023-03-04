@@ -9,7 +9,7 @@
     "lint:fix": "eslint --fix src",
     "test:ci": "jest src --coverage",
     "test:watch": "jest src --watch --coverage",
-    "build": "rimraf ./build && rimraf ./dist && tsc",
+    "build": "rimraf ./build && tsc",
     "start": "npm run build && node build/index.js"
   },
   "author": "Onur Iltan",
@@ -82,8 +82,8 @@
     "rimraf": "^3.0.2",
     "supertest": "^6.0.1",
     "ts-jest": "^26.4.4",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.1.3"
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5"
   },
   "_moduleAliases": {
     "@app": "src",

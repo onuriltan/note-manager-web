@@ -39,8 +39,10 @@ export const configurePassport = (): void => {
           }
         } catch (e) {
           logger.error('An error occured from facebook login')
-          logger.error(e.message)
-          done(e, false, e.message)
+          if (e instanceof Error) {
+            logger.error(e.message)
+            done(e, false, e.message)
+          }
         }
       }
     )
@@ -74,8 +76,10 @@ export const configurePassport = (): void => {
             done('', newUser)
           } catch (e) {
             logger.error('An error occured from google login')
-            logger.error(e.message)
-            done(e, false, e.message)
+            if (e instanceof Error) {
+              logger.error(e.message)
+              done(e, false, e.message)
+            }
           }
         } else {
           logger.error('Could not get email and googleId of the user')
@@ -90,6 +94,8 @@ export const configurePassport = (): void => {
   })
 
   passport.deserializeUser(function (user, done) {
-    done(null, user)
+    if (user) {
+      done(null, user)
+    }
   })
 }

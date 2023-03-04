@@ -36,7 +36,9 @@ const bootServer = async () => {
     logger.info('MongoDB connected.')
   } catch (e) {
     logger.error('MongoDB failed to connect.')
-    throw new Error(e)
+    if (e instanceof Error) {
+      throw e
+    }
   }
 
   // Run Mongo migrations
@@ -69,5 +71,7 @@ bootServer()
   })
   .catch((e) => {
     logger.error('Server is failed to boot.')
-    logger.error(e)
+    if (e instanceof Error) {
+      logger.error(e)
+    }
   })

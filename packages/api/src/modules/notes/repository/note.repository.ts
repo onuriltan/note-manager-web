@@ -10,7 +10,11 @@ export const findNotes = async (
   try {
     return await NoteEntity.paginate({ email }, extendedOptions)
   } catch (e) {
-    logger.error(e.toString())
+    if (e instanceof Error) {
+      if (e instanceof Error) {
+        logger.error(e)
+      }
+    }
     return false
   }
 }
@@ -40,7 +44,11 @@ export const findNotesBetweenDatesandKeyword = async (
   try {
     return await NoteEntity.paginate(query, extendedOptions)
   } catch (e) {
-    logger.error(e.toString())
+    if (e instanceof Error) {
+      if (e instanceof Error) {
+        logger.error(e)
+      }
+    }
     return false
   }
 }
@@ -55,7 +63,11 @@ export const createNote = async (
       email,
     }).save()
   } catch (e) {
-    logger.error(e.toString())
+    if (e instanceof Error) {
+      if (e instanceof Error) {
+        logger.error(e)
+      }
+    }
     return null
   }
 }
@@ -71,7 +83,11 @@ export const editNote = async (
       { text: text }
     )
   } catch (e) {
-    logger.error(e.toString())
+    if (e instanceof Error) {
+      if (e instanceof Error) {
+        logger.error(e)
+      }
+    }
     return null
   }
 }
@@ -87,7 +103,11 @@ export const deleteNote = async (
     })
     return !!deletedNote
   } catch (e) {
-    logger.error(e.toString())
+    if (e instanceof Error) {
+      if (e instanceof Error) {
+        logger.error(e)
+      }
+    }
     return false
   }
 }

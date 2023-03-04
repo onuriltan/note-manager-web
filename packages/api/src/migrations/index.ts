@@ -25,7 +25,9 @@ export const configureAndRunMigrations = async (): Promise<void> => {
     modifyPostsSchema(migrator)
   } catch (e) {
     logger.error('Error when running migrations.')
-    throw new Error(e)
+    if (e instanceof Error) {
+      throw e
+    }
   }
 
   migrator.migrateTo('latest')

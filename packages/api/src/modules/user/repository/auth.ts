@@ -25,7 +25,7 @@ export const findUserWithConfirmationToken = async (
       'An error occured  while finding user with confirmationToken',
       e
     )
-    throw new Error(e)
+    return null
   }
 }
 
@@ -80,7 +80,11 @@ export const deleteUser = async (id: string): Promise<boolean> => {
     return true
   } catch (e) {
     logger.error(`An error occured while deleting user with id ${id}`)
-    logger.error(e)
+    if (e instanceof Error) {
+      if (e instanceof Error) {
+        logger.error(e)
+      }
+    }
     return false
   }
 }

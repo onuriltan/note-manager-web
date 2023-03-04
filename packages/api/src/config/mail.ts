@@ -34,7 +34,11 @@ export const sendConfirmationMail = async (
     logger.error(
       `An error occurred while sending confirmation email for user ${to}`
     )
-    logger.error(e)
-    throw new Error(e)
+    if (e instanceof Error) {
+      if (e instanceof Error) {
+        logger.error(e)
+      }
+      throw e
+    }
   }
 }
