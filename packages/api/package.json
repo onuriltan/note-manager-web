@@ -10,7 +10,7 @@
     "test:ci": "jest src --coverage",
     "test:watch": "jest src --watch --coverage",
     "build": "npx tsc",
-    "start": "yarn build && node dist/index.js"
+    "start": "node dist/index.js"
   },
   "author": "Onur Iltan",
   "license": "MIT",

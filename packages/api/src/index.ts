@@ -45,7 +45,7 @@ const bootServer = async () => {
   configurePassport()
 
   // Routes
-  server.get('/', (_, res: Response) => {
+  server.use('/', (_, res: Response) => {
     res.send('Alive')
   })
   server.use('/api/notes', noteModule)
