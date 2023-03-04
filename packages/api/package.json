@@ -10,7 +10,7 @@
     "lint:check": "eslint src",
     "lint:fix": "eslint --fix src",
     "test:ci": "jest src --coverage",
-    "test:watch": "jest src --watch --coverage",
+    "test:watch": "jest src --watch --coverage"
   },
   "author": "Onur Iltan",
   "license": "MIT",
