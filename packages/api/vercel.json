@@ -1,12 +1,15 @@
 {
-  "buildCommand": "yarn build",
-  "installCommand": "yarn install",
-  "outputDirectory": "dist",
-  "functions": {
-    "dist/index.js": {
-      "memory": 3008,
-      "maxDuration": 30
+  "version": 2,
+  "builds": [
+    {
+      "src": "*.js",
+      "use": "@vercel/node"
     }
-  },
-  "public": "true"
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "dist/index.js"
+    }
+  ]
 }
