@@ -92,5 +92,8 @@
     "@config": "src/config",
     "@middleware": "src/middlewares",
     "@modules": "src/modules"
+  },
+  "engines": {
+    "node": "14.x"
   }
 }
