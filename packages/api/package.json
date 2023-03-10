@@ -1,12 +1,12 @@
 {
   "name": "@notemanager/api",
   "version": "1.0.0",
-  "description": "notemanager api",
+  "description": "Notemanager Api",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --files src/index.ts",
+    "dev": "NODE_ENV=local nodemon --files src/index.ts",
     "build": "npx tsc",
-    "start": "node dist/index.js",
+    "start": "NODE_ENV=prod node dist/index.js",
     "lint:check": "eslint src",
     "lint:fix": "eslint --fix src",
     "test:ci": "jest src --coverage",
@@ -94,6 +94,6 @@
     "@modules": "src/modules"
   },
   "engines": {
-    "node": "14.x"
+    "node": "18.x"
   }
 }

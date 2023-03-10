@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "install-package-dependencies": "yarn install --production=false",
-    "dev": "vue-cli-service serve",
+    "dev": "vue-cli-service serve --port 4500",
     "build": "vue-cli-service build",
     "test:watch": "vue-cli-service test:unit --watch",
     "test:ci": "vue-cli-service test:unit",

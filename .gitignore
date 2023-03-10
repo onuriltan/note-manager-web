@@ -12,6 +12,9 @@ coverage
 
 # System environments
 .env
+.env.local
+.env.prod
+deploy.txt
 
 # Log files
 npm-debug.log*

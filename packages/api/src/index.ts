@@ -1,4 +1,5 @@
-import express, { Response } from 'express'
+import express from 'express'
+import path from 'path'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
@@ -15,7 +16,13 @@ require('module-alias/register')
 
 const bootServer = async () => {
   // Environment Variables
-  dotenv.config()
+  logger.info(
+    'Loading env vars from ' +
+      path.resolve(__dirname, '..', `.env.${process.env.NODE_ENV}`)
+  )
+  dotenv.config({
+    path: path.resolve(__dirname, '..', `.env.${process.env.NODE_ENV}`),
+  })
 
   // Middleware
   const server = express()
@@ -45,9 +52,6 @@ const bootServer = async () => {
   configurePassport()
 
   // Routes
-  server.use('/', (_, res: Response) => {
-    res.send('Alive')
-  })
   server.use('/api/notes', noteModule)
   server.use('/api/user', userModule)
 
