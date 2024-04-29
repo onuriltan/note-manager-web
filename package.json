@@ -43,9 +43,5 @@
     "prettier": "^2.2.1",
     "sass-loader": "^10.1.0",
     "vue-template-compiler": "^2.6.12"
-  },
-  "engines": {
-    "node": "16.x",
-    "yarn": "1.22.x"
   }
 }
