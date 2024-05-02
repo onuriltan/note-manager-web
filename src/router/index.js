@@ -9,6 +9,7 @@ const History = () => import("../views/HistoryView.vue");
 const Confirmation = () => import("../views/ConfirmationView.vue");
 const NotFound = () => import("../views/NotFoundView.vue");
 const Profile = () => import("../views/ProfileView.vue");
+const PrivacyPolicy = () => import("../views/PrivacyPolicyView.vue");
 
 Vue.use(Router);
 
@@ -44,6 +45,10 @@ export default new Router({
     {
       path: "/",
       redirect: "/dashboard",
+    },
+    {
+      path: "/privacy-policy",
+      component: PrivacyPolicy,
     },
     {
       path: "*",
