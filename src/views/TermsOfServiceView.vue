@@ -1,18 +1,18 @@
 <template>
   <div class="container">
-    <p><strong>Terms of Service</strong></p>
+    <h1>Terms of Service</h1>
     <p>Our Terms of Service were last updated on May 02, 2024.</p>
     <p>
       Please read these terms and conditions carefully before using Our Service.
     </p>
-    <p><strong>Interpretation and Definitions</strong></p>
-    <p><strong>Interpretation</strong></p>
+    <h2>Interpretation and Definitions</h2>
+    <h2>Interpretation</h2>
     <p>
       The words of which the initial letter is capitalized have meanings defined
       under the following conditions. The following definitions shall have the
       same meaning regardless of whether they appear in singular or in plural.
     </p>
-    <p><strong>Definitions</strong></p>
+    <h2>Definitions</h2>
     <p>For the purposes of these Terms of Service:</p>
     <ul>
       <li>
@@ -96,7 +96,7 @@
         </p>
       </li>
     </ul>
-    <p><strong>Acknowledgment</strong></p>
+    <h2>Acknowledgment</h2>
     <p>
       These are the Terms of Service governing the use of this Service and the
       agreement that operates between You and the Company. These Terms of
@@ -126,7 +126,7 @@
       the law protects You. Please read Our Privacy Policy carefully before
       using Our Service.
     </p>
-    <p><strong>User Accounts</strong></p>
+    <h2>User Accounts</h2>
     <p>
       When You create an account with Us, You must provide Us information that
       is accurate, complete, and current at all times. Failure to do so
@@ -149,8 +149,8 @@
       any rights of another person or entity other than You without appropriate
       authorization, or a name that is otherwise offensive, vulgar or obscene.
     </p>
-    <p><strong>Content</strong></p>
-    <p><strong>Your Right to Post Content</strong></p>
+    <h2>Content</h2>
+    <h2>Your Right to Post Content</h2>
     <p>
       Our Service allows You to post Content. You are responsible for the
       Content that You post to the Service, including its legality, reliability,
@@ -173,7 +173,7 @@
       through the Service does not violate the privacy rights, publicity rights,
       copyrights, contract rights or any other rights of any person.
     </p>
-    <p><strong>Content Restrictions</strong></p>
+    <h2>Content Restrictions</h2>
     <p>
       The Company is not responsible for the content of the Service's users. You
       expressly understand and agree that You are solely responsible for the
@@ -232,7 +232,7 @@
       loss or damage of any kind incurred as a result of your use of any
       content.
     </p>
-    <p><strong>Content Backups</strong></p>
+    <h2>Content Backups</h2>
     <p>
       Although regular backups of Content are performed, the Company does not
       guarantee there will be no loss or corruption of data.
@@ -252,8 +252,8 @@
       You agree to maintain a complete and accurate copy of any Content in a
       location independent of the Service.
     </p>
-    <p><strong>Copyright Policy</strong></p>
-    <p><strong>Intellectual Property Infringement</strong></p>
+    <h2>Copyright Policy</h2>
+    <h2>Intellectual Property Infringement</h2>
     <p>
       We respect the intellectual property rights of others. It is Our policy to
       respond to any claim that Content posted on the Service infringes a
@@ -313,7 +313,7 @@
       its sole discretion, it deems appropriate, including removal of the
       challenged content from the Service.
     </p>
-    <p><strong>Intellectual Property</strong></p>
+    <h2>Intellectual Property</h2>
     <p>
       The Service and its original content (excluding Content provided by You or
       other users), features and functionality are and will remain the exclusive
@@ -327,7 +327,7 @@
       Our trademarks and trade dress may not be used in connection with any
       product or service without the prior written consent of the Company.
     </p>
-    <p><strong>Your Feedback to Us</strong></p>
+    <h2>Your Feedback to Us</h2>
     <p>
       You assign all rights, title and interest in any Feedback You provide the
       Company. If for any reason such assignment is ineffective, You agree to
@@ -335,7 +335,7 @@
       worldwide right and license to use, reproduce, disclose, sub-license,
       distribute, modify and exploit such Feedback without restriction.
     </p>
-    <p><strong>Links to Other Websites</strong></p>
+    <h2>Links to Other Websites</h2>
     <p>
       Our Service may contain links to third-party web sites or services that
       are not owned or controlled by the Company.
@@ -353,7 +353,7 @@
       We strongly advise You to read the terms and conditions and privacy
       policies of any third-party web sites or services that You visit.
     </p>
-    <p><strong>Termination</strong></p>
+    <h2>Termination</h2>
     <p>
       We may terminate or suspend Your Account immediately, without prior notice
       or liability, for any reason whatsoever, including without limitation if
@@ -364,7 +364,7 @@
       You wish to terminate Your Account, You may simply discontinue using the
       Service.
     </p>
-    <p><strong>Limitation of Liability</strong></p>
+    <h2>Limitation of Liability</h2>
     <p>
       Notwithstanding any damages that You might incur, the entire liability of
       the Company and any of its suppliers under any provision of this Terms and
@@ -390,7 +390,7 @@
       some of the above limitations may not apply. In these states, each party's
       liability will be limited to the greatest extent permitted by law.
     </p>
-    <p><strong>"AS IS" and "AS AVAILABLE" Disclaimer</strong></p>
+    <h2>"AS IS" and "AS AVAILABLE" Disclaimer</h2>
     <p>
       The Service is provided to You "AS IS" and "AS AVAILABLE" and with all
       faults and defects without warranty of any kind. To the maximum extent
@@ -428,24 +428,24 @@
       section shall be applied to the greatest extent enforceable under
       applicable law.
     </p>
-    <p><strong>Governing Law</strong></p>
+    <h2>Governing Law</h2>
     <p>
       The laws of the Country, excluding its conflicts of law rules, shall
       govern this Terms and Your use of the Service. Your use of the Application
       may also be subject to other local, state, national, or international
       laws.
     </p>
-    <p><strong>Disputes Resolution</strong></p>
+    <h2>Disputes Resolution</h2>
     <p>
       If You have any concern or dispute about the Service, You agree to first
       try to resolve the dispute informally by contacting the Company.
     </p>
-    <p><strong>For European Union (EU) Users</strong></p>
+    <h2>For European Union (EU) Users</h2>
     <p>
       If You are a European Union consumer, you will benefit from any mandatory
       provisions of the law of the country in which you are resident in.
     </p>
-    <p><strong>United States Legal Compliance</strong></p>
+    <h2>United States Legal Compliance</h2>
     <p>
       You represent and warrant that (i) You are not located in a country that
       is subject to the United States government embargo, or that has been
@@ -453,8 +453,8 @@
       country, and (ii) You are not listed on any United States government list
       of prohibited or restricted parties.
     </p>
-    <p><strong>Severability and Waiver</strong></p>
-    <p><strong>Severability</strong></p>
+    <h2>Severability and Waiver</h2>
+    <h2>Severability</h2>
     <p>
       If any provision of these Terms is held to be unenforceable or invalid,
       such provision will be changed and interpreted to accomplish the
@@ -462,7 +462,7 @@
       applicable law and the remaining provisions will continue in full force
       and effect.
     </p>
-    <p><strong>Waiver</strong></p>
+    <h2>Waiver</h2>
     <p>
       Except as provided herein, the failure to exercise a right or to require
       performance of an obligation under these Terms shall not effect a party's
@@ -470,14 +470,14 @@
       thereafter nor shall be the waiver of a breach constitute a waiver of any
       subsequent breach.
     </p>
-    <p><strong>Translation Interpretation</strong></p>
+    <h2>Translation Interpretation</h2>
     <p>
       These Terms of Service may have been translated if We have made them
       available to You on our Service.<br />
       You agree that the original English text shall prevail in the case of a
       dispute.
     </p>
-    <p><strong>Changes to These Terms of Service</strong></p>
+    <h2>Changes to These Terms of Service</h2>
     <p>
       We reserve the right, at Our sole discretion, to modify or replace these
       Terms at any time. If a revision is material We will make reasonable
@@ -491,7 +491,7 @@
       to the new terms, in whole or in part, please stop using the website and
       the Service.
     </p>
-    <p><strong>Contact Us</strong></p>
+    <h2>Contact Us</h2>
     <p>
       If you have any questions about these Terms of Service, You can contact
       us:
