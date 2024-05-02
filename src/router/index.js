@@ -10,6 +10,7 @@ const Confirmation = () => import("../views/ConfirmationView.vue");
 const NotFound = () => import("../views/NotFoundView.vue");
 const Profile = () => import("../views/ProfileView.vue");
 const PrivacyPolicy = () => import("../views/PrivacyPolicyView.vue");
+const TermsOfService = () => import("../views/TermsOfServiceView.vue");
 
 Vue.use(Router);
 
@@ -49,6 +50,10 @@ export default new Router({
     {
       path: "/privacy-policy",
       component: PrivacyPolicy,
+    },
+    {
+      path: "/tarms-of-service",
+      component: TermsOfService,
     },
     {
       path: "*",
