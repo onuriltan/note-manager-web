@@ -59,7 +59,7 @@ export default new Router({
     },
     {
       path: "/data-deletion-instructions",
-      component: TermsOfService,
+      component: DataDeletionInstructions,
     },
     {
       path: "*",
