@@ -11,6 +11,8 @@ const NotFound = () => import("../views/NotFoundView.vue");
 const Profile = () => import("../views/ProfileView.vue");
 const PrivacyPolicy = () => import("../views/PrivacyPolicyView.vue");
 const TermsOfService = () => import("../views/TermsOfServiceView.vue");
+const DataDeletionInstructions = () =>
+  import("../views/DataDeletionInstructionsView.vue");
 
 Vue.use(Router);
 
@@ -52,7 +54,11 @@ export default new Router({
       component: PrivacyPolicy,
     },
     {
-      path: "/tarms-of-service",
+      path: "/terms-of-service",
+      component: TermsOfService,
+    },
+    {
+      path: "/data-deletion-instructions",
       component: TermsOfService,
     },
     {
