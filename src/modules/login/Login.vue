@@ -86,7 +86,7 @@ import GoogleLogin from "../google-login/GoogleLogin";
 export default {
   name: "LoginComponent",
   components: {
-    FacebookLogin,
+    // FacebookLogin,
     GoogleLogin,
   },
   data() {
