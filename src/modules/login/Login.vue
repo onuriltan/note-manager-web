@@ -65,7 +65,8 @@
         <div style="margin: 0 5px">Login</div>
       </b-button>
       <div class="login-form__social-container">
-        <FacebookLogin />
+        <!-- Commment out facebook login button, they have strict policy. -->
+        <!-- <FacebookLogin /> -->
         <GoogleLogin />
       </div>
     </b-form>
