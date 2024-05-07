@@ -58,7 +58,7 @@
       class="notes__empty easein"
       v-if="searchClicked && notes && notes.length === 0 && isLoading === false"
     >
-      <i class="fa fa-file-o fa-5x notes__empty__icon" aria-hidden="true"></i>
+      <i class="fa-file-o fa-5x notes__empty__icon" aria-hidden="true"></i>
       <span
         v-if="this.$parent.$vnode.componentOptions.tag === 'Dashboard'"
         class="notes__empty__message"
@@ -72,7 +72,7 @@
     </div>
 
     <div class="notes__empty" v-if="searchClicked && isLoading">
-      <i class="fa fa-refresh fa-spin fa-5x icon-color"></i>
+      <i class="fa-solid fa-arrows-rotate fa-spin fa-5x icon-color"></i>
     </div>
 
     <div

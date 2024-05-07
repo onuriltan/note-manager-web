@@ -1,15 +1,16 @@
 <template>
   <div>
     <b-btn
-      class="google-button"
+      class="container"
       @click="loginWithGoogle"
-      :class="{ 'button--loading': googleLoginClicked }"
+      :class="{ 'button--loading': loginClicked }"
     >
       <i
-        class="fa fa-refresh fa-spin hide--button--loading--icon"
-        :class="{ 'show--button--loading--icon': googleLoginClicked }"
+        class="fa-brands fa-google icon"
+        :class="{ 'fa-flip': loginClicked }"
       ></i>
       <div style="margin: 0 5px">Login with Google</div>
+      <div />
     </b-btn>
   </div>
 </template>
@@ -19,12 +20,13 @@ export default {
   name: "GoogleLogin",
   data() {
     return {
-      googleLoginClicked: false,
+      loginClicked: false,
     };
   },
   methods: {
-    loginWithGoogle() {
-      this.googleLoginClicked = true;
+    async loginWithGoogle() {
+      this.loginClicked = true;
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       window.location.href = `${process.env.VUE_APP_AUTH_URL}/google`;
     },
   },
@@ -32,11 +34,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.google-button {
+.container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  background-color: #db3236;
+  background-color: #4285f4;
   border-color: var(--white);
   width: 100%;
   margin: 5px;

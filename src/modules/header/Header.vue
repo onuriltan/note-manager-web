@@ -26,10 +26,10 @@
       <b-navbar-nav class="header__right__navbar">
         <b-dropdown right text="Account" class="m-md-2" v-if="isAuthenticated">
           <b-dropdown-item to="/profile"
-            ><i class="fa fa-user mr-2"></i>Profile</b-dropdown-item
+            ><i class="fa-solid fa-user mr-2"></i>Profile</b-dropdown-item
           >
           <b-dropdown-item ref="logout" @click.native="logout()"
-            ><i class="fa fa-sign-out mr-2"></i>Logout</b-dropdown-item
+            ><i class="fa-solid fa-sign-out mr-2"></i>Logout</b-dropdown-item
           >
         </b-dropdown>
       </b-navbar-nav>

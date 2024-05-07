@@ -110,7 +110,7 @@
         :class="{ 'button--loading': registerValidated }"
       >
         <i
-          class="fa fa-refresh fa-spin hide--button--loading--icon"
+          class="fa-solid fa-arrows-rotate fa-spin hide--button--loading--icon"
           :class="{ 'show--button--loading--icon': registerValidated }"
         ></i>
         <div style="margin: 0 5px">Register</div>
